@@ -1,7 +1,9 @@
-package by.andd3dfx;
+package by.andd3dfx.samples;
+
+import by.andd3dfx.samples.subpackage.Person;
 
 /**
- * Hero is the main entity we will be using to . . .
+ * Hero is the main entity we will be using to something
  *
  * @author Captain America
  */
@@ -14,6 +16,8 @@ public class SuperHero extends Person {
     private String uniquePower;
     private int health;
     private int defense;
+
+    public final String SOME_PUBLIC_STRING = "So important string value";
 
     /**
      * <p>This is a simple description of the method. . .

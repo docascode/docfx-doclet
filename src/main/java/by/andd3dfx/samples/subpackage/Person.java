@@ -1,6 +1,10 @@
-package by.andd3dfx;
+package by.andd3dfx.samples.subpackage;
 
+/**
+ * Class that describes some person
+ */
 public class Person {
+
     /**
      * This is a first name
      */
