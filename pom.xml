@@ -20,8 +20,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <configuration>
-            <source>8</source>
-            <target>8</target>
+            <source>11</source>
+            <target>11</target>
           </configuration>
         </plugin>
       </plugins>
@@ -46,14 +46,6 @@
   </build>
 
   <dependencies>
-    <dependency>
-      <groupId>jdk.tools</groupId>
-      <artifactId>jdk.tools</artifactId>
-      <version>current-jdk-version</version>
-      <scope>system</scope>
-      <systemPath>${java.home}/../lib/tools.jar</systemPath>
-    </dependency>
-
     <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>
