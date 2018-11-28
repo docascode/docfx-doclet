@@ -12,13 +12,14 @@ import java.util.StringTokenizer;
  * - full doclet name and
  * - name of file with doclet params in it
  *
- * For example: java DocletRunner by.andd3dfx.doclet.OldCustomDoclet src\main\resources\doclet-params.txt
+ * For example: java OldDocletRunner by.andd3dfx.doclet.OldCustomDoclet src\main\resources\doclet-params.txt
  */
-public class DocletRunner {
+@Deprecated
+public class OldDocletRunner {
 
     public static void main(final String[] args) {
         if (args.length != 2) {
-            System.err.println("Usage: java DocletRunner <doclet-class-fullname> <doclet-params-filename>");
+            System.err.println("Usage: java OldDocletRunner <doclet-class-fullname> <doclet-params-filename>");
             return;
         }
         if (!(new java.io.File(args[1])).isFile()) {
