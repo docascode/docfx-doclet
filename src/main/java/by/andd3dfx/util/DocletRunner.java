@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * - full doclet name and
  * - name of file with doclet params in it
  *
- * For example: java DocletRunner by.andd3dfx.doclet.CustomDoclet src\main\resources\doclet-params.txt
+ * For example: java DocletRunner by.andd3dfx.doclet.OldCustomDoclet src\main\resources\doclet-params.txt
  */
 public class DocletRunner {
 

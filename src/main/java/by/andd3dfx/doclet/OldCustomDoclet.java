@@ -10,11 +10,12 @@ import com.sun.javadoc.Tag;
 import java.text.MessageFormat;
 
 /**
- * Doclet used for just printing class names to console
+ * Doclet used for just printing class names and some info inside them to console
  *
  * based on: https://www.javaworld.com/article/2076153/java-se/code-generation-using-javadoc.html
  */
-public class CustomDoclet {
+@Deprecated
+public class OldCustomDoclet {
 
     private static final MessageFormat METHODINFO =
         new MessageFormat("Method: name = {0}, comment = {1}, return type = {2};");
