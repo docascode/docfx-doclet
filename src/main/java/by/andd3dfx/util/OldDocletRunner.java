@@ -8,34 +8,31 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * To use runner just pass two commandline params to main method:
- * - full doclet name and
- * - name of file with doclet params in it
+ * To use runner just pass as commandline param path+name of file with doclet name and its params
  *
- * For example: java OldDocletRunner by.andd3dfx.doclet.OldCustomDoclet src\main\resources\doclet-params.txt
+ * For example: java OldDocletRunner src\main\resources\doclet-params.txt
+ *
+ * For Java 9+ use another runner
+ * @see by.andd3dfx.util.DocletRunner
  */
 @Deprecated
 public class OldDocletRunner {
 
     public static void main(final String[] args) {
-        if (args.length != 2) {
-            System.err.println("Usage: java OldDocletRunner <doclet-class-fullname> <doclet-params-filename>");
+        if (args.length != 1) {
+            System.err.println("Usage: java OldDocletRunner <doclet-params-filename>");
             return;
         }
-        if (!(new java.io.File(args[1])).isFile()) {
-            System.err.println(String.format("File '%s' not exists", args[1]));
+        if (!(new java.io.File(args[0])).isFile()) {
+            System.err.println(String.format("File '%s' not exists", args[0]));
             return;
         }
 
-        com.sun.tools.javadoc.Main.execute("javadoc", args[0],
-            processOptionsFile(args[1]));
+        com.sun.tools.javadoc.Main.execute("javadoc", processOptionsFile(args[0]));
     }
 
     private static String[] processOptionsFile(final String filename) {
-        List<String> jargs = new ArrayList<String>() {{
-            add("-classpath");
-            add(System.getenv("JAVA_HOME") + "\\lib\\tools.jar");
-        }};
+        List<String> jargs = new ArrayList<>();
 
         String options = readOptionsFromFile(filename);
         StringTokenizer tokens = new StringTokenizer(options);
