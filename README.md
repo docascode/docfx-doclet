@@ -11,8 +11,7 @@ Use this doclet standalone, without maven:
 <pre>
 javadoc \
 -docletpath ./target/custom-doclet-1.0-SNAPSHOT.jar \
--doclet by.andd3dfx.doclet.OldCustomDoclet \
--classpath "${JAVA_HOME}/lib/tools.jar" \
+-doclet by.andd3dfx.doclet.CustomDoclet \
 -sourcepath ./src/main/java \
 -subpackages by.andd3dfx.samples
 </pre>
