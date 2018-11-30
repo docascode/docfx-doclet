@@ -17,7 +17,6 @@ public class Item {
     private String fullName;
     private String type;
     private String url;
-    private Source source;
 
     private Map<String, String> extraProperties = new HashMap<>();
 
@@ -91,14 +90,6 @@ public class Item {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public Source getSource() {
-        return source;
-    }
-
-    public void setSource(Source source) {
-        this.source = source;
     }
 
     public Map<String, String> getExtraProperties() {
