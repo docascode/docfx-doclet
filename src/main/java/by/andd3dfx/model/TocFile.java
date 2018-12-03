@@ -5,65 +5,23 @@ import java.util.List;
 
 public class TocFile {
 
-    private String uid;
-    private String name;
-    private String href;
-    private List<TocFile> items = new ArrayList<>();
+    public final static String TOC_FILE_HEADER = "### YamlMime:TableOfContent\n";
 
-    public String getUid() {
-        return uid;
-    }
+    private List<TocItem> items = new ArrayList<>();
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
-    }
-
-    public List<TocFile> getItems() {
+    public List<TocItem> getItems() {
         return items;
     }
 
-    public void setItems(List<TocFile> items) {
+    public void setItems(List<TocItem> items) {
         this.items = items;
     }
 
     @Override
     public String toString() {
-        return buildTocFileChunk(0, this);
-    }
-
-    private String buildTocFileChunk(int spacesCount, TocFile tocFile) {
-        String spaces = new String(new char[spacesCount]).replace('\0', ' ');
-        return spaces + "- uid: " + tocFile.uid + "\n" +
-            spaces + "  name: " + tocFile.name + "\n" +
-            spaces + "  href: " + tocFile.href + "\n" +
-            buildItemsChunk(spacesCount + 2, tocFile.items);
-    }
-
-    private String buildItemsChunk(int spacesCount, List<TocFile> items) {
-        if (items == null || items.isEmpty()) {
-            return "";
-        }
-
-        String spaces = new String(new char[spacesCount]).replace('\0', ' ');
-        String result = spaces + "items: \n";
-        for (TocFile tocFile : items) {
-            result += buildTocFileChunk(spacesCount, tocFile);
+        String result = TOC_FILE_HEADER;
+        for (TocItem tocItem : items) {
+            result += String.valueOf(tocItem);
         }
         return result;
     }
