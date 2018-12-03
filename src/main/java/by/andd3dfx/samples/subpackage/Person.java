@@ -26,4 +26,16 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    /**
+     * Class that describes person's identification
+     */
+    public static class Identification {
+        /**
+         * Enum describes person's gender
+         */
+        public enum Gender {
+            MALE, FEMALE
+        }
+    }
 }
