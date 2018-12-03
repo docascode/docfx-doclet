@@ -99,4 +99,9 @@ public class MetadataFileItem {
     public void setExtraProperties(Map<String, String> extraProperties) {
         this.extraProperties = extraProperties;
     }
+
+    @Override
+    public String toString() {
+        return "- uid: " + uid + "\n";
+    }
 }
