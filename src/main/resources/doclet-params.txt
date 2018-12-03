@@ -1,4 +1,4 @@
--doclet by.andd3dfx.doclet.CustomDoclet
+-doclet by.andd3dfx.doclet.DocFxDoclet
 -sourcepath ./src/main/java
 -outputpath ./target/out
 -subpackages by.andd3dfx.samples

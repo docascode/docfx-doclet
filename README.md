@@ -8,7 +8,7 @@
 <pre>
 javadoc \
 -docletpath ./target/custom-doclet-1.0-SNAPSHOT.jar \
--doclet by.andd3dfx.doclet.CustomDoclet \
+-doclet by.andd3dfx.doclet.DocFxDoclet \
 -sourcepath ./src/main/java \
 -subpackages by.andd3dfx.samples
 </pre>
@@ -23,7 +23,7 @@ that it depends on hamcrest-core-1.3.jar library, so downloaded this hamcrest li
 <pre>
 javadoc \
 -docletpath ./target/custom-doclet-1.0-SNAPSHOT.jar \
--doclet by.andd3dfx.doclet.CustomDoclet \
+-doclet by.andd3dfx.doclet.DocFxDoclet \
 -cp ./hamcrest-core-1.3.jar \
 -sourcepath ./junit-4.12-sources \
 -subpackages org:junit

@@ -23,7 +23,7 @@ import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
 import org.apache.commons.lang3.StringUtils;
 
-public class CustomDoclet implements Doclet {
+public class DocFxDoclet implements Doclet {
 
     private Reporter reporter;
 
@@ -92,7 +92,7 @@ public class CustomDoclet implements Doclet {
 
     @Override
     public String getName() {
-        return "CustomDoclet";
+        return "DocFxDoclet";
     }
 
     private String outputPath;

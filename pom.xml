@@ -22,7 +22,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.0.1</version>
         <configuration>
-          <doclet>by.andd3dfx.doclet.CustomDoclet</doclet>
+          <doclet>by.andd3dfx.doclet.DocFxDoclet</doclet>
           <docletArtifact>
             <groupId>${project.groupId}</groupId>
             <artifactId>${project.artifactId}</artifactId>
