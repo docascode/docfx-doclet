@@ -1,7 +1,11 @@
 package by.andd3dfx.doclet;
 
-import com.sun.source.doctree.DocCommentTree;
-import com.sun.source.util.DocTrees;
+import by.andd3dfx.model.TocFile;
+import by.andd3dfx.model.TocItem;
+import by.andd3dfx.tmp.YmlFilesBuilder;
+import by.andd3dfx.tmp.YmlFilesBuilderImpl;
+import by.andd3dfx.util.FileUtil;
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -9,19 +13,17 @@ import java.util.Locale;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic.Kind;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
+import org.apache.commons.lang3.StringUtils;
 
-/**
- * Based on example from https://docs.oracle.com/en/java/javase/11/docs/api/jdk.javadoc/jdk/javadoc/doclet/package-summary.html
- */
 public class CustomDoclet implements Doclet {
 
-    private static final String OUTPUTPATH_PARAM_NAME = "-outputpath";
     private Reporter reporter;
 
     @Override
@@ -30,35 +32,63 @@ public class CustomDoclet implements Doclet {
         this.reporter = reporter;
     }
 
-    public void printElement(DocTrees trees, Element e) {
-        DocCommentTree docCommentTree = trees.getDocCommentTree(e);
-        if (docCommentTree != null) {
-            out("Element (" + e.getKind() + ": " + e + ") has the following comments:");
-            out("Entire body: " + docCommentTree.getFullBody());
-            out("Block tags: " + docCommentTree.getBlockTags());
+    @Override
+    public boolean run(DocletEnvironment environment) {
+        if (StringUtils.isBlank(this.outputPath)) {
+            reporter.print(Kind.ERROR, "Output path not specified");
+            return false;
         }
+
+        reporter.print(Kind.NOTE, "Output path: " + outputPath);
+
+        return buildTocAndYmlFiles(environment, outputPath, new YmlFilesBuilderImpl());
     }
 
-    @Override
-    public boolean run(DocletEnvironment docEnv) {
-        reporter.print(Kind.NOTE, "outputPath: " + outputPath);
+    boolean buildTocAndYmlFiles(DocletEnvironment environment, String outputPath, YmlFilesBuilder ymlFilesBuilder) {
+        TocFile resultTocFile = new TocFile();
+        for (PackageElement packageElement : ElementFilter.packagesIn(environment.getIncludedElements())) {
+            String packageQName = String.valueOf(packageElement.getQualifiedName());
+            String packageYmlFileName = packageQName + ".yml";
+            ymlFilesBuilder.buildPackageYmlFile(packageElement, outputPath + File.separator + packageYmlFileName);
 
-        // get the DocTrees utility class to access document comments
-        DocTrees docTrees = docEnv.getDocTrees();
+            TocItem packageTocItem = new TocItem.Builder()
+                .setUid(packageQName)
+                .setName(packageQName)
+                .setHref(packageYmlFileName)
+                .build();
 
-        for (TypeElement t : ElementFilter.typesIn(docEnv.getIncludedElements())) {
-            out(t.getKind() + ":" + t);
-            for (Element e : t.getEnclosedElements()) {
-                printElement(docTrees, e);
-            }
-            out("");
+            buildFilesForInnerClasses("", packageElement, ymlFilesBuilder, packageTocItem.getItems());
+
+            resultTocFile.getItems().add(packageTocItem);
         }
+        FileUtil.dumpToFile(String.valueOf(resultTocFile), outputPath + File.separator + "toc.yml");
         return true;
+    }
+
+    void buildFilesForInnerClasses(String namePrefix, Element element, YmlFilesBuilder ymlFilesBuilder, List<TocItem> listToAddItems) {
+        for (TypeElement typeElement : ElementFilter.typesIn(element.getEnclosedElements())) {
+            String classQName = String.valueOf(typeElement.getQualifiedName());
+            String classSimpleName = String.format("%s%s%s",
+                namePrefix,
+                StringUtils.isEmpty(namePrefix) ? "" : ".",
+                String.valueOf(typeElement.getSimpleName()));
+            String classYmlFileName = classQName + ".yml";
+            ymlFilesBuilder.buildClassYmlFile(typeElement, outputPath + File.separator + classYmlFileName);
+
+            TocItem classTocItem = new TocItem.Builder()
+                .setUid(classQName)
+                .setName(classSimpleName)
+                .setHref(classYmlFileName)
+                .build();
+            listToAddItems.add(classTocItem);
+
+            buildFilesForInnerClasses(classSimpleName, typeElement, ymlFilesBuilder, listToAddItems);
+        }
     }
 
     @Override
     public String getName() {
-        return "Custom Doclet";
+        return "CustomDoclet";
     }
 
     private String outputPath;
@@ -67,7 +97,11 @@ public class CustomDoclet implements Doclet {
     public Set<? extends Option> getSupportedOptions() {
         Option[] options = {
             new Option() {
-                private final List<String> someOption = Arrays.asList(OUTPUTPATH_PARAM_NAME);
+                private final List<String> someOption = Arrays.asList(
+                    "-outputpath",
+                    "--output-path",
+                    "-o"
+                );
 
                 @Override
                 public int getArgumentCount() {
@@ -76,7 +110,7 @@ public class CustomDoclet implements Doclet {
 
                 @Override
                 public String getDescription() {
-                    return "output path";
+                    return "Output path";
                 }
 
                 @Override
@@ -108,9 +142,5 @@ public class CustomDoclet implements Doclet {
     public SourceVersion getSupportedSourceVersion() {
         // support the latest release
         return SourceVersion.latest();
-    }
-
-    private static void out(String msg) {
-        System.out.println(msg);
     }
 }
