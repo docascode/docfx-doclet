@@ -5,6 +5,7 @@ import by.andd3dfx.model.TocItem;
 import by.andd3dfx.tmp.YmlFilesBuilder;
 import by.andd3dfx.tmp.YmlFilesBuilderImpl;
 import by.andd3dfx.util.FileUtil;
+import by.andd3dfx.util.StringUtil;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -72,6 +73,9 @@ public class CustomDoclet implements Doclet {
                 namePrefix,
                 StringUtils.isEmpty(namePrefix) ? "" : ".",
                 String.valueOf(typeElement.getSimpleName()));
+
+            classQName = classQName
+                .replace(classSimpleName, StringUtil.replaceUppercaseWithUnderscoreWithLowercase(classSimpleName));
             String classYmlFileName = classQName + ".yml";
             ymlFilesBuilder.buildClassYmlFile(typeElement, outputPath + File.separator + classYmlFileName);
 

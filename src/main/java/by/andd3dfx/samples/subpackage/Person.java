@@ -30,7 +30,7 @@ public class Person {
     /**
      * Class that describes person's identification
      */
-    public static class Identification {
+    public static class IdentificationInfo {
         /**
          * Enum describes person's gender
          */
