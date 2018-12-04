@@ -3,7 +3,7 @@ package by.andd3dfx.samples.subpackage;
 /**
  * Class that describes some person
  */
-public class Person {
+public class Person<T> {
 
     /**
      * This is a first name
