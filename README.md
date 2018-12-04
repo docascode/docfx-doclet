@@ -1,10 +1,10 @@
 
-### Doclet for generation of DocFx ready files for Java source code
+## Doclet for generation of DocFx ready files for Java source code
 
-##### Usage of doclet as part of usual maven build:  
+#### Usage of doclet as part of usual maven build:  
 `mvn javadoc:javadoc`
 
-##### To use doclet standalone, without maven:    
+#### To use doclet standalone, without maven:    
 <pre>
 javadoc \
 -docletpath ./target/docfx-doclet-1.0-SNAPSHOT.jar \
@@ -14,7 +14,7 @@ javadoc \
 </pre>
 Before this action run `mvn clean install` once to put jar into artifactory
 
-##### To use doclet for sources packed into jar  
+#### To use doclet for sources packed into jar  
 we need to unpack jar content and download libraries which this jar depends on 
 and put them to classpath  
 
@@ -28,3 +28,10 @@ javadoc \
 -sourcepath ./junit-4.12-sources \
 -subpackages org:junit
 </pre>
+
+#### For development it could be useful to use DocletRunner placed here
+- Create Run/Debug configuration with main class `com.microsoft.util.DocletRunner`
+- Add `src\main\resources\doclet-params.txt` as program arguments of configuration
+
+No we could run/debug doclet versus source code classes located at `com.microsoft.samples` 
+as mentioned in `doclet-params.txt` config file
