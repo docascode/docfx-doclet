@@ -32,12 +32,12 @@ public class MetadataFile {
 
         result += "items:\n";
         for (MetadataFileItem item : items) {
-            result += String.valueOf(item);
+            result += item.toItemString();
         }
 
         result += "references:\n";
         for (MetadataFileItem reference : references) {
-            result += String.valueOf(reference);
+            result += reference.toReferenceString();
         }
         return result;
     }

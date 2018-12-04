@@ -19,8 +19,29 @@ public class MetadataFileTest {
             + "### YamlMime:ManagedReference\n"
             + "items:\n"
             + "- uid: Item uid\n"
+            + "  id: null\n"
+            + "  children:\n"
+            + "  href: null\n"
+            + "  langs:\n"
+            + "  - java\n"
+            + "  name: null\n"
+            + "  nameWithType: null\n"
+            + "  fullName: null\n"
+            + "  type: null\n"
+            + "  summary: null\n"
+            + "  syntax:\n"
+            + "    content: null\n"
             + "references:\n"
-            + "- uid: Reference uid\n"));
+            + "- uid: Reference uid\n"
+            + "  parent: null\n"
+            + "  href: null\n"
+            + "  name: null\n"
+            + "  nameWithType: null\n"
+            + "  fullName: null\n"
+            + "  type: null\n"
+            + "  summary: null\n"
+            + "  syntax:\n"
+            + "    content: null\n"));
     }
 
     private MetadataFileItem buildMetadataFileItem(String uid) {

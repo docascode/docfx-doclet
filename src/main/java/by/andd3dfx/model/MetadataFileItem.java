@@ -20,6 +20,13 @@ public class MetadataFileItem {
 
     private Map<String, String> extraProperties = new HashMap<>();
 
+    // Not present in spec
+    private String href;
+    private String nameWithType;
+    private String summary;
+    private String content;
+    private List<TypeParameter> typeParameters = new ArrayList<>();
+
     public String getUid() {
         return uid;
     }
@@ -100,8 +107,87 @@ public class MetadataFileItem {
         this.extraProperties = extraProperties;
     }
 
-    @Override
-    public String toString() {
-        return "- uid: " + uid + "\n";
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public String getNameWithType() {
+        return nameWithType;
+    }
+
+    public void setNameWithType(String nameWithType) {
+        this.nameWithType = nameWithType;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<TypeParameter> getTypeParameters() {
+        return typeParameters;
+    }
+
+    public void setTypeParameters(List<TypeParameter> typeParameters) {
+        this.typeParameters = typeParameters;
+    }
+
+    public String toItemString() {
+        String result = "- uid: " + uid + "\n"
+            + "  id: " + id + "\n"
+            + "  children:\n";
+        for (String child : children) {
+            result += "  - " + child + "\n";
+        }
+        result += "  href: " + href + "\n"
+            + "  langs:\n"
+            + "  - java\n"
+            + "  name: " + name + "\n"
+            + "  nameWithType: " + nameWithType + "\n"
+            + "  fullName: " + fullName + "\n"
+            + "  type: " + type + "\n"
+            + "  summary: " + summary + "\n"
+            + "  syntax:\n"
+            + "    content: " + content + "\n";
+        return result;
+    }
+
+    public String toReferenceString() {
+        String result = "- uid: " + uid + "\n"
+            + "  parent: " + parent + "\n"
+            + "  href: " + href + "\n"
+            + "  name: " + name + "\n"
+            + "  nameWithType: " + nameWithType + "\n"
+            + "  fullName: " + fullName + "\n"
+            + "  type: " + type + "\n"
+            + "  summary: " + summary + "\n"
+            + "  syntax:\n";
+        result += "    content: " + content + "\n";
+
+        if (typeParameters.isEmpty()) {
+            return result;
+        }
+
+        result += "    typeParameters:\n";
+        for (TypeParameter typeParameter : typeParameters) {
+            result += "    - id: " + typeParameter.getId() + "\n"
+                + "      type: " + typeParameter.getType() + "\n";
+        }
+        return result;
     }
 }
