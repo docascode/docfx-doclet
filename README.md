@@ -1,5 +1,5 @@
 
-### Example of custom doclet
+### Doclet for generation of DocFx ready files for Java source code
 
 ##### Usage of doclet as part of usual maven build:  
 `mvn javadoc:javadoc`
@@ -7,7 +7,7 @@
 ##### To use doclet standalone, without maven:    
 <pre>
 javadoc \
--docletpath ./target/custom-doclet-1.0-SNAPSHOT.jar \
+-docletpath ./target/docfx-doclet-1.0-SNAPSHOT.jar \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -sourcepath ./src/main/java \
 -subpackages com.microsoft.samples
@@ -22,7 +22,7 @@ For example for [junit-4.12-sources](https://mvnrepository.com/artifact/junit/ju
 that it depends on hamcrest-core-1.3.jar library, so downloaded this hamcrest library, unpack sources jar and run:
 <pre>
 javadoc \
--docletpath ./target/custom-doclet-1.0-SNAPSHOT.jar \
+-docletpath ./target/docfx-doclet-1.0-SNAPSHOT.jar \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -cp ./hamcrest-core-1.3.jar \
 -sourcepath ./junit-4.12-sources \
