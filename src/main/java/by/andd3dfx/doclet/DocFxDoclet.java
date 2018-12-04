@@ -67,17 +67,12 @@ public class DocFxDoclet implements Doclet {
     }
 
     void buildFilesForInnerClasses(String namePrefix, Element element, YmlFilesBuilder ymlFilesBuilder, List<TocItem> listToAddItems) {
-        for (TypeElement typeElement : ElementFilter.typesIn(element.getEnclosedElements())) {
-            String classQName = String.valueOf(typeElement.getQualifiedName());
-            String classSimpleName = String.format("%s%s%s",
-                namePrefix,
-                StringUtils.isEmpty(namePrefix) ? "" : ".",
-                String.valueOf(typeElement.getSimpleName()));
+        for (TypeElement classElement : ElementFilter.typesIn(element.getEnclosedElements())) {
+            String classSimpleName = YmlFilesBuilderImpl.determineClassSimpleName(namePrefix, classElement);
+            String classQName = YmlFilesBuilderImpl.determineClassQName(namePrefix, classElement);
 
-            classQName = classQName
-                .replace(classSimpleName, StringUtil.replaceUppercaseWithUnderscoreWithLowercase(classSimpleName));
             String classYmlFileName = classQName + ".yml";
-            ymlFilesBuilder.buildClassYmlFile(typeElement, outputPath + File.separator + classYmlFileName);
+            ymlFilesBuilder.buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
 
             TocItem classTocItem = new TocItem.Builder()
                 .setUid(classQName)
@@ -86,7 +81,7 @@ public class DocFxDoclet implements Doclet {
                 .build();
             listToAddItems.add(classTocItem);
 
-            buildFilesForInnerClasses(classSimpleName, typeElement, ymlFilesBuilder, listToAddItems);
+            buildFilesForInnerClasses(classSimpleName, classElement, ymlFilesBuilder, listToAddItems);
         }
     }
 
