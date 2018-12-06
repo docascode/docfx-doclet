@@ -73,12 +73,13 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         referenceItem.setParent(packageName);
         referenceItem.setHref(classQName + ".yml");
         String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
-        referenceItem.setName(classQNameWithGenericsSupport.replace(packageName + ".", ""));
-        referenceItem.setNameWithType(classQNameWithGenericsSupport.replace(packageName + ".", ""));
+        String shortClassNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
+        referenceItem.setName(shortClassNameWithGenericsSupport);
+        referenceItem.setNameWithType(shortClassNameWithGenericsSupport);
         referenceItem.setFullName(classQNameWithGenericsSupport);
         referenceItem.setType(elementKindLookup.get(classElement.getKind()));
         referenceItem.setSummary("-=TBD=-");   // TODO: TBD
-        referenceItem.setContent("-=TBD=-");   // TODO: TBD
+        referenceItem.setContent(String.format("public %s %s", referenceItem.getType().toLowerCase(), shortClassNameWithGenericsSupport));
         for (TypeParameterElement typeParameter : classElement.getTypeParameters()) {
             String key = String.valueOf(typeParameter);
             if (!typeParamsLookup.containsKey(key)) {
