@@ -68,7 +68,7 @@ public class DocFxDoclet implements Doclet {
     void buildFilesForInnerClasses(String namePrefix, Element element, YmlFilesBuilder ymlFilesBuilder, List<TocItem> listToAddItems) {
         for (TypeElement classElement : ElementFilter.typesIn(element.getEnclosedElements())) {
             String classSimpleName = YmlFilesBuilderImpl.determineClassSimpleName(namePrefix, classElement);
-            String classQName = YmlFilesBuilderImpl.determineClassQName(namePrefix, classElement);
+            String classQName = String.valueOf(classElement.getQualifiedName());
 
             String classYmlFileName = classQName + ".yml";
             ymlFilesBuilder.buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);

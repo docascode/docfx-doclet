@@ -4,7 +4,6 @@ import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
 import com.microsoft.util.FileUtil;
-import com.microsoft.util.StringUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +56,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     void addPackageChildren(String packageName, String namePrefix, Element element, List<String> packageChildren,
         List<MetadataFileItem> references) {
         for (TypeElement classElement : ElementFilter.typesIn(element.getEnclosedElements())) {
-            String classQName = determineClassQName(namePrefix, classElement);
+            String classQName = String.valueOf(classElement.getQualifiedName());
             String classSimpleName = determineClassSimpleName(namePrefix, classElement);
             MetadataFileItem reference = buildClassReference(packageName, classElement, classQName);
 
@@ -108,13 +107,5 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             namePrefix,
             StringUtils.isEmpty(namePrefix) ? "" : ".",
             String.valueOf(classElement.getSimpleName()));
-    }
-
-    public static String determineClassQName(String namePrefix, TypeElement classElement) {
-        String classQName = String.valueOf(classElement.getQualifiedName());
-        String classSimpleName = determineClassSimpleName(namePrefix, classElement);
-
-        return classQName.replace(classSimpleName,
-            StringUtil.replaceUppercaseWithUnderscoreWithLowercase(classSimpleName));
     }
 }
