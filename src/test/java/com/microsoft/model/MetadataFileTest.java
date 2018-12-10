@@ -20,6 +20,7 @@ public class MetadataFileTest {
             + "items:\n"
             + "- uid: Item uid\n"
             + "  id: null\n"
+            + "  parent: Some parent\n"
             + "  children:\n"
             + "  href: null\n"
             + "  langs:\n"
@@ -33,7 +34,7 @@ public class MetadataFileTest {
             + "    content: null\n"
             + "references:\n"
             + "- uid: Reference uid\n"
-            + "  parent: null\n"
+            + "  parent: Some parent\n"
             + "  href: null\n"
             + "  name: null\n"
             + "  nameWithType: null\n"
@@ -47,6 +48,7 @@ public class MetadataFileTest {
     private MetadataFileItem buildMetadataFileItem(String uid) {
         MetadataFileItem result = new MetadataFileItem();
         result.setUid(uid);
+        result.setParent("Some parent");
         return result;
     }
 }

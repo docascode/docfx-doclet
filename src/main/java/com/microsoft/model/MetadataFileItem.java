@@ -149,8 +149,11 @@ public class MetadataFileItem {
 
     public String toItemString() {
         String result = "- uid: " + uid + "\n"
-            + "  id: " + id + "\n"
-            + "  children:\n";
+            + "  id: " + id + "\n";
+        if (parent != null) {
+            result += "  parent: " + parent + "\n";
+        }
+        result += "  children:\n";
         for (String child : children) {
             result += "  - " + child + "\n";
         }
