@@ -4,6 +4,7 @@ import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
 import com.microsoft.util.FileUtil;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,69 +26,81 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         put(ElementKind.INTERFACE, "Interface");
         put(ElementKind.ANNOTATION_TYPE, "Annotation");
         put(ElementKind.METHOD, "Method");
+        put(ElementKind.FIELD, "Field");
     }};
     private Map<String, String> typeParamsLookup = new HashMap<>();
     private Random random = new Random(21);
 
     @Override
-    public void buildPackageYmlFile(PackageElement packageElement, String outputPath) {
-        MetadataFile packageMetadataFile = new MetadataFile();
+    public void buildPackageYmlFile(PackageElement element, String outputPath) {
+        MetadataFile metadataFile = new MetadataFile();
 
-        MetadataFileItem packageItem = new MetadataFileItem();
-        String packageQName = String.valueOf(packageElement.getQualifiedName());
-        packageItem.setUid(packageQName);
-        packageItem.setId(String.valueOf(packageElement.getSimpleName()));
-        addPackageChildren(packageQName, "", packageElement, packageItem.getChildren(),
-            packageMetadataFile.getReferences());
-        packageItem.setHref(packageQName + ".yml");
-        packageItem.setName(packageQName);
-        packageItem.setNameWithType(packageQName);
-        packageItem.setFullName(packageQName);
-        packageItem.setType(elementKindLookup.get(packageElement.getKind()));
-        packageItem.setSummary("-=TBD=-");     // TODO: TBD
-        packageItem.setContent("package " + packageQName);
+        String qName = String.valueOf(element.getQualifiedName());
+        String sName = String.valueOf(element.getSimpleName());
+        String type = elementKindLookup.get(element.getKind());
 
-        packageMetadataFile.getItems().add(packageItem);
+        MetadataFileItem item = new MetadataFileItem();
+        item.setUid(qName);
+        item.setId(sName);
+        addPackageChildren(qName, "", element, item.getChildren(), metadataFile.getReferences());
+        item.setHref(qName + ".yml");
+        item.setName(qName);
+        item.setNameWithType(qName);
+        item.setFullName(qName);
+        item.setType(type);
+        item.setSummary("-=TBD=-");     // TODO: TBD
+        item.setContent("package " + qName);
+        metadataFile.getItems().add(item);
 
-        String content = String.valueOf(packageMetadataFile);
+        String content = String.valueOf(metadataFile);
         FileUtil.dumpToFile(content, outputPath);
     }
 
-    void addPackageChildren(String packageName, String namePrefix, Element element, List<String> packageChildren,
+    void addPackageChildren(String packageName, String namePrefix, Element packageElement, List<String> packageChildren,
         List<MetadataFileItem> references) {
-        for (TypeElement classElement : ElementFilter.typesIn(element.getEnclosedElements())) {
-            String classQName = String.valueOf(classElement.getQualifiedName());
-            String classSimpleName = determineClassSimpleName(namePrefix, classElement);
-            MetadataFileItem reference = buildClassReference(packageName, classElement, classQName);
+        for (TypeElement classElement : ElementFilter.typesIn(packageElement.getEnclosedElements())) {
+            String qName = String.valueOf(classElement.getQualifiedName());
+            String sName = determineClassSimpleName(namePrefix, classElement);
 
-            packageChildren.add(classQName);
+            MetadataFileItem reference = buildClassReference(packageName, classElement, qName);
             references.add(reference);
-            addPackageChildren(packageName, classSimpleName, classElement, packageChildren, references);
+
+            packageChildren.add(qName);
+            addPackageChildren(packageName, sName, classElement, packageChildren, references);
         }
     }
 
-    MetadataFileItem buildClassReference(String packageName, TypeElement classElement, String classQName) {
+    MetadataFileItem buildClassReference(String packageName, TypeElement classElement, String qName) {
+        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
+        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
+        String type = elementKindLookup.get(classElement.getKind());
+        String content = String.format("public %s %s", type.toLowerCase(), shortNameWithGenericsSupport);
+
         MetadataFileItem referenceItem = new MetadataFileItem();
-        referenceItem.setUid(classQName);
+        referenceItem.setUid(qName);
         referenceItem.setParent(packageName);
-        referenceItem.setHref(classQName + ".yml");
-        String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
-        String shortClassNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
-        referenceItem.setName(shortClassNameWithGenericsSupport);
-        referenceItem.setNameWithType(shortClassNameWithGenericsSupport);
-        referenceItem.setFullName(classQNameWithGenericsSupport);
-        referenceItem.setType(elementKindLookup.get(classElement.getKind()));
+        referenceItem.setHref(qName + ".yml");
+        referenceItem.setName(shortNameWithGenericsSupport);
+        referenceItem.setNameWithType(shortNameWithGenericsSupport);
+        referenceItem.setFullName(qNameWithGenericsSupport);
+        referenceItem.setType(type);
         referenceItem.setSummary("-=TBD=-");   // TODO: TBD
-        referenceItem.setContent(String.format("public %s %s", referenceItem.getType().toLowerCase(), shortClassNameWithGenericsSupport));
-        for (TypeParameterElement typeParameter : classElement.getTypeParameters()) {
+        referenceItem.setContent(content);
+        referenceItem.getTypeParameters().addAll(extractTypeParameters(classElement));
+        return referenceItem;
+    }
+
+    List<TypeParameter> extractTypeParameters(TypeElement element) {
+        List<TypeParameter> result = new ArrayList<>();
+        for (TypeParameterElement typeParameter : element.getTypeParameters()) {
             String key = String.valueOf(typeParameter);
             if (!typeParamsLookup.containsKey(key)) {
                 typeParamsLookup.put(key, generateRandomHexString());
             }
             String value = typeParamsLookup.get(key);
-            referenceItem.getTypeParameters().add(new TypeParameter(key, value));
+            result.add(new TypeParameter(key, value));
         }
-        return referenceItem;
+        return result;
     }
 
     private String generateRandomHexString() {
