@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
     private Map<ElementKind, String> elementKindLookup = new HashMap<>() {{
-        put(ElementKind.PACKAGE, "Namespace");  // TODO: 'Namespace' or 'Package'?
+        put(ElementKind.PACKAGE, "Namespace");
         put(ElementKind.CLASS, "Class");
         put(ElementKind.ENUM, "Enum");
         put(ElementKind.INTERFACE, "Interface");
