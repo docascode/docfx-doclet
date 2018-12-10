@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.TypeParameter;
+import java.util.HashSet;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
@@ -22,7 +23,7 @@ public class YmlFilesBuilderImplTest {
     @Before
     public void setup() {
         elements = rule.getElements();
-        ymlFilesBuilder = new YmlFilesBuilderImpl();
+        ymlFilesBuilder = new YmlFilesBuilderImpl(new HashSet<>(), "");
     }
 
     @Test
