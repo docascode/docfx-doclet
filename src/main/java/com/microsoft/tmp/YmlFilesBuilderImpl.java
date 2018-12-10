@@ -163,9 +163,12 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
     @Override
     public void buildClassYmlFile(TypeElement typeElement, String outputPath) {
-        // TODO: Add implementation
-        String content = "";
+        MetadataFile metadataFile = new MetadataFile();
 
+        // TODO: Add implementation
+
+
+        String content = String.valueOf(metadataFile);
         FileUtil.dumpToFile(content, outputPath);
     }
 
