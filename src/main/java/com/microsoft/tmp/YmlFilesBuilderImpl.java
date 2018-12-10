@@ -27,7 +27,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         put(ElementKind.METHOD, "Method");
     }};
     private Map<String, String> typeParamsLookup = new HashMap<>();
-    private Random random = new Random();
+    private Random random = new Random(21);
 
     @Override
     public void buildPackageYmlFile(PackageElement packageElement, String outputPath) {

@@ -1,0 +1,24 @@
+### YamlMime:TableOfContent
+- uid: com.microsoft.samples
+  name: com.microsoft.samples
+  href: com.microsoft.samples.yml
+  items: 
+  - uid: com.microsoft.samples.SuperHero
+    name: SuperHero
+    href: com.microsoft.samples.SuperHero.yml
+- uid: com.microsoft.samples.subpackage
+  name: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.yml
+  items: 
+  - uid: com.microsoft.samples.subpackage.Display
+    name: Display
+    href: com.microsoft.samples.subpackage.Display.yml
+  - uid: com.microsoft.samples.subpackage.Person
+    name: Person
+    href: com.microsoft.samples.subpackage.Person.yml
+  - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
+    name: Person.IdentificationInfo
+    href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
+  - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+    name: Person.IdentificationInfo.Gender
+    href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml

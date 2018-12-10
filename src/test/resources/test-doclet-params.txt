@@ -1,0 +1,4 @@
+-doclet com.microsoft.doclet.DocFxDoclet
+-sourcepath ./src/main/java
+-outputpath ./target/test-out
+-subpackages com.microsoft.samples

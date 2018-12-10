@@ -1,0 +1,68 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.microsoft.samples.subpackage
+  id: subpackage
+  children:
+  - com.microsoft.samples.subpackage.Display
+  - com.microsoft.samples.subpackage.Person
+  - com.microsoft.samples.subpackage.Person.IdentificationInfo
+  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  href: com.microsoft.samples.subpackage.yml
+  langs:
+  - java
+  name: com.microsoft.samples.subpackage
+  nameWithType: com.microsoft.samples.subpackage
+  fullName: com.microsoft.samples.subpackage
+  type: Namespace
+  summary: -=TBD=-
+  syntax:
+    content: package com.microsoft.samples.subpackage
+references:
+- uid: com.microsoft.samples.subpackage.Display
+  parent: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.Display.yml
+  name: Display<T,R>
+  nameWithType: Display<T,R>
+  fullName: com.microsoft.samples.subpackage.Display<T,R>
+  type: Interface
+  summary: -=TBD=-
+  syntax:
+    content: public interface Display<T,R>
+    typeParameters:
+    - id: T
+      type: bb61488d
+    - id: R
+      type: df411159
+- uid: com.microsoft.samples.subpackage.Person
+  parent: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.Person.yml
+  name: Person<T>
+  nameWithType: Person<T>
+  fullName: com.microsoft.samples.subpackage.Person<T>
+  type: Class
+  summary: -=TBD=-
+  syntax:
+    content: public class Person<T>
+    typeParameters:
+    - id: T
+      type: bb61488d
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
+  parent: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
+  name: Person.IdentificationInfo
+  nameWithType: Person.IdentificationInfo
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
+  type: Class
+  summary: -=TBD=-
+  syntax:
+    content: public class Person.IdentificationInfo
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  parent: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  name: Person.IdentificationInfo.Gender
+  nameWithType: Person.IdentificationInfo.Gender
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  type: Enum
+  summary: -=TBD=-
+  syntax:
+    content: public enum Person.IdentificationInfo.Gender

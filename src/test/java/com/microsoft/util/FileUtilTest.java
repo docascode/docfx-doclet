@@ -38,7 +38,7 @@ public class FileUtilTest {
         assertThat("Invalid file content", Files.readString(Paths.get(FILE_NAME)), is(content));
     }
 
-    void deleteDirectoryStream(String pathString) throws IOException {
+    public static void deleteDirectoryStream(String pathString) throws IOException {
         Path path = Paths.get(pathString);
         if (Files.exists(path)) {
             Files.walk(path)
