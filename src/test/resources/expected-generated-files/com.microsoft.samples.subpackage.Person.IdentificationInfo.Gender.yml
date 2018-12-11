@@ -1,3 +1,20 @@
 ### YamlMime:ManagedReference
 items:
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  id: Gender
+  parent: com.microsoft.samples.subpackage
+  children:
+  - values()
+  - valueOf(java.lang.String)
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  langs:
+  - java
+  name: Person.IdentificationInfo.Gender
+  nameWithType: Person.IdentificationInfo.Gender
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  type: Enum
+  package: com.microsoft.samples.subpackage
+  summary: "<p>Enum describes person's gender</p>"
+  syntax:
+    content: public enum Person.IdentificationInfo.Gender
 references:

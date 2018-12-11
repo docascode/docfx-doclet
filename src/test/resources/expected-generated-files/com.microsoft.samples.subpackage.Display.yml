@@ -1,3 +1,25 @@
 ### YamlMime:ManagedReference
 items:
+- uid: com.microsoft.samples.subpackage.Display
+  id: Display
+  parent: com.microsoft.samples.subpackage
+  children:
+  - show()
+  - hide()
+  href: com.microsoft.samples.subpackage.Display.yml
+  langs:
+  - java
+  name: Display<T,R>
+  nameWithType: Display<T,R>
+  fullName: com.microsoft.samples.subpackage.Display<T,R>
+  type: Interface
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public interface Display<T,R>
+    typeParameters:
+    - id: T
+      type: bb61488d
+    - id: R
+      type: df411159
 references:

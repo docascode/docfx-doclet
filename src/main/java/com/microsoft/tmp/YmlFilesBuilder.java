@@ -7,5 +7,5 @@ public interface YmlFilesBuilder {
 
     void buildPackageYmlFile(PackageElement packageElement, String outputPath);
 
-    void buildClassYmlFile(TypeElement typeElement, String outputPath);
+    void buildClassYmlFile(String packageName, TypeElement typeElement, String outputPath);
 }

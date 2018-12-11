@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Random;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
@@ -60,7 +61,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 .setHref(packageYmlFileName)
                 .build();
 
-            buildFilesForInnerClasses("", packageElement, this, packageTocItem.getItems());
+            buildFilesForInnerClasses(packageQName, "", packageElement, this, packageTocItem.getItems());
 
             resultTocFile.getItems().add(packageTocItem);
         }
@@ -68,14 +69,16 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         return true;
     }
 
-    void buildFilesForInnerClasses(String namePrefix, Element element, YmlFilesBuilder ymlFilesBuilder,
+    void buildFilesForInnerClasses(String packageName, String namePrefix, Element element,
+        YmlFilesBuilder ymlFilesBuilder,
         List<TocItem> listToAddItems) {
         for (TypeElement classElement : ElementFilter.typesIn(element.getEnclosedElements())) {
             String classSimpleName = YmlFilesBuilderImpl.determineClassSimpleName(namePrefix, classElement);
             String classQName = String.valueOf(classElement.getQualifiedName());
 
             String classYmlFileName = classQName + ".yml";
-            ymlFilesBuilder.buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
+            ymlFilesBuilder
+                .buildClassYmlFile(packageName, classElement, outputPath + File.separator + classYmlFileName);
 
             TocItem classTocItem = new TocItem.Builder()
                 .setUid(classQName)
@@ -84,7 +87,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 .build();
             listToAddItems.add(classTocItem);
 
-            buildFilesForInnerClasses(classSimpleName, classElement, ymlFilesBuilder, listToAddItems);
+            buildFilesForInnerClasses(packageName, classSimpleName, classElement, ymlFilesBuilder, listToAddItems);
         }
     }
 
@@ -178,14 +181,39 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     }
 
     @Override
-    public void buildClassYmlFile(TypeElement typeElement, String outputPath) {
+    public void buildClassYmlFile(String packageName, TypeElement classElement, String outputPath) {
         MetadataFile metadataFile = new MetadataFile();
 
-        // TODO: Add implementation
+        String qName = String.valueOf(classElement.getQualifiedName());
+        String sName = String.valueOf(classElement.getSimpleName());
+        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
+        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
+        String type = elementKindLookup.get(classElement.getKind());
+        String summary = extractComment(classElement);
+        String content = String.format("public %s %s", type.toLowerCase(), shortNameWithGenericsSupport);
 
+        MetadataFileItem item = new MetadataFileItem();
+        item.setUid(qName);
+        item.setId(sName);
+        item.setParent(packageName);
+        for (ExecutableElement element : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
+            item.getChildren().add(String.valueOf(element));
+        }
+        item.setHref(qName + ".yml");
+        item.setName(shortNameWithGenericsSupport);
+        item.setNameWithType(shortNameWithGenericsSupport);
+        item.setFullName(qNameWithGenericsSupport);
+        item.setType(type);
+        item.setPackageName(packageName);
+        item.setSummary(summary);
+        item.setContent(content);
+        item.getTypeParameters().addAll(extractTypeParameters(classElement));
+        metadataFile.getItems().add(item);
 
-        String content = String.valueOf(metadataFile);
-        FileUtil.dumpToFile(content, outputPath);
+        // TODO: Add methods
+
+        String metadataFileContent = String.valueOf(metadataFile);
+        FileUtil.dumpToFile(metadataFileContent, outputPath);
     }
 
     public static String determineClassSimpleName(String namePrefix, Element classElement) {

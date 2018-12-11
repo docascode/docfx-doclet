@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 public class MetadataFileItem {
 
@@ -23,6 +24,7 @@ public class MetadataFileItem {
     // Not present in spec
     private String href;
     private String nameWithType;
+    private String packageName;
     private String summary;
     private String content;
     private List<TypeParameter> typeParameters = new ArrayList<>();
@@ -123,6 +125,14 @@ public class MetadataFileItem {
         this.nameWithType = nameWithType;
     }
 
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
     public String getSummary() {
         return summary;
     }
@@ -153,9 +163,11 @@ public class MetadataFileItem {
         if (parent != null) {
             result += "  parent: " + parent + "\n";
         }
-        result += "  children:\n";
-        for (String child : children) {
-            result += "  - " + child + "\n";
+        if (!children.isEmpty()) {
+            result += "  children:\n";
+            for (String child : children) {
+                result += "  - " + child + "\n";
+            }
         }
         result += "  href: " + href + "\n"
             + "  langs:\n"
@@ -163,10 +175,22 @@ public class MetadataFileItem {
             + "  name: " + name + "\n"
             + "  nameWithType: " + nameWithType + "\n"
             + "  fullName: " + fullName + "\n"
-            + "  type: " + type + "\n"
-            + "  summary: " + summary + "\n"
+            + "  type: " + type + "\n";
+        if (StringUtils.isNotEmpty(packageName)) {
+            result += "  package: " + packageName + "\n";
+        }
+        result += "  summary: " + summary + "\n"
             + "  syntax:\n"
             + "    content: " + content + "\n";
+
+        if (typeParameters.isEmpty()) {
+            return result;
+        }
+        result += "    typeParameters:\n";
+        for (TypeParameter typeParameter : typeParameters) {
+            result += "    - id: " + typeParameter.getId() + "\n"
+                + "      type: " + typeParameter.getType() + "\n";
+        }
         return result;
     }
 

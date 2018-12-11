@@ -21,7 +21,6 @@ public class MetadataFileTest {
             + "- uid: Item uid\n"
             + "  id: null\n"
             + "  parent: Some parent\n"
-            + "  children:\n"
             + "  href: null\n"
             + "  langs:\n"
             + "  - java\n"

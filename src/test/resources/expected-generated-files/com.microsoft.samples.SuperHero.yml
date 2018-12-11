@@ -1,3 +1,27 @@
 ### YamlMime:ManagedReference
 items:
+- uid: com.microsoft.samples.SuperHero
+  id: SuperHero
+  parent: com.microsoft.samples
+  children:
+  - successfullyAttacked(int,java.lang.String)
+  - getHeroName()
+  - setHeroName(java.lang.String)
+  - getUniquePower()
+  - setUniquePower(java.lang.String)
+  - getHealth()
+  - setHealth(int)
+  - getDefense()
+  - setDefense(int)
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: SuperHero
+  nameWithType: SuperHero
+  fullName: com.microsoft.samples.SuperHero
+  type: Class
+  package: com.microsoft.samples
+  summary: "<p>Hero is the main entity we will be using to something</p><p> @author Captain America</p>"
+  syntax:
+    content: public class SuperHero
 references:

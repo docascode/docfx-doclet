@@ -1,3 +1,17 @@
 ### YamlMime:ManagedReference
 items:
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
+  id: IdentificationInfo
+  parent: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
+  langs:
+  - java
+  name: Person.IdentificationInfo
+  nameWithType: Person.IdentificationInfo
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
+  type: Class
+  package: com.microsoft.samples.subpackage
+  summary: "<p>Class that describes person's identification</p>"
+  syntax:
+    content: public class Person.IdentificationInfo
 references:

@@ -1,3 +1,25 @@
 ### YamlMime:ManagedReference
 items:
+- uid: com.microsoft.samples.subpackage.Person
+  id: Person
+  parent: com.microsoft.samples.subpackage
+  children:
+  - getFirstName()
+  - setFirstName(java.lang.String)
+  - getLastName()
+  - setLastName(java.lang.String)
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: Person<T>
+  nameWithType: Person<T>
+  fullName: com.microsoft.samples.subpackage.Person<T>
+  type: Class
+  package: com.microsoft.samples.subpackage
+  summary: "<p>Class that describes some person</p>"
+  syntax:
+    content: public class Person<T>
+    typeParameters:
+    - id: T
+      type: bb61488d
 references:
