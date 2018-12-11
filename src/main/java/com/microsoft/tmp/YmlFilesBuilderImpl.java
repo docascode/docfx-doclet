@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
@@ -24,8 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
-    private final Set<PackageElement> packages;
-    private final String outputPath;
+    private DocletEnvironment environment;
+    private String outputPath;
 
     private Map<ElementKind, String> elementKindLookup = new HashMap<>() {{
         put(ElementKind.PACKAGE, "Namespace");
@@ -39,14 +38,18 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     private Map<String, String> typeParamsLookup = new HashMap<>();
     private Random random = new Random(21);
 
-    public YmlFilesBuilderImpl(Set<PackageElement> packages, String outputPath) {
-        this.packages = packages;
+    public YmlFilesBuilderImpl(DocletEnvironment environment, String outputPath) {
+        this.environment = environment;
         this.outputPath = outputPath;
+    }
+
+    // Fot testing purposes
+    YmlFilesBuilderImpl() {
     }
 
     public boolean build() {
         TocFile resultTocFile = new TocFile();
-        for (PackageElement packageElement : packages) {
+        for (PackageElement packageElement : ElementFilter.packagesIn(environment.getIncludedElements())) {
             String packageQName = String.valueOf(packageElement.getQualifiedName());
             String packageYmlFileName = packageQName + ".yml";
             buildPackageYmlFile(packageElement, outputPath + File.separator + packageYmlFileName);
@@ -92,6 +95,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         String qName = String.valueOf(element.getQualifiedName());
         String sName = String.valueOf(element.getSimpleName());
         String type = elementKindLookup.get(element.getKind());
+        String summary = extractComment(element);
 
         MetadataFileItem item = new MetadataFileItem();
         item.setUid(qName);
@@ -102,7 +106,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         item.setNameWithType(qName);
         item.setFullName(qName);
         item.setType(type);
-        item.setSummary("-=TBD=-");     // TODO: TBD
+        item.setSummary(summary);
         item.setContent("package " + qName);
         metadataFile.getItems().add(item);
 
@@ -128,6 +132,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         String qNameWithGenericsSupport = String.valueOf(classElement.asType());
         String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
         String type = elementKindLookup.get(classElement.getKind());
+        String summary = extractComment(classElement);
         String content = String.format("public %s %s", type.toLowerCase(), shortNameWithGenericsSupport);
 
         MetadataFileItem referenceItem = new MetadataFileItem();
@@ -138,10 +143,21 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         referenceItem.setNameWithType(shortNameWithGenericsSupport);
         referenceItem.setFullName(qNameWithGenericsSupport);
         referenceItem.setType(type);
-        referenceItem.setSummary("-=TBD=-");   // TODO: TBD
+        referenceItem.setSummary(summary);
         referenceItem.setContent(content);
         referenceItem.getTypeParameters().addAll(extractTypeParameters(classElement));
         return referenceItem;
+    }
+
+    String extractComment(Element element) {
+        return cleanupComment(environment.getElementUtils().getDocComment(element));
+    }
+
+    String cleanupComment(String comment) {
+        String result = StringUtils.trimToEmpty(comment)
+            .replace("\r\n", "\n")
+            .replaceAll("\\n+", "</p><p>");
+        return String.format("\"<p>%s</p>\"", result);
     }
 
     List<TypeParameter> extractTypeParameters(TypeElement element) {

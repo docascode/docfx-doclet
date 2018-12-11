@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.TypeParameter;
-import java.util.HashSet;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
@@ -23,7 +22,21 @@ public class YmlFilesBuilderImplTest {
     @Before
     public void setup() {
         elements = rule.getElements();
-        ymlFilesBuilder = new YmlFilesBuilderImpl(new HashSet<>(), "");
+        ymlFilesBuilder = new YmlFilesBuilderImpl();
+    }
+
+    @Test
+    public void cleanupComment() {
+        String result = ymlFilesBuilder.cleanupComment("Some one-line comment\n");
+
+        assertThat("Wrong result", result, is("\"<p>Some one-line comment</p>\""));
+    }
+
+    @Test
+    public void cleanupCommentForMultilineCase() {
+        String result = ymlFilesBuilder.cleanupComment("Some multiline\n\n comment\n");
+
+        assertThat("Wrong result", result, is("\"<p>Some multiline</p><p> comment</p>\""));
     }
 
     @Test

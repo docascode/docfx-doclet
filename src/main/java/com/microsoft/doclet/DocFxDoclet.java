@@ -34,8 +34,7 @@ public class DocFxDoclet implements Doclet {
 
         reporter.print(Kind.NOTE, "Output path: " + outputPath);
 
-        Set<PackageElement> packages = ElementFilter.packagesIn(environment.getIncludedElements());
-        return (new YmlFilesBuilderImpl(packages, outputPath)).build();
+        return (new YmlFilesBuilderImpl(environment, outputPath)).build();
     }
 
     @Override
