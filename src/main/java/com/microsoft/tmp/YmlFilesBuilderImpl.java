@@ -12,12 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.StringUtils;
@@ -192,6 +194,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         String summary = extractComment(classElement);
         String content = String.format("public %s %s", type.toLowerCase(), shortNameWithGenericsSupport);
 
+        // Add class info
         MetadataFileItem item = new MetadataFileItem();
         item.setUid(qName);
         item.setId(sName);
@@ -210,10 +213,43 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         item.getTypeParameters().addAll(extractTypeParameters(classElement));
         metadataFile.getItems().add(item);
 
-        // TODO: Add methods
+        // Add methods info
+        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
+            MetadataFileItem methodItem = new MetadataFileItem();
+            String methodQName = String.valueOf(methodElement);
+            methodItem.setUid(String.format("%s.%s", qName, methodQName));
+            methodItem.setId(methodQName);
+            methodItem.setParent(qName);
+            methodItem.setHref(qName + ".yml");
+            methodItem.setName(methodQName);
+            methodItem.setNameWithType(shortNameWithGenericsSupport + "." + methodQName);
+            methodItem.setFullName(qNameWithGenericsSupport + "." + methodQName);
+            methodItem.setOverload("-=TBD=-");       // TODO: TBD
+            methodItem.setType(elementKindLookup.get(methodElement.getKind()));
+            methodItem.setPackageName(packageName);
+            methodItem.setSummary(extractComment(methodElement));
+            String methodContent = String.format("%s %s %s",
+                methodElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
+                methodElement.getReturnType(), methodQName);
+            methodItem.setContent(methodContent);
+
+            methodItem.getParameters().addAll(extractParameters(methodElement));
+            metadataFile.getItems().add(methodItem);
+        }
 
         String metadataFileContent = String.valueOf(metadataFile);
         FileUtil.dumpToFile(metadataFileContent, outputPath);
+    }
+
+    private List<TypeParameter> extractParameters(ExecutableElement element) {
+        List<TypeParameter> result = new ArrayList<>();
+        for (VariableElement parameter : element.getParameters()) {
+            String id = String.valueOf(parameter.getSimpleName());
+            String type = String.valueOf(parameter.asType());
+            String description = "-=TBD=-";     // TODO: TBD
+            result.add(new TypeParameter(id, type, description));
+        }
+        return result;
     }
 
     public static String determineClassSimpleName(String namePrefix, Element classElement) {

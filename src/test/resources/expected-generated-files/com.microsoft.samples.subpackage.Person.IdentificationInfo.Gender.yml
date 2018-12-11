@@ -17,4 +17,38 @@ items:
   summary: "<p>Enum describes person's gender</p>"
   syntax:
     content: public enum Person.IdentificationInfo.Gender
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
+  id: values()
+  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  langs:
+  - java
+  name: values()
+  nameWithType: Person.IdentificationInfo.Gender.values()
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[] values()
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
+  id: valueOf(java.lang.String)
+  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  langs:
+  - java
+  name: valueOf(java.lang.String)
+  nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String)
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender valueOf(java.lang.String)
+    parameters:
+    - id: name
+      type: java.lang.String
+      description: -=TBD=-
 references:

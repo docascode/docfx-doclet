@@ -22,4 +22,72 @@ items:
     typeParameters:
     - id: T
       type: bb61488d
+- uid: com.microsoft.samples.subpackage.Person.getFirstName()
+  id: getFirstName()
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: getFirstName()
+  nameWithType: Person<T>.getFirstName()
+  fullName: com.microsoft.samples.subpackage.Person<T>.getFirstName()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public java.lang.String getFirstName()
+- uid: com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
+  id: setFirstName(java.lang.String)
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: setFirstName(java.lang.String)
+  nameWithType: Person<T>.setFirstName(java.lang.String)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setFirstName(java.lang.String)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public void setFirstName(java.lang.String)
+    parameters:
+    - id: firstName
+      type: java.lang.String
+      description: -=TBD=-
+- uid: com.microsoft.samples.subpackage.Person.getLastName()
+  id: getLastName()
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: getLastName()
+  nameWithType: Person<T>.getLastName()
+  fullName: com.microsoft.samples.subpackage.Person<T>.getLastName()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public java.lang.String getLastName()
+- uid: com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
+  id: setLastName(java.lang.String)
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: setLastName(java.lang.String)
+  nameWithType: Person<T>.setLastName(java.lang.String)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setLastName(java.lang.String)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public void setLastName(java.lang.String)
+    parameters:
+    - id: lastName
+      type: java.lang.String
+      description: -=TBD=-
 references:

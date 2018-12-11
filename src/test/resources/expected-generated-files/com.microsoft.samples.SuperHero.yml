@@ -24,4 +24,162 @@ items:
   summary: "<p>Hero is the main entity we will be using to something</p><p> @author Captain America</p>"
   syntax:
     content: public class SuperHero
+- uid: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
+  id: successfullyAttacked(int,java.lang.String)
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: successfullyAttacked(int,java.lang.String)
+  nameWithType: SuperHero.successfullyAttacked(int,java.lang.String)
+  fullName: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p><p>This is a simple description of the method. . .</p><p> <a href="http://www.supermanisthegreatest.com">Superman!</a></p><p> </p></p><p> @param incomingDamage the amount of incoming damage</p><p> @return the amount of health hero has after attack</p><p> @throws IllegalArgumentException if incomingDamage is negative</p><p> @version 1.2</p><p> @see <a href="http://www.link_to_jira/HERO-402">HERO-402</a></p><p> @since 1.0</p><p> @deprecated As of version 1.1, use . . . instead</p>"
+  syntax:
+    content: public int successfullyAttacked(int,java.lang.String)
+    parameters:
+    - id: incomingDamage
+      type: int
+      description: -=TBD=-
+    - id: damageType
+      type: java.lang.String
+      description: -=TBD=-
+- uid: com.microsoft.samples.SuperHero.getHeroName()
+  id: getHeroName()
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: getHeroName()
+  nameWithType: SuperHero.getHeroName()
+  fullName: com.microsoft.samples.SuperHero.getHeroName()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public java.lang.String getHeroName()
+- uid: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
+  id: setHeroName(java.lang.String)
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: setHeroName(java.lang.String)
+  nameWithType: SuperHero.setHeroName(java.lang.String)
+  fullName: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public void setHeroName(java.lang.String)
+    parameters:
+    - id: heroName
+      type: java.lang.String
+      description: -=TBD=-
+- uid: com.microsoft.samples.SuperHero.getUniquePower()
+  id: getUniquePower()
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: getUniquePower()
+  nameWithType: SuperHero.getUniquePower()
+  fullName: com.microsoft.samples.SuperHero.getUniquePower()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public java.lang.String getUniquePower()
+- uid: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
+  id: setUniquePower(java.lang.String)
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: setUniquePower(java.lang.String)
+  nameWithType: SuperHero.setUniquePower(java.lang.String)
+  fullName: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public void setUniquePower(java.lang.String)
+    parameters:
+    - id: uniquePower
+      type: java.lang.String
+      description: -=TBD=-
+- uid: com.microsoft.samples.SuperHero.getHealth()
+  id: getHealth()
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: getHealth()
+  nameWithType: SuperHero.getHealth()
+  fullName: com.microsoft.samples.SuperHero.getHealth()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public int getHealth()
+- uid: com.microsoft.samples.SuperHero.setHealth(int)
+  id: setHealth(int)
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: setHealth(int)
+  nameWithType: SuperHero.setHealth(int)
+  fullName: com.microsoft.samples.SuperHero.setHealth(int)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public void setHealth(int)
+    parameters:
+    - id: health
+      type: int
+      description: -=TBD=-
+- uid: com.microsoft.samples.SuperHero.getDefense()
+  id: getDefense()
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: getDefense()
+  nameWithType: SuperHero.getDefense()
+  fullName: com.microsoft.samples.SuperHero.getDefense()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public int getDefense()
+- uid: com.microsoft.samples.SuperHero.setDefense(int)
+  id: setDefense(int)
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: setDefense(int)
+  nameWithType: SuperHero.setDefense(int)
+  fullName: com.microsoft.samples.SuperHero.setDefense(int)
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p></p>"
+  syntax:
+    content: public void setDefense(int)
+    parameters:
+    - id: defense
+      type: int
+      description: -=TBD=-
 references:

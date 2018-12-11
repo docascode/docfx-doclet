@@ -22,4 +22,34 @@ items:
       type: bb61488d
     - id: R
       type: df411159
+- uid: com.microsoft.samples.subpackage.Display.show()
+  id: show()
+  parent: com.microsoft.samples.subpackage.Display
+  href: com.microsoft.samples.subpackage.Display.yml
+  langs:
+  - java
+  name: show()
+  nameWithType: Display<T,R>.show()
+  fullName: com.microsoft.samples.subpackage.Display<T,R>.show()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public abstract void show()
+- uid: com.microsoft.samples.subpackage.Display.hide()
+  id: hide()
+  parent: com.microsoft.samples.subpackage.Display
+  href: com.microsoft.samples.subpackage.Display.yml
+  langs:
+  - java
+  name: hide()
+  nameWithType: Display<T,R>.hide()
+  fullName: com.microsoft.samples.subpackage.Display<T,R>.hide()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples.subpackage
+  summary: "<p></p>"
+  syntax:
+    content: public abstract void hide()
 references:

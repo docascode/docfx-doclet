@@ -16,6 +16,7 @@ public class MetadataFileItem {
     private String alias;
     private String name;
     private String fullName;
+    private String overload;
     private String type;
     private String url;
 
@@ -28,6 +29,7 @@ public class MetadataFileItem {
     private String summary;
     private String content;
     private List<TypeParameter> typeParameters = new ArrayList<>();
+    private List<TypeParameter> parameters = new ArrayList<>();
 
     public String getUid() {
         return uid;
@@ -83,6 +85,14 @@ public class MetadataFileItem {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getOverload() {
+        return overload;
+    }
+
+    public void setOverload(String overload) {
+        this.overload = overload;
     }
 
     public String getType() {
@@ -157,6 +167,14 @@ public class MetadataFileItem {
         this.typeParameters = typeParameters;
     }
 
+    public List<TypeParameter> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<TypeParameter> parameters) {
+        this.parameters = parameters;
+    }
+
     public String toItemString() {
         String result = "- uid: " + uid + "\n"
             + "  id: " + id + "\n";
@@ -174,8 +192,13 @@ public class MetadataFileItem {
             + "  - java\n"
             + "  name: " + name + "\n"
             + "  nameWithType: " + nameWithType + "\n"
-            + "  fullName: " + fullName + "\n"
-            + "  type: " + type + "\n";
+            + "  fullName: " + fullName + "\n";
+
+        if (StringUtils.isNotEmpty(overload)) {
+            result += "  overload: " + overload + "\n";
+        }
+
+        result += "  type: " + type + "\n";
         if (StringUtils.isNotEmpty(packageName)) {
             result += "  package: " + packageName + "\n";
         }
@@ -183,13 +206,20 @@ public class MetadataFileItem {
             + "  syntax:\n"
             + "    content: " + content + "\n";
 
-        if (typeParameters.isEmpty()) {
-            return result;
+        if (!typeParameters.isEmpty()) {
+            result += "    typeParameters:\n";
+            for (TypeParameter typeParameter : typeParameters) {
+                result += "    - id: " + typeParameter.getId() + "\n"
+                    + "      type: " + typeParameter.getType() + "\n";
+            }
         }
-        result += "    typeParameters:\n";
-        for (TypeParameter typeParameter : typeParameters) {
-            result += "    - id: " + typeParameter.getId() + "\n"
-                + "      type: " + typeParameter.getType() + "\n";
+        if (!parameters.isEmpty()) {
+            result += "    parameters:\n";
+            for (TypeParameter parameter : parameters) {
+                result += "    - id: " + parameter.getId() + "\n"
+                    + "      type: " + parameter.getType() + "\n"
+                    + "      description: " + parameter.getDescription() + "\n";
+            }
         }
         return result;
     }
