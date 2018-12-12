@@ -191,53 +191,51 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     public void buildClassYmlFile(String packageName, TypeElement classElement, String outputPath) {
         MetadataFile metadataFile = new MetadataFile();
 
-        String qName = String.valueOf(classElement.getQualifiedName());
-        String sName = String.valueOf(classElement.getSimpleName());
-        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
-        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
+        String classQName = String.valueOf(classElement.getQualifiedName());
+        String classSName = String.valueOf(classElement.getSimpleName());
+        String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
+        String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
         String type = elementKindLookup.get(classElement.getKind());
-        String summary = extractComment(classElement);
-        String content = String.format("public %s %s", type.toLowerCase(), shortNameWithGenericsSupport);
+        String classContentValue = String.format("public %s %s", type.toLowerCase(), classSNameWithGenericsSupport);
 
         // Add class info
-        MetadataFileItem item = new MetadataFileItem();
-        item.setUid(qName);
-        item.setId(sName);
-        item.setParent(packageName);
-        for (ExecutableElement element : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            item.getChildren().add(String.valueOf(element));
+        MetadataFileItem classItem = new MetadataFileItem();
+        classItem.setUid(classQName);
+        classItem.setId(classSName);
+        classItem.setParent(packageName);
+        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(String.valueOf(methodElement));
         }
-        item.setHref(qName + ".yml");
-        item.setName(shortNameWithGenericsSupport);
-        item.setNameWithType(shortNameWithGenericsSupport);
-        item.setFullName(qNameWithGenericsSupport);
-        item.setType(type);
-        item.setPackageName(packageName);
-        item.setSummary(summary);
-        item.setContent(content);
-        item.getTypeParameters().addAll(extractTypeParameters(classElement));
-        metadataFile.getItems().add(item);
+        classItem.setHref(classQName + ".yml");
+        classItem.setName(classSNameWithGenericsSupport);
+        classItem.setNameWithType(classSNameWithGenericsSupport);
+        classItem.setFullName(classQNameWithGenericsSupport);
+        classItem.setType(type);
+        classItem.setPackageName(packageName);
+        classItem.setSummary(extractComment(classElement));
+        classItem.setContent(classContentValue);
+        classItem.getTypeParameters().addAll(extractTypeParameters(classElement));
+        metadataFile.getItems().add(classItem);
 
         // Add methods info
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
             MetadataFileItem methodItem = new MetadataFileItem();
             String methodQName = String.valueOf(methodElement);
-            methodItem.setUid(String.format("%s.%s", qName, methodQName));
+            methodItem.setUid(String.format("%s.%s", classQName, methodQName));
             methodItem.setId(methodQName);
-            methodItem.setParent(qName);
-            methodItem.setHref(qName + ".yml");
+            methodItem.setParent(classQName);
+            methodItem.setHref(classQName + ".yml");
             methodItem.setName(methodQName);
-            methodItem.setNameWithType(shortNameWithGenericsSupport + "." + methodQName);
-            methodItem.setFullName(qNameWithGenericsSupport + "." + methodQName);
+            methodItem.setNameWithType(classSNameWithGenericsSupport + "." + methodQName);
+            methodItem.setFullName(classQNameWithGenericsSupport + "." + methodQName);
             methodItem.setOverload("-=TBD=-");       // TODO: TBD
             methodItem.setType(elementKindLookup.get(methodElement.getKind()));
             methodItem.setPackageName(packageName);
             methodItem.setSummary(extractComment(methodElement));
-            String methodContent = String.format("%s %s %s",
+            String methodContentValue = String.format("%s %s %s",
                 methodElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 methodElement.getReturnType(), methodQName);
-            methodItem.setContent(methodContent);
-
+            methodItem.setContent(methodContentValue);
             methodItem.getParameters().addAll(extractParameters(methodElement));
             metadataFile.getItems().add(methodItem);
         }
