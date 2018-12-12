@@ -22,6 +22,21 @@ items:
     typeParameters:
     - id: T
       type: bb61488d
+- uid: com.microsoft.samples.subpackage.Person.Person()
+  id: Person()
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: Person()
+  nameWithType: Person<T>.Person()
+  fullName: com.microsoft.samples.subpackage.Person<T>.Person()
+  overload: -=TBD=-
+  type: Constructor
+  package: com.microsoft.samples.subpackage
+  summary: 
+  syntax:
+    content: public Person()
 - uid: com.microsoft.samples.subpackage.Person.getFirstName()
   id: getFirstName()
   parent: com.microsoft.samples.subpackage.Person
@@ -90,4 +105,32 @@ items:
     - id: lastName
       type: java.lang.String
       description: -=TBD=-
+- uid: com.microsoft.samples.subpackage.Person.firstName
+  id: firstName
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: firstName
+  nameWithType: Person<T>.firstName
+  fullName: com.microsoft.samples.subpackage.Person<T>.firstName
+  type: Field
+  package: com.microsoft.samples.subpackage
+  summary: "<p>This is a first name</p>"
+  syntax:
+    content: private firstName
+- uid: com.microsoft.samples.subpackage.Person.lastName
+  id: lastName
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: lastName
+  nameWithType: Person<T>.lastName
+  fullName: com.microsoft.samples.subpackage.Person<T>.lastName
+  type: Field
+  package: com.microsoft.samples.subpackage
+  summary: 
+  syntax:
+    content: private lastName
 references:

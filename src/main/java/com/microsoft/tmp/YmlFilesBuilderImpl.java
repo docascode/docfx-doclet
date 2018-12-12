@@ -33,8 +33,10 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         put(ElementKind.PACKAGE, "Namespace");
         put(ElementKind.CLASS, "Class");
         put(ElementKind.ENUM, "Enum");
+        put(ElementKind.ENUM_CONSTANT, "Enum constant");
         put(ElementKind.INTERFACE, "Interface");
         put(ElementKind.ANNOTATION_TYPE, "Annotation");
+        put(ElementKind.CONSTRUCTOR, "Constructor");
         put(ElementKind.METHOD, "Method");
         put(ElementKind.FIELD, "Field");
     }};
@@ -218,6 +220,29 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         classItem.getTypeParameters().addAll(extractTypeParameters(classElement));
         metadataFile.getItems().add(classItem);
 
+        // Add constructors info
+        for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
+            MetadataFileItem constructorItem = new MetadataFileItem();
+            String constructorQName = String.valueOf(constructorElement);
+            constructorItem.setUid(String.format("%s.%s", classQName, constructorQName));
+            constructorItem.setId(constructorQName);
+            constructorItem.setParent(classQName);
+            constructorItem.setHref(classQName + ".yml");
+            constructorItem.setName(constructorQName);
+            constructorItem.setNameWithType(classSNameWithGenericsSupport + "." + constructorQName);
+            constructorItem.setFullName(classQNameWithGenericsSupport + "." + constructorQName);
+            constructorItem.setOverload("-=TBD=-");      // TODO: TBD
+            constructorItem.setType(elementKindLookup.get(constructorElement.getKind()));
+            constructorItem.setPackageName(packageName);
+            constructorItem.setSummary(extractComment(constructorElement));
+            String constructorContentValue = String.format("%s %s",
+                constructorElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
+                constructorQName);
+            constructorItem.setContent(constructorContentValue);
+            constructorItem.getParameters().addAll(extractParameters(constructorElement));
+            metadataFile.getItems().add(constructorItem);
+        }
+
         // Add methods info
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
             MetadataFileItem methodItem = new MetadataFileItem();
@@ -239,6 +264,27 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             methodItem.setContent(methodContentValue);
             methodItem.getParameters().addAll(extractParameters(methodElement));
             metadataFile.getItems().add(methodItem);
+        }
+
+        // Add fields info
+        for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
+            MetadataFileItem fieldItem = new MetadataFileItem();
+            String fieldQName = String.valueOf(fieldElement);
+            fieldItem.setUid(String.format("%s.%s", classQName, fieldQName));
+            fieldItem.setId(fieldQName);
+            fieldItem.setParent(classQName);
+            fieldItem.setHref(classQName + ".yml");
+            fieldItem.setName(fieldQName);
+            fieldItem.setNameWithType(classSNameWithGenericsSupport + "." + fieldQName);
+            fieldItem.setFullName(classQNameWithGenericsSupport + "." + fieldQName);
+            fieldItem.setType(elementKindLookup.get(fieldElement.getKind()));
+            fieldItem.setPackageName(packageName);
+            fieldItem.setSummary(extractComment(fieldElement));
+            String fieldContentValue = String.format("%s %s",
+                fieldElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
+                fieldQName);
+            fieldItem.setContent(fieldContentValue);
+            metadataFile.getItems().add(fieldItem);
         }
 
         String metadataFileContent = String.valueOf(metadataFile);

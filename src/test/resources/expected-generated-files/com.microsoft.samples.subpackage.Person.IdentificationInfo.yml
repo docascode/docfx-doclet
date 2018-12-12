@@ -14,4 +14,19 @@ items:
   summary: "<p>Class that describes person's identification</p>"
   syntax:
     content: public class Person.IdentificationInfo
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
+  id: IdentificationInfo()
+  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
+  langs:
+  - java
+  name: IdentificationInfo()
+  nameWithType: Person.IdentificationInfo.IdentificationInfo()
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
+  overload: -=TBD=-
+  type: Constructor
+  package: com.microsoft.samples.subpackage
+  summary: 
+  syntax:
+    content: public IdentificationInfo()
 references:

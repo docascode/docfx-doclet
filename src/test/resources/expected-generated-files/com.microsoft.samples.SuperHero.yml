@@ -24,6 +24,21 @@ items:
   summary: "<p>Hero is the main entity we will be using to something</p><p> @author Captain America</p>"
   syntax:
     content: public class SuperHero
+- uid: com.microsoft.samples.SuperHero.SuperHero()
+  id: SuperHero()
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: SuperHero()
+  nameWithType: SuperHero.SuperHero()
+  fullName: com.microsoft.samples.SuperHero.SuperHero()
+  overload: -=TBD=-
+  type: Constructor
+  package: com.microsoft.samples
+  summary: 
+  syntax:
+    content: public SuperHero()
 - uid: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
   id: successfullyAttacked(int,java.lang.String)
   parent: com.microsoft.samples.SuperHero
@@ -182,4 +197,74 @@ items:
     - id: defense
       type: int
       description: -=TBD=-
+- uid: com.microsoft.samples.SuperHero.heroName
+  id: heroName
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: heroName
+  nameWithType: SuperHero.heroName
+  fullName: com.microsoft.samples.SuperHero.heroName
+  type: Field
+  package: com.microsoft.samples
+  summary: "<p>The public name of a hero that is common knowledge</p>"
+  syntax:
+    content: private heroName
+- uid: com.microsoft.samples.SuperHero.uniquePower
+  id: uniquePower
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: uniquePower
+  nameWithType: SuperHero.uniquePower
+  fullName: com.microsoft.samples.SuperHero.uniquePower
+  type: Field
+  package: com.microsoft.samples
+  summary: 
+  syntax:
+    content: private uniquePower
+- uid: com.microsoft.samples.SuperHero.health
+  id: health
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: health
+  nameWithType: SuperHero.health
+  fullName: com.microsoft.samples.SuperHero.health
+  type: Field
+  package: com.microsoft.samples
+  summary: 
+  syntax:
+    content: private health
+- uid: com.microsoft.samples.SuperHero.defense
+  id: defense
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: defense
+  nameWithType: SuperHero.defense
+  fullName: com.microsoft.samples.SuperHero.defense
+  type: Field
+  package: com.microsoft.samples
+  summary: 
+  syntax:
+    content: private defense
+- uid: com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING
+  id: SOME_PUBLIC_STRING
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: SOME_PUBLIC_STRING
+  nameWithType: SuperHero.SOME_PUBLIC_STRING
+  fullName: com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING
+  type: Field
+  package: com.microsoft.samples
+  summary: 
+  syntax:
+    content: public final SOME_PUBLIC_STRING
 references:

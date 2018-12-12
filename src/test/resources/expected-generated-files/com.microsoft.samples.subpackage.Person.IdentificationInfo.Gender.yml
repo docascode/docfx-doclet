@@ -17,6 +17,21 @@ items:
   summary: "<p>Enum describes person's gender</p>"
   syntax:
     content: public enum Person.IdentificationInfo.Gender
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
+  id: Gender()
+  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  langs:
+  - java
+  name: Gender()
+  nameWithType: Person.IdentificationInfo.Gender.Gender()
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
+  overload: -=TBD=-
+  type: Constructor
+  package: com.microsoft.samples.subpackage
+  summary: 
+  syntax:
+    content: private Gender()
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
   id: values()
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
@@ -51,4 +66,32 @@ items:
     - id: name
       type: java.lang.String
       description: -=TBD=-
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
+  id: MALE
+  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  langs:
+  - java
+  name: MALE
+  nameWithType: Person.IdentificationInfo.Gender.MALE
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
+  type: Enum constant
+  package: com.microsoft.samples.subpackage
+  summary: 
+  syntax:
+    content: public static final MALE
+- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
+  id: FEMALE
+  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  langs:
+  - java
+  name: FEMALE
+  nameWithType: Person.IdentificationInfo.Gender.FEMALE
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
+  type: Enum constant
+  package: com.microsoft.samples.subpackage
+  summary: 
+  syntax:
+    content: public static final FEMALE
 references:
