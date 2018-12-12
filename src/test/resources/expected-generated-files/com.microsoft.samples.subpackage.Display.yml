@@ -14,7 +14,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Display<T,R>
   type: Interface
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public interface Display<T,R>
     typeParameters:
@@ -34,7 +34,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public abstract void show()
 - uid: com.microsoft.samples.subpackage.Display.hide()
@@ -49,7 +49,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public abstract void hide()
 references:

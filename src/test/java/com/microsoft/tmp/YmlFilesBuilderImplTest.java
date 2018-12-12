@@ -40,6 +40,13 @@ public class YmlFilesBuilderImplTest {
     }
 
     @Test
+    public void cleanupCommentForEmptyCase() {
+        String result = ymlFilesBuilder.cleanupComment("");
+
+        assertThat("Wrong result", result, is(""));
+    }
+
+    @Test
     public void extractTypeParameters() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 

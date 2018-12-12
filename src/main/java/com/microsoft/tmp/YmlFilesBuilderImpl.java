@@ -159,9 +159,14 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     }
 
     String cleanupComment(String comment) {
-        String result = StringUtils.trimToEmpty(comment)
+        String result = StringUtils.trimToEmpty(comment);
+        if (StringUtils.isEmpty(result)) {
+            return "";
+        }
+        result = result
             .replace("\r\n", "\n")
             .replaceAll("\\n+", "</p><p>");
+
         return String.format("\"<p>%s</p>\"", result);
     }
 

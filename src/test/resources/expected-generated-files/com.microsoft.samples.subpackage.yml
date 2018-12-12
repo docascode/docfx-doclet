@@ -25,7 +25,7 @@ references:
   nameWithType: Display<T,R>
   fullName: com.microsoft.samples.subpackage.Display<T,R>
   type: Interface
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public interface Display<T,R>
     typeParameters:

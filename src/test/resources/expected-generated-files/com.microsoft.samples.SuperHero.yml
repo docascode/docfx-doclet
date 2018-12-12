@@ -58,7 +58,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public java.lang.String getHeroName()
 - uid: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
@@ -73,7 +73,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public void setHeroName(java.lang.String)
     parameters:
@@ -92,7 +92,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public java.lang.String getUniquePower()
 - uid: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
@@ -107,7 +107,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public void setUniquePower(java.lang.String)
     parameters:
@@ -126,7 +126,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public int getHealth()
 - uid: com.microsoft.samples.SuperHero.setHealth(int)
@@ -141,7 +141,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public void setHealth(int)
     parameters:
@@ -160,7 +160,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public int getDefense()
 - uid: com.microsoft.samples.SuperHero.setDefense(int)
@@ -175,7 +175,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public void setDefense(int)
     parameters:

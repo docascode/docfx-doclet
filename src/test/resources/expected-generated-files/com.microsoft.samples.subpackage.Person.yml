@@ -34,7 +34,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public java.lang.String getFirstName()
 - uid: com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
@@ -49,7 +49,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public void setFirstName(java.lang.String)
     parameters:
@@ -68,7 +68,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public java.lang.String getLastName()
 - uid: com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
@@ -83,7 +83,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public void setLastName(java.lang.String)
     parameters:

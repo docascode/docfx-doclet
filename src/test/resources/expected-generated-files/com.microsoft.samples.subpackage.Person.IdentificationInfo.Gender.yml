@@ -29,7 +29,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[] values()
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
@@ -44,7 +44,7 @@ items:
   overload: -=TBD=-
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: "<p></p>"
+  summary: 
   syntax:
     content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender valueOf(java.lang.String)
     parameters:
