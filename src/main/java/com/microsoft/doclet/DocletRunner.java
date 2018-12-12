@@ -1,5 +1,6 @@
-package com.microsoft.util;
+package com.microsoft.doclet;
 
+import com.microsoft.util.OptionsFileUtil;
 import javax.tools.ToolProvider;
 
 /**

@@ -30,7 +30,7 @@ javadoc \
 </pre>
 
 #### For development it could be useful to use DocletRunner placed here
-- Create Run/Debug configuration with main class `com.microsoft.util.DocletRunner`
+- Create Run/Debug configuration with main class `com.microsoft.doclet.DocletRunner`
 - Add `src\test\resources\test-doclet-params.txt` as program arguments of configuration
 
 No we could run/debug doclet versus source code classes located at `com.microsoft.samples` 

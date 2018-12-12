@@ -1,4 +1,4 @@
-package com.microsoft.util;
+package com.microsoft.doclet;
 
 import static com.microsoft.util.FileUtilTest.deleteDirectoryStream;
 import static org.hamcrest.CoreMatchers.is;
