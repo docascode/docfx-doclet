@@ -263,6 +263,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 methodElement.getReturnType(), methodQName);
             methodItem.setContent(methodContentValue);
             methodItem.getParameters().addAll(extractParameters(methodElement));
+            methodItem.setReturnType(String.valueOf(methodElement.getReturnType()));
+            methodItem.setReturnDescription("-=TBD=-");     // TODO: TBD
             metadataFile.getItems().add(methodItem);
         }
 

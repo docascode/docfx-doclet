@@ -30,6 +30,8 @@ public class MetadataFileItem {
     private String content;
     private List<TypeParameter> typeParameters = new ArrayList<>();
     private List<TypeParameter> parameters = new ArrayList<>();
+    private String returnType;
+    private String returnDescription;
 
     public String getUid() {
         return uid;
@@ -175,6 +177,22 @@ public class MetadataFileItem {
         this.parameters = parameters;
     }
 
+    public String getReturnType() {
+        return returnType;
+    }
+
+    public void setReturnType(String returnType) {
+        this.returnType = returnType;
+    }
+
+    public String getReturnDescription() {
+        return returnDescription;
+    }
+
+    public void setReturnDescription(String returnDescription) {
+        this.returnDescription = returnDescription;
+    }
+
     public String toItemString() {
         String result = "- uid: " + uid + "\n"
             + "  id: " + id + "\n";
@@ -220,6 +238,11 @@ public class MetadataFileItem {
                     + "      type: " + parameter.getType() + "\n"
                     + "      description: " + parameter.getDescription() + "\n";
             }
+        }
+        if (StringUtils.isNotEmpty(returnType)) {
+            result += "    return:\n"
+                + "      type: " + returnType + "\n"
+                + "      description: " + returnDescription + "\n";
         }
         return result;
     }

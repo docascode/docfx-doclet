@@ -61,6 +61,9 @@ items:
     - id: damageType
       type: java.lang.String
       description: -=TBD=-
+    return:
+      type: int
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.getHeroName()
   id: getHeroName()
   parent: com.microsoft.samples.SuperHero
@@ -76,6 +79,9 @@ items:
   summary: 
   syntax:
     content: public java.lang.String getHeroName()
+    return:
+      type: java.lang.String
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
   id: setHeroName(java.lang.String)
   parent: com.microsoft.samples.SuperHero
@@ -95,6 +101,9 @@ items:
     - id: heroName
       type: java.lang.String
       description: -=TBD=-
+    return:
+      type: void
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.getUniquePower()
   id: getUniquePower()
   parent: com.microsoft.samples.SuperHero
@@ -110,6 +119,9 @@ items:
   summary: 
   syntax:
     content: public java.lang.String getUniquePower()
+    return:
+      type: java.lang.String
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
   id: setUniquePower(java.lang.String)
   parent: com.microsoft.samples.SuperHero
@@ -129,6 +141,9 @@ items:
     - id: uniquePower
       type: java.lang.String
       description: -=TBD=-
+    return:
+      type: void
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.getHealth()
   id: getHealth()
   parent: com.microsoft.samples.SuperHero
@@ -144,6 +159,9 @@ items:
   summary: 
   syntax:
     content: public int getHealth()
+    return:
+      type: int
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.setHealth(int)
   id: setHealth(int)
   parent: com.microsoft.samples.SuperHero
@@ -163,6 +181,9 @@ items:
     - id: health
       type: int
       description: -=TBD=-
+    return:
+      type: void
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.getDefense()
   id: getDefense()
   parent: com.microsoft.samples.SuperHero
@@ -178,6 +199,9 @@ items:
   summary: 
   syntax:
     content: public int getDefense()
+    return:
+      type: int
+      description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.setDefense(int)
   id: setDefense(int)
   parent: com.microsoft.samples.SuperHero
@@ -196,6 +220,9 @@ items:
     parameters:
     - id: defense
       type: int
+      description: -=TBD=-
+    return:
+      type: void
       description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.heroName
   id: heroName
