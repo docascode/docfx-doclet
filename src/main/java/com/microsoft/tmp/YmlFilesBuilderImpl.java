@@ -63,7 +63,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 .setHref(packageYmlFileName)
                 .build();
 
-            buildFilesForInnerClasses(packageQName, "", packageElement, this, packageTocItem.getItems());
+            buildFilesForInnerClasses("", packageElement, this, packageTocItem.getItems());
 
             resultTocFile.getItems().add(packageTocItem);
         }
@@ -71,7 +71,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         return true;
     }
 
-    void buildFilesForInnerClasses(String packageName, String namePrefix, Element element,
+    void buildFilesForInnerClasses(String namePrefix, Element element,
         YmlFilesBuilder ymlFilesBuilder,
         List<TocItem> listToAddItems) {
         for (TypeElement classElement : ElementFilter.typesIn(element.getEnclosedElements())) {
@@ -80,7 +80,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
             String classYmlFileName = classQName + ".yml";
             ymlFilesBuilder
-                .buildClassYmlFile(packageName, classElement, outputPath + File.separator + classYmlFileName);
+                .buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
 
             TocItem classTocItem = new TocItem.Builder()
                 .setUid(classQName)
@@ -89,7 +89,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 .build();
             listToAddItems.add(classTocItem);
 
-            buildFilesForInnerClasses(packageName, classSimpleName, classElement, ymlFilesBuilder, listToAddItems);
+            buildFilesForInnerClasses(classSimpleName, classElement, ymlFilesBuilder, listToAddItems);
         }
     }
 
@@ -188,9 +188,10 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     }
 
     @Override
-    public void buildClassYmlFile(String packageName, TypeElement classElement, String outputPath) {
+    public void buildClassYmlFile(TypeElement classElement, String outputPath) {
         MetadataFile metadataFile = new MetadataFile();
 
+        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
         String classQName = String.valueOf(classElement.getQualifiedName());
         String classSName = String.valueOf(classElement.getSimpleName());
         String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
