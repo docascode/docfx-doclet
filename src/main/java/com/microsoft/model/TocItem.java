@@ -43,6 +43,9 @@ public class TocItem {
         }
     }
 
+    private TocItem() {
+    }
+
     public String getUid() {
         return uid;
     }

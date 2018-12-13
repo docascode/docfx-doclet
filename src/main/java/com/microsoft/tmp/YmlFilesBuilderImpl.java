@@ -180,7 +180,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 typeParamsLookup.put(key, generateRandomHexString());
             }
             String value = typeParamsLookup.get(key);
-            result.add(new TypeParameter(key, value));
+            result.add(new TypeParameter.Builder().addId(key).addType(value).build());
         }
         return result;
     }
@@ -296,12 +296,11 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     }
 
     private List<TypeParameter> extractExceptions(ExecutableElement methodElement) {
-        return methodElement.getThrownTypes().stream().map(o -> {
-            TypeParameter typeParameter = new TypeParameter();  // TODO: replace with builder for TypeParameter
-            typeParameter.setType(String.valueOf(o));
-            typeParameter.setDescription("-=TBD=-");    // TODO: TBD
-            return typeParameter;
-        }).collect(Collectors.toList());
+        return methodElement.getThrownTypes().stream().map(o -> new TypeParameter.Builder()
+            .addType(String.valueOf(o))
+            .addDescription("-=TBD=-")    // TODO: TBD
+            .build()
+        ).collect(Collectors.toList());
     }
 
     private List<TypeParameter> extractParameters(ExecutableElement element) {
@@ -310,7 +309,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             String id = String.valueOf(parameter.getSimpleName());
             String type = String.valueOf(parameter.asType());
             String description = "-=TBD=-";     // TODO: TBD
-            result.add(new TypeParameter(id, type, description));
+            result.add(new TypeParameter.Builder().addId(id).addType(type).addDescription(description).build());
         }
         return result;
     }

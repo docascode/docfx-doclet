@@ -2,18 +2,38 @@ package com.microsoft.model;
 
 public class TypeParameter {
 
-    public TypeParameter() {
+    public static class Builder {
+
+        private TypeParameter value;
+
+        public Builder() {
+            this.value = new TypeParameter();
+        }
+
+        public Builder addId(String id) {
+            value.setId(id);
+            return this;
+        }
+
+        public Builder addType(String type) {
+            value.setType(type);
+            return this;
+        }
+
+        public Builder addDescription(String description) {
+            value.setDescription(description);
+            return this;
+        }
+
+        public TypeParameter build() {
+            if (value.type != null && (value.id != null || value.description != null)) {
+                return value;
+            }
+            throw new IllegalStateException("Not enough data to create TypeParameter object!");
+        }
     }
 
-    public TypeParameter(String id, String type) {
-        this.id = id;
-        this.type = type;
-    }
-
-    public TypeParameter(String id, String type, String description) {
-        this.id = id;
-        this.type = type;
-        this.description = description;
+    private TypeParameter() {
     }
 
     private String id;
