@@ -2,6 +2,9 @@ package com.microsoft.model;
 
 public class TypeParameter {
 
+    public TypeParameter() {
+    }
+
     public TypeParameter(String id, String type) {
         this.id = id;
         this.type = type;

@@ -66,6 +66,9 @@ items:
     return:
       type: int
       description: -=TBD=-
+  exceptions:
+  - type: java.lang.Exception
+    description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.getHeroName()
   id: getHeroName()
   parent: com.microsoft.samples.SuperHero

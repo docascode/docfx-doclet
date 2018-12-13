@@ -263,6 +263,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 methodElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 methodElement.getReturnType(), methodQName);
             methodItem.setContent(methodContentValue);
+            methodItem.getExceptions().addAll(extractExceptions(methodElement));
             methodItem.getParameters().addAll(extractParameters(methodElement));
             methodItem.setReturnType(String.valueOf(methodElement.getReturnType()));
             methodItem.setReturnDescription("-=TBD=-");     // TODO: TBD
@@ -292,6 +293,15 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         String metadataFileContent = String.valueOf(metadataFile);
         FileUtil.dumpToFile(metadataFileContent, outputPath);
+    }
+
+    private List<TypeParameter> extractExceptions(ExecutableElement methodElement) {
+        return methodElement.getThrownTypes().stream().map(o -> {
+            TypeParameter typeParameter = new TypeParameter();  // TODO: replace with builder for TypeParameter
+            typeParameter.setType(String.valueOf(o));
+            typeParameter.setDescription("-=TBD=-");    // TODO: TBD
+            return typeParameter;
+        }).collect(Collectors.toList());
     }
 
     private List<TypeParameter> extractParameters(ExecutableElement element) {

@@ -29,6 +29,7 @@ public class MetadataFileItem {
     private String summary;
     private String content;
     private String superclass;
+    private List<TypeParameter> exceptions = new ArrayList<>();
     private List<TypeParameter> typeParameters = new ArrayList<>();
     private List<TypeParameter> parameters = new ArrayList<>();
     private String returnType;
@@ -170,6 +171,14 @@ public class MetadataFileItem {
         this.superclass = superclass;
     }
 
+    public List<TypeParameter> getExceptions() {
+        return exceptions;
+    }
+
+    public void setExceptions(List<TypeParameter> exceptions) {
+        this.exceptions = exceptions;
+    }
+
     public List<TypeParameter> getTypeParameters() {
         return typeParameters;
     }
@@ -256,6 +265,14 @@ public class MetadataFileItem {
         if (StringUtils.isNotEmpty(superclass)) {
             result += "  inheritance:\n"
                 + "  - " + superclass + "\n";
+        }
+
+        if (!exceptions.isEmpty()) {
+            result += "  exceptions:\n";
+            for (TypeParameter exception : exceptions) {
+                result += "  - type: " + exception.getType() + "\n"
+                    + "    description: " + exception.getDescription() + "\n";
+            }
         }
         return result;
     }
