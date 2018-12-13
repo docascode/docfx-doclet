@@ -10,6 +10,7 @@ javadoc \
 -docletpath ./target/docfx-doclet-1.0-SNAPSHOT.jar \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -sourcepath ./src/main/java \
+-outputpath ./target/test-out \
 -subpackages com.microsoft.samples
 </pre>
 Before this action run `mvn clean install` once to put jar into artifactory
@@ -26,6 +27,7 @@ javadoc \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -cp ./hamcrest-core-1.3.jar \
 -sourcepath ./junit-4.12-sources \
+-outputpath ./target/test-out \
 -subpackages org:junit
 </pre>
 

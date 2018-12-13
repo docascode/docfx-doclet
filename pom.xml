@@ -29,6 +29,7 @@
             <version>${project.version}</version>
           </docletArtifact>
           <useStandardDocletOptions>false</useStandardDocletOptions>
+          <additionalOptions>-outputpath ./generated-files</additionalOptions>
         </configuration>
       </plugin>
     </plugins>
