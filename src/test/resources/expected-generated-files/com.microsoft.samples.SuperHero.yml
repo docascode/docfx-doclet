@@ -24,6 +24,8 @@ items:
   summary: "<p>Hero is the main entity we will be using to something</p><p> @author Captain America</p>"
   syntax:
     content: public class SuperHero
+  inheritance:
+  - com.microsoft.samples.subpackage.Person
 - uid: com.microsoft.samples.SuperHero.SuperHero()
   id: SuperHero()
   parent: com.microsoft.samples.SuperHero

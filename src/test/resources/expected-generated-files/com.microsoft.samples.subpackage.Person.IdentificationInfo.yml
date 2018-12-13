@@ -14,6 +14,8 @@ items:
   summary: "<p>Class that describes person's identification</p>"
   syntax:
     content: public class Person.IdentificationInfo
+  inheritance:
+  - java.lang.Object
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
   id: IdentificationInfo()
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo

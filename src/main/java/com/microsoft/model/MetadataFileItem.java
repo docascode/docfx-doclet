@@ -28,6 +28,7 @@ public class MetadataFileItem {
     private String packageName;
     private String summary;
     private String content;
+    private String superclass;
     private List<TypeParameter> typeParameters = new ArrayList<>();
     private List<TypeParameter> parameters = new ArrayList<>();
     private String returnType;
@@ -161,6 +162,14 @@ public class MetadataFileItem {
         this.content = content;
     }
 
+    public String getSuperclass() {
+        return superclass;
+    }
+
+    public void setSuperclass(String superclass) {
+        this.superclass = superclass;
+    }
+
     public List<TypeParameter> getTypeParameters() {
         return typeParameters;
     }
@@ -223,7 +232,6 @@ public class MetadataFileItem {
         result += "  summary: " + summary + "\n"
             + "  syntax:\n"
             + "    content: " + content + "\n";
-
         if (!typeParameters.isEmpty()) {
             result += "    typeParameters:\n";
             for (TypeParameter typeParameter : typeParameters) {
@@ -243,6 +251,11 @@ public class MetadataFileItem {
             result += "    return:\n"
                 + "      type: " + returnType + "\n"
                 + "      description: " + returnDescription + "\n";
+        }
+
+        if (StringUtils.isNotEmpty(superclass)) {
+            result += "  inheritance:\n"
+                + "  - " + superclass + "\n";
         }
         return result;
     }

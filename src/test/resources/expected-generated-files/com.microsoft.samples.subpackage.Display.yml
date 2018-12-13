@@ -22,6 +22,8 @@ items:
       type: bb61488d
     - id: R
       type: df411159
+  inheritance:
+  - none
 - uid: com.microsoft.samples.subpackage.Display.show()
   id: show()
   parent: com.microsoft.samples.subpackage.Display

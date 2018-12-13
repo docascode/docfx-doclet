@@ -17,6 +17,8 @@ items:
   summary: "<p>Enum describes person's gender</p>"
   syntax:
     content: public enum Person.IdentificationInfo.Gender
+  inheritance:
+  - java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
   id: Gender()
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender

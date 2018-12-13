@@ -217,6 +217,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         classItem.setPackageName(packageName);
         classItem.setSummary(extractComment(classElement));
         classItem.setContent(classContentValue);
+        classItem.setSuperclass(String.valueOf(classElement.getSuperclass()));
         classItem.getTypeParameters().addAll(extractTypeParameters(classElement));
         metadataFile.getItems().add(classItem);
 

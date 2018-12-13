@@ -22,6 +22,8 @@ items:
     typeParameters:
     - id: T
       type: bb61488d
+  inheritance:
+  - java.lang.Object
 - uid: com.microsoft.samples.subpackage.Person.Person()
   id: Person()
   parent: com.microsoft.samples.subpackage.Person
