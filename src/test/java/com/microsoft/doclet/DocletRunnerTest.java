@@ -37,8 +37,16 @@ public class DocletRunnerTest {
             String generatedFileContent = Files.readString(generatedFilePath);
             String expectedFileContent = Files.readString(expectedFilePath);
 
-            assertThat("Wrong file content for file " + generatedFilePath,
-                generatedFileContent, is(expectedFileContent));
+            String[] generatedFileLines = generatedFileContent.split("\n");
+            String[] expectedFileLines = expectedFileContent.split("\n");
+
+            assertThat("Unexpected amount of lines in file " + generatedFilePath, generatedFileLines.length,
+                is(expectedFileLines.length));
+
+            for (int i = 0; i < generatedFileLines.length; i++) {
+                assertThat("Wrong file content for file " + generatedFilePath,
+                    generatedFileLines[i], is(expectedFileLines[i]));
+            }
         }
     }
 }
