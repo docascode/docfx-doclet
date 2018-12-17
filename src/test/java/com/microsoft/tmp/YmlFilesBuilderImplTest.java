@@ -7,6 +7,7 @@ import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.TypeParameter;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import org.junit.Before;
 import org.junit.Rule;
@@ -76,6 +77,38 @@ public class YmlFilesBuilderImplTest {
     }
 
     @Test
+    public void extractExceptions() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        List<TypeParameter> result = ymlFilesBuilder.extractExceptions(
+            ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
+        );
+
+        assertThat("Wrong exceptions count", result.size(), is(1));
+        assertThat("Wrong type", result.get(0).getType(), is("java.lang.Exception"));
+        assertThat("Wrong description", result.get(0).getDescription(), is("-=TBD=-"));
+    }
+
+    @Test
+    public void extarctParameters() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        List<TypeParameter> result = ymlFilesBuilder.extractParameters(
+            ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
+        );
+
+        assertThat("Wrong parameters count", result.size(), is(2));
+
+        assertThat("Wrong first param id", result.get(0).getId(), is("incomingDamage"));
+        assertThat("Wrong first param type", result.get(0).getType(), is("int"));
+        assertThat("Wrong first param description", result.get(0).getDescription(), is("-=TBD=-"));
+
+        assertThat("Wrong second param id", result.get(1).getId(), is("damageType"));
+        assertThat("Wrong second param type", result.get(1).getType(), is("java.lang.String"));
+        assertThat("Wrong second param description", result.get(1).getDescription(), is("-=TBD=-"));
+    }
+
+    @Test
     public void convertFullNameToOverload() {
         assertThat("Wrong result", ymlFilesBuilder.convertFullNameToOverload(
             "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"), is(
@@ -95,8 +128,8 @@ public class YmlFilesBuilderImplTest {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
         assertThat("Wrong result",
-            YmlFilesBuilderImpl.determineClassSimpleName("bla-bla-prefix", element), is("bla-bla-prefix.SuperHero"));
+            ymlFilesBuilder.determineClassSimpleName("bla-bla-prefix", element), is("bla-bla-prefix.SuperHero"));
         assertThat("Wrong result for empty prefix",
-            YmlFilesBuilderImpl.determineClassSimpleName("", element), is("SuperHero"));
+            ymlFilesBuilder.determineClassSimpleName("", element), is("SuperHero"));
     }
 }

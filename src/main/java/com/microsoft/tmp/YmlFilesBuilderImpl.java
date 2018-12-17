@@ -83,7 +83,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         YmlFilesBuilder ymlFilesBuilder,
         List<TocItem> listToAddItems) {
         for (TypeElement classElement : extractSortedElements(element)) {
-            String classSimpleName = YmlFilesBuilderImpl.determineClassSimpleName(namePrefix, classElement);
+            String classSimpleName = determineClassSimpleName(namePrefix, classElement);
             String classQName = String.valueOf(classElement.getQualifiedName());
 
             String classYmlFileName = classQName + ".yml";
@@ -327,7 +327,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         return String.valueOf(superclass);
     }
 
-    private List<TypeParameter> extractExceptions(ExecutableElement methodElement) {
+    List<TypeParameter> extractExceptions(ExecutableElement methodElement) {
         return methodElement.getThrownTypes().stream().map(o -> new TypeParameter.Builder()
             .addType(String.valueOf(o))
             .addDescription("-=TBD=-")    // TODO: TBD
@@ -335,18 +335,16 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         ).collect(Collectors.toList());
     }
 
-    private List<TypeParameter> extractParameters(ExecutableElement element) {
-        List<TypeParameter> result = new ArrayList<>();
-        for (VariableElement parameter : element.getParameters()) {
-            String id = String.valueOf(parameter.getSimpleName());
-            String type = String.valueOf(parameter.asType());
-            String description = "-=TBD=-";     // TODO: TBD
-            result.add(new TypeParameter.Builder().addId(id).addType(type).addDescription(description).build());
-        }
-        return result;
+    List<TypeParameter> extractParameters(ExecutableElement element) {
+        return element.getParameters().stream().map(o -> new TypeParameter.Builder()
+            .addId(String.valueOf(o.getSimpleName()))
+            .addType(String.valueOf(o.asType()))
+            .addDescription("-=TBD=-")    // TODO: TBD
+            .build()
+        ).collect(Collectors.toList());
     }
 
-    public static String determineClassSimpleName(String namePrefix, Element classElement) {
+    String determineClassSimpleName(String namePrefix, Element classElement) {
         return String.format("%s%s%s",
             namePrefix,
             StringUtils.isEmpty(namePrefix) ? "" : ".",
