@@ -33,7 +33,7 @@ items:
   name: Person()
   nameWithType: Person<T>.Person()
   fullName: com.microsoft.samples.subpackage.Person<T>.Person()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person<T>.Person*
   type: Constructor
   package: com.microsoft.samples.subpackage
   summary: 
@@ -48,7 +48,7 @@ items:
   name: getFirstName()
   nameWithType: Person<T>.getFirstName()
   fullName: com.microsoft.samples.subpackage.Person<T>.getFirstName()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person<T>.getFirstName*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 
@@ -66,7 +66,7 @@ items:
   name: setFirstName(java.lang.String)
   nameWithType: Person<T>.setFirstName(java.lang.String)
   fullName: com.microsoft.samples.subpackage.Person<T>.setFirstName(java.lang.String)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person<T>.setFirstName*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 
@@ -88,7 +88,7 @@ items:
   name: getLastName()
   nameWithType: Person<T>.getLastName()
   fullName: com.microsoft.samples.subpackage.Person<T>.getLastName()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person<T>.getLastName*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 
@@ -106,7 +106,7 @@ items:
   name: setLastName(java.lang.String)
   nameWithType: Person<T>.setLastName(java.lang.String)
   fullName: com.microsoft.samples.subpackage.Person<T>.setLastName(java.lang.String)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person<T>.setLastName*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 

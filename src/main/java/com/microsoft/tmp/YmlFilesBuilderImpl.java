@@ -240,14 +240,16 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
             MetadataFileItem constructorItem = new MetadataFileItem();
             String constructorQName = String.valueOf(constructorElement);
+            String fullName = String.format("%s.%s", classQNameWithGenericsSupport, constructorQName);
+
             constructorItem.setUid(String.format("%s.%s", classQName, constructorQName));
             constructorItem.setId(constructorQName);
             constructorItem.setParent(classQName);
             constructorItem.setHref(classQName + ".yml");
             constructorItem.setName(constructorQName);
             constructorItem.setNameWithType(classSNameWithGenericsSupport + "." + constructorQName);
-            constructorItem.setFullName(classQNameWithGenericsSupport + "." + constructorQName);
-            constructorItem.setOverload("-=TBD=-");      // TODO: TBD
+            constructorItem.setFullName(fullName);
+            constructorItem.setOverload(convertFullNameToOverload(fullName));
             constructorItem.setType(elementKindLookup.get(constructorElement.getKind()));
             constructorItem.setPackageName(packageName);
             constructorItem.setSummary(extractComment(constructorElement));
@@ -263,14 +265,16 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
             MetadataFileItem methodItem = new MetadataFileItem();
             String methodQName = String.valueOf(methodElement);
+            String fullName = String.format("%s.%s", classQNameWithGenericsSupport, methodQName);
+
             methodItem.setUid(String.format("%s.%s", classQName, methodQName));
             methodItem.setId(methodQName);
             methodItem.setParent(classQName);
             methodItem.setHref(classQName + ".yml");
             methodItem.setName(methodQName);
             methodItem.setNameWithType(classSNameWithGenericsSupport + "." + methodQName);
-            methodItem.setFullName(classQNameWithGenericsSupport + "." + methodQName);
-            methodItem.setOverload("-=TBD=-");       // TODO: TBD
+            methodItem.setFullName(fullName);
+            methodItem.setOverload(convertFullNameToOverload(fullName));
             methodItem.setType(elementKindLookup.get(methodElement.getKind()));
             methodItem.setPackageName(packageName);
             methodItem.setSummary(extractComment(methodElement));
@@ -309,6 +313,10 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         String metadataFileContent = String.valueOf(metadataFile);
         FileUtil.dumpToFile(metadataFileContent, outputPath);
+    }
+
+    String convertFullNameToOverload(String fullName) {
+        return fullName.replaceAll("\\(.*", "*");
     }
 
     String extractSuperclass(TypeElement classElement) {

@@ -36,7 +36,7 @@ items:
   name: SuperHero()
   nameWithType: SuperHero.SuperHero()
   fullName: com.microsoft.samples.SuperHero.SuperHero()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.SuperHero*
   type: Constructor
   package: com.microsoft.samples
   summary: 
@@ -51,7 +51,7 @@ items:
   name: successfullyAttacked(int,java.lang.String)
   nameWithType: SuperHero.successfullyAttacked(int,java.lang.String)
   fullName: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.successfullyAttacked*
   type: Method
   package: com.microsoft.samples
   summary: "<p><p>This is a simple description of the method. . .</p><p> <a href="http://www.supermanisthegreatest.com">Superman!</a></p><p> </p></p><p> @param incomingDamage the amount of incoming damage</p><p> @return the amount of health hero has after attack</p><p> @throws IllegalArgumentException if incomingDamage is negative</p><p> @version 1.2</p><p> @see <a href="http://www.link_to_jira/HERO-402">HERO-402</a></p><p> @since 1.0</p><p> @deprecated As of version 1.1, use . . . instead</p>"
@@ -79,7 +79,7 @@ items:
   name: getHeroName()
   nameWithType: SuperHero.getHeroName()
   fullName: com.microsoft.samples.SuperHero.getHeroName()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.getHeroName*
   type: Method
   package: com.microsoft.samples
   summary: 
@@ -97,7 +97,7 @@ items:
   name: setHeroName(java.lang.String)
   nameWithType: SuperHero.setHeroName(java.lang.String)
   fullName: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.setHeroName*
   type: Method
   package: com.microsoft.samples
   summary: 
@@ -119,7 +119,7 @@ items:
   name: getLastName()
   nameWithType: SuperHero.getLastName()
   fullName: com.microsoft.samples.SuperHero.getLastName()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.getLastName*
   type: Method
   package: com.microsoft.samples
   summary: "<p>Get capitalized last name. But it's not the end,</p><p> because of multiline comment</p><p> @return lastName in uppercase. But it's not the end,</p><p> because of multiline comment</p>"
@@ -137,7 +137,7 @@ items:
   name: getUniquePower()
   nameWithType: SuperHero.getUniquePower()
   fullName: com.microsoft.samples.SuperHero.getUniquePower()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.getUniquePower*
   type: Method
   package: com.microsoft.samples
   summary: 
@@ -155,7 +155,7 @@ items:
   name: setUniquePower(java.lang.String)
   nameWithType: SuperHero.setUniquePower(java.lang.String)
   fullName: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.setUniquePower*
   type: Method
   package: com.microsoft.samples
   summary: 
@@ -177,7 +177,7 @@ items:
   name: getHealth()
   nameWithType: SuperHero.getHealth()
   fullName: com.microsoft.samples.SuperHero.getHealth()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.getHealth*
   type: Method
   package: com.microsoft.samples
   summary: 
@@ -195,7 +195,7 @@ items:
   name: setHealth(int)
   nameWithType: SuperHero.setHealth(int)
   fullName: com.microsoft.samples.SuperHero.setHealth(int)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.setHealth*
   type: Method
   package: com.microsoft.samples
   summary: 
@@ -217,7 +217,7 @@ items:
   name: getDefense()
   nameWithType: SuperHero.getDefense()
   fullName: com.microsoft.samples.SuperHero.getDefense()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.getDefense*
   type: Method
   package: com.microsoft.samples
   summary: 
@@ -235,7 +235,7 @@ items:
   name: setDefense(int)
   nameWithType: SuperHero.setDefense(int)
   fullName: com.microsoft.samples.SuperHero.setDefense(int)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.SuperHero.setDefense*
   type: Method
   package: com.microsoft.samples
   summary: 

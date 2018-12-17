@@ -76,6 +76,21 @@ public class YmlFilesBuilderImplTest {
     }
 
     @Test
+    public void convertFullNameToOverload() {
+        assertThat("Wrong result", ymlFilesBuilder.convertFullNameToOverload(
+            "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"), is(
+            "com.microsoft.samples.SuperHero.successfullyAttacked*"));
+
+        assertThat("Wrong result for case with generics", ymlFilesBuilder.convertFullNameToOverload(
+            "com.microsoft.samples.subpackage.Display<T,R>.show()"), is(
+            "com.microsoft.samples.subpackage.Display<T,R>.show*"));
+
+        assertThat("Wrong result for constructor case", ymlFilesBuilder.convertFullNameToOverload(
+            "com.microsoft.samples.SuperHero.SuperHero()"), is(
+            "com.microsoft.samples.SuperHero.SuperHero*"));
+    }
+
+    @Test
     public void determineClassSimpleName() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 

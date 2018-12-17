@@ -28,7 +28,7 @@ items:
   name: Gender()
   nameWithType: Person.IdentificationInfo.Gender.Gender()
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*
   type: Constructor
   package: com.microsoft.samples.subpackage
   summary: 
@@ -43,7 +43,7 @@ items:
   name: values()
   nameWithType: Person.IdentificationInfo.Gender.values()
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 
@@ -61,7 +61,7 @@ items:
   name: valueOf(java.lang.String)
   nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String)
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 

@@ -33,7 +33,7 @@ items:
   name: show()
   nameWithType: Display<T,R>.show()
   fullName: com.microsoft.samples.subpackage.Display<T,R>.show()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Display<T,R>.show*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 
@@ -51,7 +51,7 @@ items:
   name: hide()
   nameWithType: Display<T,R>.hide()
   fullName: com.microsoft.samples.subpackage.Display<T,R>.hide()
-  overload: -=TBD=-
+  overload: com.microsoft.samples.subpackage.Display<T,R>.hide*
   type: Method
   package: com.microsoft.samples.subpackage
   summary: 
