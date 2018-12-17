@@ -22,6 +22,8 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +58,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
     public boolean build() {
         TocFile resultTocFile = new TocFile();
-        Set<PackageElement> packageElements = new LinkedHashSet<>(ElementFilter.packagesIn(environment.getIncludedElements()));
+        Set<PackageElement> packageElements = new LinkedHashSet<>(
+            ElementFilter.packagesIn(environment.getIncludedElements()));
         for (PackageElement packageElement : packageElements) {
             String packageQName = String.valueOf(packageElement.getQualifiedName());
             String packageYmlFileName = packageQName + ".yml";
@@ -138,8 +141,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         }
     }
 
-    List<TypeElement> extractSortedElements(Element element)
-    {
+    List<TypeElement> extractSortedElements(Element element) {
         // Need to apply sorting, because order of result items for PackageElement.getEnclosedElements() depend on JDK implementation
         List<TypeElement> elements = ElementFilter.typesIn(element.getEnclosedElements());
         elements.sort((o1, o2) ->
@@ -230,7 +232,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         classItem.setPackageName(packageName);
         classItem.setSummary(extractComment(classElement));
         classItem.setContent(classContentValue);
-        classItem.setSuperclass(String.valueOf(classElement.getSuperclass()));
+        classItem.setSuperclass(extractSuperclass(classElement));
         classItem.getTypeParameters().addAll(extractTypeParameters(classElement));
         metadataFile.getItems().add(classItem);
 
@@ -306,6 +308,14 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         String metadataFileContent = String.valueOf(metadataFile);
         FileUtil.dumpToFile(metadataFileContent, outputPath);
+    }
+
+    String extractSuperclass(TypeElement classElement) {
+        TypeMirror superclass = classElement.getSuperclass();
+        if (superclass.getKind() == TypeKind.NONE) {
+            return "java.lang.Object";
+        }
+        return String.valueOf(superclass);
     }
 
     private List<TypeParameter> extractExceptions(ExecutableElement methodElement) {

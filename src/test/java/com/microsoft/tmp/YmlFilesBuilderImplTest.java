@@ -58,6 +58,24 @@ public class YmlFilesBuilderImplTest {
     }
 
     @Test
+    public void extractSuperclass() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
+
+        String result = ymlFilesBuilder.extractSuperclass(element);
+
+        assertThat("Wrong result", result, is("java.lang.Object"));
+    }
+
+    @Test
+    public void extractSuperclassForChildClass() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        String result = ymlFilesBuilder.extractSuperclass(element);
+
+        assertThat("Wrong result", result, is("com.microsoft.samples.subpackage.Person"));
+    }
+
+    @Test
     public void determineClassSimpleName() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
