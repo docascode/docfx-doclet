@@ -7,6 +7,7 @@ items:
   - successfullyAttacked(int,java.lang.String)
   - getHeroName()
   - setHeroName(java.lang.String)
+  - getLastName()
   - getUniquePower()
   - setUniquePower(java.lang.String)
   - getHealth()
@@ -108,6 +109,24 @@ items:
       description: -=TBD=-
     return:
       type: void
+      description: -=TBD=-
+- uid: com.microsoft.samples.SuperHero.getLastName()
+  id: getLastName()
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: getLastName()
+  nameWithType: SuperHero.getLastName()
+  fullName: com.microsoft.samples.SuperHero.getLastName()
+  overload: -=TBD=-
+  type: Method
+  package: com.microsoft.samples
+  summary: "<p>Get capitalized last name. But it's not the end,</p><p> because of multiline comment</p><p> @return lastName in uppercase. But it's not the end,</p><p> because of multiline comment</p>"
+  syntax:
+    content: public java.lang.String getLastName()
+    return:
+      type: java.lang.String
       description: -=TBD=-
 - uid: com.microsoft.samples.SuperHero.getUniquePower()
   id: getUniquePower()

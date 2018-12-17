@@ -1,6 +1,7 @@
 package com.microsoft.samples;
 
 import com.microsoft.samples.subpackage.Person;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Hero is the main entity we will be using to something
@@ -46,6 +47,18 @@ public class SuperHero extends Person {
 
     public void setHeroName(String heroName) {
         this.heroName = heroName;
+    }
+
+    /**
+     * Get capitalized last name. But it's not the end,
+     * because of multiline comment
+     *
+     * @return lastName in uppercase. But it's not the end,
+     * because of multiline comment
+     */
+    @Override
+    public String getLastName() {
+        return StringUtils.upperCase(super.getLastName());
     }
 
     public String getUniquePower() {
