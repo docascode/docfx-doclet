@@ -258,8 +258,10 @@ public class MetadataFileItem {
         }
         if (StringUtils.isNotEmpty(returnType)) {
             result += "    return:\n"
-                + "      type: " + returnType + "\n"
-                + "      description: " + returnDescription + "\n";
+                + "      type: " + returnType + "\n";
+            if (returnDescription != null) {
+                result += "      description: " + returnDescription + "\n";
+            }
         }
 
         if (StringUtils.isNotEmpty(superclass)) {

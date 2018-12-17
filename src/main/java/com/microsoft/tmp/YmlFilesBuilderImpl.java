@@ -303,6 +303,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 fieldElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 fieldQName);
             fieldItem.setContent(fieldContentValue);
+            fieldItem.setReturnType(String.valueOf(fieldElement.asType()));
             metadataFile.getItems().add(fieldItem);
         }
 

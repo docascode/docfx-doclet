@@ -243,6 +243,8 @@ items:
   summary: "<p>The public name of a hero that is common knowledge</p>"
   syntax:
     content: private heroName
+    return:
+      type: java.lang.String
 - uid: com.microsoft.samples.SuperHero.uniquePower
   id: uniquePower
   parent: com.microsoft.samples.SuperHero
@@ -257,6 +259,8 @@ items:
   summary: 
   syntax:
     content: private uniquePower
+    return:
+      type: java.lang.String
 - uid: com.microsoft.samples.SuperHero.health
   id: health
   parent: com.microsoft.samples.SuperHero
@@ -271,6 +275,8 @@ items:
   summary: 
   syntax:
     content: private health
+    return:
+      type: int
 - uid: com.microsoft.samples.SuperHero.defense
   id: defense
   parent: com.microsoft.samples.SuperHero
@@ -285,6 +291,8 @@ items:
   summary: 
   syntax:
     content: private defense
+    return:
+      type: int
 - uid: com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING
   id: SOME_PUBLIC_STRING
   parent: com.microsoft.samples.SuperHero
@@ -299,4 +307,6 @@ items:
   summary: 
   syntax:
     content: public final SOME_PUBLIC_STRING
+    return:
+      type: java.lang.String
 references:
