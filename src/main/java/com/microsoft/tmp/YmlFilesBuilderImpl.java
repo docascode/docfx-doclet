@@ -9,9 +9,11 @@ import com.microsoft.util.FileUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -54,7 +56,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
     public boolean build() {
         TocFile resultTocFile = new TocFile();
-        for (PackageElement packageElement : ElementFilter.packagesIn(environment.getIncludedElements())) {
+        Set<PackageElement> packageElements = new LinkedHashSet<>(ElementFilter.packagesIn(environment.getIncludedElements()));
+        for (PackageElement packageElement : packageElements) {
             String packageQName = String.valueOf(packageElement.getQualifiedName());
             String packageYmlFileName = packageQName + ".yml";
             buildPackageYmlFile(packageElement, outputPath + File.separator + packageYmlFileName);
@@ -76,7 +79,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     void buildFilesForInnerClasses(String namePrefix, Element element,
         YmlFilesBuilder ymlFilesBuilder,
         List<TocItem> listToAddItems) {
-        for (TypeElement classElement : ElementFilter.typesIn(element.getEnclosedElements())) {
+        for (TypeElement classElement : extractSortedElements(element)) {
             String classSimpleName = YmlFilesBuilderImpl.determineClassSimpleName(namePrefix, classElement);
             String classQName = String.valueOf(classElement.getQualifiedName());
 
@@ -123,7 +126,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
     void addPackageChildren(String packageName, String namePrefix, Element packageElement, List<String> packageChildren,
         List<MetadataFileItem> references) {
-        for (TypeElement classElement : ElementFilter.typesIn(packageElement.getEnclosedElements())) {
+        for (TypeElement classElement : extractSortedElements(packageElement)) {
             String qName = String.valueOf(classElement.getQualifiedName());
             String sName = determineClassSimpleName(namePrefix, classElement);
 
@@ -133,6 +136,16 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             packageChildren.add(qName);
             addPackageChildren(packageName, sName, classElement, packageChildren, references);
         }
+    }
+
+    List<TypeElement> extractSortedElements(Element element)
+    {
+        // Need to apply sorting, because order of result items for PackageElement.getEnclosedElements() depend on JDK implementation
+        List<TypeElement> elements = ElementFilter.typesIn(element.getEnclosedElements());
+        elements.sort((o1, o2) ->
+            StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+        );
+        return elements;
     }
 
     MetadataFileItem buildClassReference(String packageName, TypeElement classElement, String qName) {
