@@ -5,8 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.TypeParameter;
-import com.microsoft.model.TypeParameter.Builder;
+import com.microsoft.model.MethodParameter;
 import java.util.Collections;
 import org.junit.Test;
 
@@ -29,6 +28,7 @@ public class YamlUtilTest {
             + "    parameters:\n"
             + "    - id: Some id 3\n"
             + "      type: Some type 3\n"
+            + "      description: Some desc 3\n"
             + "references:\n"
             + "- uid: Some uid 5\n"
             + "  id: Some id5\n"
@@ -36,7 +36,8 @@ public class YamlUtilTest {
             + "  syntax:\n"
             + "    parameters:\n"
             + "    - id: Some id 5\n"
-            + "      type: Some type 5\n"));
+            + "      type: Some type 5\n"
+            + "      description: Some desc 5\n"));
     }
 
     private MetadataFileItem buildMetadataFileItem(int seed) {
@@ -44,8 +45,8 @@ public class YamlUtilTest {
         metadataFileItem.setUid("Some uid " + seed);
         metadataFileItem.setId("Some id" + seed);
         metadataFileItem.setHref("Some href" + seed);
-        metadataFileItem.setParameters(Collections.singletonList(new Builder()
-            .addId("Some id " + seed).addType("Some type " + seed).build()));
+        metadataFileItem.setParameters(Collections.singletonList(
+            new MethodParameter("Some id " + seed, "Some type " + seed, "Some desc " + seed)));
 
         return metadataFileItem;
     }

@@ -1,7 +1,9 @@
 package com.microsoft.tmp;
 
+import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TocItem;
 import com.microsoft.model.TypeParameter;
@@ -70,14 +72,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             String packageYmlFileName = packageQName + ".yml";
             buildPackageYmlFile(packageElement, outputPath + File.separator + packageYmlFileName);
 
-            TocItem packageTocItem = new TocItem.Builder()
-                .setUid(packageQName)
-                .setName(packageQName)
-                .setHref(packageYmlFileName)
-                .build();
-
+            TocItem packageTocItem = new TocItem(packageQName, packageQName, packageYmlFileName);
             buildFilesForInnerClasses("", packageElement, this, packageTocItem.getItems());
-
             tocItems.add(packageTocItem);
         }
         String fileContent = TOC_FILE_HEADER + YamlUtil.objectToYamlString(tocItems);
@@ -93,14 +89,9 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             String classQName = String.valueOf(classElement.getQualifiedName());
 
             String classYmlFileName = classQName + ".yml";
-            ymlFilesBuilder
-                .buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
+            ymlFilesBuilder.buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
 
-            TocItem classTocItem = new TocItem.Builder()
-                .setUid(classQName)
-                .setName(classSimpleName)
-                .setHref(classYmlFileName)
-                .build();
+            TocItem classTocItem = new TocItem(classQName, classSimpleName, classYmlFileName);
             listToAddItems.add(classTocItem);
 
             buildFilesForInnerClasses(classSimpleName, classElement, ymlFilesBuilder, listToAddItems);
@@ -190,7 +181,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 typeParamsLookup.put(key, generateRandomHexString());
             }
             String value = typeParamsLookup.get(key);
-            result.add(new TypeParameter.Builder().addId(key).addType(value).build());
+            result.add(new TypeParameter(key, value));
         }
         return result;
     }
@@ -280,7 +271,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 methodElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 methodElement.getReturnType(), methodQName);
             methodItem.setContent(methodContentValue);
-            methodItem.getExceptions().addAll(extractExceptions(methodElement));
+            methodItem.setExceptions(extractExceptions(methodElement));
             methodItem.setParameters(extractParameters(methodElement));
             methodItem.setReturn(new Return(String.valueOf(methodElement.getReturnType()), "-=TBD=-"));     // TODO: TBD
             metadataFile.getItems().add(methodItem);
@@ -325,21 +316,18 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         return String.valueOf(superclass);
     }
 
-    List<TypeParameter> extractExceptions(ExecutableElement methodElement) {
-        return methodElement.getThrownTypes().stream().map(o -> new TypeParameter.Builder()
-            .addType(String.valueOf(o))
-            .addDescription("-=TBD=-")    // TODO: TBD
-            .build()
-        ).collect(Collectors.toList());
+    List<ExceptionItem> extractExceptions(ExecutableElement methodElement) {
+        return methodElement.getThrownTypes().stream()
+            .map(o -> new ExceptionItem(String.valueOf(o), "-=TBD=-"))    // TODO: TBD
+            .collect(Collectors.toList());
     }
 
-    List<TypeParameter> extractParameters(ExecutableElement element) {
-        return element.getParameters().stream().map(o -> new TypeParameter.Builder()
-            .addId(String.valueOf(o.getSimpleName()))
-            .addType(String.valueOf(o.asType()))
-            .addDescription("-=TBD=-")    // TODO: TBD
-            .build()
-        ).collect(Collectors.toList());
+    List<MethodParameter> extractParameters(ExecutableElement element) {
+        return element.getParameters().stream().map(o -> new MethodParameter(
+            String.valueOf(o.getSimpleName()),
+            String.valueOf(o.asType()),
+            "-=TBD=-"               // TODO: TBD
+        )).collect(Collectors.toList());
     }
 
     String determineClassSimpleName(String namePrefix, Element classElement) {

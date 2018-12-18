@@ -7,7 +7,7 @@ import java.util.List;
 public class Syntax {
 
     private String content;
-    private List<TypeParameter> parameters = new ArrayList<>();
+    private List<MethodParameter> parameters = new ArrayList<>();
     @JsonProperty("return")
     private Return returnValue;
     private List<TypeParameter> typeParameters = new ArrayList<>();
@@ -20,11 +20,11 @@ public class Syntax {
         this.content = content;
     }
 
-    public List<TypeParameter> getParameters() {
+    public List<MethodParameter> getParameters() {
         return parameters;
     }
 
-    public void setParameters(List<TypeParameter> parameters) {
+    public void setParameters(List<MethodParameter> parameters) {
         this.parameters = parameters;
     }
 

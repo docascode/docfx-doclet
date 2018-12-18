@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import com.google.testing.compile.CompilationRule;
+import com.microsoft.model.ExceptionItem;
+import com.microsoft.model.MethodParameter;
 import com.microsoft.model.TypeParameter;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
@@ -59,7 +61,7 @@ public class YmlFilesBuilderImplTest {
     public void extractExceptions() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
-        List<TypeParameter> result = ymlFilesBuilder.extractExceptions(
+        List<ExceptionItem> result = ymlFilesBuilder.extractExceptions(
             ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
         );
 
@@ -72,7 +74,7 @@ public class YmlFilesBuilderImplTest {
     public void extarctParameters() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
-        List<TypeParameter> result = ymlFilesBuilder.extractParameters(
+        List<MethodParameter> result = ymlFilesBuilder.extractParameters(
             ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
         );
 

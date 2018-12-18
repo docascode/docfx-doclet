@@ -26,7 +26,7 @@ public class MetadataFileItem {
     private Syntax syntax = new Syntax();
     @JsonProperty("inheritance")
     private String[] superclass;
-    private List<TypeParameter> exceptions = new ArrayList<>();
+    private List<ExceptionItem> exceptions;
 
     public String getUid() {
         return uid;
@@ -148,11 +148,11 @@ public class MetadataFileItem {
         this.superclass = new String[]{superclass};
     }
 
-    public List<TypeParameter> getExceptions() {
+    public List<ExceptionItem> getExceptions() {
         return exceptions;
     }
 
-    public void setExceptions(List<TypeParameter> exceptions) {
+    public void setExceptions(List<ExceptionItem> exceptions) {
         this.exceptions = exceptions;
     }
 
@@ -164,7 +164,7 @@ public class MetadataFileItem {
         syntax.setTypeParameters(typeParameters);
     }
 
-    public void setParameters(List<TypeParameter> parameters) {
+    public void setParameters(List<MethodParameter> parameters) {
         syntax.setParameters(parameters);
     }
 
