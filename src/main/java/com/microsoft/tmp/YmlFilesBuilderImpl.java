@@ -2,10 +2,10 @@ package com.microsoft.tmp;
 
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.model.TypeParameter;
 import com.microsoft.util.FileUtil;
+import com.microsoft.util.YamlUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
+    private final static String TOC_FILE_HEADER = "### YamlMime:TableOfContent\n";
     private DocletEnvironment environment;
     private String outputPath;
 
@@ -57,7 +58,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     }
 
     public boolean build() {
-        TocFile resultTocFile = new TocFile();
+        List<TocItem> tocItems = new ArrayList<>();
         Set<PackageElement> packageElements = new LinkedHashSet<>(
             ElementFilter.packagesIn(environment.getIncludedElements()));
         for (PackageElement packageElement : packageElements) {
@@ -73,9 +74,10 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
             buildFilesForInnerClasses("", packageElement, this, packageTocItem.getItems());
 
-            resultTocFile.getItems().add(packageTocItem);
+            tocItems.add(packageTocItem);
         }
-        FileUtil.dumpToFile(String.valueOf(resultTocFile), outputPath + File.separator + "toc.yml");
+        String fileContent = TOC_FILE_HEADER + YamlUtil.objectToYamlString(tocItems);
+        FileUtil.dumpToFile(fileContent, outputPath + File.separator + "toc.yml");
         return true;
     }
 
@@ -350,4 +352,5 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             StringUtils.isEmpty(namePrefix) ? "" : ".",
             String.valueOf(classElement.getSimpleName()));
     }
+
 }

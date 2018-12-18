@@ -77,30 +77,4 @@ public class TocItem {
     public void setItems(List<TocItem> items) {
         this.items = items;
     }
-
-    @Override
-    public String toString() {
-        return buildItemChunk(0);
-    }
-
-    String buildItemChunk(int spacesCount) {
-        String spaces = new String(new char[spacesCount]).replace('\0', ' ');
-        return spaces + "- uid: " + uid + "\n" +
-            spaces + "  name: " + name + "\n" +
-            spaces + "  href: " + href + "\n" +
-            buildItemsChunk(spacesCount + 2, items);
-    }
-
-    String buildItemsChunk(int spacesCount, List<TocItem> items) {
-        if (items == null || items.isEmpty()) {
-            return "";
-        }
-
-        String spaces = new String(new char[spacesCount]).replace('\0', ' ');
-        String result = spaces + "items: \n";
-        for (TocItem tocItem : items) {
-            result += tocItem.buildItemChunk(spacesCount);
-        }
-        return result;
-    }
 }
