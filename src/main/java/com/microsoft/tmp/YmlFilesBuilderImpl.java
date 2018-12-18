@@ -2,6 +2,7 @@ package com.microsoft.tmp;
 
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.Return;
 import com.microsoft.model.TocItem;
 import com.microsoft.model.TypeParameter;
 import com.microsoft.util.FileUtil;
@@ -31,6 +32,8 @@ import org.apache.commons.lang3.StringUtils;
 public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
     private final static String TOC_FILE_HEADER = "### YamlMime:TableOfContent\n";
+    private final static String METADATA_FILE_HEADER = "### YamlMime:ManagedReference\n";
+
     private DocletEnvironment environment;
     private String outputPath;
 
@@ -61,6 +64,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         List<TocItem> tocItems = new ArrayList<>();
         Set<PackageElement> packageElements = new LinkedHashSet<>(
             ElementFilter.packagesIn(environment.getIncludedElements()));
+
         for (PackageElement packageElement : packageElements) {
             String packageQName = String.valueOf(packageElement.getQualifiedName());
             String packageYmlFileName = packageQName + ".yml";
@@ -117,6 +121,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         item.setId(sName);
         addPackageChildren(qName, "", element, item.getChildren(), metadataFile.getReferences());
         item.setHref(qName + ".yml");
+        item.setLangs(new String[]{"java"});
         item.setName(qName);
         item.setNameWithType(qName);
         item.setFullName(qName);
@@ -125,8 +130,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         item.setContent("package " + qName);
         metadataFile.getItems().add(item);
 
-        String content = String.valueOf(metadataFile);
-        FileUtil.dumpToFile(content, outputPath);
+        String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(metadataFile);
+        FileUtil.dumpToFile(fileContent, outputPath);
     }
 
     void addPackageChildren(String packageName, String namePrefix, Element packageElement, List<String> packageChildren,
@@ -169,24 +174,12 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         referenceItem.setType(type);
         referenceItem.setSummary(summary);
         referenceItem.setContent(content);
-        referenceItem.getTypeParameters().addAll(extractTypeParameters(classElement));
+        referenceItem.setTypeParameters(extractTypeParameters(classElement));
         return referenceItem;
     }
 
     String extractComment(Element element) {
-        return cleanupComment(environment.getElementUtils().getDocComment(element));
-    }
-
-    String cleanupComment(String comment) {
-        String result = StringUtils.trimToEmpty(comment);
-        if (StringUtils.isEmpty(result)) {
-            return "";
-        }
-        result = result
-            .replace("\r\n", "\n")
-            .replaceAll("\\n+", "</p><p>");
-
-        return String.format("\"<p>%s</p>\"", result);
+        return environment.getElementUtils().getDocComment(element);
     }
 
     List<TypeParameter> extractTypeParameters(TypeElement element) {
@@ -227,6 +220,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             classItem.getChildren().add(String.valueOf(methodElement));
         }
         classItem.setHref(classQName + ".yml");
+        classItem.setLangs(new String[]{"java"});
         classItem.setName(classSNameWithGenericsSupport);
         classItem.setNameWithType(classSNameWithGenericsSupport);
         classItem.setFullName(classQNameWithGenericsSupport);
@@ -235,7 +229,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         classItem.setSummary(extractComment(classElement));
         classItem.setContent(classContentValue);
         classItem.setSuperclass(extractSuperclass(classElement));
-        classItem.getTypeParameters().addAll(extractTypeParameters(classElement));
+        classItem.setTypeParameters(extractTypeParameters(classElement));
         metadataFile.getItems().add(classItem);
 
         // Add constructors info
@@ -248,6 +242,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             constructorItem.setId(constructorQName);
             constructorItem.setParent(classQName);
             constructorItem.setHref(classQName + ".yml");
+            constructorItem.setLangs(new String[]{"java"});
             constructorItem.setName(constructorQName);
             constructorItem.setNameWithType(classSNameWithGenericsSupport + "." + constructorQName);
             constructorItem.setFullName(fullName);
@@ -259,7 +254,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 constructorElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 constructorQName);
             constructorItem.setContent(constructorContentValue);
-            constructorItem.getParameters().addAll(extractParameters(constructorElement));
+            constructorItem.setParameters(extractParameters(constructorElement));
             metadataFile.getItems().add(constructorItem);
         }
 
@@ -273,6 +268,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             methodItem.setId(methodQName);
             methodItem.setParent(classQName);
             methodItem.setHref(classQName + ".yml");
+            methodItem.setLangs(new String[]{"java"});
             methodItem.setName(methodQName);
             methodItem.setNameWithType(classSNameWithGenericsSupport + "." + methodQName);
             methodItem.setFullName(fullName);
@@ -285,9 +281,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 methodElement.getReturnType(), methodQName);
             methodItem.setContent(methodContentValue);
             methodItem.getExceptions().addAll(extractExceptions(methodElement));
-            methodItem.getParameters().addAll(extractParameters(methodElement));
-            methodItem.setReturnType(String.valueOf(methodElement.getReturnType()));
-            methodItem.setReturnDescription("-=TBD=-");     // TODO: TBD
+            methodItem.setParameters(extractParameters(methodElement));
+            methodItem.setReturn(new Return(String.valueOf(methodElement.getReturnType()), "-=TBD=-"));     // TODO: TBD
             metadataFile.getItems().add(methodItem);
         }
 
@@ -299,6 +294,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             fieldItem.setId(fieldQName);
             fieldItem.setParent(classQName);
             fieldItem.setHref(classQName + ".yml");
+            fieldItem.setLangs(new String[]{"java"});
             fieldItem.setName(fieldQName);
             fieldItem.setNameWithType(classSNameWithGenericsSupport + "." + fieldQName);
             fieldItem.setFullName(classQNameWithGenericsSupport + "." + fieldQName);
@@ -309,12 +305,12 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 fieldElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 fieldQName);
             fieldItem.setContent(fieldContentValue);
-            fieldItem.setReturnType(String.valueOf(fieldElement.asType()));
+            fieldItem.setReturn(new Return(String.valueOf(fieldElement.asType())));
             metadataFile.getItems().add(fieldItem);
         }
 
-        String metadataFileContent = String.valueOf(metadataFile);
-        FileUtil.dumpToFile(metadataFileContent, outputPath);
+        String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(metadataFile);
+        FileUtil.dumpToFile(fileContent, outputPath);
     }
 
     String convertFullNameToOverload(String fullName) {
@@ -352,5 +348,4 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             StringUtils.isEmpty(namePrefix) ? "" : ".",
             String.valueOf(classElement.getSimpleName()));
     }
-
 }

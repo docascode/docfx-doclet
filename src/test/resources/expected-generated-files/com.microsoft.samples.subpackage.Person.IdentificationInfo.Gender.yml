@@ -14,7 +14,8 @@ items:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   type: Enum
   package: com.microsoft.samples.subpackage
-  summary: "<p>Enum describes person's gender</p>"
+  summary: |2
+     Enum describes person's gender
   syntax:
     content: public enum Person.IdentificationInfo.Gender
   inheritance:
@@ -31,7 +32,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*
   type: Constructor
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: private Gender()
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
@@ -46,7 +46,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[] values()
     return:
@@ -64,7 +63,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender valueOf(java.lang.String)
     parameters:
@@ -85,7 +83,6 @@ items:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
   type: Enum constant
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public static final MALE
     return:
@@ -101,9 +98,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
   type: Enum constant
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public static final FEMALE
     return:
       type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-references:

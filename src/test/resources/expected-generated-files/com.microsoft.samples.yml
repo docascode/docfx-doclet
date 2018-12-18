@@ -11,7 +11,8 @@ items:
   nameWithType: com.microsoft.samples
   fullName: com.microsoft.samples
   type: Namespace
-  summary: "<p>This package contains the sample set of classes for testing DocFx doclet.</p>"
+  summary: |2
+     This package contains the sample set of classes for testing DocFx doclet.
   syntax:
     content: package com.microsoft.samples
 references:
@@ -22,6 +23,9 @@ references:
   nameWithType: SuperHero
   fullName: com.microsoft.samples.SuperHero
   type: Class
-  summary: "<p>Hero is the main entity we will be using to something</p><p> @author Captain America</p>"
+  summary: |2
+     Hero is the main entity we will be using to something
+
+     @author Captain America
   syntax:
     content: public class SuperHero

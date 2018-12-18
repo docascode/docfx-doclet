@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
+import com.microsoft.model.TypeParameter.Builder;
+import java.util.Collections;
 import org.junit.Test;
 
 public class YamlUtilTest {
@@ -23,16 +25,18 @@ public class YamlUtilTest {
             + "- uid: Some uid 3\n"
             + "  id: Some id3\n"
             + "  href: Some href3\n"
-            + "  parameters:\n"
-            + "  - id: Some id 3\n"
-            + "    type: Some type 3\n"
+            + "  syntax:\n"
+            + "    parameters:\n"
+            + "    - id: Some id 3\n"
+            + "      type: Some type 3\n"
             + "references:\n"
             + "- uid: Some uid 5\n"
             + "  id: Some id5\n"
             + "  href: Some href5\n"
-            + "  parameters:\n"
-            + "  - id: Some id 5\n"
-            + "    type: Some type 5\n"));
+            + "  syntax:\n"
+            + "    parameters:\n"
+            + "    - id: Some id 5\n"
+            + "      type: Some type 5\n"));
     }
 
     private MetadataFileItem buildMetadataFileItem(int seed) {
@@ -40,8 +44,8 @@ public class YamlUtilTest {
         metadataFileItem.setUid("Some uid " + seed);
         metadataFileItem.setId("Some id" + seed);
         metadataFileItem.setHref("Some href" + seed);
-        metadataFileItem.getParameters().add(new TypeParameter.Builder()
-            .addId("Some id " + seed).addType("Some type " + seed).build());
+        metadataFileItem.setParameters(Collections.singletonList(new Builder()
+            .addId("Some id " + seed).addType("Some type " + seed).build()));
 
         return metadataFileItem;
     }

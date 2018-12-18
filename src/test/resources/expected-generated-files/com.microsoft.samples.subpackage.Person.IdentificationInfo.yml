@@ -11,7 +11,8 @@ items:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
   type: Class
   package: com.microsoft.samples.subpackage
-  summary: "<p>Class that describes person's identification</p>"
+  summary: |2
+     Class that describes person's identification
   syntax:
     content: public class Person.IdentificationInfo
   inheritance:
@@ -28,7 +29,5 @@ items:
   overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo*
   type: Constructor
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public IdentificationInfo()
-references:

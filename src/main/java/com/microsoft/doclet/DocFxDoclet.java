@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic.Kind;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;

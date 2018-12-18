@@ -16,7 +16,8 @@ items:
   fullName: com.microsoft.samples.subpackage.Person<T>
   type: Class
   package: com.microsoft.samples.subpackage
-  summary: "<p>Class that describes some person</p>"
+  summary: |2
+     Class that describes some person
   syntax:
     content: public class Person<T>
     typeParameters:
@@ -36,7 +37,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person<T>.Person*
   type: Constructor
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public Person()
 - uid: com.microsoft.samples.subpackage.Person.getFirstName()
@@ -51,7 +51,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person<T>.getFirstName*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public java.lang.String getFirstName()
     return:
@@ -69,7 +68,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person<T>.setFirstName*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public void setFirstName(java.lang.String)
     parameters:
@@ -91,7 +89,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person<T>.getLastName*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public java.lang.String getLastName()
     return:
@@ -109,7 +106,6 @@ items:
   overload: com.microsoft.samples.subpackage.Person<T>.setLastName*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public void setLastName(java.lang.String)
     parameters:
@@ -130,7 +126,8 @@ items:
   fullName: com.microsoft.samples.subpackage.Person<T>.firstName
   type: Field
   package: com.microsoft.samples.subpackage
-  summary: "<p>This is a first name</p>"
+  summary: |2
+     This is a first name
   syntax:
     content: private firstName
     return:
@@ -146,9 +143,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Person<T>.lastName
   type: Field
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: private lastName
     return:
       type: java.lang.String
-references:

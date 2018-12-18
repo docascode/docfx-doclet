@@ -27,27 +27,6 @@ public class YmlFilesBuilderImplTest {
     }
 
     @Test
-    public void cleanupComment() {
-        String result = ymlFilesBuilder.cleanupComment("Some one-line comment\n");
-
-        assertThat("Wrong result", result, is("\"<p>Some one-line comment</p>\""));
-    }
-
-    @Test
-    public void cleanupCommentForMultilineCase() {
-        String result = ymlFilesBuilder.cleanupComment("Some multiline\n\n comment\n");
-
-        assertThat("Wrong result", result, is("\"<p>Some multiline</p><p> comment</p>\""));
-    }
-
-    @Test
-    public void cleanupCommentForEmptyCase() {
-        String result = ymlFilesBuilder.cleanupComment("");
-
-        assertThat("Wrong result", result, is(""));
-    }
-
-    @Test
     public void extractTypeParameters() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 

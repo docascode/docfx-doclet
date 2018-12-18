@@ -14,7 +14,6 @@ items:
   fullName: com.microsoft.samples.subpackage.Display<T,R>
   type: Interface
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public interface Display<T,R>
     typeParameters:
@@ -36,7 +35,6 @@ items:
   overload: com.microsoft.samples.subpackage.Display<T,R>.show*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public abstract void show()
     return:
@@ -54,10 +52,8 @@ items:
   overload: com.microsoft.samples.subpackage.Display<T,R>.hide*
   type: Method
   package: com.microsoft.samples.subpackage
-  summary: 
   syntax:
     content: public abstract void hide()
     return:
       type: void
       description: -=TBD=-
-references:

@@ -1,8 +1,9 @@
 package com.microsoft.model;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 
 public class TocItem {
 
@@ -16,27 +17,26 @@ public class TocItem {
         private TocItem tocItem;
 
         public Builder() {
-            this.tocItem = new TocItem();
+            tocItem = new TocItem();
         }
 
         public Builder setUid(String uid) {
-            this.tocItem.setUid(uid);
+            tocItem.setUid(uid);
             return this;
         }
 
         public Builder setName(String name) {
-            this.tocItem.setName(name);
+            tocItem.setName(name);
             return this;
         }
 
         public Builder setHref(String href) {
-            this.tocItem.setHref(href);
+            tocItem.setHref(href);
             return this;
         }
 
         public TocItem build() {
-            if (StringUtils.isBlank(this.tocItem.uid) || StringUtils.isBlank(this.tocItem.name)
-                || StringUtils.isBlank(this.tocItem.href)) {
+            if (isBlank(tocItem.uid) || isBlank(tocItem.name) || isBlank(tocItem.href)) {
                 throw new IllegalArgumentException("TocItem could not constructed: not enough info");
             }
             return tocItem;
