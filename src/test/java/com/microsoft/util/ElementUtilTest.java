@@ -1,4 +1,4 @@
-package com.microsoft.build;
+package com.microsoft.util;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,24 +15,22 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class YmlFilesBuilderTest {
+public class ElementUtilTest {
 
     @Rule
     public CompilationRule rule = new CompilationRule();
     private Elements elements;
-    private YmlFilesBuilder ymlFilesBuilder;
 
     @Before
     public void setup() {
         elements = rule.getElements();
-        ymlFilesBuilder = new YmlFilesBuilder();
     }
 
     @Test
     public void extractTypeParameters() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 
-        List<TypeParameter> result = ymlFilesBuilder.extractTypeParameters(element);
+        List<TypeParameter> result = ElementUtil.extractTypeParameters(element);
 
         assertThat("Wrong type params size", result.size(), is(1));
         assertThat("Wrong type parameter id", result.get(0).getId(), is("T"));
@@ -43,7 +41,7 @@ public class YmlFilesBuilderTest {
     public void extractSuperclass() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 
-        String result = ymlFilesBuilder.extractSuperclass(element);
+        String result = ElementUtil.extractSuperclass(element);
 
         assertThat("Wrong result", result, is("java.lang.Object"));
     }
@@ -52,7 +50,7 @@ public class YmlFilesBuilderTest {
     public void extractSuperclassForChildClass() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
-        String result = ymlFilesBuilder.extractSuperclass(element);
+        String result = ElementUtil.extractSuperclass(element);
 
         assertThat("Wrong result", result, is("com.microsoft.samples.subpackage.Person"));
     }
@@ -61,7 +59,7 @@ public class YmlFilesBuilderTest {
     public void extractExceptions() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
-        List<ExceptionItem> result = ymlFilesBuilder.extractExceptions(
+        List<ExceptionItem> result = ElementUtil.extractExceptions(
             ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
         );
 
@@ -74,7 +72,7 @@ public class YmlFilesBuilderTest {
     public void extarctParameters() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
-        List<MethodParameter> result = ymlFilesBuilder.extractParameters(
+        List<MethodParameter> result = ElementUtil.extractParameters(
             ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
         );
 
@@ -91,15 +89,15 @@ public class YmlFilesBuilderTest {
 
     @Test
     public void convertFullNameToOverload() {
-        assertThat("Wrong result", ymlFilesBuilder.convertFullNameToOverload(
+        assertThat("Wrong result", ElementUtil.convertFullNameToOverload(
             "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"), is(
             "com.microsoft.samples.SuperHero.successfullyAttacked*"));
 
-        assertThat("Wrong result for case with generics", ymlFilesBuilder.convertFullNameToOverload(
+        assertThat("Wrong result for case with generics", ElementUtil.convertFullNameToOverload(
             "com.microsoft.samples.subpackage.Display<T,R>.show()"), is(
             "com.microsoft.samples.subpackage.Display<T,R>.show*"));
 
-        assertThat("Wrong result for constructor case", ymlFilesBuilder.convertFullNameToOverload(
+        assertThat("Wrong result for constructor case", ElementUtil.convertFullNameToOverload(
             "com.microsoft.samples.SuperHero.SuperHero()"), is(
             "com.microsoft.samples.SuperHero.SuperHero*"));
     }
@@ -109,16 +107,16 @@ public class YmlFilesBuilderTest {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
         assertThat("Wrong result",
-            ymlFilesBuilder.determineClassSimpleName("bla-bla-prefix", element), is("bla-bla-prefix.SuperHero"));
+            ElementUtil.determineClassSimpleName("bla-bla-prefix", element), is("bla-bla-prefix.SuperHero"));
         assertThat("Wrong result for empty prefix",
-            ymlFilesBuilder.determineClassSimpleName("", element), is("SuperHero"));
+            ElementUtil.determineClassSimpleName("", element), is("SuperHero"));
     }
 
     @Test
     public void extractClassContent() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
-        String result = ymlFilesBuilder.extractClassContent(element, "SuperHero");
+        String result = ElementUtil.extractClassContent(element, "SuperHero");
 
         assertThat("Wrong result", result, is("public class SuperHero"));
     }
@@ -127,16 +125,17 @@ public class YmlFilesBuilderTest {
     public void extractClassContentForInterface() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
 
-        String result = ymlFilesBuilder.extractClassContent(element, "Display<T, R>");
+        String result = ElementUtil.extractClassContent(element, "Display<T, R>");
 
         assertThat("Wrong result", result, is("public interface Display<T, R>"));
     }
 
     @Test
     public void extractClassContentForEnum() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+        TypeElement element = elements
+            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
 
-        String result = ymlFilesBuilder.extractClassContent(element, "Person.IdentificationInfo.Gender");
+        String result = ElementUtil.extractClassContent(element, "Person.IdentificationInfo.Gender");
 
         assertThat("Wrong result", result, is("public enum Person.IdentificationInfo.Gender"));
     }
@@ -145,7 +144,7 @@ public class YmlFilesBuilderTest {
     public void extractClassContentForStaticClass() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
 
-        String result = ymlFilesBuilder.extractClassContent(element, "Person.IdentificationInfo");
+        String result = ElementUtil.extractClassContent(element, "Person.IdentificationInfo");
 
         assertThat("Wrong result", result, is("public static class Person.IdentificationInfo"));
     }
@@ -154,20 +153,21 @@ public class YmlFilesBuilderTest {
     public void extractTypeForInterface() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
 
-        assertThat(ymlFilesBuilder.extractType(element), is("Interface"));
+        assertThat(ElementUtil.extractType(element), is("Interface"));
     }
 
     @Test
     public void extractTypeForEnum() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+        TypeElement element = elements
+            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
 
-        assertThat(ymlFilesBuilder.extractType(element), is("Enum"));
+        assertThat(ElementUtil.extractType(element), is("Enum"));
     }
 
     @Test
     public void extractTypeForClass() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
 
-        assertThat(ymlFilesBuilder.extractType(element), is("Class"));
+        assertThat(ElementUtil.extractType(element), is("Class"));
     }
 }

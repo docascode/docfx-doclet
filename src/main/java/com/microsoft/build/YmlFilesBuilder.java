@@ -1,35 +1,34 @@
 package com.microsoft.build;
 
-import com.microsoft.model.ExceptionItem;
+import static com.microsoft.util.ElementUtil.convertFullNameToOverload;
+import static com.microsoft.util.ElementUtil.determineClassSimpleName;
+import static com.microsoft.util.ElementUtil.extractClassContent;
+import static com.microsoft.util.ElementUtil.extractExceptions;
+import static com.microsoft.util.ElementUtil.extractParameters;
+import static com.microsoft.util.ElementUtil.extractSortedElements;
+import static com.microsoft.util.ElementUtil.extractSuperclass;
+import static com.microsoft.util.ElementUtil.extractType;
+import static com.microsoft.util.ElementUtil.extractTypeParameters;
+
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TocItem;
-import com.microsoft.model.TypeParameter;
 import com.microsoft.util.FileUtil;
 import com.microsoft.util.YamlUtil;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.TypeKind;
-import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import jdk.javadoc.doclet.DocletEnvironment;
-import org.apache.commons.lang3.StringUtils;
 
 public class YmlFilesBuilder {
 
@@ -39,26 +38,9 @@ public class YmlFilesBuilder {
     private DocletEnvironment environment;
     private String outputPath;
 
-    private Map<ElementKind, String> elementKindLookup = new HashMap<>() {{
-        put(ElementKind.PACKAGE, "Namespace");
-        put(ElementKind.CLASS, "Class");
-        put(ElementKind.ENUM, "Enum");
-        put(ElementKind.ENUM_CONSTANT, "Enum constant");
-        put(ElementKind.INTERFACE, "Interface");
-        put(ElementKind.CONSTRUCTOR, "Constructor");
-        put(ElementKind.METHOD, "Method");
-        put(ElementKind.FIELD, "Field");
-    }};
-    private Map<String, String> typeParamsLookup = new HashMap<>();
-    private Random random = new Random(21);
-
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath) {
         this.environment = environment;
         this.outputPath = outputPath;
-    }
-
-    // Fot testing purposes
-    YmlFilesBuilder() {
     }
 
     public boolean build() {
@@ -95,7 +77,7 @@ public class YmlFilesBuilder {
         }
     }
 
-    public void buildPackageYmlFile(PackageElement element, String outputPath) {
+    void buildPackageYmlFile(PackageElement element, String outputPath) {
         MetadataFile metadataFile = new MetadataFile();
 
         String qName = String.valueOf(element.getQualifiedName());
@@ -119,10 +101,6 @@ public class YmlFilesBuilder {
         FileUtil.dumpToFile(fileContent, outputPath);
     }
 
-    String extractType(Element element) {
-        return elementKindLookup.get(element.getKind());
-    }
-
     void addPackageChildren(String packageName, String namePrefix, Element packageElement, List<String> packageChildren,
         List<MetadataFileItem> references) {
         for (TypeElement classElement : extractSortedElements(packageElement)) {
@@ -137,19 +115,9 @@ public class YmlFilesBuilder {
         }
     }
 
-    List<TypeElement> extractSortedElements(Element element) {
-        // Need to apply sorting, because order of result items for PackageElement.getEnclosedElements() depend on JDK implementation
-        List<TypeElement> elements = ElementFilter.typesIn(element.getEnclosedElements());
-        elements.sort((o1, o2) ->
-            StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
-        );
-        return elements;
-    }
-
     MetadataFileItem buildClassReference(String packageName, TypeElement classElement, String qName) {
         String qNameWithGenericsSupport = String.valueOf(classElement.asType());
         String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
-        String summary = extractComment(classElement);
 
         MetadataFileItem referenceItem = new MetadataFileItem();
         referenceItem.setUid(qName);
@@ -159,7 +127,7 @@ public class YmlFilesBuilder {
         referenceItem.setNameWithType(shortNameWithGenericsSupport);
         referenceItem.setFullName(qNameWithGenericsSupport);
         referenceItem.setType(extractType(classElement));
-        referenceItem.setSummary(summary);
+        referenceItem.setSummary(extractComment(classElement));
         referenceItem.setContent(extractClassContent(classElement, shortNameWithGenericsSupport));
         referenceItem.setTypeParameters(extractTypeParameters(classElement));
         return referenceItem;
@@ -169,24 +137,7 @@ public class YmlFilesBuilder {
         return environment.getElementUtils().getDocComment(element);
     }
 
-    List<TypeParameter> extractTypeParameters(TypeElement element) {
-        List<TypeParameter> result = new ArrayList<>();
-        for (TypeParameterElement typeParameter : element.getTypeParameters()) {
-            String key = String.valueOf(typeParameter);
-            if (!typeParamsLookup.containsKey(key)) {
-                typeParamsLookup.put(key, generateRandomHexString());
-            }
-            String value = typeParamsLookup.get(key);
-            result.add(new TypeParameter(key, value));
-        }
-        return result;
-    }
-
-    private String generateRandomHexString() {
-        return Integer.toHexString(random.nextInt());
-    }
-
-    public void buildClassYmlFile(TypeElement classElement, String outputPath) {
+    void buildClassYmlFile(TypeElement classElement, String outputPath) {
         MetadataFile classMetadataFile = new MetadataFile();
 
         String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
@@ -289,48 +240,5 @@ public class YmlFilesBuilder {
         metadataFileItem.setSummary(extractComment(element));
 
         return metadataFileItem;
-    }
-
-    String convertFullNameToOverload(String fullName) {
-        return fullName.replaceAll("\\(.*", "*");
-    }
-
-    String extractSuperclass(TypeElement classElement) {
-        TypeMirror superclass = classElement.getSuperclass();
-        if (superclass.getKind() == TypeKind.NONE) {
-            return "java.lang.Object";
-        }
-        return String.valueOf(superclass);
-    }
-
-    List<ExceptionItem> extractExceptions(ExecutableElement methodElement) {
-        return methodElement.getThrownTypes().stream()
-            .map(o -> new ExceptionItem(String.valueOf(o), "-=TBD=-"))    // TODO: TBD
-            .collect(Collectors.toList());
-    }
-
-    List<MethodParameter> extractParameters(ExecutableElement element) {
-        return element.getParameters().stream().map(o -> new MethodParameter(
-            String.valueOf(o.getSimpleName()),
-            String.valueOf(o.asType()),
-            "-=TBD=-"               // TODO: TBD
-        )).collect(Collectors.toList());
-    }
-
-    String determineClassSimpleName(String namePrefix, Element classElement) {
-        return String.format("%s%s%s",
-            namePrefix,
-            StringUtils.isEmpty(namePrefix) ? "" : ".",
-            String.valueOf(classElement.getSimpleName()));
-    }
-
-    String extractClassContent(TypeElement classElement, String shortNameWithGenericsSupport) {
-        String type = elementKindLookup.get(classElement.getKind());
-        return String.format("%s %s %s",
-            classElement.getModifiers().stream().map(String::valueOf)
-                .filter(modifier -> !("Interface".equals(type) && "abstract".equals(modifier)))
-                .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
-                .collect(Collectors.joining(" ")),
-            type.toLowerCase(), shortNameWithGenericsSupport);
     }
 }
