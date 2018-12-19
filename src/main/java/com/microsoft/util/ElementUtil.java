@@ -2,6 +2,7 @@ package com.microsoft.util;
 
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
+import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
@@ -78,7 +80,7 @@ public class ElementUtil {
 
     public static List<ExceptionItem> extractExceptions(ExecutableElement methodElement) {
         return methodElement.getThrownTypes().stream()
-            .map(o -> new ExceptionItem(String.valueOf(o), "-=TBD=-"))    // TODO: TBD
+            .map(o -> new ExceptionItem(String.valueOf(o), "-=TBD=-"))  // TODO: Determine exception description
             .collect(Collectors.toList());
     }
 
@@ -86,7 +88,7 @@ public class ElementUtil {
         return element.getParameters().stream().map(o -> new MethodParameter(
             String.valueOf(o.getSimpleName()),
             String.valueOf(o.asType()),
-            "-=TBD=-"               // TODO: TBD
+            "-=TBD=-"                                                   // TODO: Determine parameter description
         )).collect(Collectors.toList());
     }
 
@@ -105,5 +107,13 @@ public class ElementUtil {
                 .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
                 .collect(Collectors.joining(" ")),
             type.toLowerCase(), shortNameWithGenericsSupport);
+    }
+
+    public static Return extractReturn(ExecutableElement methodElement) {
+        return new Return(String.valueOf(methodElement.getReturnType()), "-=TBD=-"); // TODO: Determine return description
+    }
+
+    public static Return extractReturn(VariableElement fieldElement) {
+        return new Return(String.valueOf(fieldElement.asType()));
     }
 }

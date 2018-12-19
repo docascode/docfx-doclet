@@ -6,9 +6,12 @@ import static org.junit.Assert.assertThat;
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
+import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import java.util.List;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import org.junit.Before;
@@ -169,5 +172,41 @@ public class ElementUtilTest {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
 
         assertThat(ElementUtil.extractType(element), is("Class"));
+    }
+
+    @Test
+    public void extractReturnForExecutableElement() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        checkReturnForExecutableElement(element, 0, "int", "-=TBD=-");
+        checkReturnForExecutableElement(element, 1, "java.lang.String", "-=TBD=-");
+    }
+
+    @Test
+    public void extractReturnForVariableElement() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        checkReturnForVariableElement(element, 0, "java.lang.String");
+        checkReturnForVariableElement(element, 1, "java.lang.String");
+        checkReturnForVariableElement(element, 2, "int");
+        checkReturnForVariableElement(element, 3, "int");
+        checkReturnForVariableElement(element, 4, "java.lang.String");
+    }
+
+    private void checkReturnForExecutableElement(TypeElement element, int methodNumber, String expectedType, String expectedDescription) {
+        ExecutableElement executableElement = ElementFilter.methodsIn(element.getEnclosedElements()).get(methodNumber);
+
+        Return result = ElementUtil.extractReturn(executableElement);
+
+        assertThat(result.getReturnType(), is(expectedType));
+        assertThat(result.getReturnDescription(), is(expectedDescription));
+    }
+
+    private void checkReturnForVariableElement(TypeElement element, int variableNumber, String expectedType) {
+        VariableElement variableElement = ElementFilter.fieldsIn(element.getEnclosedElements()).get(variableNumber);
+
+        Return result = ElementUtil.extractReturn(variableElement);
+
+        assertThat(result.getReturnType(), is(expectedType));
     }
 }

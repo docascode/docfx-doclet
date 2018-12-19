@@ -5,6 +5,7 @@ import static com.microsoft.util.ElementUtil.determineClassSimpleName;
 import static com.microsoft.util.ElementUtil.extractClassContent;
 import static com.microsoft.util.ElementUtil.extractExceptions;
 import static com.microsoft.util.ElementUtil.extractParameters;
+import static com.microsoft.util.ElementUtil.extractReturn;
 import static com.microsoft.util.ElementUtil.extractSortedElements;
 import static com.microsoft.util.ElementUtil.extractSuperclass;
 import static com.microsoft.util.ElementUtil.extractType;
@@ -199,7 +200,8 @@ public class YmlFilesBuilder {
             methodItem.setContent(methodContentValue);
             methodItem.setExceptions(extractExceptions(methodElement));
             methodItem.setParameters(extractParameters(methodElement));
-            methodItem.setReturn(new Return(String.valueOf(methodElement.getReturnType()), "-=TBD=-"));     // TODO: TBD
+            methodItem.setReturn(extractReturn(methodElement));
+
             classMetadataFile.getItems().add(methodItem);
         }
 
@@ -214,7 +216,7 @@ public class YmlFilesBuilder {
                 fieldElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 fieldQName);
             fieldItem.setContent(fieldContentValue);
-            fieldItem.setReturn(new Return(String.valueOf(fieldElement.asType())));
+            fieldItem.setReturn(extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
         }
 
