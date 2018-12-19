@@ -1,6 +1,6 @@
 package com.microsoft.doclet;
 
-import com.microsoft.tmp.YmlFilesBuilderImpl;
+import com.microsoft.build.YmlFilesBuilder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +32,7 @@ public class DocFxDoclet implements Doclet {
 
         reporter.print(Kind.NOTE, "Output path: " + outputPath);
 
-        return (new YmlFilesBuilderImpl(environment, outputPath)).build();
+        return (new YmlFilesBuilder(environment, outputPath)).build();
     }
 
     @Override

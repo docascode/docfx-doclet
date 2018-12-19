@@ -1,4 +1,4 @@
-package com.microsoft.tmp;
+package com.microsoft.build;
 
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MetadataFile;
@@ -31,7 +31,7 @@ import javax.lang.model.util.ElementFilter;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.StringUtils;
 
-public class YmlFilesBuilderImpl implements YmlFilesBuilder {
+public class YmlFilesBuilder {
 
     private final static String TOC_FILE_HEADER = "### YamlMime:TableOfContent\n";
     private final static String METADATA_FILE_HEADER = "### YamlMime:ManagedReference\n";
@@ -52,13 +52,13 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     private Map<String, String> typeParamsLookup = new HashMap<>();
     private Random random = new Random(21);
 
-    public YmlFilesBuilderImpl(DocletEnvironment environment, String outputPath) {
+    public YmlFilesBuilder(DocletEnvironment environment, String outputPath) {
         this.environment = environment;
         this.outputPath = outputPath;
     }
 
     // Fot testing purposes
-    YmlFilesBuilderImpl() {
+    YmlFilesBuilder() {
     }
 
     public boolean build() {
@@ -72,7 +72,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             buildPackageYmlFile(packageElement, outputPath + File.separator + packageYmlFileName);
 
             TocItem packageTocItem = new TocItem(packageQName, packageQName, packageYmlFileName);
-            buildFilesForInnerClasses("", packageElement, this, packageTocItem.getItems());
+            buildFilesForInnerClasses("", packageElement, packageTocItem.getItems());
             tocItems.add(packageTocItem);
         }
         String fileContent = TOC_FILE_HEADER + YamlUtil.objectToYamlString(tocItems);
@@ -80,24 +80,21 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         return true;
     }
 
-    void buildFilesForInnerClasses(String namePrefix, Element element,
-        YmlFilesBuilder ymlFilesBuilder,
-        List<TocItem> listToAddItems) {
+    void buildFilesForInnerClasses(String namePrefix, Element element, List<TocItem> listToAddItems) {
         for (TypeElement classElement : extractSortedElements(element)) {
             String classSimpleName = determineClassSimpleName(namePrefix, classElement);
             String classQName = String.valueOf(classElement.getQualifiedName());
 
             String classYmlFileName = classQName + ".yml";
-            ymlFilesBuilder.buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
+            buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
 
             TocItem classTocItem = new TocItem(classQName, classSimpleName, classYmlFileName);
             listToAddItems.add(classTocItem);
 
-            buildFilesForInnerClasses(classSimpleName, classElement, ymlFilesBuilder, listToAddItems);
+            buildFilesForInnerClasses(classSimpleName, classElement, listToAddItems);
         }
     }
 
-    @Override
     public void buildPackageYmlFile(PackageElement element, String outputPath) {
         MetadataFile metadataFile = new MetadataFile();
 
@@ -189,7 +186,6 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         return Integer.toHexString(random.nextInt());
     }
 
-    @Override
     public void buildClassYmlFile(TypeElement classElement, String outputPath) {
         MetadataFile classMetadataFile = new MetadataFile();
 

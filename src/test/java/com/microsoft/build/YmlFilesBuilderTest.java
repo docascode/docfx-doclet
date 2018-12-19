@@ -1,4 +1,4 @@
-package com.microsoft.tmp;
+package com.microsoft.build;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,17 +15,17 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class YmlFilesBuilderImplTest {
+public class YmlFilesBuilderTest {
 
     @Rule
     public CompilationRule rule = new CompilationRule();
     private Elements elements;
-    private YmlFilesBuilderImpl ymlFilesBuilder;
+    private YmlFilesBuilder ymlFilesBuilder;
 
     @Before
     public void setup() {
         elements = rule.getElements();
-        ymlFilesBuilder = new YmlFilesBuilderImpl();
+        ymlFilesBuilder = new YmlFilesBuilder();
     }
 
     @Test
