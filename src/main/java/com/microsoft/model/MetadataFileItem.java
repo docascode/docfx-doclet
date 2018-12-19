@@ -28,6 +28,13 @@ public class MetadataFileItem {
     private String[] superclass;
     private List<ExceptionItem> exceptions;
 
+    public MetadataFileItem(String[] langs) {
+        this.langs = langs;
+    }
+
+    public MetadataFileItem() {
+    }
+
     public String getUid() {
         return uid;
     }
@@ -70,10 +77,6 @@ public class MetadataFileItem {
 
     public String[] getLangs() {
         return langs;
-    }
-
-    public void setLangs(String[] langs) {
-        this.langs = langs;
     }
 
     public String getName() {

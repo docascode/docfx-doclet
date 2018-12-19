@@ -13,7 +13,6 @@ import static com.microsoft.util.ElementUtil.extractTypeParameters;
 
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.Return;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.FileUtil;
 import com.microsoft.util.YamlUtil;
@@ -35,6 +34,7 @@ public class YmlFilesBuilder {
 
     private final static String TOC_FILE_HEADER = "### YamlMime:TableOfContent\n";
     private final static String METADATA_FILE_HEADER = "### YamlMime:ManagedReference\n";
+    private final static String[] LANGS = {"java"};
 
     private DocletEnvironment environment;
     private String outputPath;
@@ -84,12 +84,11 @@ public class YmlFilesBuilder {
         String qName = String.valueOf(element.getQualifiedName());
         String sName = String.valueOf(element.getSimpleName());
 
-        MetadataFileItem item = new MetadataFileItem();
+        MetadataFileItem item = new MetadataFileItem(LANGS);
         item.setUid(qName);
         item.setId(sName);
         addPackageChildren(qName, "", element, item.getChildren(), metadataFile.getReferences());
         item.setHref(qName + ".yml");
-        item.setLangs(new String[]{"java"});
         item.setName(qName);
         item.setNameWithType(qName);
         item.setFullName(qName);
@@ -148,7 +147,7 @@ public class YmlFilesBuilder {
         String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
 
         // Add class info
-        MetadataFileItem classItem = new MetadataFileItem();
+        MetadataFileItem classItem = new MetadataFileItem(LANGS);
         classItem.setUid(classQName);
         classItem.setId(classSName);
         classItem.setParent(packageName);
@@ -156,7 +155,6 @@ public class YmlFilesBuilder {
             classItem.getChildren().add(String.valueOf(methodElement));
         }
         classItem.setHref(classQName + ".yml");
-        classItem.setLangs(new String[]{"java"});
         classItem.setName(classSNameWithGenericsSupport);
         classItem.setNameWithType(classSNameWithGenericsSupport);
         classItem.setFullName(classQNameWithGenericsSupport);
@@ -226,7 +224,7 @@ public class YmlFilesBuilder {
 
     MetadataFileItem buildMetadataFileItem(String classQName, String classQNameWithGenericsSupport,
         Element element, String packageName) {
-        MetadataFileItem metadataFileItem = new MetadataFileItem();
+        MetadataFileItem metadataFileItem = new MetadataFileItem(LANGS);
         String elementQName = String.valueOf(element);
         String fullName = String.format("%s.%s", classQNameWithGenericsSupport, elementQName);
 
@@ -234,7 +232,6 @@ public class YmlFilesBuilder {
         metadataFileItem.setId(elementQName);
         metadataFileItem.setParent(classQName);
         metadataFileItem.setHref(classQName + ".yml");
-        metadataFileItem.setLangs(new String[]{"java"});
         metadataFileItem.setName(elementQName);
         metadataFileItem.setFullName(fullName);
         metadataFileItem.setType(extractType(element));
