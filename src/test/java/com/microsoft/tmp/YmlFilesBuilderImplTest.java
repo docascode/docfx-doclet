@@ -113,4 +113,40 @@ public class YmlFilesBuilderImplTest {
         assertThat("Wrong result for empty prefix",
             ymlFilesBuilder.determineClassSimpleName("", element), is("SuperHero"));
     }
+
+    @Test
+    public void extractClassContent() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        String result = ymlFilesBuilder.extractClassContent(element, "SuperHero");
+
+        assertThat("Wrong result", result, is("public class SuperHero"));
+    }
+
+    @Test
+    public void extractClassContentForInterface() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
+
+        String result = ymlFilesBuilder.extractClassContent(element, "Display<T, R>");
+
+        assertThat("Wrong result", result, is("public interface Display<T, R>"));
+    }
+
+    @Test
+    public void extractClassContentForEnum() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+
+        String result = ymlFilesBuilder.extractClassContent(element, "Person.IdentificationInfo.Gender");
+
+        assertThat("Wrong result", result, is("public enum Person.IdentificationInfo.Gender"));
+    }
+
+    @Test
+    public void extractClassContentForStaticClass() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
+
+        String result = ymlFilesBuilder.extractClassContent(element, "Person.IdentificationInfo");
+
+        assertThat("Wrong result", result, is("public static class Person.IdentificationInfo"));
+    }
 }

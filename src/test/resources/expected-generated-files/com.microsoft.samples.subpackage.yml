@@ -57,7 +57,7 @@ references:
   summary: |2
      Class that describes person's identification
   syntax:
-    content: public class Person.IdentificationInfo
+    content: public static class Person.IdentificationInfo
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   parent: com.microsoft.samples.subpackage
   href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml

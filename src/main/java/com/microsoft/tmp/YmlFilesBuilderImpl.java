@@ -153,7 +153,6 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
         String type = elementKindLookup.get(classElement.getKind());
         String summary = extractComment(classElement);
-        String content = String.format("public %s %s", type.toLowerCase(), shortNameWithGenericsSupport);
 
         MetadataFileItem referenceItem = new MetadataFileItem();
         referenceItem.setUid(qName);
@@ -164,7 +163,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         referenceItem.setFullName(qNameWithGenericsSupport);
         referenceItem.setType(type);
         referenceItem.setSummary(summary);
-        referenceItem.setContent(content);
+        referenceItem.setContent(extractClassContent(classElement, shortNameWithGenericsSupport));
         referenceItem.setTypeParameters(extractTypeParameters(classElement));
         return referenceItem;
     }
@@ -200,7 +199,6 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
         String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
         String type = elementKindLookup.get(classElement.getKind());
-        String classContentValue = String.format("public %s %s", type.toLowerCase(), classSNameWithGenericsSupport);
 
         // Add class info
         MetadataFileItem classItem = new MetadataFileItem();
@@ -218,14 +216,15 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         classItem.setType(type);
         classItem.setPackageName(packageName);
         classItem.setSummary(extractComment(classElement));
-        classItem.setContent(classContentValue);
+        classItem.setContent(extractClassContent(classElement, classSNameWithGenericsSupport));
         classItem.setSuperclass(extractSuperclass(classElement));
         classItem.setTypeParameters(extractTypeParameters(classElement));
         metadataFile.getItems().add(classItem);
 
         // Add constructors info
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem constructorItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, constructorElement, packageName);
+            MetadataFileItem constructorItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport,
+                constructorElement, packageName);
             String constructorQName = String.valueOf(constructorElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, constructorQName);
 
@@ -241,7 +240,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         // Add methods info
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem methodItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, methodElement, packageName);
+            MetadataFileItem methodItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport,
+                methodElement, packageName);
             String methodQName = String.valueOf(methodElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, methodQName);
 
@@ -259,7 +259,8 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         // Add fields info
         for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem fieldItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, fieldElement, packageName);
+            MetadataFileItem fieldItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, fieldElement,
+                packageName);
             String fieldQName = String.valueOf(fieldElement);
 
             fieldItem.setNameWithType(classSNameWithGenericsSupport + "." + fieldQName);
@@ -326,5 +327,15 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             namePrefix,
             StringUtils.isEmpty(namePrefix) ? "" : ".",
             String.valueOf(classElement.getSimpleName()));
+    }
+
+    String extractClassContent(TypeElement classElement, String shortNameWithGenericsSupport) {
+        String type = elementKindLookup.get(classElement.getKind());
+        return String.format("%s %s %s",
+            classElement.getModifiers().stream().map(String::valueOf)
+                .filter(modifier -> !("Interface".equals(type) && "abstract".equals(modifier)))
+                .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
+                .collect(Collectors.joining(" ")),
+            type.toLowerCase(), shortNameWithGenericsSupport);
     }
 }

@@ -14,7 +14,7 @@ items:
   summary: |2
      Class that describes person's identification
   syntax:
-    content: public class Person.IdentificationInfo
+    content: public static class Person.IdentificationInfo
   inheritance:
   - java.lang.Object
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
