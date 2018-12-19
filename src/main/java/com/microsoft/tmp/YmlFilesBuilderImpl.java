@@ -225,22 +225,12 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         // Add constructors info
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem constructorItem = new MetadataFileItem();
+            MetadataFileItem constructorItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, constructorElement, packageName);
             String constructorQName = String.valueOf(constructorElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, constructorQName);
 
-            constructorItem.setUid(String.format("%s.%s", classQName, constructorQName));
-            constructorItem.setId(constructorQName);
-            constructorItem.setParent(classQName);
-            constructorItem.setHref(classQName + ".yml");
-            constructorItem.setLangs(new String[]{"java"});
-            constructorItem.setName(constructorQName);
             constructorItem.setNameWithType(classSNameWithGenericsSupport + "." + constructorQName);
-            constructorItem.setFullName(fullName);
             constructorItem.setOverload(convertFullNameToOverload(fullName));
-            constructorItem.setType(elementKindLookup.get(constructorElement.getKind()));
-            constructorItem.setPackageName(packageName);
-            constructorItem.setSummary(extractComment(constructorElement));
             String constructorContentValue = String.format("%s %s",
                 constructorElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 constructorQName);
@@ -251,22 +241,12 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         // Add methods info
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem methodItem = new MetadataFileItem();
+            MetadataFileItem methodItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, methodElement, packageName);
             String methodQName = String.valueOf(methodElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, methodQName);
 
-            methodItem.setUid(String.format("%s.%s", classQName, methodQName));
-            methodItem.setId(methodQName);
-            methodItem.setParent(classQName);
-            methodItem.setHref(classQName + ".yml");
-            methodItem.setLangs(new String[]{"java"});
-            methodItem.setName(methodQName);
             methodItem.setNameWithType(classSNameWithGenericsSupport + "." + methodQName);
-            methodItem.setFullName(fullName);
             methodItem.setOverload(convertFullNameToOverload(fullName));
-            methodItem.setType(elementKindLookup.get(methodElement.getKind()));
-            methodItem.setPackageName(packageName);
-            methodItem.setSummary(extractComment(methodElement));
             String methodContentValue = String.format("%s %s %s",
                 methodElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 methodElement.getReturnType(), methodQName);
@@ -279,19 +259,10 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         // Add fields info
         for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem fieldItem = new MetadataFileItem();
+            MetadataFileItem fieldItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, fieldElement, packageName);
             String fieldQName = String.valueOf(fieldElement);
-            fieldItem.setUid(String.format("%s.%s", classQName, fieldQName));
-            fieldItem.setId(fieldQName);
-            fieldItem.setParent(classQName);
-            fieldItem.setHref(classQName + ".yml");
-            fieldItem.setLangs(new String[]{"java"});
-            fieldItem.setName(fieldQName);
+
             fieldItem.setNameWithType(classSNameWithGenericsSupport + "." + fieldQName);
-            fieldItem.setFullName(classQNameWithGenericsSupport + "." + fieldQName);
-            fieldItem.setType(elementKindLookup.get(fieldElement.getKind()));
-            fieldItem.setPackageName(packageName);
-            fieldItem.setSummary(extractComment(fieldElement));
             String fieldContentValue = String.format("%s %s",
                 fieldElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 fieldQName);
@@ -302,6 +273,26 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(metadataFile);
         FileUtil.dumpToFile(fileContent, outputPath);
+    }
+
+    MetadataFileItem buildMetadataFileItem(String classQName, String classQNameWithGenericsSupport,
+        Element element, String packageName) {
+        MetadataFileItem metadataFileItem = new MetadataFileItem();
+        String elementQName = String.valueOf(element);
+        String fullName = String.format("%s.%s", classQNameWithGenericsSupport, elementQName);
+
+        metadataFileItem.setUid(String.format("%s.%s", classQName, elementQName));
+        metadataFileItem.setId(elementQName);
+        metadataFileItem.setParent(classQName);
+        metadataFileItem.setHref(classQName + ".yml");
+        metadataFileItem.setLangs(new String[]{"java"});
+        metadataFileItem.setName(elementQName);
+        metadataFileItem.setFullName(fullName);
+        metadataFileItem.setType(elementKindLookup.get(element.getKind()));
+        metadataFileItem.setPackageName(packageName);
+        metadataFileItem.setSummary(extractComment(element));
+
+        return metadataFileItem;
     }
 
     String convertFullNameToOverload(String fullName) {
