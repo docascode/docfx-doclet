@@ -149,4 +149,25 @@ public class YmlFilesBuilderImplTest {
 
         assertThat("Wrong result", result, is("public static class Person.IdentificationInfo"));
     }
+
+    @Test
+    public void extractTypeForInterface() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
+
+        assertThat(ymlFilesBuilder.extractType(element), is("Interface"));
+    }
+
+    @Test
+    public void extractTypeForEnum() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+
+        assertThat(ymlFilesBuilder.extractType(element), is("Enum"));
+    }
+
+    @Test
+    public void extractTypeForClass() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
+
+        assertThat(ymlFilesBuilder.extractType(element), is("Class"));
+    }
 }

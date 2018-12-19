@@ -45,7 +45,6 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         put(ElementKind.ENUM, "Enum");
         put(ElementKind.ENUM_CONSTANT, "Enum constant");
         put(ElementKind.INTERFACE, "Interface");
-        put(ElementKind.ANNOTATION_TYPE, "Annotation");
         put(ElementKind.CONSTRUCTOR, "Constructor");
         put(ElementKind.METHOD, "Method");
         put(ElementKind.FIELD, "Field");
@@ -104,8 +103,6 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
         String qName = String.valueOf(element.getQualifiedName());
         String sName = String.valueOf(element.getSimpleName());
-        String type = elementKindLookup.get(element.getKind());
-        String summary = extractComment(element);
 
         MetadataFileItem item = new MetadataFileItem();
         item.setUid(qName);
@@ -116,13 +113,17 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         item.setName(qName);
         item.setNameWithType(qName);
         item.setFullName(qName);
-        item.setType(type);
-        item.setSummary(summary);
+        item.setType(extractType(element));
+        item.setSummary(extractComment(element));
         item.setContent("package " + qName);
         metadataFile.getItems().add(item);
 
         String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(metadataFile);
         FileUtil.dumpToFile(fileContent, outputPath);
+    }
+
+    String extractType(Element element) {
+        return elementKindLookup.get(element.getKind());
     }
 
     void addPackageChildren(String packageName, String namePrefix, Element packageElement, List<String> packageChildren,
@@ -151,7 +152,6 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
     MetadataFileItem buildClassReference(String packageName, TypeElement classElement, String qName) {
         String qNameWithGenericsSupport = String.valueOf(classElement.asType());
         String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
-        String type = elementKindLookup.get(classElement.getKind());
         String summary = extractComment(classElement);
 
         MetadataFileItem referenceItem = new MetadataFileItem();
@@ -161,7 +161,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         referenceItem.setName(shortNameWithGenericsSupport);
         referenceItem.setNameWithType(shortNameWithGenericsSupport);
         referenceItem.setFullName(qNameWithGenericsSupport);
-        referenceItem.setType(type);
+        referenceItem.setType(extractType(classElement));
         referenceItem.setSummary(summary);
         referenceItem.setContent(extractClassContent(classElement, shortNameWithGenericsSupport));
         referenceItem.setTypeParameters(extractTypeParameters(classElement));
@@ -191,14 +191,13 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
 
     @Override
     public void buildClassYmlFile(TypeElement classElement, String outputPath) {
-        MetadataFile metadataFile = new MetadataFile();
+        MetadataFile classMetadataFile = new MetadataFile();
 
         String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
         String classQName = String.valueOf(classElement.getQualifiedName());
         String classSName = String.valueOf(classElement.getSimpleName());
         String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
         String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
-        String type = elementKindLookup.get(classElement.getKind());
 
         // Add class info
         MetadataFileItem classItem = new MetadataFileItem();
@@ -213,13 +212,13 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         classItem.setName(classSNameWithGenericsSupport);
         classItem.setNameWithType(classSNameWithGenericsSupport);
         classItem.setFullName(classQNameWithGenericsSupport);
-        classItem.setType(type);
+        classItem.setType(extractType(classElement));
         classItem.setPackageName(packageName);
         classItem.setSummary(extractComment(classElement));
         classItem.setContent(extractClassContent(classElement, classSNameWithGenericsSupport));
         classItem.setSuperclass(extractSuperclass(classElement));
         classItem.setTypeParameters(extractTypeParameters(classElement));
-        metadataFile.getItems().add(classItem);
+        classMetadataFile.getItems().add(classItem);
 
         // Add constructors info
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
@@ -235,7 +234,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 constructorQName);
             constructorItem.setContent(constructorContentValue);
             constructorItem.setParameters(extractParameters(constructorElement));
-            metadataFile.getItems().add(constructorItem);
+            classMetadataFile.getItems().add(constructorItem);
         }
 
         // Add methods info
@@ -254,7 +253,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
             methodItem.setExceptions(extractExceptions(methodElement));
             methodItem.setParameters(extractParameters(methodElement));
             methodItem.setReturn(new Return(String.valueOf(methodElement.getReturnType()), "-=TBD=-"));     // TODO: TBD
-            metadataFile.getItems().add(methodItem);
+            classMetadataFile.getItems().add(methodItem);
         }
 
         // Add fields info
@@ -269,10 +268,10 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
                 fieldQName);
             fieldItem.setContent(fieldContentValue);
             fieldItem.setReturn(new Return(String.valueOf(fieldElement.asType())));
-            metadataFile.getItems().add(fieldItem);
+            classMetadataFile.getItems().add(fieldItem);
         }
 
-        String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(metadataFile);
+        String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(classMetadataFile);
         FileUtil.dumpToFile(fileContent, outputPath);
     }
 
@@ -289,7 +288,7 @@ public class YmlFilesBuilderImpl implements YmlFilesBuilder {
         metadataFileItem.setLangs(new String[]{"java"});
         metadataFileItem.setName(elementQName);
         metadataFileItem.setFullName(fullName);
-        metadataFileItem.setType(elementKindLookup.get(element.getKind()));
+        metadataFileItem.setType(extractType(element));
         metadataFileItem.setPackageName(packageName);
         metadataFileItem.setSummary(extractComment(element));
 
