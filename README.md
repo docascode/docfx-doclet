@@ -23,11 +23,11 @@ For example for [junit-4.12-sources](https://mvnrepository.com/artifact/junit/ju
 that it depends on hamcrest-core-1.3.jar library, so downloaded this hamcrest library, unpack sources jar and run:
 <pre>
 javadoc \
--docletpath ./target/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \
+-docletpath ./docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -cp ./hamcrest-core-1.3.jar \
 -sourcepath ./junit-4.12-sources \
--outputpath ./target/test-out \
+-outputpath ./test-out \
 -subpackages org:junit
 </pre>
 

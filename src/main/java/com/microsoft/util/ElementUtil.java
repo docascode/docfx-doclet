@@ -31,6 +31,7 @@ public class ElementUtil {
         put(ElementKind.ENUM, "Enum");
         put(ElementKind.ENUM_CONSTANT, "Enum constant");
         put(ElementKind.INTERFACE, "Interface");
+        put(ElementKind.ANNOTATION_TYPE, "Interface");
         put(ElementKind.CONSTRUCTOR, "Constructor");
         put(ElementKind.METHOD, "Method");
         put(ElementKind.FIELD, "Field");
@@ -43,7 +44,7 @@ public class ElementUtil {
     }
 
     public static List<TypeElement> extractSortedElements(Element element) {
-        // Need to apply sorting, because order of result items for PackageElement.getEnclosedElements() depend on JDK implementation
+        // Need to apply sorting, because order of result items for Element.getEnclosedElements() depend on JDK implementation
         List<TypeElement> elements = ElementFilter.typesIn(element.getEnclosedElements());
         elements.sort((o1, o2) ->
             StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
@@ -118,7 +119,7 @@ public class ElementUtil {
                 .filter(modifier -> !("Interface".equals(type) && "abstract".equals(modifier)))
                 .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
                 .collect(Collectors.joining(" ")),
-            type.toLowerCase(), shortNameWithGenericsSupport);
+            StringUtils.lowerCase(type), shortNameWithGenericsSupport);
     }
 
     public static Return extractReturn(ExecutableElement methodElement) {
