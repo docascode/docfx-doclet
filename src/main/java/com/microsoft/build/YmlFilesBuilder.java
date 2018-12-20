@@ -173,7 +173,6 @@ public class YmlFilesBuilder {
             String constructorQName = String.valueOf(constructorElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, constructorQName);
 
-            constructorItem.setNameWithType(classSNameWithGenericsSupport + "." + constructorQName);
             constructorItem.setOverload(convertFullNameToOverload(fullName));
             String constructorContentValue = String.format("%s %s",
                 constructorElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
@@ -190,7 +189,6 @@ public class YmlFilesBuilder {
             String methodQName = String.valueOf(methodElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, methodQName);
 
-            methodItem.setNameWithType(classSNameWithGenericsSupport + "." + methodQName);
             methodItem.setOverload(convertFullNameToOverload(fullName));
             String methodContentValue = String.format("%s %s %s",
                 methodElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
@@ -209,7 +207,6 @@ public class YmlFilesBuilder {
                 packageName);
             String fieldQName = String.valueOf(fieldElement);
 
-            fieldItem.setNameWithType(classSNameWithGenericsSupport + "." + fieldQName);
             String fieldContentValue = String.format("%s %s",
                 fieldElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
                 fieldQName);
@@ -227,12 +224,14 @@ public class YmlFilesBuilder {
         MetadataFileItem metadataFileItem = new MetadataFileItem(LANGS);
         String elementQName = String.valueOf(element);
         String fullName = String.format("%s.%s", classQNameWithGenericsSupport, elementQName);
+        String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
 
         metadataFileItem.setUid(String.format("%s.%s", classQName, elementQName));
         metadataFileItem.setId(elementQName);
         metadataFileItem.setParent(classQName);
         metadataFileItem.setHref(classQName + ".yml");
         metadataFileItem.setName(elementQName);
+        metadataFileItem.setNameWithType(String.format("%s.%s", classSNameWithGenericsSupport, elementQName));
         metadataFileItem.setFullName(fullName);
         metadataFileItem.setType(extractType(element));
         metadataFileItem.setPackageName(packageName);
