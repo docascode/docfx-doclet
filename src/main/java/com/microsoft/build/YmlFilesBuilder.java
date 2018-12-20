@@ -13,11 +13,9 @@ import static com.microsoft.util.ElementUtil.extractTypeParameters;
 
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.FileUtil;
-import com.microsoft.util.YamlUtil;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,8 +30,6 @@ import jdk.javadoc.doclet.DocletEnvironment;
 
 public class YmlFilesBuilder {
 
-    private final static String TOC_FILE_HEADER = "### YamlMime:TableOfContent\n";
-    private final static String METADATA_FILE_HEADER = "### YamlMime:ManagedReference\n";
     private final static String[] LANGS = {"java"};
 
     private DocletEnvironment environment;
@@ -45,21 +41,20 @@ public class YmlFilesBuilder {
     }
 
     public boolean build() {
-        List<TocItem> tocItems = new ArrayList<>();
+        TocFile tocFile = new TocFile(outputPath);
         Set<PackageElement> packageElements = new LinkedHashSet<>(
             ElementFilter.packagesIn(environment.getIncludedElements()));
 
         for (PackageElement packageElement : packageElements) {
             String packageQName = String.valueOf(packageElement.getQualifiedName());
             String packageYmlFileName = packageQName + ".yml";
-            buildPackageYmlFile(packageElement, outputPath + File.separator + packageYmlFileName);
+            buildPackageYmlFile(packageElement, packageYmlFileName);
 
             TocItem packageTocItem = new TocItem(packageQName, packageQName, packageYmlFileName);
             buildFilesForInnerClasses("", packageElement, packageTocItem.getItems());
-            tocItems.add(packageTocItem);
+            tocFile.addTocItem(packageTocItem);
         }
-        String fileContent = TOC_FILE_HEADER + YamlUtil.objectToYamlString(tocItems);
-        FileUtil.dumpToFile(fileContent, outputPath + File.separator + "toc.yml");
+        FileUtil.dumpToFile(tocFile);
         return true;
     }
 
@@ -69,7 +64,7 @@ public class YmlFilesBuilder {
             String classQName = String.valueOf(classElement.getQualifiedName());
 
             String classYmlFileName = classQName + ".yml";
-            buildClassYmlFile(classElement, outputPath + File.separator + classYmlFileName);
+            buildClassYmlFile(classElement, classYmlFileName);
 
             TocItem classTocItem = new TocItem(classQName, classSimpleName, classYmlFileName);
             listToAddItems.add(classTocItem);
@@ -78,8 +73,8 @@ public class YmlFilesBuilder {
         }
     }
 
-    void buildPackageYmlFile(PackageElement packageElement, String outputPath) {
-        MetadataFile metadataFile = new MetadataFile();
+    void buildPackageYmlFile(PackageElement packageElement, String fileName) {
+        MetadataFile metadataFile = new MetadataFile(outputPath, fileName);
 
         String qName = String.valueOf(packageElement.getQualifiedName());
         String sName = String.valueOf(packageElement.getSimpleName());
@@ -97,8 +92,7 @@ public class YmlFilesBuilder {
         packageItem.setContent("package " + qName);
         metadataFile.getItems().add(packageItem);
 
-        String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(metadataFile);
-        FileUtil.dumpToFile(fileContent, outputPath);
+        FileUtil.dumpToFile(metadataFile);
     }
 
     void addPackageChildren(String packageName, String namePrefix, Element packageElement, List<String> packageChildren,
@@ -137,8 +131,8 @@ public class YmlFilesBuilder {
         return environment.getElementUtils().getDocComment(element);
     }
 
-    void buildClassYmlFile(TypeElement classElement, String outputPath) {
-        MetadataFile classMetadataFile = new MetadataFile();
+    void buildClassYmlFile(TypeElement classElement, String fileName) {
+        MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
 
         String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
         String classQName = String.valueOf(classElement.getQualifiedName());
@@ -215,8 +209,7 @@ public class YmlFilesBuilder {
             classMetadataFile.getItems().add(fieldItem);
         }
 
-        String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(classMetadataFile);
-        FileUtil.dumpToFile(fileContent, outputPath);
+        FileUtil.dumpToFile(classMetadataFile);
     }
 
     MetadataFileItem buildMetadataFileItem(String classQName, String classQNameWithGenericsSupport,

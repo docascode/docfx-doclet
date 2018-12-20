@@ -13,7 +13,7 @@ public class YamlUtilTest {
 
     @Test
     public void objectToYamlString() {
-        MetadataFile metadataFile = new MetadataFile();
+        MetadataFile metadataFile = new MetadataFile("", "SomeFileName");
         metadataFile.getItems().add(buildMetadataFileItem(3));
         metadataFile.getReferences().add(buildMetadataFileItem(5));
 
