@@ -4,8 +4,8 @@ items:
   id: Display
   parent: com.microsoft.samples.subpackage
   children:
-  - show()
-  - hide()
+  - com.microsoft.samples.subpackage.Display.show()
+  - com.microsoft.samples.subpackage.Display.hide()
   href: com.microsoft.samples.subpackage.Display.yml
   langs:
   - java

@@ -150,9 +150,20 @@ public class YmlFilesBuilder {
         classItem.setUid(classQName);
         classItem.setId(classSName);
         classItem.setParent(packageName);
-        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(String.valueOf(methodElement));
+
+        for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(classQName + "." + constructorElement);
         }
+        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(classQName + "." + methodElement);
+        }
+        for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(classQName + "." + fieldElement);
+        }
+        for (TypeElement innerClassElement : ElementFilter.typesIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(String.valueOf(innerClassElement));
+        }
+
         classItem.setHref(classQName + ".yml");
         classItem.setName(classSNameWithGenericsSupport);
         classItem.setNameWithType(classSNameWithGenericsSupport);

@@ -3,6 +3,9 @@ items:
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
   id: IdentificationInfo
   parent: com.microsoft.samples.subpackage
+  children:
+  - com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
+  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
   langs:
   - java

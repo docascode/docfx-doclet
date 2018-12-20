@@ -4,10 +4,14 @@ items:
   id: Person
   parent: com.microsoft.samples.subpackage
   children:
-  - getFirstName()
-  - setFirstName(java.lang.String)
-  - getLastName()
-  - setLastName(java.lang.String)
+  - com.microsoft.samples.subpackage.Person.Person()
+  - com.microsoft.samples.subpackage.Person.getFirstName()
+  - com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
+  - com.microsoft.samples.subpackage.Person.getLastName()
+  - com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
+  - com.microsoft.samples.subpackage.Person.firstName
+  - com.microsoft.samples.subpackage.Person.lastName
+  - com.microsoft.samples.subpackage.Person.IdentificationInfo
   href: com.microsoft.samples.subpackage.Person.yml
   langs:
   - java
