@@ -78,24 +78,24 @@ public class YmlFilesBuilder {
         }
     }
 
-    void buildPackageYmlFile(PackageElement element, String outputPath) {
+    void buildPackageYmlFile(PackageElement packageElement, String outputPath) {
         MetadataFile metadataFile = new MetadataFile();
 
-        String qName = String.valueOf(element.getQualifiedName());
-        String sName = String.valueOf(element.getSimpleName());
+        String qName = String.valueOf(packageElement.getQualifiedName());
+        String sName = String.valueOf(packageElement.getSimpleName());
 
-        MetadataFileItem item = new MetadataFileItem(LANGS);
-        item.setUid(qName);
-        item.setId(sName);
-        addPackageChildren(qName, "", element, item.getChildren(), metadataFile.getReferences());
-        item.setHref(qName + ".yml");
-        item.setName(qName);
-        item.setNameWithType(qName);
-        item.setFullName(qName);
-        item.setType(extractType(element));
-        item.setSummary(extractComment(element));
-        item.setContent("package " + qName);
-        metadataFile.getItems().add(item);
+        MetadataFileItem packageItem = new MetadataFileItem(LANGS);
+        packageItem.setUid(qName);
+        packageItem.setId(sName);
+        addPackageChildren(qName, "", packageElement, packageItem.getChildren(), metadataFile.getReferences());
+        packageItem.setHref(qName + ".yml");
+        packageItem.setName(qName);
+        packageItem.setNameWithType(qName);
+        packageItem.setFullName(qName);
+        packageItem.setType(extractType(packageElement));
+        packageItem.setSummary(extractComment(packageElement));
+        packageItem.setContent("package " + qName);
+        metadataFile.getItems().add(packageItem);
 
         String fileContent = METADATA_FILE_HEADER + YamlUtil.objectToYamlString(metadataFile);
         FileUtil.dumpToFile(fileContent, outputPath);
