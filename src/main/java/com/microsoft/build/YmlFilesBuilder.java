@@ -18,9 +18,7 @@ import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.FileUtil;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
@@ -59,9 +57,8 @@ public class YmlFilesBuilder {
 
     void buildFilesForInnerClasses(String namePrefix, Element element, List<TocItem> listToAddItems) {
         for (TypeElement classElement : extractSortedElements(element)) {
-            String classSimpleName = determineClassSimpleName(namePrefix, classElement);
             String classQName = String.valueOf(classElement.getQualifiedName());
-
+            String classSimpleName = determineClassSimpleName(namePrefix, classElement);
             String classYmlFileName = classQName + ".yml";
             buildClassYmlFile(classElement, classYmlFileName);
 
@@ -98,7 +95,7 @@ public class YmlFilesBuilder {
             String qName = String.valueOf(classElement.getQualifiedName());
             String sName = determineClassSimpleName(namePrefix, classElement);
 
-            MetadataFileItem reference = buildClassReference(packageName, classElement, qName);
+            MetadataFileItem reference = buildClassReference(classElement);
             references.add(reference);
 
             packageChildren.add(qName);
@@ -106,8 +103,10 @@ public class YmlFilesBuilder {
         }
     }
 
-    MetadataFileItem buildClassReference(String packageName, TypeElement classElement, String qName) {
+    MetadataFileItem buildShortClassReference(TypeElement classElement) {
+        String qName = String.valueOf(classElement.getQualifiedName());
         String qNameWithGenericsSupport = String.valueOf(classElement.asType());
+        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
         String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
 
         MetadataFileItem referenceItem = new MetadataFileItem();
@@ -119,6 +118,15 @@ public class YmlFilesBuilder {
         referenceItem.setFullName(qNameWithGenericsSupport);
         referenceItem.setType(extractType(classElement));
         referenceItem.setSummary(extractComment(classElement));
+        return referenceItem;
+    }
+
+    MetadataFileItem buildClassReference(TypeElement classElement) {
+        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
+        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
+        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
+
+        MetadataFileItem referenceItem = buildShortClassReference(classElement);
         referenceItem.setContent(extractClassContent(classElement, shortNameWithGenericsSupport));
         referenceItem.setTypeParameters(extractTypeParameters(classElement));
         return referenceItem;
@@ -160,7 +168,7 @@ public class YmlFilesBuilder {
         // Add constructors info
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
             MetadataFileItem constructorItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport,
-                constructorElement, packageName);
+                constructorElement);
             String constructorQName = String.valueOf(constructorElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, constructorQName);
 
@@ -176,7 +184,7 @@ public class YmlFilesBuilder {
         // Add methods info
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
             MetadataFileItem methodItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport,
-                methodElement, packageName);
+                methodElement);
             String methodQName = String.valueOf(methodElement);
             String fullName = String.format("%s.%s", classQNameWithGenericsSupport, methodQName);
 
@@ -194,8 +202,7 @@ public class YmlFilesBuilder {
 
         // Add fields info
         for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem fieldItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, fieldElement,
-                packageName);
+            MetadataFileItem fieldItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, fieldElement);
             String fieldQName = String.valueOf(fieldElement);
 
             String fieldContentValue = String.format("%s %s",
@@ -205,14 +212,19 @@ public class YmlFilesBuilder {
             fieldItem.setReturn(extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
         }
+
+        // Add references info
+        // Owner class reference
+        classMetadataFile.getReferences().add(buildShortClassReference(classElement));
+
         FileUtil.dumpToFile(classMetadataFile);
     }
 
-    MetadataFileItem buildMetadataFileItem(String classQName, String classQNameWithGenericsSupport,
-        Element element, String packageName) {
+    MetadataFileItem buildMetadataFileItem(String classQName, String classQNameWithGenericsSupport, Element element) {
         MetadataFileItem metadataFileItem = new MetadataFileItem(LANGS);
         String elementQName = String.valueOf(element);
         String fullName = String.format("%s.%s", classQNameWithGenericsSupport, elementQName);
+        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(element));
         String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
 
         metadataFileItem.setUid(String.format("%s.%s", classQName, elementQName));

@@ -23,7 +23,7 @@ public class MetadataFileItem {
     @JsonProperty("package")
     private String packageName;
     private String summary;
-    private Syntax syntax = new Syntax();
+    private Syntax syntax;
     @JsonProperty("inheritance")
     private String[] superclass;
     private List<ExceptionItem> exceptions;
@@ -160,18 +160,30 @@ public class MetadataFileItem {
     }
 
     public void setContent(String content) {
+        if (syntax == null) {
+            syntax = new Syntax();
+        }
         syntax.setContent(content);
     }
 
     public void setTypeParameters(List<TypeParameter> typeParameters) {
+        if (syntax == null) {
+            syntax = new Syntax();
+        }
         syntax.setTypeParameters(typeParameters);
     }
 
     public void setParameters(List<MethodParameter> parameters) {
+        if (syntax == null) {
+            syntax = new Syntax();
+        }
         syntax.setParameters(parameters);
     }
 
     public void setReturn(Return returnValue) {
+        if (syntax == null) {
+            syntax = new Syntax();
+        }
         syntax.setReturnValue(returnValue);
     }
 }

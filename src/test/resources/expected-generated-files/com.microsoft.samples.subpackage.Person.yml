@@ -147,3 +147,13 @@ items:
     content: private lastName
     return:
       type: java.lang.String
+references:
+- uid: com.microsoft.samples.subpackage.Person
+  parent: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.Person.yml
+  name: Person<T>
+  nameWithType: Person<T>
+  fullName: com.microsoft.samples.subpackage.Person<T>
+  type: Class
+  summary: |2
+     Class that describes some person

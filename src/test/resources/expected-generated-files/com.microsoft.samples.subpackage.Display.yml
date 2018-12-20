@@ -57,3 +57,11 @@ items:
     return:
       type: void
       description: -=TBD=-
+references:
+- uid: com.microsoft.samples.subpackage.Display
+  parent: com.microsoft.samples.subpackage
+  href: com.microsoft.samples.subpackage.Display.yml
+  name: Display<T,R>
+  nameWithType: Display<T,R>
+  fullName: com.microsoft.samples.subpackage.Display<T,R>
+  type: Interface

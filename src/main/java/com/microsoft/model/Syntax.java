@@ -7,10 +7,10 @@ import java.util.List;
 public class Syntax {
 
     private String content;
-    private List<MethodParameter> parameters = new ArrayList<>();
+    private List<MethodParameter> parameters;
     @JsonProperty("return")
     private Return returnValue;
-    private List<TypeParameter> typeParameters = new ArrayList<>();
+    private List<TypeParameter> typeParameters;
 
     public String getContent() {
         return content;
