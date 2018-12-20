@@ -7,7 +7,7 @@ import javax.tools.ToolProvider;
  * To use runner just pass as commandline param to main method:
  * - name of file with doclet name amd params
  *
- * For example: java DocletRunner src\main\resources\doclet-params.txt
+ * For example: java DocletRunner src\test\resources\test-doclet-params.txt
  */
 public class DocletRunner {
 
