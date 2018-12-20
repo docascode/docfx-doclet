@@ -157,3 +157,23 @@ references:
   type: Class
   summary: |2
      Class that describes some person
+- uid: com.microsoft.samples.subpackage.Person.getFirstName()
+  name: getFirstName()
+  nameWithType: Person<T>.getFirstName()
+  fullName: com.microsoft.samples.subpackage.Person<T>.getFirstName()
+  package: com.microsoft.samples.subpackage
+- uid: com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
+  name: setFirstName(java.lang.String)
+  nameWithType: Person<T>.setFirstName(java.lang.String)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setFirstName(java.lang.String)
+  package: com.microsoft.samples.subpackage
+- uid: com.microsoft.samples.subpackage.Person.getLastName()
+  name: getLastName()
+  nameWithType: Person<T>.getLastName()
+  fullName: com.microsoft.samples.subpackage.Person<T>.getLastName()
+  package: com.microsoft.samples.subpackage
+- uid: com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
+  name: setLastName(java.lang.String)
+  nameWithType: Person<T>.setLastName(java.lang.String)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setLastName(java.lang.String)
+  package: com.microsoft.samples.subpackage

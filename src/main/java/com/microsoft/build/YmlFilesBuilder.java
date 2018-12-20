@@ -216,8 +216,29 @@ public class YmlFilesBuilder {
         // Add references info
         // Owner class reference
         classMetadataFile.getReferences().add(buildShortClassReference(classElement));
+        // Class methods references
+        classMetadataFile.getReferences().addAll(buildMethodsReferences(classElement));
 
         FileUtil.dumpToFile(classMetadataFile);
+    }
+
+    private List<MetadataFileItem> buildMethodsReferences(TypeElement classElement) {
+        return ElementFilter.methodsIn(classElement.getEnclosedElements()).stream().map(methodElement -> {
+            String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
+            String elementQName = String.valueOf(methodElement);
+            String classQName = String.valueOf(classElement.getQualifiedName());
+            String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
+            String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
+            String fullName = String.format("%s.%s", classQNameWithGenericsSupport, elementQName);
+
+            MetadataFileItem methodItem = new MetadataFileItem();
+            methodItem.setUid(String.format("%s.%s", classQName, elementQName));
+            methodItem.setName(elementQName);
+            methodItem.setNameWithType(String.format("%s.%s", classSNameWithGenericsSupport, elementQName));
+            methodItem.setFullName(fullName);
+            methodItem.setPackageName(packageName);
+            return methodItem;
+        }).collect(Collectors.toList());
     }
 
     MetadataFileItem buildMetadataFileItem(String classQName, String classQNameWithGenericsSupport, Element element) {

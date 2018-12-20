@@ -65,3 +65,13 @@ references:
   nameWithType: Display<T,R>
   fullName: com.microsoft.samples.subpackage.Display<T,R>
   type: Interface
+- uid: com.microsoft.samples.subpackage.Display.show()
+  name: show()
+  nameWithType: Display<T,R>.show()
+  fullName: com.microsoft.samples.subpackage.Display<T,R>.show()
+  package: com.microsoft.samples.subpackage
+- uid: com.microsoft.samples.subpackage.Display.hide()
+  name: hide()
+  nameWithType: Display<T,R>.hide()
+  fullName: com.microsoft.samples.subpackage.Display<T,R>.hide()
+  package: com.microsoft.samples.subpackage
