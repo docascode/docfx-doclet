@@ -1,5 +1,6 @@
 package com.microsoft.util;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -8,8 +9,14 @@ import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
@@ -116,6 +123,15 @@ public class ElementUtilTest {
     }
 
     @Test
+    public void extractPackageContent() {
+        PackageElement element = elements.getPackageElement("com.microsoft.samples");
+
+        String result = ElementUtil.extractPackageContent(element);
+
+        assertThat("Wrong resulr", result, is("package com.microsoft.samples"));
+    }
+
+    @Test
     public void extractClassContent() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
@@ -193,7 +209,24 @@ public class ElementUtilTest {
         checkReturnForVariableElement(element, 4, "java.lang.String");
     }
 
-    private void checkReturnForExecutableElement(TypeElement element, int methodNumber, String expectedType, String expectedDescription) {
+    @Test
+    public void extractPackageElements() {
+        Set<? extends Element> elementsSet = new HashSet<>() {{
+            add(elements.getPackageElement("com.microsoft.samples"));
+            add(elements.getTypeElement("com.microsoft.samples.SuperHero"));
+            add(elements.getPackageElement("com.microsoft.samples.subpackage"));
+        }};
+
+        List<String> result = StreamSupport.stream(
+            ElementUtil.extractPackageElements(elementsSet)
+                .spliterator(), false).map(String::valueOf).collect(Collectors.toList());
+
+        assertThat("Wrong result list size", result.size(), is(2));
+        assertThat("Unexpected content", result, hasItems("com.microsoft.samples", "com.microsoft.samples.subpackage"));
+    }
+
+    private void checkReturnForExecutableElement(TypeElement element, int methodNumber, String expectedType,
+        String expectedDescription) {
         ExecutableElement executableElement = ElementFilter.methodsIn(element.getEnclosedElements()).get(methodNumber);
 
         Return result = ElementUtil.extractReturn(executableElement);

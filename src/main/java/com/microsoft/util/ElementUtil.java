@@ -6,13 +6,16 @@ import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
@@ -99,6 +102,10 @@ public class ElementUtil {
             String.valueOf(classElement.getSimpleName()));
     }
 
+    public static String extractPackageContent(PackageElement packageElement) {
+        return "package " + packageElement.getQualifiedName();
+    }
+
     public static String extractClassContent(TypeElement classElement, String shortNameWithGenericsSupport) {
         String type = elementKindLookup.get(classElement.getKind());
         return String.format("%s %s %s",
@@ -110,10 +117,15 @@ public class ElementUtil {
     }
 
     public static Return extractReturn(ExecutableElement methodElement) {
-        return new Return(String.valueOf(methodElement.getReturnType()), "-=TBD=-"); // TODO: Determine return description
+        return new Return(String.valueOf(methodElement.getReturnType()),
+            "-=TBD=-"); // TODO: Determine return description
     }
 
     public static Return extractReturn(VariableElement fieldElement) {
         return new Return(String.valueOf(fieldElement.asType()));
+    }
+
+    public static Iterable<PackageElement> extractPackageElements(Set<? extends Element> elements) {
+        return new LinkedHashSet<>(ElementFilter.packagesIn(elements));
     }
 }

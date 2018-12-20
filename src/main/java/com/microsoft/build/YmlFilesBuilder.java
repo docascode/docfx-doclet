@@ -4,6 +4,8 @@ import static com.microsoft.util.ElementUtil.convertFullNameToOverload;
 import static com.microsoft.util.ElementUtil.determineClassSimpleName;
 import static com.microsoft.util.ElementUtil.extractClassContent;
 import static com.microsoft.util.ElementUtil.extractExceptions;
+import static com.microsoft.util.ElementUtil.extractPackageContent;
+import static com.microsoft.util.ElementUtil.extractPackageElements;
 import static com.microsoft.util.ElementUtil.extractParameters;
 import static com.microsoft.util.ElementUtil.extractReturn;
 import static com.microsoft.util.ElementUtil.extractSortedElements;
@@ -42,10 +44,7 @@ public class YmlFilesBuilder {
 
     public boolean build() {
         TocFile tocFile = new TocFile(outputPath);
-        Set<PackageElement> packageElements = new LinkedHashSet<>(
-            ElementFilter.packagesIn(environment.getIncludedElements()));
-
-        for (PackageElement packageElement : packageElements) {
+        for (PackageElement packageElement : extractPackageElements(environment.getIncludedElements())) {
             String packageQName = String.valueOf(packageElement.getQualifiedName());
             String packageYmlFileName = packageQName + ".yml";
             buildPackageYmlFile(packageElement, packageYmlFileName);
@@ -75,7 +74,6 @@ public class YmlFilesBuilder {
 
     void buildPackageYmlFile(PackageElement packageElement, String fileName) {
         MetadataFile metadataFile = new MetadataFile(outputPath, fileName);
-
         String qName = String.valueOf(packageElement.getQualifiedName());
         String sName = String.valueOf(packageElement.getSimpleName());
 
@@ -89,9 +87,8 @@ public class YmlFilesBuilder {
         packageItem.setFullName(qName);
         packageItem.setType(extractType(packageElement));
         packageItem.setSummary(extractComment(packageElement));
-        packageItem.setContent("package " + qName);
+        packageItem.setContent(extractPackageContent(packageElement));
         metadataFile.getItems().add(packageItem);
-
         FileUtil.dumpToFile(metadataFile);
     }
 
@@ -208,7 +205,6 @@ public class YmlFilesBuilder {
             fieldItem.setReturn(extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
         }
-
         FileUtil.dumpToFile(classMetadataFile);
     }
 
@@ -229,7 +225,6 @@ public class YmlFilesBuilder {
         metadataFileItem.setType(extractType(element));
         metadataFileItem.setPackageName(packageName);
         metadataFileItem.setSummary(extractComment(element));
-
         return metadataFileItem;
     }
 }
