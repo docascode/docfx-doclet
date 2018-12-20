@@ -77,7 +77,7 @@ public class YmlFilesBuilder {
         MetadataFileItem packageItem = new MetadataFileItem(LANGS);
         packageItem.setUid(qName);
         packageItem.setId(sName);
-        addPackageChildren(qName, "", packageElement, packageItem.getChildren(), metadataFile.getReferences());
+        addChildrenReferences("", packageElement, packageItem.getChildren(), metadataFile.getReferences());
         packageItem.setHref(qName + ".yml");
         packageItem.setName(qName);
         packageItem.setNameWithType(qName);
@@ -89,17 +89,17 @@ public class YmlFilesBuilder {
         FileUtil.dumpToFile(metadataFile);
     }
 
-    void addPackageChildren(String packageName, String namePrefix, Element packageElement, List<String> packageChildren,
-        List<MetadataFileItem> references) {
-        for (TypeElement classElement : extractSortedElements(packageElement)) {
+    void addChildrenReferences(String namePrefix, Element element, List<String> packageChildren,
+        List<MetadataFileItem> referencesCollector) {
+        for (TypeElement classElement : extractSortedElements(element)) {
             String qName = String.valueOf(classElement.getQualifiedName());
             String sName = determineClassSimpleName(namePrefix, classElement);
 
             MetadataFileItem reference = buildClassReference(classElement);
-            references.add(reference);
+            referencesCollector.add(reference);
 
             packageChildren.add(qName);
-            addPackageChildren(packageName, sName, classElement, packageChildren, references);
+            addChildrenReferences(sName, classElement, packageChildren, referencesCollector);
         }
     }
 
