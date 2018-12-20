@@ -216,7 +216,13 @@ public class YmlFilesBuilder {
         // Add references info
         // Owner class reference
         classMetadataFile.getReferences().add(buildShortClassReference(classElement));
-        // Class methods references
+        // Inner classes references
+        classMetadataFile.getReferences().addAll(
+            ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
+                .map(this::buildShortClassReference)
+                .collect(Collectors.toList()));
+
+        // Owner class methods references
         classMetadataFile.getReferences().addAll(buildMethodsReferences(classElement));
 
         FileUtil.dumpToFile(classMetadataFile);
