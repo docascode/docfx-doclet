@@ -6,7 +6,6 @@ import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -50,6 +49,12 @@ public class ElementUtil {
             StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
         );
         return elements;
+    }
+
+    public static List<PackageElement> extractPackageElements(Set<? extends Element> elements) {
+        return ElementFilter.packagesIn(elements).stream().sorted((o1, o2) ->
+            StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+        ).collect(Collectors.toList());
     }
 
     public static List<TypeParameter> extractTypeParameters(TypeElement element) {
@@ -123,9 +128,5 @@ public class ElementUtil {
 
     public static Return extractReturn(VariableElement fieldElement) {
         return new Return(String.valueOf(fieldElement.asType()));
-    }
-
-    public static Iterable<PackageElement> extractPackageElements(Set<? extends Element> elements) {
-        return new LinkedHashSet<>(ElementFilter.packagesIn(elements));
     }
 }

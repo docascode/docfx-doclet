@@ -1,6 +1,5 @@
 package com.microsoft.util;
 
-import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -13,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
@@ -217,12 +215,12 @@ public class ElementUtilTest {
             add(elements.getPackageElement("com.microsoft.samples.subpackage"));
         }};
 
-        List<String> result = StreamSupport.stream(
-            ElementUtil.extractPackageElements(elementsSet)
-                .spliterator(), false).map(String::valueOf).collect(Collectors.toList());
+        List<String> result = ElementUtil.extractPackageElements(elementsSet)
+            .stream().map(String::valueOf).collect(Collectors.toList());
 
         assertThat("Wrong result list size", result.size(), is(2));
-        assertThat("Unexpected content", result, hasItems("com.microsoft.samples", "com.microsoft.samples.subpackage"));
+        assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples"));
+        assertThat("Unexpected second item", result.get(1), is("com.microsoft.samples.subpackage"));
     }
 
     private void checkReturnForExecutableElement(TypeElement element, int methodNumber, String expectedType,
