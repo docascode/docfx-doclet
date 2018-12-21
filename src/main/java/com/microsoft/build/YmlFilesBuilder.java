@@ -1,22 +1,21 @@
 package com.microsoft.build;
 
-import static com.microsoft.util.ElementUtil.convertFullNameToOverload;
 import static com.microsoft.util.ElementUtil.determineClassSimpleName;
 import static com.microsoft.util.ElementUtil.extractClassContent;
-import static com.microsoft.util.ElementUtil.extractExceptions;
+import static com.microsoft.util.ElementUtil.extractComment;
 import static com.microsoft.util.ElementUtil.extractPackageContent;
 import static com.microsoft.util.ElementUtil.extractPackageElements;
-import static com.microsoft.util.ElementUtil.extractParameters;
-import static com.microsoft.util.ElementUtil.extractReturn;
 import static com.microsoft.util.ElementUtil.extractSortedElements;
 import static com.microsoft.util.ElementUtil.extractSuperclass;
 import static com.microsoft.util.ElementUtil.extractType;
 import static com.microsoft.util.ElementUtil.extractTypeParameters;
 
+import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
+import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,10 +33,12 @@ public class YmlFilesBuilder {
 
     private DocletEnvironment environment;
     private String outputPath;
+    private final ElementUtil elementUtil;
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath) {
         this.environment = environment;
         this.outputPath = outputPath;
+        this.elementUtil = new ElementUtil(environment);
     }
 
     public boolean build() {
@@ -123,13 +124,8 @@ public class YmlFilesBuilder {
         return referenceItem;
     }
 
-    String extractComment(Element element) {
-        return environment.getElementUtils().getDocComment(element);
-    }
-
     void buildClassYmlFile(TypeElement classElement, String fileName) {
         MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
-
         String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
         String classQName = String.valueOf(classElement.getQualifiedName());
         String classSName = String.valueOf(classElement.getSimpleName());
@@ -169,49 +165,29 @@ public class YmlFilesBuilder {
 
         // Add constructors info
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem constructorItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport,
-                constructorElement);
-            String constructorQName = String.valueOf(constructorElement);
-            String fullName = String.format("%s.%s", classQNameWithGenericsSupport, constructorQName);
-
-            constructorItem.setOverload(convertFullNameToOverload(fullName));
-            String constructorContentValue = String.format("%s %s",
-                constructorElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
-                constructorQName);
-            constructorItem.setContent(constructorContentValue);
-            constructorItem.setParameters(extractParameters(constructorElement));
+            MetadataFileItem constructorItem = buildMetadataFileItem(constructorElement);
+            constructorItem.setOverload(ClassItemsLookup.extractOverload(constructorElement));
+            constructorItem.setContent(ClassItemsLookup.extractConstructorContent(constructorElement));
+            constructorItem.setParameters(ClassItemsLookup.extractParameters(constructorElement));
             classMetadataFile.getItems().add(constructorItem);
         }
 
         // Add methods info
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem methodItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport,
-                methodElement);
-            String methodQName = String.valueOf(methodElement);
-            String fullName = String.format("%s.%s", classQNameWithGenericsSupport, methodQName);
-
-            methodItem.setOverload(convertFullNameToOverload(fullName));
-            String methodContentValue = String.format("%s %s %s",
-                methodElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
-                methodElement.getReturnType(), methodQName);
-            methodItem.setContent(methodContentValue);
-            methodItem.setExceptions(extractExceptions(methodElement));
-            methodItem.setParameters(extractParameters(methodElement));
-            methodItem.setReturn(extractReturn(methodElement));
-
+            MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
+            methodItem.setOverload(ClassItemsLookup.extractOverload(methodElement));
+            methodItem.setContent(ClassItemsLookup.extractMethodContent(methodElement));
+            methodItem.setExceptions(ClassItemsLookup.extractExceptions(methodElement));
+            methodItem.setParameters(ClassItemsLookup.extractParameters(methodElement));
+            methodItem.setReturn(ClassItemsLookup.extractReturn(methodElement));
             classMetadataFile.getItems().add(methodItem);
         }
 
         // Add fields info
         for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem fieldItem = buildMetadataFileItem(classQName, classQNameWithGenericsSupport, fieldElement);
-            String fieldQName = String.valueOf(fieldElement);
-
-            String fieldContentValue = String.format("%s %s",
-                fieldElement.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" ")),
-                fieldQName);
-            fieldItem.setContent(fieldContentValue);
-            fieldItem.setReturn(extractReturn(fieldElement));
+            MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
+            fieldItem.setContent(ClassItemsLookup.extractFieldContent(fieldElement));
+            fieldItem.setReturn(ClassItemsLookup.extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
         }
 
@@ -231,41 +207,28 @@ public class YmlFilesBuilder {
     }
 
     private List<MetadataFileItem> buildMethodsReferences(TypeElement classElement) {
-        return ElementFilter.methodsIn(classElement.getEnclosedElements()).stream().map(methodElement -> {
-            String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
-            String elementQName = String.valueOf(methodElement);
-            String classQName = String.valueOf(classElement.getQualifiedName());
-            String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
-            String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
-            String fullName = String.format("%s.%s", classQNameWithGenericsSupport, elementQName);
-
-            MetadataFileItem methodItem = new MetadataFileItem();
-            methodItem.setUid(String.format("%s.%s", classQName, elementQName));
-            methodItem.setName(elementQName);
-            methodItem.setNameWithType(String.format("%s.%s", classSNameWithGenericsSupport, elementQName));
-            methodItem.setFullName(fullName);
-            methodItem.setPackageName(packageName);
-            return methodItem;
-        }).collect(Collectors.toList());
+        return ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
+            .map(methodElement -> new MetadataFileItem() {{
+                setUid(ClassItemsLookup.extractUid(methodElement));
+                setName(ClassItemsLookup.extractName(methodElement));
+                setNameWithType(ClassItemsLookup.extractNameWithType(methodElement));
+                setFullName(ClassItemsLookup.extractFullName(methodElement));
+                setPackageName(ClassItemsLookup.extractPackageName(methodElement));
+            }}).collect(Collectors.toList());
     }
 
-    MetadataFileItem buildMetadataFileItem(String classQName, String classQNameWithGenericsSupport, Element element) {
-        MetadataFileItem metadataFileItem = new MetadataFileItem(LANGS);
-        String elementQName = String.valueOf(element);
-        String fullName = String.format("%s.%s", classQNameWithGenericsSupport, elementQName);
-        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(element));
-        String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
-
-        metadataFileItem.setUid(String.format("%s.%s", classQName, elementQName));
-        metadataFileItem.setId(elementQName);
-        metadataFileItem.setParent(classQName);
-        metadataFileItem.setHref(classQName + ".yml");
-        metadataFileItem.setName(elementQName);
-        metadataFileItem.setNameWithType(String.format("%s.%s", classSNameWithGenericsSupport, elementQName));
-        metadataFileItem.setFullName(fullName);
-        metadataFileItem.setType(extractType(element));
-        metadataFileItem.setPackageName(packageName);
-        metadataFileItem.setSummary(extractComment(element));
-        return metadataFileItem;
+    MetadataFileItem buildMetadataFileItem(Element element) {
+        return new MetadataFileItem(LANGS) {{
+            setUid(ClassItemsLookup.extractUid(element));
+            setId(ClassItemsLookup.extractId(element));
+            setParent(ClassItemsLookup.extractParent(element));
+            setHref(ClassItemsLookup.extractHref(element));
+            setName(ClassItemsLookup.extractName(element));
+            setNameWithType(ClassItemsLookup.extractNameWithType(element));
+            setFullName(ClassItemsLookup.extractFullName(element));
+            setType(extractType(element));
+            setPackageName(ClassItemsLookup.extractPackageName(element));
+            setSummary(ClassItemsLookup.extractSummary(element));
+        }};
     }
 }

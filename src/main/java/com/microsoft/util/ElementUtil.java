@@ -21,6 +21,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
+import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.StringUtils;
 
 public class ElementUtil {
@@ -38,6 +39,11 @@ public class ElementUtil {
     }};
     private static Map<String, String> typeParamsLookup = new HashMap<>();
     private static Random random = new Random(21);
+    private static DocletEnvironment environment;
+
+    public ElementUtil(DocletEnvironment environment) {
+        this.environment = environment;
+    }
 
     public static String extractType(Element element) {
         return elementKindLookup.get(element.getKind());
@@ -129,5 +135,13 @@ public class ElementUtil {
 
     public static Return extractReturn(VariableElement fieldElement) {
         return new Return(String.valueOf(fieldElement.asType()));
+    }
+
+    public static String extractComment(Element element) {
+        return environment.getElementUtils().getDocComment(element);
+    }
+
+    public static String extractPackageName(Element element) {
+        return String.valueOf(environment.getElementUtils().getPackageOf(element));
     }
 }
