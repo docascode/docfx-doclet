@@ -1,14 +1,12 @@
 package com.microsoft.build;
 
 import static com.microsoft.util.ElementUtil.determineClassSimpleName;
-import static com.microsoft.util.ElementUtil.extractComment;
-import static com.microsoft.util.ElementUtil.extractPackageContent;
 import static com.microsoft.util.ElementUtil.extractPackageElements;
 import static com.microsoft.util.ElementUtil.extractSortedElements;
-import static com.microsoft.util.ElementUtil.extractType;
 
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
+import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
@@ -42,11 +40,11 @@ public class YmlFilesBuilder {
     public boolean build() {
         TocFile tocFile = new TocFile(outputPath);
         for (PackageElement packageElement : extractPackageElements(environment.getIncludedElements())) {
-            String packageQName = String.valueOf(packageElement.getQualifiedName());
-            String packageYmlFileName = packageQName + ".yml";
-            buildPackageYmlFile(packageElement, packageYmlFileName);
+            String uid = PackageLookup.extractUid(packageElement);
+            String href = PackageLookup.extractHref(packageElement);
+            buildPackageYmlFile(packageElement, href);
 
-            TocItem packageTocItem = new TocItem(packageQName, packageQName, packageYmlFileName);
+            TocItem packageTocItem = new TocItem(uid, uid, href);
             buildFilesForInnerClasses("", packageElement, packageTocItem.getItems());
             tocFile.addTocItem(packageTocItem);
         }
@@ -69,21 +67,19 @@ public class YmlFilesBuilder {
 
     void buildPackageYmlFile(PackageElement packageElement, String fileName) {
         MetadataFile metadataFile = new MetadataFile(outputPath, fileName);
-        String qName = String.valueOf(packageElement.getQualifiedName());
-        String sName = String.valueOf(packageElement.getSimpleName());
-
         MetadataFileItem packageItem = new MetadataFileItem(LANGS);
-        packageItem.setUid(qName);
-        packageItem.setId(sName);
+        packageItem.setUid(PackageLookup.extractUid(packageElement));
+        packageItem.setId(PackageLookup.extractId(packageElement));
         addChildrenReferences(packageElement, packageItem.getChildren(), metadataFile.getReferences());
-        packageItem.setHref(qName + ".yml");
-        packageItem.setName(qName);
-        packageItem.setNameWithType(qName);
-        packageItem.setFullName(qName);
-        packageItem.setType(extractType(packageElement));
-        packageItem.setSummary(extractComment(packageElement));
-        packageItem.setContent(extractPackageContent(packageElement));
+        packageItem.setHref(PackageLookup.extractHref(packageElement));
+        packageItem.setName(PackageLookup.extractName(packageElement));
+        packageItem.setNameWithType(PackageLookup.extractNameWithType(packageElement));
+        packageItem.setFullName(PackageLookup.extractFullName(packageElement));
+        packageItem.setType(PackageLookup.extractType(packageElement));
+        packageItem.setSummary(PackageLookup.extractSummary(packageElement));
+        packageItem.setContent(PackageLookup.extractContent(packageElement));
         metadataFile.getItems().add(packageItem);
+
         FileUtil.dumpToFile(metadataFile);
     }
 
@@ -220,7 +216,7 @@ public class YmlFilesBuilder {
             setName(ClassItemsLookup.extractName(element));
             setNameWithType(ClassItemsLookup.extractNameWithType(element));
             setFullName(ClassItemsLookup.extractFullName(element));
-            setType(extractType(element));
+            setType(ClassItemsLookup.extractType(element));
             setPackageName(ClassItemsLookup.extractPackageName(element));
             setSummary(ClassItemsLookup.extractSummary(element));
         }};
