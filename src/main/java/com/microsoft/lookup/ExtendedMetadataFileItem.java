@@ -3,6 +3,7 @@ package com.microsoft.lookup;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
+import com.microsoft.model.TypeParameter;
 import java.util.List;
 
 /**
@@ -15,6 +16,9 @@ class ExtendedMetadataFileItem extends MetadataFileItem {
     private String constructorContent;
     private List<MethodParameter> parameters;
     private Return returnValue;
+    private String content;
+    private List<TypeParameter> typeParameters;
+    private String superclass;
 
     public String getMethodContent() {
         return methodContent;
@@ -56,5 +60,32 @@ class ExtendedMetadataFileItem extends MetadataFileItem {
     @Override
     public void setReturn(Return returnValue) {
         this.returnValue = returnValue;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    @Override
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<TypeParameter> getTypeParameters() {
+        return typeParameters;
+    }
+
+    @Override
+    public void setTypeParameters(List<TypeParameter> typeParameters) {
+        this.typeParameters = typeParameters;
+    }
+
+    public String getSuperclassValue() {
+        return superclass;
+    }
+
+    @Override
+    public void setSuperclass(String superclass) {
+        this.superclass = superclass;
     }
 }

@@ -1,16 +1,14 @@
 package com.microsoft.build;
 
 import static com.microsoft.util.ElementUtil.determineClassSimpleName;
-import static com.microsoft.util.ElementUtil.extractClassContent;
 import static com.microsoft.util.ElementUtil.extractComment;
 import static com.microsoft.util.ElementUtil.extractPackageContent;
 import static com.microsoft.util.ElementUtil.extractPackageElements;
 import static com.microsoft.util.ElementUtil.extractSortedElements;
-import static com.microsoft.util.ElementUtil.extractSuperclass;
 import static com.microsoft.util.ElementUtil.extractType;
-import static com.microsoft.util.ElementUtil.extractTypeParameters;
 
 import com.microsoft.lookup.ClassItemsLookup;
+import com.microsoft.lookup.ClassLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
@@ -58,15 +56,14 @@ public class YmlFilesBuilder {
 
     void buildFilesForInnerClasses(String namePrefix, Element element, List<TocItem> listToAddItems) {
         for (TypeElement classElement : extractSortedElements(element)) {
-            String classQName = String.valueOf(classElement.getQualifiedName());
-            String classSimpleName = determineClassSimpleName(namePrefix, classElement);
-            String classYmlFileName = classQName + ".yml";
-            buildClassYmlFile(classElement, classYmlFileName);
+            String uid = ClassLookup.extractUid(classElement);
+            String id = determineClassSimpleName(namePrefix, classElement);
+            String href = ClassLookup.extractHref(classElement);
 
-            TocItem classTocItem = new TocItem(classQName, classSimpleName, classYmlFileName);
-            listToAddItems.add(classTocItem);
+            listToAddItems.add(new TocItem(uid, id, href));
 
-            buildFilesForInnerClasses(classSimpleName, classElement, listToAddItems);
+            buildClassYmlFile(classElement, href);
+            buildFilesForInnerClasses(id, classElement, listToAddItems);
         }
     }
 
@@ -78,7 +75,7 @@ public class YmlFilesBuilder {
         MetadataFileItem packageItem = new MetadataFileItem(LANGS);
         packageItem.setUid(qName);
         packageItem.setId(sName);
-        addChildrenReferences("", packageElement, packageItem.getChildren(), metadataFile.getReferences());
+        addChildrenReferences(packageElement, packageItem.getChildren(), metadataFile.getReferences());
         packageItem.setHref(qName + ".yml");
         packageItem.setName(qName);
         packageItem.setNameWithType(qName);
@@ -90,85 +87,72 @@ public class YmlFilesBuilder {
         FileUtil.dumpToFile(metadataFile);
     }
 
-    void addChildrenReferences(String namePrefix, Element element, List<String> packageChildren,
+    void addChildrenReferences(Element element, List<String> packageChildren,
         List<MetadataFileItem> referencesCollector) {
         for (TypeElement classElement : extractSortedElements(element)) {
-            String qName = String.valueOf(classElement.getQualifiedName());
-            String sName = determineClassSimpleName(namePrefix, classElement);
+            referencesCollector.add(buildClassReference(classElement));
 
-            MetadataFileItem reference = buildClassReference(classElement);
-            referencesCollector.add(reference);
-
-            packageChildren.add(qName);
-            addChildrenReferences(sName, classElement, packageChildren, referencesCollector);
+            packageChildren.add(ClassLookup.extractUid(classElement));
+            addChildrenReferences(classElement, packageChildren, referencesCollector);
         }
     }
 
     MetadataFileItem buildClassReference(TypeElement classElement) {
         MetadataFileItem referenceItem = new MetadataFileItem();
-        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
-        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
-        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
-        String qName = String.valueOf(classElement.getQualifiedName());
-
-        referenceItem.setUid(qName);
-        referenceItem.setParent(packageName);
-        referenceItem.setHref(qName + ".yml");
-        referenceItem.setName(shortNameWithGenericsSupport);
-        referenceItem.setNameWithType(shortNameWithGenericsSupport);
-        referenceItem.setFullName(qNameWithGenericsSupport);
-        referenceItem.setType(extractType(classElement));
-        referenceItem.setSummary(extractComment(classElement));
-        referenceItem.setContent(extractClassContent(classElement, shortNameWithGenericsSupport));
-        referenceItem.setTypeParameters(extractTypeParameters(classElement));
+        referenceItem.setUid(ClassLookup.extractUid(classElement));
+        referenceItem.setParent(ClassLookup.extractParent(classElement));
+        referenceItem.setHref(ClassLookup.extractHref(classElement));
+        referenceItem.setName(ClassLookup.extractName(classElement));
+        referenceItem.setNameWithType(ClassLookup.extractNameWithType(classElement));
+        referenceItem.setFullName(ClassLookup.extractFullName(classElement));
+        referenceItem.setType(ClassLookup.extractType(classElement));
+        referenceItem.setSummary(ClassLookup.extractSummary(classElement));
+        referenceItem.setContent(ClassLookup.extractContent(classElement));
+        referenceItem.setTypeParameters(ClassLookup.extractTypeParameters(classElement));
         return referenceItem;
     }
 
     void buildClassYmlFile(TypeElement classElement, String fileName) {
         MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
-        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
-        String classQName = String.valueOf(classElement.getQualifiedName());
-        String classSName = String.valueOf(classElement.getSimpleName());
-        String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
-        String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
-
-        // Add class info
-        MetadataFileItem classItem = new MetadataFileItem(LANGS);
-        classItem.setUid(classQName);
-        classItem.setId(classSName);
-        classItem.setParent(packageName);
-
-        for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(classQName + "." + constructorElement);
-        }
-        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(classQName + "." + methodElement);
-        }
-        for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(classQName + "." + fieldElement);
-        }
-        for (TypeElement innerClassElement : ElementFilter.typesIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(String.valueOf(innerClassElement));
-        }
-
-        classItem.setHref(classQName + ".yml");
-        classItem.setName(classSNameWithGenericsSupport);
-        classItem.setNameWithType(classSNameWithGenericsSupport);
-        classItem.setFullName(classQNameWithGenericsSupport);
-        classItem.setType(extractType(classElement));
-        classItem.setPackageName(packageName);
-        classItem.setSummary(extractComment(classElement));
-        classItem.setContent(extractClassContent(classElement, classSNameWithGenericsSupport));
-        classItem.setSuperclass(extractSuperclass(classElement));
-        classItem.setTypeParameters(extractTypeParameters(classElement));
-        classMetadataFile.getItems().add(classItem);
-
+        addClassInfo(classElement, classMetadataFile);
         addConstructorsInfo(classElement, classMetadataFile);
         addMethodsInfo(classElement, classMetadataFile);
         addFieldsInfo(classElement, classMetadataFile);
         addReferencesInfo(classElement, classMetadataFile);
 
         FileUtil.dumpToFile(classMetadataFile);
+    }
+
+    void addClassInfo(TypeElement classElement, MetadataFile classMetadataFile) {
+        MetadataFileItem classItem = new MetadataFileItem(LANGS);
+        classItem.setUid(ClassLookup.extractUid(classElement));
+        classItem.setId(ClassLookup.extractId(classElement));
+        classItem.setParent(ClassLookup.extractParent(classElement));
+
+        for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(ClassItemsLookup.extractUid(constructorElement));
+        }
+        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(ClassItemsLookup.extractUid(methodElement));
+        }
+        for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(ClassItemsLookup.extractUid(fieldElement));
+        }
+        for (TypeElement innerClassElement : ElementFilter.typesIn(classElement.getEnclosedElements())) {
+            classItem.getChildren().add(String.valueOf(innerClassElement));
+        }
+
+        classItem.setHref(ClassLookup.extractHref(classElement));
+        classItem.setName(ClassLookup.extractName(classElement));
+        classItem.setNameWithType(ClassLookup.extractNameWithType(classElement));
+        classItem.setFullName(ClassLookup.extractFullName(classElement));
+        classItem.setType(ClassLookup.extractType(classElement));
+        classItem.setPackageName(ClassLookup.extractPackageName(classElement));
+        classItem.setSummary(ClassLookup.extractSummary(classElement));
+        classItem.setContent(ClassLookup.extractContent(classElement));
+        classItem.setTypeParameters(ClassLookup.extractTypeParameters(classElement));
+        classItem.setSuperclass(ClassLookup.extractSuperclass(classElement));
+        classMetadataFile.getItems().add(classItem);
     }
 
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
