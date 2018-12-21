@@ -111,16 +111,6 @@ public class ElementUtilTest {
     }
 
     @Test
-    public void determineClassSimpleName() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
-
-        assertThat("Wrong result",
-            ElementUtil.determineClassSimpleName("bla-bla-prefix", element), is("bla-bla-prefix.SuperHero"));
-        assertThat("Wrong result for empty prefix",
-            ElementUtil.determineClassSimpleName("", element), is("SuperHero"));
-    }
-
-    @Test
     public void extractPackageContent() {
         PackageElement element = elements.getPackageElement("com.microsoft.samples");
 

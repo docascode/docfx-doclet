@@ -1,6 +1,5 @@
 package com.microsoft.build;
 
-import static com.microsoft.util.ElementUtil.determineClassSimpleName;
 import static com.microsoft.util.ElementUtil.extractPackageElements;
 import static com.microsoft.util.ElementUtil.extractSortedElements;
 
@@ -49,23 +48,23 @@ public class YmlFilesBuilder {
             buildPackageYmlFile(packageElement, href);
 
             TocItem packageTocItem = new TocItem(uid, uid, href);
-            buildFilesForInnerClasses("", packageElement, packageTocItem.getItems());
+            buildFilesForInnerClasses(packageElement, packageTocItem.getItems());
             tocFile.addTocItem(packageTocItem);
         }
         FileUtil.dumpToFile(tocFile);
         return true;
     }
 
-    void buildFilesForInnerClasses(String namePrefix, Element element, List<TocItem> listToAddItems) {
+    void buildFilesForInnerClasses(Element element, List<TocItem> listToAddItems) {
         for (TypeElement classElement : extractSortedElements(element)) {
             String uid = classLookup.extractUid(classElement);
-            String id = determineClassSimpleName(namePrefix, classElement);
+            String name = classLookup.extractTocName(classElement);
             String href = classLookup.extractHref(classElement);
 
-            listToAddItems.add(new TocItem(uid, id, href));
+            listToAddItems.add(new TocItem(uid, name, href));
 
             buildClassYmlFile(classElement, href);
-            buildFilesForInnerClasses(id, classElement, listToAddItems);
+            buildFilesForInnerClasses(classElement, listToAddItems);
         }
     }
 

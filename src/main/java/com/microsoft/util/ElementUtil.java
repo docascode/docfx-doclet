@@ -107,13 +107,6 @@ public class ElementUtil {
         )).collect(Collectors.toList());
     }
 
-    public static String determineClassSimpleName(String namePrefix, Element classElement) {
-        return String.format("%s%s%s",
-            namePrefix,
-            StringUtils.isEmpty(namePrefix) ? "" : ".",
-            String.valueOf(classElement.getSimpleName()));
-    }
-
     public static String extractPackageContent(PackageElement packageElement) {
         return "package " + packageElement.getQualifiedName();
     }

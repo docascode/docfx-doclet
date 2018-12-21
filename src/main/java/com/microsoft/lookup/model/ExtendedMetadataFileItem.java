@@ -19,6 +19,7 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     private String content;
     private List<TypeParameter> typeParameters;
     private String superclass;
+    private String tocName;
 
     public String getMethodContent() {
         return methodContent;
@@ -87,5 +88,13 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     @Override
     public void setSuperclass(String superclass) {
         this.superclass = superclass;
+    }
+
+    public void setTocName(String tocName) {
+        this.tocName = tocName;
+    }
+
+    public String getTocName() {
+        return tocName;
     }
 }

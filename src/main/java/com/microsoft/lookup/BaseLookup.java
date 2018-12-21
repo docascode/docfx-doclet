@@ -8,6 +8,7 @@ import com.microsoft.model.TypeParameter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.element.TypeElement;
 
 public abstract class BaseLookup<T> {
 
@@ -102,5 +103,9 @@ public abstract class BaseLookup<T> {
 
     public String extractSuperclass(T key) {
         return resolve(key).getSuperclassValue();
+    }
+
+    public String extractTocName(T key) {
+        return resolve(key).getTocName();
     }
 }

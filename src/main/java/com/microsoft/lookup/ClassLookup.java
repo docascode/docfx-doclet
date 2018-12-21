@@ -2,7 +2,9 @@ package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.util.ElementUtil;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import org.apache.commons.lang3.StringUtils;
 
 public class ClassLookup extends BaseLookup<TypeElement> {
 
@@ -12,7 +14,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         String classQName = String.valueOf(classElement.getQualifiedName());
         String classSName = String.valueOf(classElement.getSimpleName());
         String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
-        String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName + ".", "");
+        String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName.concat("."), "");
 
         ExtendedMetadataFileItem result = new ExtendedMetadataFileItem();
         result.setUid(classQName);
@@ -28,6 +30,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         result.setContent(ElementUtil.extractClassContent(classElement, classSNameWithGenericsSupport));
         result.setSuperclass(ElementUtil.extractSuperclass(classElement));
         result.setTypeParameters(ElementUtil.extractTypeParameters(classElement));
+        result.setTocName(classQName.replace(packageName.concat("."), ""));
 
         return result;
     }
