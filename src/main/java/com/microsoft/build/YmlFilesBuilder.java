@@ -163,7 +163,15 @@ public class YmlFilesBuilder {
         classItem.setTypeParameters(extractTypeParameters(classElement));
         classMetadataFile.getItems().add(classItem);
 
-        // Add constructors info
+        addConstructorsInfo(classElement, classMetadataFile);
+        addMethodsInfo(classElement, classMetadataFile);
+        addFieldsInfo(classElement, classMetadataFile);
+        addReferencesInfo(classElement, classMetadataFile);
+
+        FileUtil.dumpToFile(classMetadataFile);
+    }
+
+    void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
             MetadataFileItem constructorItem = buildMetadataFileItem(constructorElement);
             constructorItem.setOverload(ClassItemsLookup.extractOverload(constructorElement));
@@ -171,8 +179,9 @@ public class YmlFilesBuilder {
             constructorItem.setParameters(ClassItemsLookup.extractParameters(constructorElement));
             classMetadataFile.getItems().add(constructorItem);
         }
+    }
 
-        // Add methods info
+    void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
             MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
             methodItem.setOverload(ClassItemsLookup.extractOverload(methodElement));
@@ -182,18 +191,21 @@ public class YmlFilesBuilder {
             methodItem.setReturn(ClassItemsLookup.extractReturn(methodElement));
             classMetadataFile.getItems().add(methodItem);
         }
+    }
 
-        // Add fields info
+    void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
             MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
             fieldItem.setContent(ClassItemsLookup.extractFieldContent(fieldElement));
             fieldItem.setReturn(ClassItemsLookup.extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
         }
+    }
 
-        // Add references info
+    void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         // Owner class reference
         classMetadataFile.getReferences().add(buildClassReference(classElement));
+
         // Inner classes references
         classMetadataFile.getReferences().addAll(
             ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
@@ -202,11 +214,9 @@ public class YmlFilesBuilder {
 
         // Owner class methods references
         classMetadataFile.getReferences().addAll(buildMethodsReferences(classElement));
-
-        FileUtil.dumpToFile(classMetadataFile);
     }
 
-    private List<MetadataFileItem> buildMethodsReferences(TypeElement classElement) {
+    List<MetadataFileItem> buildMethodsReferences(TypeElement classElement) {
         return ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
             .map(methodElement -> new MetadataFileItem() {{
                 setUid(ClassItemsLookup.extractUid(methodElement));
