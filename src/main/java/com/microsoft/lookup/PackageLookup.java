@@ -1,5 +1,6 @@
 package com.microsoft.lookup;
 
+import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.util.ElementUtil;
 import java.util.HashMap;
 import java.util.Map;

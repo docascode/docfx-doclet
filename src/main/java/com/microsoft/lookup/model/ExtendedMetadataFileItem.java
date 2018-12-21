@@ -1,4 +1,4 @@
-package com.microsoft.lookup;
+package com.microsoft.lookup.model;
 
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Just container to keep cached precalculated values for lookup
  */
-class ExtendedMetadataFileItem extends MetadataFileItem {
+public class ExtendedMetadataFileItem extends MetadataFileItem {
 
     private String methodContent;
     private String fieldContent;

@@ -2,6 +2,7 @@ package com.microsoft.lookup;
 
 import static com.microsoft.util.ElementUtil.convertFullNameToOverload;
 
+import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
