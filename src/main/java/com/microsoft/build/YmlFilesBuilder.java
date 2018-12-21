@@ -31,6 +31,9 @@ public class YmlFilesBuilder {
     private DocletEnvironment environment;
     private String outputPath;
     private final ElementUtil elementUtil;
+    private PackageLookup packageLookup = new PackageLookup();
+    private ClassItemsLookup classItemsLookup = new ClassItemsLookup();
+    private ClassLookup classLookup = new ClassLookup();
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath) {
         this.environment = environment;
@@ -41,8 +44,8 @@ public class YmlFilesBuilder {
     public boolean build() {
         TocFile tocFile = new TocFile(outputPath);
         for (PackageElement packageElement : extractPackageElements(environment.getIncludedElements())) {
-            String uid = PackageLookup.extractUid(packageElement);
-            String href = PackageLookup.extractHref(packageElement);
+            String uid = packageLookup.extractUid(packageElement);
+            String href = packageLookup.extractHref(packageElement);
             buildPackageYmlFile(packageElement, href);
 
             TocItem packageTocItem = new TocItem(uid, uid, href);
@@ -55,9 +58,9 @@ public class YmlFilesBuilder {
 
     void buildFilesForInnerClasses(String namePrefix, Element element, List<TocItem> listToAddItems) {
         for (TypeElement classElement : extractSortedElements(element)) {
-            String uid = ClassLookup.extractUid(classElement);
+            String uid = classLookup.extractUid(classElement);
             String id = determineClassSimpleName(namePrefix, classElement);
-            String href = ClassLookup.extractHref(classElement);
+            String href = classLookup.extractHref(classElement);
 
             listToAddItems.add(new TocItem(uid, id, href));
 
@@ -69,16 +72,17 @@ public class YmlFilesBuilder {
     void buildPackageYmlFile(PackageElement packageElement, String fileName) {
         MetadataFile metadataFile = new MetadataFile(outputPath, fileName);
         MetadataFileItem packageItem = new MetadataFileItem(LANGS);
-        packageItem.setUid(PackageLookup.extractUid(packageElement));
-        packageItem.setId(PackageLookup.extractId(packageElement));
-        addChildrenReferences(packageElement, packageItem.getChildren(), metadataFile.getReferences());
-        packageItem.setHref(PackageLookup.extractHref(packageElement));
-        packageItem.setName(PackageLookup.extractName(packageElement));
-        packageItem.setNameWithType(PackageLookup.extractNameWithType(packageElement));
-        packageItem.setFullName(PackageLookup.extractFullName(packageElement));
-        packageItem.setType(PackageLookup.extractType(packageElement));
-        packageItem.setSummary(PackageLookup.extractSummary(packageElement));
-        packageItem.setContent(PackageLookup.extractContent(packageElement));
+        packageItem.setUid(packageLookup.extractUid(packageElement));
+        packageItem.setId(packageLookup.extractId(packageElement));
+        addChildrenReferences(packageElement, packageItem.getChildren(),
+            metadataFile.getReferences());
+        packageItem.setHref(packageLookup.extractHref(packageElement));
+        packageItem.setName(packageLookup.extractName(packageElement));
+        packageItem.setNameWithType(packageLookup.extractNameWithType(packageElement));
+        packageItem.setFullName(packageLookup.extractFullName(packageElement));
+        packageItem.setType(packageLookup.extractType(packageElement));
+        packageItem.setSummary(packageLookup.extractSummary(packageElement));
+        packageItem.setContent(packageLookup.extractContent(packageElement));
         metadataFile.getItems().add(packageItem);
 
         FileUtil.dumpToFile(metadataFile);
@@ -89,23 +93,23 @@ public class YmlFilesBuilder {
         for (TypeElement classElement : extractSortedElements(element)) {
             referencesCollector.add(buildClassReference(classElement));
 
-            packageChildren.add(ClassLookup.extractUid(classElement));
+            packageChildren.add(classLookup.extractUid(classElement));
             addChildrenReferences(classElement, packageChildren, referencesCollector);
         }
     }
 
     MetadataFileItem buildClassReference(TypeElement classElement) {
         MetadataFileItem referenceItem = new MetadataFileItem();
-        referenceItem.setUid(ClassLookup.extractUid(classElement));
-        referenceItem.setParent(ClassLookup.extractParent(classElement));
-        referenceItem.setHref(ClassLookup.extractHref(classElement));
-        referenceItem.setName(ClassLookup.extractName(classElement));
-        referenceItem.setNameWithType(ClassLookup.extractNameWithType(classElement));
-        referenceItem.setFullName(ClassLookup.extractFullName(classElement));
-        referenceItem.setType(ClassLookup.extractType(classElement));
-        referenceItem.setSummary(ClassLookup.extractSummary(classElement));
-        referenceItem.setContent(ClassLookup.extractContent(classElement));
-        referenceItem.setTypeParameters(ClassLookup.extractTypeParameters(classElement));
+        referenceItem.setUid(classLookup.extractUid(classElement));
+        referenceItem.setParent(classLookup.extractParent(classElement));
+        referenceItem.setHref(classLookup.extractHref(classElement));
+        referenceItem.setName(classLookup.extractName(classElement));
+        referenceItem.setNameWithType(classLookup.extractNameWithType(classElement));
+        referenceItem.setFullName(classLookup.extractFullName(classElement));
+        referenceItem.setType(classLookup.extractType(classElement));
+        referenceItem.setSummary(classLookup.extractSummary(classElement));
+        referenceItem.setContent(classLookup.extractContent(classElement));
+        referenceItem.setTypeParameters(classLookup.extractTypeParameters(classElement));
         return referenceItem;
     }
 
@@ -122,28 +126,28 @@ public class YmlFilesBuilder {
 
     void addClassInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         MetadataFileItem classItem = new MetadataFileItem(LANGS);
-        classItem.setUid(ClassLookup.extractUid(classElement));
-        classItem.setId(ClassLookup.extractId(classElement));
-        classItem.setParent(ClassLookup.extractParent(classElement));
+        classItem.setUid(classLookup.extractUid(classElement));
+        classItem.setId(classLookup.extractId(classElement));
+        classItem.setParent(classLookup.extractParent(classElement));
         addChildren(classElement, classItem.getChildren());
-        classItem.setHref(ClassLookup.extractHref(classElement));
-        classItem.setName(ClassLookup.extractName(classElement));
-        classItem.setNameWithType(ClassLookup.extractNameWithType(classElement));
-        classItem.setFullName(ClassLookup.extractFullName(classElement));
-        classItem.setType(ClassLookup.extractType(classElement));
-        classItem.setPackageName(ClassLookup.extractPackageName(classElement));
-        classItem.setSummary(ClassLookup.extractSummary(classElement));
-        classItem.setContent(ClassLookup.extractContent(classElement));
-        classItem.setTypeParameters(ClassLookup.extractTypeParameters(classElement));
-        classItem.setSuperclass(ClassLookup.extractSuperclass(classElement));
+        classItem.setHref(classLookup.extractHref(classElement));
+        classItem.setName(classLookup.extractName(classElement));
+        classItem.setNameWithType(classLookup.extractNameWithType(classElement));
+        classItem.setFullName(classLookup.extractFullName(classElement));
+        classItem.setType(classLookup.extractType(classElement));
+        classItem.setPackageName(classLookup.extractPackageName(classElement));
+        classItem.setSummary(classLookup.extractSummary(classElement));
+        classItem.setContent(classLookup.extractContent(classElement));
+        classItem.setTypeParameters(classLookup.extractTypeParameters(classElement));
+        classItem.setSuperclass(classLookup.extractSuperclass(classElement));
         classMetadataFile.getItems().add(classItem);
     }
 
     void addChildren(TypeElement classElement, List<String> children) {
         collect(ElementFilter.constructorsIn(classElement.getEnclosedElements()), children,
-            ClassItemsLookup::extractUid);
-        collect(ElementFilter.methodsIn(classElement.getEnclosedElements()), children, ClassItemsLookup::extractUid);
-        collect(ElementFilter.fieldsIn(classElement.getEnclosedElements()), children, ClassItemsLookup::extractUid);
+            classItemsLookup::extractUid);
+        collect(ElementFilter.methodsIn(classElement.getEnclosedElements()), children, classItemsLookup::extractUid);
+        collect(ElementFilter.fieldsIn(classElement.getEnclosedElements()), children, classItemsLookup::extractUid);
         collect(ElementFilter.typesIn(classElement.getEnclosedElements()), children, String::valueOf);
     }
 
@@ -154,9 +158,10 @@ public class YmlFilesBuilder {
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
             MetadataFileItem constructorItem = buildMetadataFileItem(constructorElement);
-            constructorItem.setOverload(ClassItemsLookup.extractOverload(constructorElement));
-            constructorItem.setContent(ClassItemsLookup.extractConstructorContent(constructorElement));
-            constructorItem.setParameters(ClassItemsLookup.extractParameters(constructorElement));
+            constructorItem.setOverload(classItemsLookup.extractOverload(constructorElement));
+            constructorItem
+                .setContent(classItemsLookup.extractConstructorContent(constructorElement));
+            constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
             classMetadataFile.getItems().add(constructorItem);
         }
     }
@@ -164,11 +169,11 @@ public class YmlFilesBuilder {
     void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
             MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
-            methodItem.setOverload(ClassItemsLookup.extractOverload(methodElement));
-            methodItem.setContent(ClassItemsLookup.extractMethodContent(methodElement));
-            methodItem.setExceptions(ClassItemsLookup.extractExceptions(methodElement));
-            methodItem.setParameters(ClassItemsLookup.extractParameters(methodElement));
-            methodItem.setReturn(ClassItemsLookup.extractReturn(methodElement));
+            methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
+            methodItem.setContent(classItemsLookup.extractMethodContent(methodElement));
+            methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
+            methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
+            methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
             classMetadataFile.getItems().add(methodItem);
         }
     }
@@ -176,8 +181,8 @@ public class YmlFilesBuilder {
     void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
             MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
-            fieldItem.setContent(ClassItemsLookup.extractFieldContent(fieldElement));
-            fieldItem.setReturn(ClassItemsLookup.extractReturn(fieldElement));
+            fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
+            fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
         }
     }
@@ -199,26 +204,26 @@ public class YmlFilesBuilder {
     List<MetadataFileItem> buildMethodsReferences(TypeElement classElement) {
         return ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
             .map(methodElement -> new MetadataFileItem() {{
-                setUid(ClassItemsLookup.extractUid(methodElement));
-                setName(ClassItemsLookup.extractName(methodElement));
-                setNameWithType(ClassItemsLookup.extractNameWithType(methodElement));
-                setFullName(ClassItemsLookup.extractFullName(methodElement));
-                setPackageName(ClassItemsLookup.extractPackageName(methodElement));
+                setUid(classItemsLookup.extractUid(methodElement));
+                setName(classItemsLookup.extractName(methodElement));
+                setNameWithType(classItemsLookup.extractNameWithType(methodElement));
+                setFullName(classItemsLookup.extractFullName(methodElement));
+                setPackageName(classItemsLookup.extractPackageName(methodElement));
             }}).collect(Collectors.toList());
     }
 
     MetadataFileItem buildMetadataFileItem(Element element) {
         return new MetadataFileItem(LANGS) {{
-            setUid(ClassItemsLookup.extractUid(element));
-            setId(ClassItemsLookup.extractId(element));
-            setParent(ClassItemsLookup.extractParent(element));
-            setHref(ClassItemsLookup.extractHref(element));
-            setName(ClassItemsLookup.extractName(element));
-            setNameWithType(ClassItemsLookup.extractNameWithType(element));
-            setFullName(ClassItemsLookup.extractFullName(element));
-            setType(ClassItemsLookup.extractType(element));
-            setPackageName(ClassItemsLookup.extractPackageName(element));
-            setSummary(ClassItemsLookup.extractSummary(element));
+            setUid(classItemsLookup.extractUid(element));
+            setId(classItemsLookup.extractId(element));
+            setParent(classItemsLookup.extractParent(element));
+            setHref(classItemsLookup.extractHref(element));
+            setName(classItemsLookup.extractName(element));
+            setNameWithType(classItemsLookup.extractNameWithType(element));
+            setFullName(classItemsLookup.extractFullName(element));
+            setType(classItemsLookup.extractType(element));
+            setPackageName(classItemsLookup.extractPackageName(element));
+            setSummary(classItemsLookup.extractSummary(element));
         }};
     }
 }
