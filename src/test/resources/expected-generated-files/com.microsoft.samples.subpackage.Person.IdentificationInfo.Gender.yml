@@ -115,6 +115,8 @@ references:
   type: Enum
   summary: |2
      Enum describes person's gender
+  syntax:
+    content: public enum Person.IdentificationInfo.Gender
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
   name: values()
   nameWithType: Person.IdentificationInfo.Gender.values()

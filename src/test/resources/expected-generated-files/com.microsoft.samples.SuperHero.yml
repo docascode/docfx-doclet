@@ -353,6 +353,8 @@ references:
      Hero is the main entity we will be using to something
 
      @author Captain America
+  syntax:
+    content: public class SuperHero
 - uid: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
   name: successfullyAttacked(int,java.lang.String)
   nameWithType: SuperHero.successfullyAttacked(int,java.lang.String)

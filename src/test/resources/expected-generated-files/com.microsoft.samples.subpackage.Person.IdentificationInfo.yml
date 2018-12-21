@@ -44,6 +44,8 @@ references:
   type: Class
   summary: |2
      Class that describes person's identification
+  syntax:
+    content: public static class Person.IdentificationInfo
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   parent: com.microsoft.samples.subpackage
   href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
@@ -53,3 +55,5 @@ references:
   type: Enum
   summary: |2
      Enum describes person's gender
+  syntax:
+    content: public enum Person.IdentificationInfo.Gender

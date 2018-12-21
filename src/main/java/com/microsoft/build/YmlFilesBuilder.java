@@ -103,13 +103,13 @@ public class YmlFilesBuilder {
         }
     }
 
-    MetadataFileItem buildShortClassReference(TypeElement classElement) {
-        String qName = String.valueOf(classElement.getQualifiedName());
-        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
-        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
-        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
-
+    MetadataFileItem buildClassReference(TypeElement classElement) {
         MetadataFileItem referenceItem = new MetadataFileItem();
+        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
+        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
+        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
+        String qName = String.valueOf(classElement.getQualifiedName());
+
         referenceItem.setUid(qName);
         referenceItem.setParent(packageName);
         referenceItem.setHref(qName + ".yml");
@@ -118,15 +118,6 @@ public class YmlFilesBuilder {
         referenceItem.setFullName(qNameWithGenericsSupport);
         referenceItem.setType(extractType(classElement));
         referenceItem.setSummary(extractComment(classElement));
-        return referenceItem;
-    }
-
-    MetadataFileItem buildClassReference(TypeElement classElement) {
-        String qNameWithGenericsSupport = String.valueOf(classElement.asType());
-        String packageName = String.valueOf(environment.getElementUtils().getPackageOf(classElement));
-        String shortNameWithGenericsSupport = qNameWithGenericsSupport.replace(packageName + ".", "");
-
-        MetadataFileItem referenceItem = buildShortClassReference(classElement);
         referenceItem.setContent(extractClassContent(classElement, shortNameWithGenericsSupport));
         referenceItem.setTypeParameters(extractTypeParameters(classElement));
         return referenceItem;
@@ -226,11 +217,11 @@ public class YmlFilesBuilder {
 
         // Add references info
         // Owner class reference
-        classMetadataFile.getReferences().add(buildShortClassReference(classElement));
+        classMetadataFile.getReferences().add(buildClassReference(classElement));
         // Inner classes references
         classMetadataFile.getReferences().addAll(
             ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
-                .map(this::buildShortClassReference)
+                .map(this::buildClassReference)
                 .collect(Collectors.toList()));
 
         // Owner class methods references

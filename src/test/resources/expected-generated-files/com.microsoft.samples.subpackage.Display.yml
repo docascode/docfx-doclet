@@ -65,6 +65,13 @@ references:
   nameWithType: Display<T,R>
   fullName: com.microsoft.samples.subpackage.Display<T,R>
   type: Interface
+  syntax:
+    content: public interface Display<T,R>
+    typeParameters:
+    - id: T
+      type: bb61488d
+    - id: R
+      type: df411159
 - uid: com.microsoft.samples.subpackage.Display.show()
   name: show()
   nameWithType: Display<T,R>.show()
