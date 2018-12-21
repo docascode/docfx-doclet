@@ -14,6 +14,7 @@ import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
@@ -124,20 +125,7 @@ public class YmlFilesBuilder {
         classItem.setUid(ClassLookup.extractUid(classElement));
         classItem.setId(ClassLookup.extractId(classElement));
         classItem.setParent(ClassLookup.extractParent(classElement));
-
-        for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(ClassItemsLookup.extractUid(constructorElement));
-        }
-        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(ClassItemsLookup.extractUid(methodElement));
-        }
-        for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(ClassItemsLookup.extractUid(fieldElement));
-        }
-        for (TypeElement innerClassElement : ElementFilter.typesIn(classElement.getEnclosedElements())) {
-            classItem.getChildren().add(String.valueOf(innerClassElement));
-        }
-
+        addChildren(classElement, classItem.getChildren());
         classItem.setHref(ClassLookup.extractHref(classElement));
         classItem.setName(ClassLookup.extractName(classElement));
         classItem.setNameWithType(ClassLookup.extractNameWithType(classElement));
@@ -149,6 +137,18 @@ public class YmlFilesBuilder {
         classItem.setTypeParameters(ClassLookup.extractTypeParameters(classElement));
         classItem.setSuperclass(ClassLookup.extractSuperclass(classElement));
         classMetadataFile.getItems().add(classItem);
+    }
+
+    void addChildren(TypeElement classElement, List<String> children) {
+        collect(ElementFilter.constructorsIn(classElement.getEnclosedElements()), children,
+            ClassItemsLookup::extractUid);
+        collect(ElementFilter.methodsIn(classElement.getEnclosedElements()), children, ClassItemsLookup::extractUid);
+        collect(ElementFilter.fieldsIn(classElement.getEnclosedElements()), children, ClassItemsLookup::extractUid);
+        collect(ElementFilter.typesIn(classElement.getEnclosedElements()), children, String::valueOf);
+    }
+
+    void collect(List<? extends Element> elements, List<String> children, Function<? super Element, String> func) {
+        children.addAll(elements.stream().map(func).collect(Collectors.toList()));
     }
 
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
