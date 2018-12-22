@@ -14,8 +14,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
   type: Class
   package: com.microsoft.samples.subpackage
-  summary: |2
-     Class that describes person's identification
+  summary: Class that describes person's identification
   syntax:
     content: public static class Person.IdentificationInfo
   inheritance:
@@ -42,8 +41,7 @@ references:
   nameWithType: Person.IdentificationInfo
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
   type: Class
-  summary: |2
-     Class that describes person's identification
+  summary: Class that describes person's identification
   syntax:
     content: public static class Person.IdentificationInfo
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
@@ -53,7 +51,6 @@ references:
   nameWithType: Person.IdentificationInfo.Gender
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   type: Enum
-  summary: |2
-     Enum describes person's gender
+  summary: Enum describes person's gender
   syntax:
     content: public enum Person.IdentificationInfo.Gender

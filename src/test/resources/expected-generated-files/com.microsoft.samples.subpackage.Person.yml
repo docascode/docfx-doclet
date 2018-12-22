@@ -20,8 +20,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Person<T>
   type: Class
   package: com.microsoft.samples.subpackage
-  summary: |2
-     Class that describes some person
+  summary: Class that describes some person
   syntax:
     content: public class Person<T>
     typeParameters:
@@ -130,8 +129,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Person<T>.firstName
   type: Field
   package: com.microsoft.samples.subpackage
-  summary: |2
-     This is a first name
+  summary: This is a first name
   syntax:
     content: private firstName
     return:
@@ -159,8 +157,7 @@ references:
   nameWithType: Person<T>
   fullName: com.microsoft.samples.subpackage.Person<T>
   type: Class
-  summary: |2
-     Class that describes some person
+  summary: Class that describes some person
   syntax:
     content: public class Person<T>
     typeParameters:
@@ -173,8 +170,7 @@ references:
   nameWithType: Person.IdentificationInfo
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
   type: Class
-  summary: |2
-     Class that describes person's identification
+  summary: Class that describes person's identification
   syntax:
     content: public static class Person.IdentificationInfo
 - uid: com.microsoft.samples.subpackage.Person.getFirstName()

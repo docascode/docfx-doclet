@@ -17,8 +17,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   type: Enum
   package: com.microsoft.samples.subpackage
-  summary: |2
-     Enum describes person's gender
+  summary: Enum describes person's gender
   syntax:
     content: public enum Person.IdentificationInfo.Gender
   inheritance:
@@ -113,8 +112,7 @@ references:
   nameWithType: Person.IdentificationInfo.Gender
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   type: Enum
-  summary: |2
-     Enum describes person's gender
+  summary: Enum describes person's gender
   syntax:
     content: public enum Person.IdentificationInfo.Gender
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()

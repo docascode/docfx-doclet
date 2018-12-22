@@ -28,10 +28,7 @@ items:
   fullName: com.microsoft.samples.SuperHero
   type: Class
   package: com.microsoft.samples
-  summary: |2
-     Hero is the main entity we will be using to something
-
-     @author Captain America
+  summary: Hero is the main entity we will be using to something
   syntax:
     content: public class SuperHero
   inheritance:
@@ -62,18 +59,10 @@ items:
   overload: com.microsoft.samples.SuperHero.successfullyAttacked*
   type: Method
   package: com.microsoft.samples
-  summary: |2
-     <p>This is a simple description of the method. . .
-     <a href="http://www.supermanisthegreatest.com">Superman!</a>
-     </p>
-
-     @param incomingDamage the amount of incoming damage
-     @return the amount of health hero has after attack
-     @throws IllegalArgumentException if incomingDamage is negative
-     @version 1.2
-     @see <a href="http://www.link_to_jira/HERO-402">HERO-402</a>
-     @since 1.0
-     @deprecated As of version 1.1, use . . . instead
+  summary: |-
+    <p>,This is a simple description of the method. . .
+     ,<a href="http://www.supermanisthegreatest.com">,Superman!,</a>,
+     ,</p>
   syntax:
     content: public int successfullyAttacked(int,java.lang.String)
     parameters:
@@ -139,11 +128,8 @@ items:
   overload: com.microsoft.samples.SuperHero.getLastName*
   type: Method
   package: com.microsoft.samples
-  summary: |2
-     Get capitalized last name. But it's not the end,
-     because of multiline comment
-
-     @return lastName in uppercase. But it's not the end,
+  summary: |-
+    Get capitalized last name. But it's not the end,
      because of multiline comment
   syntax:
     content: public java.lang.String getLastName()
@@ -275,8 +261,7 @@ items:
   fullName: com.microsoft.samples.SuperHero.heroName
   type: Field
   package: com.microsoft.samples
-  summary: |2
-     The public name of a hero that is common knowledge
+  summary: The public name of a hero that is common knowledge
   syntax:
     content: private heroName
     return:
@@ -349,10 +334,7 @@ references:
   nameWithType: SuperHero
   fullName: com.microsoft.samples.SuperHero
   type: Class
-  summary: |2
-     Hero is the main entity we will be using to something
-
-     @author Captain America
+  summary: Hero is the main entity we will be using to something
   syntax:
     content: public class SuperHero
 - uid: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)

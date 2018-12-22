@@ -4,10 +4,12 @@ import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
+import com.sun.source.doctree.DocCommentTree;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -131,10 +133,14 @@ public class ElementUtil {
     }
 
     public static String extractComment(Element element) {
-        return environment.getElementUtils().getDocComment(element);
+        return getDocCommentTree(element).map(docTree -> String.valueOf(docTree.getFullBody())).orElse(null);
     }
 
     public static String extractPackageName(Element element) {
         return String.valueOf(environment.getElementUtils().getPackageOf(element));
+    }
+
+    public static Optional<DocCommentTree> getDocCommentTree(Element element) {
+        return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
     }
 }
