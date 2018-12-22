@@ -52,7 +52,6 @@ items:
     content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[] values()
     return:
       type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]
-      description: -=TBD=-
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
   id: valueOf(java.lang.String)
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
@@ -73,7 +72,6 @@ items:
       description: -=TBD=-
     return:
       type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-      description: -=TBD=-
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
   id: MALE
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender

@@ -5,6 +5,7 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree.Kind;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +126,7 @@ public class ElementUtil {
 
     public static Return extractReturn(ExecutableElement methodElement) {
         return new Return(String.valueOf(methodElement.getReturnType()),
-            "-=TBD=-"); // TODO: Determine return description
+            extractReturnDescription(methodElement));
     }
 
     public static Return extractReturn(VariableElement fieldElement) {
@@ -142,5 +143,15 @@ public class ElementUtil {
 
     public static Optional<DocCommentTree> getDocCommentTree(Element element) {
         return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
+    }
+
+    private static String extractReturnDescription(ExecutableElement methodElement) {
+        return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
+            .filter(o -> o.getKind() == Kind.RETURN)
+            .map(String::valueOf)
+            .map(o -> StringUtils.remove(o, "@return"))
+            .map(StringUtils::trim)
+            .findFirst().orElse(null)
+        ).orElse(null);
     }
 }

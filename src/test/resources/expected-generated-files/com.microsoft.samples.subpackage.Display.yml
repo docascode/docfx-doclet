@@ -39,7 +39,6 @@ items:
     content: public abstract void show()
     return:
       type: void
-      description: -=TBD=-
 - uid: com.microsoft.samples.subpackage.Display.hide()
   id: hide()
   parent: com.microsoft.samples.subpackage.Display
@@ -56,7 +55,6 @@ items:
     content: public abstract void hide()
     return:
       type: void
-      description: -=TBD=-
 references:
 - uid: com.microsoft.samples.subpackage.Display
   parent: com.microsoft.samples.subpackage

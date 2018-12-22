@@ -2,12 +2,21 @@ package com.microsoft.util;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.ReturnTree;
+import com.sun.source.util.DocTrees;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,19 +28,35 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
+import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ElementUtilTest {
 
     @Rule
     public CompilationRule rule = new CompilationRule();
     private Elements elements;
+    private DocletEnvironment environment;
+    private ElementUtil elementUtil;
+    private DocTrees docTrees;
+    private DocCommentTree docCommentTree;
+    private ReturnTree returnTree;
 
     @Before
     public void setup() {
         elements = rule.getElements();
+
+        environment = Mockito.mock(DocletEnvironment.class);
+        docTrees = Mockito.mock(DocTrees.class);
+        docCommentTree = Mockito.mock(DocCommentTree.class);
+        returnTree = Mockito.mock(ReturnTree.class);
+        elementUtil = new ElementUtil(environment);
     }
 
     @Test
@@ -181,9 +206,23 @@ public class ElementUtilTest {
     @Test
     public void extractReturnForExecutableElement() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+        ExecutableElement method0 = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
+        ExecutableElement method1 = ElementFilter.methodsIn(element.getEnclosedElements()).get(1);
 
-        checkReturnForExecutableElement(element, 0, "int", "-=TBD=-");
-        checkReturnForExecutableElement(element, 1, "java.lang.String", "-=TBD=-");
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(method0)).thenReturn(docCommentTree);
+        when(docTrees.getDocCommentTree(method1)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList(returnTree)).when(docCommentTree).getBlockTags();
+        when(returnTree.getKind()).thenReturn(Kind.RETURN);
+        when(returnTree.toString()).thenReturn("@return bla", "@return bla-bla");
+
+        checkReturnForExecutableElement(element, 0, "int", "bla");
+        checkReturnForExecutableElement(element, 1, "java.lang.String", "bla-bla");
+        verify(environment, times(2)).getDocTrees();
+        verify(docTrees).getDocCommentTree(method0);
+        verify(docTrees).getDocCommentTree(method1);
+        verify(docCommentTree, times(2)).getBlockTags();
+        verify(returnTree, times(2)).getKind();
     }
 
     @Test

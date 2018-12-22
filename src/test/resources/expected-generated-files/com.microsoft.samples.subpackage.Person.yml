@@ -58,7 +58,6 @@ items:
     content: public java.lang.String getFirstName()
     return:
       type: java.lang.String
-      description: -=TBD=-
 - uid: com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
   id: setFirstName(java.lang.String)
   parent: com.microsoft.samples.subpackage.Person
@@ -79,7 +78,6 @@ items:
       description: -=TBD=-
     return:
       type: void
-      description: -=TBD=-
 - uid: com.microsoft.samples.subpackage.Person.getLastName()
   id: getLastName()
   parent: com.microsoft.samples.subpackage.Person
@@ -96,7 +94,6 @@ items:
     content: public java.lang.String getLastName()
     return:
       type: java.lang.String
-      description: -=TBD=-
 - uid: com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
   id: setLastName(java.lang.String)
   parent: com.microsoft.samples.subpackage.Person
@@ -117,7 +114,6 @@ items:
       description: -=TBD=-
     return:
       type: void
-      description: -=TBD=-
 - uid: com.microsoft.samples.subpackage.Person.firstName
   id: firstName
   parent: com.microsoft.samples.subpackage.Person
