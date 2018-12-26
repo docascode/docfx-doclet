@@ -14,6 +14,7 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <jackson.version>2.9.7</jackson.version>
+    <apache.commons.version>3.8.1</apache.commons.version>
   </properties>
 
   <build>
@@ -62,7 +63,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.8.1</version>
+      <version>${apache.commons.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
