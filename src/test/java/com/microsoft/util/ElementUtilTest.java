@@ -16,6 +16,7 @@ import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.ParamTree;
 import com.sun.source.doctree.ReturnTree;
+import com.sun.source.doctree.ThrowsTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -47,6 +48,7 @@ public class ElementUtilTest {
     private ElementUtil elementUtil;
     private DocTrees docTrees;
     private DocCommentTree docCommentTree;
+    private ThrowsTree throwsTree;
     private ParamTree paramTree;
     private ReturnTree returnTree;
 
@@ -57,6 +59,7 @@ public class ElementUtilTest {
         environment = Mockito.mock(DocletEnvironment.class);
         docTrees = Mockito.mock(DocTrees.class);
         docCommentTree = Mockito.mock(DocCommentTree.class);
+        throwsTree = Mockito.mock(ThrowsTree.class);
         paramTree = Mockito.mock(ParamTree.class);
         returnTree = Mockito.mock(ReturnTree.class);
         elementUtil = new ElementUtil(environment);
@@ -94,14 +97,23 @@ public class ElementUtilTest {
     @Test
     public void extractExceptions() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+        ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
 
-        List<ExceptionItem> result = ElementUtil.extractExceptions(
-            ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
-        );
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList(throwsTree)).when(docCommentTree).getBlockTags();
+        when(throwsTree.getKind()).thenReturn(Kind.THROWS);
+        when(throwsTree.toString()).thenReturn("@throws IllegalArgumentException some text");
 
+        List<ExceptionItem> result = ElementUtil.extractExceptions(method);
+
+        verify(environment).getDocTrees();
+        verify(docTrees).getDocCommentTree(method);
+        verify(docCommentTree).getBlockTags();
+        verify(throwsTree).getKind();
         assertThat("Wrong exceptions count", result.size(), is(1));
-        assertThat("Wrong type", result.get(0).getType(), is("java.lang.Exception"));
-        assertThat("Wrong description", result.get(0).getDescription(), is("-=TBD=-"));
+        assertThat("Wrong type", result.get(0).getType(), is("java.lang.IllegalArgumentException"));
+        assertThat("Wrong description", result.get(0).getDescription(), is("some text"));
     }
 
     @Test

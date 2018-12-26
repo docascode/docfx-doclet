@@ -97,9 +97,10 @@ public class ElementUtil {
     }
 
     public static List<ExceptionItem> extractExceptions(ExecutableElement methodElement) {
-        return methodElement.getThrownTypes().stream()
-            .map(o -> new ExceptionItem(String.valueOf(o), "-=TBD=-"))  // TODO: Determine exception description
-            .collect(Collectors.toList());
+        return methodElement.getThrownTypes().stream().map(o -> {
+            String exceptionType = String.valueOf(o);
+            return new ExceptionItem(exceptionType, extractExceptionDescription(methodElement, exceptionType));
+        }).collect(Collectors.toList());
     }
 
     public static List<MethodParameter> extractParameters(ExecutableElement element) {
@@ -163,6 +164,20 @@ public class ElementUtil {
             .map(StringUtils::trim)
             .filter(o -> o.startsWith(paramName))
             .map(o -> StringUtils.replace(o, paramName, ""))
+            .map(StringUtils::trim)
+            .findFirst().orElse(null)
+        ).orElse(null);
+    }
+
+    private static String extractExceptionDescription(ExecutableElement methodElement, String exceptionType) {
+        return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
+            .filter(o -> o.getKind() == Kind.THROWS)
+            .map(String::valueOf)
+            .map(o -> StringUtils.remove(o, "@throws"))
+            .map(StringUtils::trim)
+            .filter(o -> o.contains(" "))
+            .filter(o -> StringUtils.contains(exceptionType, o.substring(0, o.indexOf(" "))))
+            .map(o -> StringUtils.replace(o, o.substring(0, o.indexOf(" ")), ""))
             .map(StringUtils::trim)
             .findFirst().orElse(null)
         ).orElse(null);

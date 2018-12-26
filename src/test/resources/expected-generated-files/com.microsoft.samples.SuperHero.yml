@@ -76,8 +76,8 @@ items:
       type: int
       description: the amount of health hero has after attack
   exceptions:
-  - type: java.lang.Exception
-    description: -=TBD=-
+  - type: java.lang.IllegalArgumentException
+    description: when incomingDamage is negative
 - uid: com.microsoft.samples.SuperHero.getHeroName()
   id: getHeroName()
   parent: com.microsoft.samples.SuperHero

@@ -28,13 +28,13 @@ public class SuperHero extends Person {
      * @param incomingDamage the amount of incoming damage
      * @param damageType type of damage
      * @return the amount of health hero has after attack
-     * @throws IllegalArgumentException if incomingDamage is negative
+     * @throws IllegalArgumentException when incomingDamage is negative
      * @version 1.2
      * @see <a href="http://www.link_to_jira/HERO-402">HERO-402</a>
      * @since 1.0
      * @deprecated As of version 1.1, use . . . instead
      */
-    public int successfullyAttacked(int incomingDamage, String damageType) throws Exception {
+    public int successfullyAttacked(int incomingDamage, String damageType) throws IllegalArgumentException {
         // do things
         if (incomingDamage < 0) {
             throw new IllegalArgumentException("Cannot cause negative damage");
