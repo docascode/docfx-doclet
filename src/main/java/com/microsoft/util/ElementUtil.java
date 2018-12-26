@@ -7,7 +7,9 @@ import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,9 +45,13 @@ public class ElementUtil {
     private static Map<String, String> typeParamsLookup = new HashMap<>();
     private static Random random = new Random(21);
     private static DocletEnvironment environment;
+    private static final Set<String> excludePackages = new HashSet<>();
+    private static final Set<String> excludeClasses = new HashSet<>();
 
-    public ElementUtil(DocletEnvironment environment) {
+    public ElementUtil(DocletEnvironment environment, String[] excludePackages, String[] excludeClasses) {
         this.environment = environment;
+        Collections.addAll(this.excludePackages, excludePackages);
+        Collections.addAll(this.excludeClasses, excludeClasses);
     }
 
     public static String extractType(Element element) {
@@ -54,17 +60,19 @@ public class ElementUtil {
 
     public static List<TypeElement> extractSortedElements(Element element) {
         // Need to apply sorting, because order of result items for Element.getEnclosedElements() depend on JDK implementation
-        List<TypeElement> elements = ElementFilter.typesIn(element.getEnclosedElements());
-        elements.sort((o1, o2) ->
-            StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
-        );
-        return elements;
+        return ElementFilter.typesIn(element.getEnclosedElements()).stream()
+            .filter(o -> !excludeClasses.contains(String.valueOf(o.getQualifiedName())))
+            .sorted((o1, o2) ->
+                StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+            ).collect(Collectors.toList());
     }
 
     public static List<PackageElement> extractPackageElements(Set<? extends Element> elements) {
-        return ElementFilter.packagesIn(elements).stream().sorted((o1, o2) ->
-            StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
-        ).collect(Collectors.toList());
+        return ElementFilter.packagesIn(elements).stream()
+            .filter(element -> !excludePackages.contains(String.valueOf(element)))
+            .sorted((o1, o2) ->
+                StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+            ).collect(Collectors.toList());
     }
 
     public static List<TypeParameter> extractTypeParameters(TypeElement element) {

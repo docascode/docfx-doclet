@@ -62,7 +62,7 @@ public class ElementUtilTest {
         throwsTree = Mockito.mock(ThrowsTree.class);
         paramTree = Mockito.mock(ParamTree.class);
         returnTree = Mockito.mock(ReturnTree.class);
-        elementUtil = new ElementUtil(environment);
+        elementUtil = new ElementUtil(environment, new String[]{}, new String[]{});
     }
 
     @Test

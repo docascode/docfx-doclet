@@ -31,8 +31,10 @@ public class DocFxDoclet implements Doclet {
         }
 
         reporter.print(Kind.NOTE, "Output path: " + outputPath);
+        reporter.print(Kind.NOTE, "Excluded packages: " + Arrays.toString(excludePackages));
+        reporter.print(Kind.NOTE, "Excluded classes: " + Arrays.toString(excludeClasses));
 
-        return (new YmlFilesBuilder(environment, outputPath)).build();
+        return (new YmlFilesBuilder(environment, outputPath, excludePackages, excludeClasses)).build();
     }
 
     @Override
@@ -40,46 +42,32 @@ public class DocFxDoclet implements Doclet {
         return "DocFxDoclet";
     }
 
+
     private String outputPath;
+    private String[] excludePackages = {};
+    private String[] excludeClasses = {};
 
     @Override
     public Set<? extends Option> getSupportedOptions() {
         Option[] options = {
-            new Option() {
-                private final List<String> someOption = Arrays.asList(
-                    "-outputpath",
-                    "--output-path",
-                    "-o"
-                );
-
-                @Override
-                public int getArgumentCount() {
-                    return 1;
-                }
-
-                @Override
-                public String getDescription() {
-                    return "Output path";
-                }
-
-                @Override
-                public Kind getKind() {
-                    return Kind.STANDARD;
-                }
-
-                @Override
-                public List<String> getNames() {
-                    return someOption;
-                }
-
-                @Override
-                public String getParameters() {
-                    return "path";
-                }
-
+            new CustomOption("Output path", Arrays.asList("-outputpath", "--output-path", "-o"), "path") {
                 @Override
                 public boolean process(String option, List<String> arguments) {
                     outputPath = arguments.get(0);
+                    return true;
+                }
+            },
+            new CustomOption("Exclude packages", Arrays.asList("-excludepackages", "--exclude-packages", "-ep"), "packages") {
+                @Override
+                public boolean process(String option, List<String> arguments) {
+                    excludePackages = StringUtils.split(arguments.get(0), ":");
+                    return true;
+                }
+            },
+            new CustomOption("Exclude classes", Arrays.asList("-excludeclasses", "--exclude-classes", "-ec"), "classes") {
+                @Override
+                public boolean process(String option, List<String> arguments) {
+                    excludeClasses = StringUtils.split(arguments.get(0), ":");
                     return true;
                 }
             }
@@ -91,5 +79,43 @@ public class DocFxDoclet implements Doclet {
     public SourceVersion getSupportedSourceVersion() {
         // support the latest release
         return SourceVersion.latest();
+    }
+
+    private abstract class CustomOption implements Option {
+
+        private final String description;
+        private final List<String> names;
+        private final String parameters;
+
+        public CustomOption(String description, List<String> names, String parameters) {
+            this.description = description;
+            this.names = names;
+            this.parameters = parameters;
+        }
+
+        @Override
+        public int getArgumentCount() {
+            return 1;
+        }
+
+        @Override
+        public String getDescription() {
+            return description;
+        }
+
+        @Override
+        public Kind getKind() {
+            return Kind.STANDARD;
+        }
+
+        @Override
+        public List<String> getNames() {
+            return names;
+        }
+
+        @Override
+        public String getParameters() {
+            return parameters;
+        }
     }
 }

@@ -34,10 +34,11 @@ public class YmlFilesBuilder {
     private ClassItemsLookup classItemsLookup = new ClassItemsLookup();
     private ClassLookup classLookup = new ClassLookup();
 
-    public YmlFilesBuilder(DocletEnvironment environment, String outputPath) {
+    public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
+        String[] excludePackages, String[] excludeClasses) {
         this.environment = environment;
         this.outputPath = outputPath;
-        this.elementUtil = new ElementUtil(environment);
+        this.elementUtil = new ElementUtil(environment, excludePackages, excludeClasses);
     }
 
     public boolean build() {
