@@ -103,11 +103,11 @@ public class ElementUtil {
     }
 
     public static List<MethodParameter> extractParameters(ExecutableElement element) {
-        return element.getParameters().stream().map(o -> new MethodParameter(
-            String.valueOf(o.getSimpleName()),
-            String.valueOf(o.asType()),
-            "-=TBD=-"                                                   // TODO: Determine parameter description
-        )).collect(Collectors.toList());
+        return element.getParameters().stream().map(o -> {
+            String paramName = String.valueOf(o.getSimpleName());
+            String paramType = String.valueOf(o.asType());
+            return new MethodParameter(paramName, paramType, extractParameterDescription(element, paramName));
+        }).collect(Collectors.toList());
     }
 
     public static String extractPackageContent(PackageElement packageElement) {
@@ -150,6 +150,19 @@ public class ElementUtil {
             .filter(o -> o.getKind() == Kind.RETURN)
             .map(String::valueOf)
             .map(o -> StringUtils.remove(o, "@return"))
+            .map(StringUtils::trim)
+            .findFirst().orElse(null)
+        ).orElse(null);
+    }
+
+    private static String extractParameterDescription(ExecutableElement method, String paramName) {
+        return getDocCommentTree(method).map(docTree -> docTree.getBlockTags().stream()
+            .filter(o -> o.getKind() == Kind.PARAM)
+            .map(String::valueOf)
+            .map(o -> StringUtils.remove(o, "@param"))
+            .map(StringUtils::trim)
+            .filter(o -> o.startsWith(paramName))
+            .map(o -> StringUtils.replace(o, paramName, ""))
             .map(StringUtils::trim)
             .findFirst().orElse(null)
         ).orElse(null);

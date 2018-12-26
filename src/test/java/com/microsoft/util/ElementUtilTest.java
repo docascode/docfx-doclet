@@ -14,6 +14,7 @@ import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.ParamTree;
 import com.sun.source.doctree.ReturnTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
@@ -46,6 +47,7 @@ public class ElementUtilTest {
     private ElementUtil elementUtil;
     private DocTrees docTrees;
     private DocCommentTree docCommentTree;
+    private ParamTree paramTree;
     private ReturnTree returnTree;
 
     @Before
@@ -55,6 +57,7 @@ public class ElementUtilTest {
         environment = Mockito.mock(DocletEnvironment.class);
         docTrees = Mockito.mock(DocTrees.class);
         docCommentTree = Mockito.mock(DocCommentTree.class);
+        paramTree = Mockito.mock(ParamTree.class);
         returnTree = Mockito.mock(ReturnTree.class);
         elementUtil = new ElementUtil(environment);
     }
@@ -102,22 +105,31 @@ public class ElementUtilTest {
     }
 
     @Test
-    public void extarctParameters() {
+    public void extractParameters() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+        ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
 
-        List<MethodParameter> result = ElementUtil.extractParameters(
-            ElementFilter.methodsIn(element.getEnclosedElements()).get(0)
-        );
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList(paramTree)).when(docCommentTree).getBlockTags();
+        when(paramTree.getKind()).thenReturn(Kind.PARAM);
+        when(paramTree.toString())
+            .thenReturn("@param incomingDamage some text bla", "@param damageType some text bla-bla");
 
+        List<MethodParameter> result = ElementUtil.extractParameters(method);
+
+        verify(environment, times(2)).getDocTrees();
+        verify(docTrees, times(2)).getDocCommentTree(method);
+        verify(docCommentTree, times(2)).getBlockTags();
         assertThat("Wrong parameters count", result.size(), is(2));
 
         assertThat("Wrong first param id", result.get(0).getId(), is("incomingDamage"));
         assertThat("Wrong first param type", result.get(0).getType(), is("int"));
-        assertThat("Wrong first param description", result.get(0).getDescription(), is("-=TBD=-"));
+        assertThat("Wrong first param description", result.get(0).getDescription(), is("some text bla"));
 
         assertThat("Wrong second param id", result.get(1).getId(), is("damageType"));
         assertThat("Wrong second param type", result.get(1).getType(), is("java.lang.String"));
-        assertThat("Wrong second param description", result.get(1).getDescription(), is("-=TBD=-"));
+        assertThat("Wrong second param description", result.get(1).getDescription(), is("some text bla-bla"));
     }
 
     @Test

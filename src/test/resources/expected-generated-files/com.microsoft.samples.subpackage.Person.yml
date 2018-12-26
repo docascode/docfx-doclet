@@ -75,7 +75,6 @@ items:
     parameters:
     - id: firstName
       type: java.lang.String
-      description: -=TBD=-
     return:
       type: void
 - uid: com.microsoft.samples.subpackage.Person.getLastName()
@@ -111,7 +110,6 @@ items:
     parameters:
     - id: lastName
       type: java.lang.String
-      description: -=TBD=-
     return:
       type: void
 - uid: com.microsoft.samples.subpackage.Person.firstName

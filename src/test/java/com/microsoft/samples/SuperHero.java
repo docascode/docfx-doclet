@@ -26,6 +26,7 @@ public class SuperHero extends Person {
      * </p>
      *
      * @param incomingDamage the amount of incoming damage
+     * @param damageType type of damage
      * @return the amount of health hero has after attack
      * @throws IllegalArgumentException if incomingDamage is negative
      * @version 1.2

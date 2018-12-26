@@ -68,10 +68,10 @@ items:
     parameters:
     - id: incomingDamage
       type: int
-      description: -=TBD=-
+      description: the amount of incoming damage
     - id: damageType
       type: java.lang.String
-      description: -=TBD=-
+      description: type of damage
     return:
       type: int
       description: the amount of health hero has after attack
@@ -111,7 +111,6 @@ items:
     parameters:
     - id: heroName
       type: java.lang.String
-      description: -=TBD=-
     return:
       type: void
 - uid: com.microsoft.samples.SuperHero.getLastName()
@@ -169,7 +168,6 @@ items:
     parameters:
     - id: uniquePower
       type: java.lang.String
-      description: -=TBD=-
     return:
       type: void
 - uid: com.microsoft.samples.SuperHero.getHealth()
@@ -205,7 +203,6 @@ items:
     parameters:
     - id: health
       type: int
-      description: -=TBD=-
     return:
       type: void
 - uid: com.microsoft.samples.SuperHero.getDefense()
@@ -241,7 +238,6 @@ items:
     parameters:
     - id: defense
       type: int
-      description: -=TBD=-
     return:
       type: void
 - uid: com.microsoft.samples.SuperHero.heroName

@@ -69,7 +69,6 @@ items:
     parameters:
     - id: name
       type: java.lang.String
-      description: -=TBD=-
     return:
       type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
