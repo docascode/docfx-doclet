@@ -1,6 +1,6 @@
 -doclet com.microsoft.doclet.DocFxDoclet
 -sourcepath ./src/test/java
 -outputpath ./target/test-out
--excludepackages com.microsoft.samples.someexcludedpackage:com.microsoft.samples.someunexistingpackage
--excludeclasses com.microsoft.samples.subpackage.SomeExcludedClass:com.microsoft.samples.subpackage.SomeUnexistingClass
+-excludepackages com\.microsoft\.samples\.someexcludedpack.*:com\.microsoft\.samples\.someunexistingpackage
+-excludeclasses com\.microsoft\.samples\.subpackage\.SomeExcluded.*:com\.microsoft\.samples\.subpackage\.SomeUnexistingClass
 -subpackages com.microsoft.samples

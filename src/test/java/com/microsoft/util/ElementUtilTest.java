@@ -1,7 +1,9 @@
 package com.microsoft.util;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -22,6 +24,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
@@ -274,6 +277,16 @@ public class ElementUtilTest {
         assertThat("Wrong result list size", result.size(), is(2));
         assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples"));
         assertThat("Unexpected second item", result.get(1), is("com.microsoft.samples.subpackage"));
+    }
+
+    @Test
+    public void matchAnyPattern() {
+        HashSet<Pattern> patterns = new HashSet<>(
+            Arrays.asList(Pattern.compile("com\\.ms\\.Some.*"), Pattern.compile(".*UsualClass")));
+        assertTrue(ElementUtil.matchAnyPattern(patterns, "com.ms.SomeStrangeClass"));
+        assertTrue(ElementUtil.matchAnyPattern(patterns, "UsualClass"));
+        assertFalse(ElementUtil.matchAnyPattern(patterns, "EngineFive"));
+        assertFalse(ElementUtil.matchAnyPattern(patterns, "com.ms.Awesome"));
     }
 
     private void checkReturnForExecutableElement(TypeElement element, int methodNumber, String expectedType,

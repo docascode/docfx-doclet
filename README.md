@@ -11,6 +11,8 @@ javadoc \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -sourcepath ./src/test/java \
 -outputpath ./target/test-out \
+-excludepackages com\.msdn\..*:com\.ms\.news\..*  \   # Not mandatory parameter
+-excludeclasses .*SomeClass:com\.ms\..*AnyClass       # Not mandatory parameter
 -subpackages com.microsoft.samples
 </pre>
 Before this action run `mvn clean install` once to put jar into artifactory
@@ -28,6 +30,8 @@ javadoc \
 -cp ./hamcrest-core-1.3.jar \
 -sourcepath ./junit-4.12-sources \
 -outputpath ./test-out \
+-excludepackages com\.msdn\..*:com\.ms\.news\..*  \   # Not mandatory parameter
+-excludeclasses .*SomeClass:com\.ms\..*AnyClass       # Not mandatory parameter
 -subpackages org:junit
 </pre>
 

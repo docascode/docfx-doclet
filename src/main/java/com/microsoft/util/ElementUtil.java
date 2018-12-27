@@ -7,7 +7,6 @@ import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +14,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -45,13 +47,16 @@ public class ElementUtil {
     private static Map<String, String> typeParamsLookup = new HashMap<>();
     private static Random random = new Random(21);
     private static DocletEnvironment environment;
-    private static final Set<String> excludePackages = new HashSet<>();
-    private static final Set<String> excludeClasses = new HashSet<>();
+    private static final Set<Pattern> excludePackages = new HashSet<>();
+    private static final Set<Pattern> excludeClasses = new HashSet<>();
 
     public ElementUtil(DocletEnvironment environment, String[] excludePackages, String[] excludeClasses) {
         this.environment = environment;
-        Collections.addAll(this.excludePackages, excludePackages);
-        Collections.addAll(this.excludeClasses, excludeClasses);
+
+        this.excludePackages.addAll(Stream.of(excludePackages)
+            .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
+        this.excludeClasses.addAll(Stream.of(excludeClasses)
+            .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
     }
 
     public static String extractType(Element element) {
@@ -61,7 +66,7 @@ public class ElementUtil {
     public static List<TypeElement> extractSortedElements(Element element) {
         // Need to apply sorting, because order of result items for Element.getEnclosedElements() depend on JDK implementation
         return ElementFilter.typesIn(element.getEnclosedElements()).stream()
-            .filter(o -> !excludeClasses.contains(String.valueOf(o.getQualifiedName())))
+            .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
             .sorted((o1, o2) ->
                 StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
             ).collect(Collectors.toList());
@@ -69,7 +74,7 @@ public class ElementUtil {
 
     public static List<PackageElement> extractPackageElements(Set<? extends Element> elements) {
         return ElementFilter.packagesIn(elements).stream()
-            .filter(element -> !excludePackages.contains(String.valueOf(element)))
+            .filter(o -> !matchAnyPattern(excludePackages, String.valueOf(o)))
             .sorted((o1, o2) ->
                 StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
             ).collect(Collectors.toList());
@@ -189,5 +194,14 @@ public class ElementUtil {
             .map(StringUtils::trim)
             .findFirst().orElse(null)
         ).orElse(null);
+    }
+
+    static boolean matchAnyPattern(Set<Pattern> patterns, String stringToCheck) {
+        for (Pattern pattern : patterns) {
+            if (pattern.matcher(stringToCheck).matches()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
