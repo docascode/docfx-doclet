@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -148,7 +147,21 @@ public class ElementUtil {
     }
 
     public static String extractComment(Element element) {
-        return getDocCommentTree(element).map(docTree -> String.valueOf(docTree.getFullBody())).orElse(null);
+        return getDocCommentTree(element).map(docTree -> docTree.getFullBody().stream()
+            .map(o -> {
+                if (o.getKind() == Kind.LINK) {
+                    return replaceLinkWithXrefTag(String.valueOf(o));
+                }
+                return String.valueOf(o);
+            }).collect(Collectors.joining())
+        ).orElse(null);
+    }
+
+    static String replaceLinkWithXrefTag(String text) {
+        text = StringUtils.remove(text, "{@link ");
+        text = StringUtils.remove(text, "}");
+        String uidContent = "";         // TODO: determine uid content
+        return "<xref uid=\"" + uidContent + "\" data-throw-if-not-resolved=\"false\">" + text + "</xref>";
     }
 
     public static String extractPackageName(Element element) {

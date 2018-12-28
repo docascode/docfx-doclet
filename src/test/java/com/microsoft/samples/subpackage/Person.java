@@ -6,7 +6,7 @@ package com.microsoft.samples.subpackage;
 public class Person<T> {
 
     /**
-     * This is a first name
+     * This is a first name of a {@link Person} entity
      */
     private String firstName;
     private String lastName;

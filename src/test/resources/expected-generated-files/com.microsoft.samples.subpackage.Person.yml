@@ -123,7 +123,7 @@ items:
   fullName: com.microsoft.samples.subpackage.Person<T>.firstName
   type: Field
   package: com.microsoft.samples.subpackage
-  summary: This is a first name
+  summary: This is a first name of a <xref uid="" data-throw-if-not-resolved="false">Person</xref> entity
   syntax:
     content: private firstName
     return:

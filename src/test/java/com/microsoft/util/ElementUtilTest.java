@@ -16,8 +16,10 @@ import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.ParamTree;
 import com.sun.source.doctree.ReturnTree;
+import com.sun.source.doctree.TextTree;
 import com.sun.source.doctree.ThrowsTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
@@ -54,6 +56,8 @@ public class ElementUtilTest {
     private ThrowsTree throwsTree;
     private ParamTree paramTree;
     private ReturnTree returnTree;
+    private TextTree textTree;
+    private LinkTree linkTree;
 
     @Before
     public void setup() {
@@ -65,6 +69,8 @@ public class ElementUtilTest {
         throwsTree = Mockito.mock(ThrowsTree.class);
         paramTree = Mockito.mock(ParamTree.class);
         returnTree = Mockito.mock(ReturnTree.class);
+        textTree = Mockito.mock(TextTree.class);
+        linkTree = Mockito.mock(LinkTree.class);
         elementUtil = new ElementUtil(environment, new String[]{}, new String[]{});
     }
 
@@ -287,6 +293,36 @@ public class ElementUtilTest {
         assertTrue(ElementUtil.matchAnyPattern(patterns, "UsualClass"));
         assertFalse(ElementUtil.matchAnyPattern(patterns, "EngineFive"));
         assertFalse(ElementUtil.matchAnyPattern(patterns, "com.ms.Awesome"));
+    }
+
+    @Test
+    public void extractComment() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList(textTree, linkTree)).when(docCommentTree).getFullBody();
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        when(linkTree.getKind()).thenReturn(Kind.LINK);
+        when(textTree.toString()).thenReturn("Some text 1");
+        when(linkTree.toString()).thenReturn("Some text 2");
+
+        String result = ElementUtil.extractComment(element);
+
+        verify(environment).getDocTrees();
+        verify(docTrees).getDocCommentTree(element);
+        verify(docCommentTree).getFullBody();
+        verify(textTree).getKind();
+        verify(linkTree).getKind();
+        assertThat("Wrong result", result, is("Some text 1<xref uid=\"\" data-throw-if-not-resolved=\"false\">Some text 2</xref>"));
+    }
+
+    @Test
+    public void replaceLinkWithXrefTag() {
+        assertThat("Wrong result", ElementUtil.replaceLinkWithXrefTag("{@link Class1#method10()}"),
+            is("<xref uid=\"\" data-throw-if-not-resolved=\"false\">Class1#method10()</xref>"));
+        assertThat("Wrong result for method with parameter",
+            ElementUtil.replaceLinkWithXrefTag("{@link Class2#method15(java.lang.String)}"),
+            is("<xref uid=\"\" data-throw-if-not-resolved=\"false\">Class2#method15(java.lang.String)</xref>"));
     }
 
     private void checkReturnForExecutableElement(TypeElement element, int methodNumber, String expectedType,

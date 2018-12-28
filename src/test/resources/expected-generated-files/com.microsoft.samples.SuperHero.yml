@@ -60,9 +60,9 @@ items:
   type: Method
   package: com.microsoft.samples
   summary: |-
-    <p>,This is a simple description of the method. . .
-     ,<a href="http://www.supermanisthegreatest.com">,Superman!,</a>,
-     ,</p>
+    <p>This is a simple description of the method. . .
+     <a href="http://www.supermanisthegreatest.com">Superman!</a>
+     </p>
   syntax:
     content: public int successfullyAttacked(int,java.lang.String)
     parameters:
