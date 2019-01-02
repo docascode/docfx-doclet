@@ -20,6 +20,16 @@ public class SuperHero extends Person {
 
     public final String SOME_PUBLIC_STRING = "So important string value";
 
+    public SuperHero() {
+    }
+
+    public SuperHero(String heroName, String uniquePower, int health, int defense) {
+        this.heroName = heroName;
+        this.uniquePower = uniquePower;
+        this.health = health;
+        this.defense = defense;
+    }
+
     /**
      * <p>This is a simple description of the method. . .
      * <a href="http://www.supermanisthegreatest.com">Superman!</a>

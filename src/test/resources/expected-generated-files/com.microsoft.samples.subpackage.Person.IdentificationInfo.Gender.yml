@@ -58,14 +58,14 @@ items:
   href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
   langs:
   - java
-  name: valueOf(java.lang.String)
-  nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
+  name: valueOf(java.lang.String name)
+  nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
   overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*
   type: Method
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender valueOf(java.lang.String)
+    content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender valueOf(java.lang.String name)
     parameters:
     - id: name
       type: java.lang.String
@@ -118,7 +118,7 @@ references:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
   package: com.microsoft.samples.subpackage
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  name: valueOf(java.lang.String)
-  nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
+  name: valueOf(java.lang.String name)
+  nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
   package: com.microsoft.samples.subpackage
