@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -44,7 +43,6 @@ public class ElementUtil {
         put(ElementKind.FIELD, "Field");
     }};
     private static Map<String, String> typeParamsLookup = new HashMap<>();
-    private static Random random = new Random(21);
     private static DocletEnvironment environment;
     private static final Set<Pattern> excludePackages = new HashSet<>();
     private static final Set<Pattern> excludeClasses = new HashSet<>();
@@ -84,7 +82,7 @@ public class ElementUtil {
         for (TypeParameterElement typeParameter : element.getTypeParameters()) {
             String key = String.valueOf(typeParameter);
             if (!typeParamsLookup.containsKey(key)) {
-                typeParamsLookup.put(key, generateRandomHexString());
+                typeParamsLookup.put(key, generateHexString(key));
             }
             String value = typeParamsLookup.get(key);
             result.add(new TypeParameter(key, value));
@@ -92,12 +90,12 @@ public class ElementUtil {
         return result;
     }
 
-    private static String generateRandomHexString() {
-        return Integer.toHexString(random.nextInt());
+    static String generateHexString(String key) {
+        return String.valueOf(key.hashCode());
     }
 
     public static String convertFullNameToOverload(String fullName) {
-        return fullName.replaceAll("\\(.*", "*");
+        return fullName.replaceAll("\\(.*\\)", "*");
     }
 
     public static String extractSuperclass(TypeElement classElement) {

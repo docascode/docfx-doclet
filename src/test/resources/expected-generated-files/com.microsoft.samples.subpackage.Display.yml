@@ -18,9 +18,9 @@ items:
     content: public interface Display<T,R>
     typeParameters:
     - id: T
-      type: bb61488d
+      type: 84
     - id: R
-      type: df411159
+      type: 82
   inheritance:
   - java.lang.Object
 - uid: com.microsoft.samples.subpackage.Display.show()
@@ -67,9 +67,9 @@ references:
     content: public interface Display<T,R>
     typeParameters:
     - id: T
-      type: bb61488d
+      type: 84
     - id: R
-      type: df411159
+      type: 82
 - uid: com.microsoft.samples.subpackage.Display.show()
   name: show()
   nameWithType: Display<T,R>.show()

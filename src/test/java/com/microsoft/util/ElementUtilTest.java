@@ -82,7 +82,13 @@ public class ElementUtilTest {
 
         assertThat("Wrong type params size", result.size(), is(1));
         assertThat("Wrong type parameter id", result.get(0).getId(), is("T"));
-        assertThat("Wrong type parameter type", result.get(0).getType(), is("bb61488d"));
+        assertThat("Wrong type parameter type", result.get(0).getType(), is("84"));
+    }
+
+    @Test
+    public void generateHexString() {
+        assertThat("Wrong result for simple string", ElementUtil.generateHexString("T"), is("84"));
+        assertThat("Wrong result for complex string", ElementUtil.generateHexString("? extends SomeClass"), is("-819114916"));
     }
 
     @Test
