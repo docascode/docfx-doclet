@@ -5,14 +5,38 @@ import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree.Kind;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.element.TypeElement;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class BaseLookup<T> {
 
+    protected final Map<ElementKind, String> elementKindLookup = new HashMap<>() {{
+        put(ElementKind.PACKAGE, "Namespace");
+        put(ElementKind.CLASS, "Class");
+        put(ElementKind.ENUM, "Enum");
+        put(ElementKind.ENUM_CONSTANT, "Enum constant");
+        put(ElementKind.INTERFACE, "Interface");
+        put(ElementKind.ANNOTATION_TYPE, "Interface");
+        put(ElementKind.CONSTRUCTOR, "Constructor");
+        put(ElementKind.METHOD, "Method");
+        put(ElementKind.FIELD, "Field");
+    }};
+
     protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
+    private final DocletEnvironment environment;
+
+    protected BaseLookup(DocletEnvironment environment) {
+        this.environment = environment;
+    }
 
     protected ExtendedMetadataFileItem resolve(T key) {
         ExtendedMetadataFileItem value = map.get(key);
@@ -107,5 +131,35 @@ public abstract class BaseLookup<T> {
 
     public String extractTocName(T key) {
         return resolve(key).getTocName();
+    }
+
+    protected String determineType(Element element) {
+        return elementKindLookup.get(element.getKind());
+    }
+
+    protected String determinePackageName(Element element) {
+        return String.valueOf(environment.getElementUtils().getPackageOf(element));
+    }
+
+    protected String determineComment(Element element) {
+        return getDocCommentTree(element).map(docTree -> docTree.getFullBody().stream()
+            .map(o -> {
+                if (o.getKind() == Kind.LINK) {
+                    return replaceLinkWithXrefTag(String.valueOf(o));
+                }
+                return String.valueOf(o);
+            }).collect(Collectors.joining())
+        ).orElse(null);
+    }
+
+    String replaceLinkWithXrefTag(String text) {
+        text = StringUtils.remove(text, "{@link ");
+        text = StringUtils.remove(text, "}");
+        String uidContent = "";         // TODO: determine uid content
+        return "<xref uid=\"" + uidContent + "\" data-throw-if-not-resolved=\"false\">" + text + "</xref>";
+    }
+
+    protected Optional<DocCommentTree> getDocCommentTree(Element element) {
+        return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
     }
 }

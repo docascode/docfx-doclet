@@ -3,8 +3,13 @@ package com.microsoft.lookup;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.util.ElementUtil;
 import javax.lang.model.element.PackageElement;
+import jdk.javadoc.doclet.DocletEnvironment;
 
 public class PackageLookup extends BaseLookup<PackageElement> {
+
+    public PackageLookup(DocletEnvironment environment) {
+        super(environment);
+    }
 
     @Override
     protected ExtendedMetadataFileItem buildMetadataFileItem(PackageElement packageElement) {
@@ -18,10 +23,14 @@ public class PackageLookup extends BaseLookup<PackageElement> {
         result.setName(qName);
         result.setNameWithType(qName);
         result.setFullName(qName);
-        result.setType(ElementUtil.extractType(packageElement));
-        result.setSummary(ElementUtil.extractComment(packageElement));
-        result.setContent(ElementUtil.extractPackageContent(packageElement));
+        result.setType(determineType(packageElement));
+        result.setSummary(determineComment(packageElement));
+        result.setContent(determinePackageContent(packageElement));
 
         return result;
+    }
+
+    String determinePackageContent(PackageElement packageElement) {
+        return "package " + packageElement.getQualifiedName();
     }
 }

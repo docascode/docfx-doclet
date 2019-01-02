@@ -1,12 +1,9 @@
 package com.microsoft.lookup;
 
-import static com.microsoft.util.ElementUtil.convertFullNameToOverload;
-
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
-import com.microsoft.util.ElementUtil;
 import com.sun.source.doctree.DocTree.Kind;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +11,18 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.StringUtils;
 
 public class ClassItemsLookup extends BaseLookup<Element> {
 
+    public ClassItemsLookup(DocletEnvironment environment) {
+        super(environment);
+    }
+
     @Override
     protected ExtendedMetadataFileItem buildMetadataFileItem(Element element) {
-        String packageName = ElementUtil.extractPackageName(element);
+        String packageName = determinePackageName(element);
         TypeElement classElement = (TypeElement) element.getEnclosingElement();
         String classQName = String.valueOf(classElement.getQualifiedName());
         String elementQName = String.valueOf(element);
@@ -34,9 +36,9 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             setParent(classQName);
             setHref(classQName + ".yml");
             setName(elementQName);
-            setType(ElementUtil.extractType(element));
+            setType(determineType(element));
             setPackageName(packageName);
-            setSummary(ElementUtil.extractComment(element));
+            setSummary(determineComment(element));
         }};
 
         String modifiers = element.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" "));
@@ -77,7 +79,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     }
 
     String extractParameterDescription(ExecutableElement method, String paramName) {
-        return ElementUtil.getDocCommentTree(method).map(docTree -> docTree.getBlockTags().stream()
+        return getDocCommentTree(method).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.PARAM)
             .map(String::valueOf)
             .map(o -> StringUtils.remove(o, "@param"))
@@ -97,7 +99,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     }
 
     String extractExceptionDescription(ExecutableElement methodElement, String exceptionType) {
-        return ElementUtil.getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
+        return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.THROWS)
             .map(String::valueOf)
             .map(o -> StringUtils.remove(o, "@throws"))
@@ -116,7 +118,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     }
 
     String extractReturnDescription(ExecutableElement methodElement) {
-        return ElementUtil.getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
+        return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.RETURN)
             .map(String::valueOf)
             .map(o -> StringUtils.remove(o, "@return"))
@@ -127,5 +129,9 @@ public class ClassItemsLookup extends BaseLookup<Element> {
 
     Return extractReturn(VariableElement fieldElement) {
         return new Return(String.valueOf(fieldElement.asType()));
+    }
+
+    String convertFullNameToOverload(String fullName) {
+        return fullName.replaceAll("\\(.*\\)", "*");
     }
 }

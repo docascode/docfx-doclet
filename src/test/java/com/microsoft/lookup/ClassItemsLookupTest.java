@@ -45,7 +45,6 @@ public class ClassItemsLookupTest {
     private ParamTree paramTree;
     private ThrowsTree throwsTree;
     private ReturnTree returnTree;
-    private ElementUtil elementUtil;
     private ClassItemsLookup classItemsLookup;
 
     @Before
@@ -57,8 +56,7 @@ public class ClassItemsLookupTest {
         paramTree = Mockito.mock(ParamTree.class);
         throwsTree = Mockito.mock(ThrowsTree.class);
         returnTree = Mockito.mock(ReturnTree.class);
-        elementUtil = new ElementUtil(environment, new String[]{}, new String[]{});
-        classItemsLookup = new ClassItemsLookup();
+        classItemsLookup = new ClassItemsLookup(environment);
     }
 
     @Test
@@ -220,5 +218,20 @@ public class ClassItemsLookupTest {
         Return result = classItemsLookup.extractReturn(variableElement);
 
         assertThat(result.getReturnType(), is(expectedType));
+    }
+
+    @Test
+    public void convertFullNameToOverload() {
+        assertThat("Wrong result", classItemsLookup.convertFullNameToOverload(
+            "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"), is(
+            "com.microsoft.samples.SuperHero.successfullyAttacked*"));
+
+        assertThat("Wrong result for case with generics", classItemsLookup.convertFullNameToOverload(
+            "com.microsoft.samples.subpackage.Display<T,R>.show()"), is(
+            "com.microsoft.samples.subpackage.Display<T,R>.show*"));
+
+        assertThat("Wrong result for constructor case", classItemsLookup.convertFullNameToOverload(
+            "com.microsoft.samples.SuperHero.SuperHero()"), is(
+            "com.microsoft.samples.SuperHero.SuperHero*"));
     }
 }

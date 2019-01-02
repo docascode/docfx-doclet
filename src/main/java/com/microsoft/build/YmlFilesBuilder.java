@@ -1,8 +1,5 @@
 package com.microsoft.build;
 
-import static com.microsoft.util.ElementUtil.extractPackageElements;
-import static com.microsoft.util.ElementUtil.extractSortedElements;
-
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
@@ -29,21 +26,24 @@ public class YmlFilesBuilder {
 
     private DocletEnvironment environment;
     private String outputPath;
-    private final ElementUtil elementUtil;
-    private PackageLookup packageLookup = new PackageLookup();
-    private ClassItemsLookup classItemsLookup = new ClassItemsLookup();
-    private ClassLookup classLookup = new ClassLookup();
+    private ElementUtil elementUtil;
+    private PackageLookup packageLookup;
+    private ClassItemsLookup classItemsLookup;
+    private ClassLookup classLookup;
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
         String[] excludePackages, String[] excludeClasses) {
         this.environment = environment;
         this.outputPath = outputPath;
-        this.elementUtil = new ElementUtil(environment, excludePackages, excludeClasses);
+        this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
+        this.packageLookup = new PackageLookup(environment);
+        this.classItemsLookup = new ClassItemsLookup(environment);
+        this.classLookup = new ClassLookup(environment);
     }
 
     public boolean build() {
         TocFile tocFile = new TocFile(outputPath);
-        for (PackageElement packageElement : extractPackageElements(environment.getIncludedElements())) {
+        for (PackageElement packageElement : elementUtil.extractPackageElements(environment.getIncludedElements())) {
             String uid = packageLookup.extractUid(packageElement);
             String href = packageLookup.extractHref(packageElement);
             buildPackageYmlFile(packageElement, href);
@@ -57,7 +57,7 @@ public class YmlFilesBuilder {
     }
 
     void buildFilesForInnerClasses(Element element, List<TocItem> listToAddItems) {
-        for (TypeElement classElement : extractSortedElements(element)) {
+        for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             String uid = classLookup.extractUid(classElement);
             String name = classLookup.extractTocName(classElement);
             String href = classLookup.extractHref(classElement);
@@ -90,7 +90,7 @@ public class YmlFilesBuilder {
 
     void addChildrenReferences(Element element, List<String> packageChildren,
         List<MetadataFileItem> referencesCollector) {
-        for (TypeElement classElement : extractSortedElements(element)) {
+        for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             referencesCollector.add(buildClassReference(classElement));
 
             packageChildren.add(classLookup.extractUid(classElement));
