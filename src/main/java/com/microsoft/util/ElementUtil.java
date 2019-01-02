@@ -1,8 +1,5 @@
 package com.microsoft.util;
 
-import com.microsoft.model.ExceptionItem;
-import com.microsoft.model.MethodParameter;
-import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
@@ -18,11 +15,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
@@ -106,21 +101,6 @@ public class ElementUtil {
         return String.valueOf(superclass);
     }
 
-    public static List<ExceptionItem> extractExceptions(ExecutableElement methodElement) {
-        return methodElement.getThrownTypes().stream().map(o -> {
-            String exceptionType = String.valueOf(o);
-            return new ExceptionItem(exceptionType, extractExceptionDescription(methodElement, exceptionType));
-        }).collect(Collectors.toList());
-    }
-
-    public static List<MethodParameter> extractParameters(ExecutableElement element) {
-        return element.getParameters().stream().map(o -> {
-            String paramName = String.valueOf(o.getSimpleName());
-            String paramType = String.valueOf(o.asType());
-            return new MethodParameter(paramName, paramType, extractParameterDescription(element, paramName));
-        }).collect(Collectors.toList());
-    }
-
     public static String extractPackageContent(PackageElement packageElement) {
         return "package " + packageElement.getQualifiedName();
     }
@@ -133,15 +113,6 @@ public class ElementUtil {
                 .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
                 .collect(Collectors.joining(" ")),
             StringUtils.lowerCase(type), shortNameWithGenericsSupport);
-    }
-
-    public static Return extractReturn(ExecutableElement methodElement) {
-        return new Return(String.valueOf(methodElement.getReturnType()),
-            extractReturnDescription(methodElement));
-    }
-
-    public static Return extractReturn(VariableElement fieldElement) {
-        return new Return(String.valueOf(fieldElement.asType()));
     }
 
     public static String extractComment(Element element) {
@@ -168,43 +139,6 @@ public class ElementUtil {
 
     public static Optional<DocCommentTree> getDocCommentTree(Element element) {
         return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
-    }
-
-    private static String extractReturnDescription(ExecutableElement methodElement) {
-        return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
-            .filter(o -> o.getKind() == Kind.RETURN)
-            .map(String::valueOf)
-            .map(o -> StringUtils.remove(o, "@return"))
-            .map(StringUtils::trim)
-            .findFirst().orElse(null)
-        ).orElse(null);
-    }
-
-    private static String extractParameterDescription(ExecutableElement method, String paramName) {
-        return getDocCommentTree(method).map(docTree -> docTree.getBlockTags().stream()
-            .filter(o -> o.getKind() == Kind.PARAM)
-            .map(String::valueOf)
-            .map(o -> StringUtils.remove(o, "@param"))
-            .map(StringUtils::trim)
-            .filter(o -> o.startsWith(paramName))
-            .map(o -> StringUtils.replace(o, paramName, ""))
-            .map(StringUtils::trim)
-            .findFirst().orElse(null)
-        ).orElse(null);
-    }
-
-    private static String extractExceptionDescription(ExecutableElement methodElement, String exceptionType) {
-        return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
-            .filter(o -> o.getKind() == Kind.THROWS)
-            .map(String::valueOf)
-            .map(o -> StringUtils.remove(o, "@throws"))
-            .map(StringUtils::trim)
-            .filter(o -> o.contains(" "))
-            .filter(o -> StringUtils.contains(exceptionType, o.substring(0, o.indexOf(" "))))
-            .map(o -> StringUtils.replace(o, o.substring(0, o.indexOf(" ")), ""))
-            .map(StringUtils::trim)
-            .findFirst().orElse(null)
-        ).orElse(null);
     }
 
     static boolean matchAnyPattern(Set<Pattern> patterns, String stringToCheck) {
