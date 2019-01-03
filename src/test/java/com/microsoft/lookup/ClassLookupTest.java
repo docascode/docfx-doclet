@@ -83,9 +83,9 @@ public class ClassLookupTest {
     public void determineClassContentForInterface() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
 
-        String result = classLookup.determineClassContent(element, "Display<T, R>");
+        String result = classLookup.determineClassContent(element, "Display<T,R>");
 
-        assertThat("Wrong result", result, is("public interface Display<T, R> extends java.io.Serializable"));
+        assertThat("Wrong result", result, is("public interface Display<T,R> extends java.io.Serializable, java.util.List<com.microsoft.samples.subpackage.Person<T>>"));
     }
 
     @Test
