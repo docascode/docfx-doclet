@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.type.TypeKind;
@@ -16,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ClassLookup extends BaseLookup<TypeElement> {
 
+    private static final String JAVA_LANG_OBJECT = "java.lang.Object";
     private Map<String, String> typeParamsLookup = new HashMap<>();
 
     public ClassLookup(DocletEnvironment environment) {
@@ -60,9 +62,12 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     String determineSuperclass(TypeElement classElement) {
+        if (classElement.getKind() == ElementKind.ENUM) {
+            return JAVA_LANG_OBJECT;
+        }
         TypeMirror superclass = classElement.getSuperclass();
         if (superclass.getKind() == TypeKind.NONE) {
-            return "java.lang.Object";
+            return JAVA_LANG_OBJECT;
         }
         return String.valueOf(superclass);
     }

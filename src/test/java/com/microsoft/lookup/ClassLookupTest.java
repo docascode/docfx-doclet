@@ -62,6 +62,15 @@ public class ClassLookupTest {
     }
 
     @Test
+    public void determineSuperclassForEnum() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+
+        String result = classLookup.determineSuperclass(element);
+
+        assertThat("Wrong result", result, is("java.lang.Object"));
+    }
+
+    @Test
     public void determineClassContent() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
