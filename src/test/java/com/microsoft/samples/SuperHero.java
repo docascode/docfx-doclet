@@ -1,6 +1,7 @@
 package com.microsoft.samples;
 
 import com.microsoft.samples.subpackage.Person;
+import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -8,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Captain America
  */
-public class SuperHero extends Person {
+public class SuperHero extends Person implements Serializable, Cloneable {
 
     /**
      * The public name of a hero that is common knowledge

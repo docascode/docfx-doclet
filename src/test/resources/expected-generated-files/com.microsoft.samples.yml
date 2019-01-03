@@ -24,4 +24,4 @@ references:
   type: Class
   summary: Hero is the main entity we will be using to something
   syntax:
-    content: public class SuperHero
+    content: public class SuperHero extends com.microsoft.samples.subpackage.Person implements java.io.Serializable, java.lang.Cloneable

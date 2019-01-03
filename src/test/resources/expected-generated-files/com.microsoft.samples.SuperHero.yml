@@ -31,7 +31,7 @@ items:
   package: com.microsoft.samples
   summary: Hero is the main entity we will be using to something
   syntax:
-    content: public class SuperHero
+    content: public class SuperHero extends com.microsoft.samples.subpackage.Person implements java.io.Serializable, java.lang.Cloneable
   inheritance:
   - com.microsoft.samples.subpackage.Person
 - uid: com.microsoft.samples.SuperHero.SuperHero()
@@ -350,7 +350,7 @@ references:
   type: Class
   summary: Hero is the main entity we will be using to something
   syntax:
-    content: public class SuperHero
+    content: public class SuperHero extends com.microsoft.samples.subpackage.Person implements java.io.Serializable, java.lang.Cloneable
 - uid: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
   name: successfullyAttacked(int incomingDamage, java.lang.String damageType)
   nameWithType: SuperHero.successfullyAttacked(int incomingDamage, java.lang.String damageType)

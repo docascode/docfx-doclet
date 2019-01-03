@@ -13,6 +13,7 @@ import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ClassLookup extends BaseLookup<TypeElement> {
@@ -53,12 +54,25 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
     String determineClassContent(TypeElement classElement, String shortNameWithGenericsSupport) {
         String type = elementKindLookup.get(classElement.getKind());
-        return String.format("%s %s %s",
+        String result = String.format("%s %s %s",
             classElement.getModifiers().stream().map(String::valueOf)
                 .filter(modifier -> !("Interface".equals(type) && "abstract".equals(modifier)))
                 .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
                 .collect(Collectors.joining(" ")),
             StringUtils.lowerCase(type), shortNameWithGenericsSupport);
+
+        String superclass = determineSuperclass(classElement);
+        if (!JAVA_LANG_OBJECT.equals(superclass)) {
+            result += " extends " + superclass;
+        }
+
+        List<? extends TypeMirror> interfaces = classElement.getInterfaces();
+        if (CollectionUtils.isNotEmpty(interfaces)) {
+            String prefix = (classElement.getKind() == ElementKind.INTERFACE) ? " extends " : " implements ";
+            result += prefix + interfaces.stream().map(String::valueOf).collect(Collectors.joining(", "));
+        }
+
+        return result;
     }
 
     String determineSuperclass(TypeElement classElement) {

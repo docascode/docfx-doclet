@@ -1,6 +1,8 @@
 package com.microsoft.samples.subpackage;
 
-public interface Display<T, R> {
+import java.io.Serializable;
+
+public interface Display<T, R> extends Serializable {
 
     void show();
 
