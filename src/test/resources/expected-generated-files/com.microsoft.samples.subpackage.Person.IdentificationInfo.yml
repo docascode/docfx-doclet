@@ -19,20 +19,6 @@ items:
     content: public static class Person.IdentificationInfo
   inheritance:
   - java.lang.Object
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
-  id: IdentificationInfo()
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
-  langs:
-  - java
-  name: IdentificationInfo()
-  nameWithType: Person.IdentificationInfo.IdentificationInfo()
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
-  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo*
-  type: Constructor
-  package: com.microsoft.samples.subpackage
-  syntax:
-    content: public IdentificationInfo()
 references:
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
   parent: com.microsoft.samples.subpackage

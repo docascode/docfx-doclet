@@ -5,6 +5,7 @@ import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.MethodParameter;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
@@ -157,11 +158,16 @@ public class YmlFilesBuilder {
 
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
+            List<MethodParameter> parameters = classItemsLookup.extractParameters(constructorElement);
+            if (parameters.isEmpty()) {
+                // Don't show constructor without params
+                continue;
+            }
+
             MetadataFileItem constructorItem = buildMetadataFileItem(constructorElement);
             constructorItem.setOverload(classItemsLookup.extractOverload(constructorElement));
-            constructorItem
-                .setContent(classItemsLookup.extractConstructorContent(constructorElement));
-            constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
+            constructorItem.setContent(classItemsLookup.extractConstructorContent(constructorElement));
+            constructorItem.setParameters(parameters);
             classMetadataFile.getItems().add(constructorItem);
         }
     }

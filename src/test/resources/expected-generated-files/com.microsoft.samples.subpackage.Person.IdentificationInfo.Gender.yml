@@ -22,20 +22,6 @@ items:
     content: public enum Person.IdentificationInfo.Gender
   inheritance:
   - java.lang.Object
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
-  id: Gender()
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
-  langs:
-  - java
-  name: Gender()
-  nameWithType: Person.IdentificationInfo.Gender.Gender()
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
-  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*
-  type: Constructor
-  package: com.microsoft.samples.subpackage
-  syntax:
-    content: private Gender()
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
   id: values()
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
