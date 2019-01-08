@@ -1,9 +1,9 @@
 package com.microsoft.doclet;
 
-import static com.microsoft.util.FileUtilTest.deleteDirectoryStream;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import com.microsoft.util.FileUtilTest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +20,7 @@ public class DocletRunnerTest {
 
     @Before
     public void cleanup() throws IOException {
-        deleteDirectoryStream(OUTPUT_DIR);
+        FileUtilTest.deleteDirectory(OUTPUT_DIR);
     }
 
     @Test

@@ -20,25 +20,37 @@ public class FileUtilTest {
 
     @Before
     public void setup() throws IOException {
-        deleteDirectoryStream(ROOT_DIR);
+        deleteDirectory(ROOT_DIR);
     }
 
     @After
     public void tearDown() throws IOException {
-        deleteDirectoryStream(ROOT_DIR);
+        deleteDirectory(ROOT_DIR);
     }
 
     @Test
-    public void dumpToFile() throws IOException {
+    public void dumpToFileWithDirectoryCreation() throws IOException {
         String content = "Bla-bla content";
 
         FileUtil.dumpToFile(content, FILE_NAME);
 
-        assertThat("File should be present", Files.exists(Paths.get(FILE_NAME)), is(true));
+        assertThat("New file should appear", Files.exists(Paths.get(FILE_NAME)), is(true));
         assertThat("Invalid file content", Files.readString(Paths.get(FILE_NAME)), is(content));
     }
 
-    public static void deleteDirectoryStream(String pathString) throws IOException {
+    @Test
+    public void dumpToFileForExistingNonEmptyDirectory() throws IOException {
+        createDirectoryWithFile(ROOT_DIR + "/dir2/tmp1.txt");
+        String content = "Bla-bla content";
+
+        FileUtil.dumpToFile(content, FILE_NAME);
+
+        assertThat("Existing file should not be deleted", Files.exists(Path.of(ROOT_DIR + "/dir2/tmp1.txt")), is(true));
+        assertThat("New file should appear", Files.exists(Paths.get(FILE_NAME)), is(true));
+        assertThat("Invalid file content", Files.readString(Paths.get(FILE_NAME)), is(content));
+    }
+
+    public static void deleteDirectory(String pathString) throws IOException {
         Path path = Paths.get(pathString);
         if (Files.exists(path)) {
             Files.walk(path)
@@ -46,5 +58,11 @@ public class FileUtilTest {
                 .map(Path::toFile)
                 .forEach(File::delete);
         }
+    }
+
+    public static void createDirectoryWithFile(String pathString) throws IOException {
+        Path path = Paths.get(pathString);
+        Files.createDirectories(path.getParent());
+        Files.createFile(path);
     }
 }
