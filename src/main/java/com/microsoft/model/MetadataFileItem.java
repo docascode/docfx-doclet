@@ -186,4 +186,23 @@ public class MetadataFileItem {
         }
         syntax.setReturnValue(returnValue);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        MetadataFileItem that = (MetadataFileItem) o;
+
+        return uid.equals(that.uid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uid.hashCode();
+    }
 }

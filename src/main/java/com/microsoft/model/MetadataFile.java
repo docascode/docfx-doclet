@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.microsoft.util.YamlUtil;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MetadataFile implements YmlFile {
 
@@ -12,7 +14,7 @@ public class MetadataFile implements YmlFile {
     private final String outputPath;
     private final String fileName;
     private List<MetadataFileItem> items = new ArrayList<>();
-    private List<MetadataFileItem> references = new ArrayList<>();
+    private Set<MetadataFileItem> references = new LinkedHashSet<>();
 
     public MetadataFile(String outputPath, String fileName) {
         this.outputPath = outputPath;
@@ -27,11 +29,11 @@ public class MetadataFile implements YmlFile {
         this.items = items;
     }
 
-    public List<MetadataFileItem> getReferences() {
+    public Set<MetadataFileItem> getReferences() {
         return references;
     }
 
-    public void setReferences(List<MetadataFileItem> references) {
+    public void setReferences(Set<MetadataFileItem> references) {
         this.references = references;
     }
 

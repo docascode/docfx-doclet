@@ -11,6 +11,7 @@ import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
@@ -90,7 +91,7 @@ public class YmlFilesBuilder {
     }
 
     void addChildrenReferences(Element element, List<String> packageChildren,
-        List<MetadataFileItem> referencesCollector) {
+        Set<MetadataFileItem> referencesCollector) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             referencesCollector.add(buildClassReference(classElement));
 
