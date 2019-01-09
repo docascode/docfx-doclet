@@ -121,8 +121,6 @@ items:
     parameters:
     - id: heroName
       type: java.lang.String
-    return:
-      type: void
 - uid: com.microsoft.samples.SuperHero.getLastName()
   id: getLastName()
   parent: com.microsoft.samples.SuperHero
@@ -178,8 +176,6 @@ items:
     parameters:
     - id: uniquePower
       type: java.lang.String
-    return:
-      type: void
 - uid: com.microsoft.samples.SuperHero.getHealth()
   id: getHealth()
   parent: com.microsoft.samples.SuperHero
@@ -213,8 +209,6 @@ items:
     parameters:
     - id: health
       type: int
-    return:
-      type: void
 - uid: com.microsoft.samples.SuperHero.getDefense()
   id: getDefense()
   parent: com.microsoft.samples.SuperHero
@@ -248,8 +242,6 @@ items:
     parameters:
     - id: defense
       type: int
-    return:
-      type: void
 - uid: com.microsoft.samples.SuperHero.heroName
   id: heroName
   parent: com.microsoft.samples.SuperHero

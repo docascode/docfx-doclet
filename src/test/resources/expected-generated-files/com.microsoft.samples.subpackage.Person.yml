@@ -61,8 +61,6 @@ items:
     parameters:
     - id: firstName
       type: java.lang.String
-    return:
-      type: void
 - uid: com.microsoft.samples.subpackage.Person.getLastName()
   id: getLastName()
   parent: com.microsoft.samples.subpackage.Person
@@ -96,8 +94,6 @@ items:
     parameters:
     - id: lastName
       type: java.lang.String
-    return:
-      type: void
 - uid: com.microsoft.samples.subpackage.Person.firstName
   id: firstName
   parent: com.microsoft.samples.subpackage.Person

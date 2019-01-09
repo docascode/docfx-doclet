@@ -1,6 +1,7 @@
 package com.microsoft.lookup;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
@@ -154,6 +155,7 @@ public class ClassItemsLookupTest {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
         ExecutableElement method0 = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
         ExecutableElement method1 = ElementFilter.methodsIn(element.getEnclosedElements()).get(1);
+        ExecutableElement method2 = ElementFilter.methodsIn(element.getEnclosedElements()).get(2);
 
         when(environment.getDocTrees()).thenReturn(docTrees);
         when(docTrees.getDocCommentTree(method0)).thenReturn(docCommentTree);
@@ -162,8 +164,10 @@ public class ClassItemsLookupTest {
         when(returnTree.getKind()).thenReturn(Kind.RETURN);
         when(returnTree.toString()).thenReturn("@return bla", "@return bla-bla");
 
-        checkReturnForExecutableElement(element, 0, "int", "bla");
-        checkReturnForExecutableElement(element, 1, "java.lang.String", "bla-bla");
+        checkReturnForExecutableElement(method0, "int", "bla");
+        checkReturnForExecutableElement(method1, "java.lang.String", "bla-bla");
+        checkVoidReturnForExecutableElement(method2);
+
         verify(environment, times(2)).getDocTrees();
         verify(docTrees).getDocCommentTree(method0);
         verify(docTrees).getDocCommentTree(method1);
@@ -171,14 +175,16 @@ public class ClassItemsLookupTest {
         verify(returnTree, times(2)).getKind();
     }
 
-    private void checkReturnForExecutableElement(TypeElement element, int methodNumber, String expectedType,
+    private void checkReturnForExecutableElement(ExecutableElement executableElement, String expectedType,
         String expectedDescription) {
-        ExecutableElement executableElement = ElementFilter.methodsIn(element.getEnclosedElements()).get(methodNumber);
-
         Return result = classItemsLookup.extractReturn(executableElement);
 
         assertThat(result.getReturnType(), is(expectedType));
         assertThat(result.getReturnDescription(), is(expectedDescription));
+    }
+
+    private void checkVoidReturnForExecutableElement(ExecutableElement executableElement) {
+        assertThat(classItemsLookup.extractReturn(executableElement), is(nullValue()));
     }
 
     @Test

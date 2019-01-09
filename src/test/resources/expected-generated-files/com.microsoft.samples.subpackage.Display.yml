@@ -37,8 +37,6 @@ items:
   package: com.microsoft.samples.subpackage
   syntax:
     content: public abstract void show()
-    return:
-      type: void
 - uid: com.microsoft.samples.subpackage.Display.hide()
   id: hide()
   parent: com.microsoft.samples.subpackage.Display
@@ -53,8 +51,6 @@ items:
   package: com.microsoft.samples.subpackage
   syntax:
     content: public abstract void hide()
-    return:
-      type: void
 references:
 - uid: com.microsoft.samples.subpackage.Display
   parent: com.microsoft.samples.subpackage

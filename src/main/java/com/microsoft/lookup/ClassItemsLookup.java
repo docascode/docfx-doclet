@@ -11,6 +11,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.TypeKind;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.StringUtils;
 
@@ -113,8 +114,10 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     }
 
     Return extractReturn(ExecutableElement methodElement) {
-        return new Return(String.valueOf(methodElement.getReturnType()),
-            extractReturnDescription(methodElement));
+        if (methodElement.getReturnType().getKind() == TypeKind.VOID) {
+            return null;
+        }
+        return new Return(String.valueOf(methodElement.getReturnType()), extractReturnDescription(methodElement));
     }
 
     String extractReturnDescription(ExecutableElement methodElement) {
