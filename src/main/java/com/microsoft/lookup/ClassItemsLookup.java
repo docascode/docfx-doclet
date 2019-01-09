@@ -7,6 +7,7 @@ import com.microsoft.model.Return;
 import com.sun.source.doctree.DocTree.Kind;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
@@ -65,11 +66,20 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         result.setOverload(convertFullNameToOverload(result.getFullName()));
 
         if (element instanceof VariableElement) {
-            String type = String.valueOf(element.asType());
+            String type = makeTypeShort(String.valueOf(element.asType()));
             result.setFieldContent(String.format("%s %s %s", modifiers, type, elementQName));
             result.setReturn(extractReturn((VariableElement) element));
         }
         return result;
+    }
+
+    String makeTypeShort(String value) {
+        if (!value.contains(".")) {
+            return value;
+        }
+        return Stream.of(StringUtils.split(value, "."))
+            .filter(s -> Character.isUpperCase(s.charAt(0)))
+            .collect(Collectors.joining("."));
     }
 
     List<MethodParameter> extractParameters(ExecutableElement element) {

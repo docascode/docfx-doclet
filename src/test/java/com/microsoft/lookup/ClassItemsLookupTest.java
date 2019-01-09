@@ -12,7 +12,6 @@ import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
-import com.microsoft.util.ElementUtil;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.ParamTree;
@@ -239,5 +238,13 @@ public class ClassItemsLookupTest {
         assertThat("Wrong result for constructor case", classItemsLookup.convertFullNameToOverload(
             "com.microsoft.samples.SuperHero.SuperHero()"), is(
             "com.microsoft.samples.SuperHero.SuperHero*"));
+    }
+
+    @Test
+    public void makeTypeShort() {
+        assertThat("Wrong result for primitive type", classItemsLookup.makeTypeShort("int"), is("int"));
+        assertThat("Wrong result", classItemsLookup.makeTypeShort("java.lang.String"), is("String"));
+        assertThat("Wrong result for inner class", classItemsLookup.makeTypeShort("com.ms.pack.Custom.Type"),
+            is("Custom.Type"));
     }
 }
