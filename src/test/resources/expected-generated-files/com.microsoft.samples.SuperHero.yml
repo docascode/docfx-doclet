@@ -50,13 +50,13 @@ items:
     content: public SuperHero(java.lang.String,java.lang.String,int,int)
     parameters:
     - id: heroName
-      type: java.lang.String
+      type: 1195259493
     - id: uniquePower
-      type: java.lang.String
+      type: 1195259493
     - id: health
-      type: int
+      type: 104431
     - id: defense
-      type: int
+      type: 104431
 - uid: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
   id: successfullyAttacked(int,java.lang.String)
   parent: com.microsoft.samples.SuperHero
@@ -77,16 +77,16 @@ items:
     content: public int successfullyAttacked(int incomingDamage, java.lang.String damageType)
     parameters:
     - id: incomingDamage
-      type: int
+      type: 104431
       description: the amount of incoming damage
     - id: damageType
-      type: java.lang.String
+      type: 1195259493
       description: type of damage
     return:
-      type: int
+      type: 104431
       description: the amount of health hero has after attack
   exceptions:
-  - type: java.lang.IllegalArgumentException
+  - type: -310638960
     description: when incomingDamage is negative
 - uid: com.microsoft.samples.SuperHero.getHeroName()
   id: getHeroName()
@@ -103,7 +103,7 @@ items:
   syntax:
     content: public java.lang.String getHeroName()
     return:
-      type: java.lang.String
+      type: 1195259493
 - uid: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
   id: setHeroName(java.lang.String)
   parent: com.microsoft.samples.SuperHero
@@ -120,7 +120,7 @@ items:
     content: public void setHeroName(java.lang.String heroName)
     parameters:
     - id: heroName
-      type: java.lang.String
+      type: 1195259493
 - uid: com.microsoft.samples.SuperHero.getLastName()
   id: getLastName()
   parent: com.microsoft.samples.SuperHero
@@ -139,7 +139,7 @@ items:
   syntax:
     content: public java.lang.String getLastName()
     return:
-      type: java.lang.String
+      type: 1195259493
       description: |-
         lastName in uppercase. But it's not the end,
          because of multiline comment
@@ -158,7 +158,7 @@ items:
   syntax:
     content: public java.lang.String getUniquePower()
     return:
-      type: java.lang.String
+      type: 1195259493
 - uid: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
   id: setUniquePower(java.lang.String)
   parent: com.microsoft.samples.SuperHero
@@ -175,7 +175,7 @@ items:
     content: public void setUniquePower(java.lang.String uniquePower)
     parameters:
     - id: uniquePower
-      type: java.lang.String
+      type: 1195259493
 - uid: com.microsoft.samples.SuperHero.getHealth()
   id: getHealth()
   parent: com.microsoft.samples.SuperHero
@@ -191,7 +191,7 @@ items:
   syntax:
     content: public int getHealth()
     return:
-      type: int
+      type: 104431
 - uid: com.microsoft.samples.SuperHero.setHealth(int)
   id: setHealth(int)
   parent: com.microsoft.samples.SuperHero
@@ -208,7 +208,7 @@ items:
     content: public void setHealth(int health)
     parameters:
     - id: health
-      type: int
+      type: 104431
 - uid: com.microsoft.samples.SuperHero.getDefense()
   id: getDefense()
   parent: com.microsoft.samples.SuperHero
@@ -224,7 +224,7 @@ items:
   syntax:
     content: public int getDefense()
     return:
-      type: int
+      type: 104431
 - uid: com.microsoft.samples.SuperHero.setDefense(int)
   id: setDefense(int)
   parent: com.microsoft.samples.SuperHero
@@ -241,7 +241,7 @@ items:
     content: public void setDefense(int defense)
     parameters:
     - id: defense
-      type: int
+      type: 104431
 - uid: com.microsoft.samples.SuperHero.heroName
   id: heroName
   parent: com.microsoft.samples.SuperHero
@@ -257,7 +257,7 @@ items:
   syntax:
     content: private heroName
     return:
-      type: java.lang.String
+      type: 1195259493
 - uid: com.microsoft.samples.SuperHero.uniquePower
   id: uniquePower
   parent: com.microsoft.samples.SuperHero
@@ -272,7 +272,7 @@ items:
   syntax:
     content: private uniquePower
     return:
-      type: java.lang.String
+      type: 1195259493
 - uid: com.microsoft.samples.SuperHero.health
   id: health
   parent: com.microsoft.samples.SuperHero
@@ -287,7 +287,7 @@ items:
   syntax:
     content: private health
     return:
-      type: int
+      type: 104431
 - uid: com.microsoft.samples.SuperHero.defense
   id: defense
   parent: com.microsoft.samples.SuperHero
@@ -302,7 +302,7 @@ items:
   syntax:
     content: private defense
     return:
-      type: int
+      type: 104431
 - uid: com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING
   id: SOME_PUBLIC_STRING
   parent: com.microsoft.samples.SuperHero
@@ -317,8 +317,20 @@ items:
   syntax:
     content: public final SOME_PUBLIC_STRING
     return:
-      type: java.lang.String
+      type: 1195259493
 references:
+- uid: 1195259493
+  spec.java:
+    name: java.lang.String
+    fullName: java.lang.String
+- uid: 104431
+  spec.java:
+    name: int
+    fullName: int
+- uid: -310638960
+  spec.java:
+    name: java.lang.IllegalArgumentException
+    fullName: java.lang.IllegalArgumentException
 - uid: com.microsoft.samples.SuperHero
   parent: com.microsoft.samples
   href: com.microsoft.samples.SuperHero.yml

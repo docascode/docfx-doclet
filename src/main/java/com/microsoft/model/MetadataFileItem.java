@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "name", "nameWithType", "fullName", "overload",
-    "type", "package", "summary", "syntax", "inheritance", "exceptions"})
+    "type", "package", "summary", "syntax", "inheritance", "exceptions", "spec.java"})
 public class MetadataFileItem {
 
     private String uid;
@@ -27,6 +27,8 @@ public class MetadataFileItem {
     @JsonProperty("inheritance")
     private String[] superclass;
     private List<ExceptionItem> exceptions;
+    @JsonProperty("spec.java")
+    private SpecJava specJava;
 
     public MetadataFileItem(String[] langs) {
         this.langs = langs;
@@ -157,6 +159,14 @@ public class MetadataFileItem {
 
     public void setExceptions(List<ExceptionItem> exceptions) {
         this.exceptions = exceptions;
+    }
+
+    public SpecJava getSpecJava() {
+        return specJava;
+    }
+
+    public void setSpecJava(SpecJava specJava) {
+        this.specJava = specJava;
     }
 
     public void setContent(String content) {

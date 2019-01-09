@@ -11,9 +11,11 @@ import com.microsoft.model.MetadataFileItem;
 import com.sun.source.util.DocTrees;
 import java.io.File;
 import java.util.List;
+import java.util.function.Function;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,5 +66,35 @@ public class YmlFilesBuilderTest {
         assertThat("Wrong file name", container.getFileName(), is("output" + File.separator + "name"));
         List<MetadataFileItem> constructorItems = container.getItems();
         assertThat("Container should contain constructor item", constructorItems.size(), is(1));
+    }
+
+    @Test
+    public void buildSpecJavaRefItemAndReplaceField() {
+        CustomClass customClass = new CustomClass();
+        String originalValue = "initial value";
+        String expectedUpdatedValue = originalValue.toUpperCase() + "!";
+        customClass.setSomeField(originalValue);
+        Function<String, String> conversionFunc = s -> StringUtils.upperCase(s) + "!";
+
+        MetadataFileItem result = ymlFilesBuilder
+            .buildSpecJavaRefItemAndReplaceField(customClass, "someField", conversionFunc);
+
+        assertThat("Field value should be changed", customClass.getSomeField(), is(expectedUpdatedValue));
+        assertThat("Wrong uid", result.getUid(), is(expectedUpdatedValue));
+        assertThat("Wrong name", result.getSpecJava().getName(), is(originalValue));
+        assertThat("Wrong fullName", result.getSpecJava().getFullName(), is(originalValue));
+    }
+
+    private class CustomClass {
+
+        private String someField;
+
+        public String getSomeField() {
+            return someField;
+        }
+
+        public void setSomeField(String someField) {
+            this.someField = someField;
+        }
     }
 }

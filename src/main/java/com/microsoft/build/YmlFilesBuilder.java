@@ -6,14 +6,18 @@ import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
+import com.microsoft.model.SpecJava;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
@@ -170,6 +174,8 @@ public class YmlFilesBuilder {
             constructorItem.setContent(classItemsLookup.extractConstructorContent(constructorElement));
             constructorItem.setParameters(parameters);
             classMetadataFile.getItems().add(constructorItem);
+
+            addParameterReferences(constructorItem, classMetadataFile);
         }
     }
 
@@ -182,6 +188,10 @@ public class YmlFilesBuilder {
             methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
             methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
             classMetadataFile.getItems().add(methodItem);
+
+            addExceptionReferences(methodItem, classMetadataFile);
+            addParameterReferences(methodItem, classMetadataFile);
+            addReturnReferences(methodItem, classMetadataFile);
         }
     }
 
@@ -191,12 +201,17 @@ public class YmlFilesBuilder {
             fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
             fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
+
+            addReturnReferences(fieldItem, classMetadataFile);
         }
     }
 
     void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         // Owner class reference
-        classMetadataFile.getReferences().add(buildClassReference(classElement));
+        MetadataFileItem classReference = buildClassReference(classElement);
+        classMetadataFile.getReferences().add(classReference);
+        // Type parameter references
+        addTypeParameterReferences(classReference, classMetadataFile);
 
         // Inner classes references
         classMetadataFile.getReferences().addAll(
@@ -232,5 +247,65 @@ public class YmlFilesBuilder {
             setPackageName(classItemsLookup.extractPackageName(element));
             setSummary(classItemsLookup.extractSummary(element));
         }};
+    }
+
+    void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
+        classMetadataFile.getReferences().addAll(
+            methodItem.getSyntax().getParameters().stream()
+                .map(parameter -> buildSpecJavaRefItemAndReplaceField(parameter, "type", this::generateHexString))
+                .collect(Collectors.toList()));
+    }
+
+    void addReturnReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
+        classMetadataFile.getReferences().addAll(
+            Stream.of(methodItem.getSyntax().getReturnValue())
+                .filter(Objects::nonNull)
+                .map(returnValue -> buildSpecJavaRefItemAndReplaceField(returnValue, "returnType",
+                    this::generateHexString))
+                .collect(Collectors.toList()));
+    }
+
+    void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
+        classMetadataFile.getReferences().addAll(
+            methodItem.getExceptions().stream()
+                .map(exceptionItem -> buildSpecJavaRefItemAndReplaceField(exceptionItem, "type",
+                    this::generateHexString))
+                .collect(Collectors.toList()));
+    }
+
+    void addTypeParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
+        classMetadataFile.getReferences().addAll(
+            methodItem.getSyntax().getTypeParameters().stream()
+                .map(typeParameter -> {
+                    String id = typeParameter.getId();
+                    MetadataFileItem metadataFileItem = new MetadataFileItem();
+                    metadataFileItem.setUid(generateHexString(id));
+                    metadataFileItem.setSpecJava(new SpecJava(id, id));
+                    return metadataFileItem;
+                }).collect(Collectors.toList()));
+    }
+
+    MetadataFileItem buildSpecJavaRefItemAndReplaceField(Object object, String fieldName,
+        Function<String, String> conversionFunc) {
+        try {
+            Field field = object.getClass().getDeclaredField(fieldName);
+            boolean accessible = field.canAccess(object);
+            field.setAccessible(true);
+            String value = String.valueOf(field.get(object));
+            String convertedValue = conversionFunc.apply(value);
+            field.set(object, convertedValue);
+            field.setAccessible(accessible);
+
+            MetadataFileItem metadataFileItem = new MetadataFileItem();
+            metadataFileItem.setUid(convertedValue);
+            metadataFileItem.setSpecJava(new SpecJava(value, value));
+            return metadataFileItem;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Error during field replacement", e);
+        }
+    }
+
+    String generateHexString(String key) {
+        return String.valueOf(key.hashCode());
     }
 }

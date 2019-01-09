@@ -37,7 +37,7 @@ items:
   syntax:
     content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[] values()
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]
+      type: -1239864654
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
   id: valueOf(java.lang.String)
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
@@ -54,9 +54,9 @@ items:
     content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender valueOf(java.lang.String name)
     parameters:
     - id: name
-      type: java.lang.String
+      type: 1195259493
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+      type: 829993808
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
   id: MALE
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
@@ -71,7 +71,7 @@ items:
   syntax:
     content: public static final MALE
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+      type: 829993808
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
   id: FEMALE
   parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
@@ -86,8 +86,20 @@ items:
   syntax:
     content: public static final FEMALE
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+      type: 829993808
 references:
+- uid: -1239864654
+  spec.java:
+    name: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]
+    fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]
+- uid: 1195259493
+  spec.java:
+    name: java.lang.String
+    fullName: java.lang.String
+- uid: 829993808
+  spec.java:
+    name: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+    fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
   parent: com.microsoft.samples.subpackage
   href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml

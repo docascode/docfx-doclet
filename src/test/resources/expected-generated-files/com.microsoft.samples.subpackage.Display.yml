@@ -66,6 +66,14 @@ references:
       type: 84
     - id: R
       type: 82
+- uid: 84
+  spec.java:
+    name: T
+    fullName: T
+- uid: 82
+  spec.java:
+    name: R
+    fullName: R
 - uid: com.microsoft.samples.subpackage.Display.show()
   name: show()
   nameWithType: Display<T,R>.show()

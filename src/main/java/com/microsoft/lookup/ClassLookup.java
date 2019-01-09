@@ -2,14 +2,10 @@ package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.TypeParameter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -19,7 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 public class ClassLookup extends BaseLookup<TypeElement> {
 
     private static final String JAVA_LANG_OBJECT = "java.lang.Object";
-    private Map<String, String> typeParamsLookup = new HashMap<>();
 
     public ClassLookup(DocletEnvironment environment) {
         super(environment);
@@ -87,16 +82,11 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     List<TypeParameter> determineTypeParameters(TypeElement element) {
-        List<TypeParameter> result = new ArrayList<>();
-        for (TypeParameterElement typeParameter : element.getTypeParameters()) {
+        return element.getTypeParameters().stream().map(typeParameter -> {
             String key = String.valueOf(typeParameter);
-            if (!typeParamsLookup.containsKey(key)) {
-                typeParamsLookup.put(key, generateHexString(key));
-            }
-            String value = typeParamsLookup.get(key);
-            result.add(new TypeParameter(key, value));
-        }
-        return result;
+            String value = generateHexString(key);
+            return new TypeParameter(key, value);
+        }).collect(Collectors.toList());
     }
 
     String generateHexString(String key) {
