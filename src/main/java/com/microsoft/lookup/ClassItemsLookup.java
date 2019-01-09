@@ -65,7 +65,8 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         result.setOverload(convertFullNameToOverload(result.getFullName()));
 
         if (element instanceof VariableElement) {
-            result.setFieldContent(String.format("%s %s", modifiers, elementQName));
+            String type = String.valueOf(element.asType());
+            result.setFieldContent(String.format("%s %s %s", modifiers, type, elementQName));
             result.setReturn(extractReturn((VariableElement) element));
         }
         return result;

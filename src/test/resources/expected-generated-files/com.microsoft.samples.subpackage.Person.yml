@@ -121,7 +121,7 @@ items:
   package: com.microsoft.samples.subpackage
   summary: This is a first name of a <xref uid="" data-throw-if-not-resolved="false">Person</xref> entity
   syntax:
-    content: private firstName
+    content: private java.lang.String firstName
     return:
       type: 1195259493
 - uid: com.microsoft.samples.subpackage.Person.lastName
@@ -136,7 +136,7 @@ items:
   type: Field
   package: com.microsoft.samples.subpackage
   syntax:
-    content: private lastName
+    content: private java.lang.String lastName
     return:
       type: 1195259493
 references:

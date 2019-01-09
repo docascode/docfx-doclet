@@ -83,7 +83,7 @@ items:
   type: Enum constant
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public static final MALE
+    content: public static final com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender MALE
     return:
       type: 829993808
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
@@ -98,7 +98,7 @@ items:
   type: Enum constant
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public static final FEMALE
+    content: public static final com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender FEMALE
     return:
       type: 829993808
 references:

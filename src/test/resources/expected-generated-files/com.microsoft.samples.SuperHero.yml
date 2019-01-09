@@ -269,7 +269,7 @@ items:
   package: com.microsoft.samples
   summary: The public name of a hero that is common knowledge
   syntax:
-    content: private heroName
+    content: private java.lang.String heroName
     return:
       type: 1195259493
 - uid: com.microsoft.samples.SuperHero.uniquePower
@@ -284,7 +284,7 @@ items:
   type: Field
   package: com.microsoft.samples
   syntax:
-    content: private uniquePower
+    content: private java.lang.String uniquePower
     return:
       type: 1195259493
 - uid: com.microsoft.samples.SuperHero.health
@@ -299,7 +299,7 @@ items:
   type: Field
   package: com.microsoft.samples
   syntax:
-    content: private health
+    content: private int health
     return:
       type: 104431
 - uid: com.microsoft.samples.SuperHero.defense
@@ -314,7 +314,7 @@ items:
   type: Field
   package: com.microsoft.samples
   syntax:
-    content: private defense
+    content: private int defense
     return:
       type: 104431
 - uid: com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING
@@ -329,7 +329,7 @@ items:
   type: Field
   package: com.microsoft.samples
   syntax:
-    content: public final SOME_PUBLIC_STRING
+    content: public final java.lang.String SOME_PUBLIC_STRING
     return:
       type: 1195259493
 references:
