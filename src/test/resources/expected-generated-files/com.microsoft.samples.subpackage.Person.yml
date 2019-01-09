@@ -28,6 +28,20 @@ items:
       type: 84
   inheritance:
   - java.lang.Object
+- uid: com.microsoft.samples.subpackage.Person.Person()
+  id: Person()
+  parent: com.microsoft.samples.subpackage.Person
+  href: com.microsoft.samples.subpackage.Person.yml
+  langs:
+  - java
+  name: Person()
+  nameWithType: Person<T>.Person()
+  fullName: com.microsoft.samples.subpackage.Person<T>.Person()
+  overload: com.microsoft.samples.subpackage.Person<T>.Person*
+  type: Constructor
+  package: com.microsoft.samples.subpackage
+  syntax:
+    content: public Person()
 - uid: com.microsoft.samples.subpackage.Person.getFirstName()
   id: getFirstName()
   parent: com.microsoft.samples.subpackage.Person

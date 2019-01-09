@@ -163,16 +163,10 @@ public class YmlFilesBuilder {
 
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
-            List<MethodParameter> parameters = classItemsLookup.extractParameters(constructorElement);
-            if (parameters.isEmpty()) {
-                // Don't show constructor without params
-                continue;
-            }
-
             MetadataFileItem constructorItem = buildMetadataFileItem(constructorElement);
             constructorItem.setOverload(classItemsLookup.extractOverload(constructorElement));
             constructorItem.setContent(classItemsLookup.extractConstructorContent(constructorElement));
-            constructorItem.setParameters(parameters);
+            constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
             classMetadataFile.getItems().add(constructorItem);
 
             addParameterReferences(constructorItem, classMetadataFile);

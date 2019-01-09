@@ -51,7 +51,7 @@ public class YmlFilesBuilderTest {
         ymlFilesBuilder.addConstructorsInfo(element, container);
 
         assertThat("Wrong file name", container.getFileName(), is("output" + File.separator + "name"));
-        assertTrue("Container shouldn't contain constructor items", container.getItems().isEmpty());
+        assertThat("Container should contain constructor item", container.getItems().size(), is(1));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class YmlFilesBuilderTest {
 
         assertThat("Wrong file name", container.getFileName(), is("output" + File.separator + "name"));
         List<MetadataFileItem> constructorItems = container.getItems();
-        assertThat("Container should contain constructor item", constructorItems.size(), is(1));
+        assertThat("Container should contain 2 constructor items", constructorItems.size(), is(2));
     }
 
     @Test

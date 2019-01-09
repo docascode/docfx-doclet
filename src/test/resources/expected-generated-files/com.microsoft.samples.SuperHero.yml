@@ -34,6 +34,20 @@ items:
     content: public class SuperHero extends com.microsoft.samples.subpackage.Person implements java.io.Serializable, java.lang.Cloneable
   inheritance:
   - com.microsoft.samples.subpackage.Person
+- uid: com.microsoft.samples.SuperHero.SuperHero()
+  id: SuperHero()
+  parent: com.microsoft.samples.SuperHero
+  href: com.microsoft.samples.SuperHero.yml
+  langs:
+  - java
+  name: SuperHero()
+  nameWithType: SuperHero.SuperHero()
+  fullName: com.microsoft.samples.SuperHero.SuperHero()
+  overload: com.microsoft.samples.SuperHero.SuperHero*
+  type: Constructor
+  package: com.microsoft.samples
+  syntax:
+    content: public SuperHero()
 - uid: com.microsoft.samples.SuperHero.SuperHero(java.lang.String,java.lang.String,int,int)
   id: SuperHero(java.lang.String,java.lang.String,int,int)
   parent: com.microsoft.samples.SuperHero
