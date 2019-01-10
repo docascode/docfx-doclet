@@ -57,7 +57,7 @@ items:
   syntax:
     content: public java.lang.String getFirstName()
     return:
-      type: 1195259493
+      type: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
   id: setFirstName(java.lang.String)
   parent: com.microsoft.samples.subpackage.Person
@@ -74,7 +74,7 @@ items:
     content: public void setFirstName(java.lang.String firstName)
     parameters:
     - id: firstName
-      type: 1195259493
+      type: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person.getLastName()
   id: getLastName()
   parent: com.microsoft.samples.subpackage.Person
@@ -90,7 +90,7 @@ items:
   syntax:
     content: public java.lang.String getLastName()
     return:
-      type: 1195259493
+      type: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
   id: setLastName(java.lang.String)
   parent: com.microsoft.samples.subpackage.Person
@@ -107,7 +107,7 @@ items:
     content: public void setLastName(java.lang.String lastName)
     parameters:
     - id: lastName
-      type: 1195259493
+      type: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person.firstName
   id: firstName
   parent: com.microsoft.samples.subpackage.Person
@@ -123,7 +123,7 @@ items:
   syntax:
     content: private String firstName
     return:
-      type: 1195259493
+      type: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person.lastName
   id: lastName
   parent: com.microsoft.samples.subpackage.Person
@@ -138,12 +138,8 @@ items:
   syntax:
     content: private String lastName
     return:
-      type: 1195259493
+      type: java.lang.String
 references:
-- uid: 1195259493
-  spec.java:
-    name: java.lang.String
-    fullName: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person
   parent: com.microsoft.samples.subpackage
   href: com.microsoft.samples.subpackage.Person.yml
@@ -157,10 +153,6 @@ references:
     typeParameters:
     - id: T
       type: 84
-- uid: 84
-  spec.java:
-    name: T
-    fullName: T
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
   parent: com.microsoft.samples.subpackage
   href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml

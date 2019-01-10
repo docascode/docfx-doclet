@@ -169,7 +169,7 @@ public class YmlFilesBuilder {
             constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
             classMetadataFile.getItems().add(constructorItem);
 
-            addParameterReferences(constructorItem, classMetadataFile);
+//            addParameterReferences(constructorItem, classMetadataFile);
         }
     }
 
@@ -183,9 +183,9 @@ public class YmlFilesBuilder {
             methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
             classMetadataFile.getItems().add(methodItem);
 
-            addExceptionReferences(methodItem, classMetadataFile);
-            addParameterReferences(methodItem, classMetadataFile);
-            addReturnReferences(methodItem, classMetadataFile);
+//            addExceptionReferences(methodItem, classMetadataFile);
+//            addParameterReferences(methodItem, classMetadataFile);
+//            addReturnReferences(methodItem, classMetadataFile);
         }
     }
 
@@ -196,7 +196,7 @@ public class YmlFilesBuilder {
             fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
 
-            addReturnReferences(fieldItem, classMetadataFile);
+//            addReturnReferences(fieldItem, classMetadataFile);
         }
     }
 
@@ -205,7 +205,7 @@ public class YmlFilesBuilder {
         MetadataFileItem classReference = buildClassReference(classElement);
         classMetadataFile.getReferences().add(classReference);
         // Type parameter references
-        addTypeParameterReferences(classReference, classMetadataFile);
+//        addTypeParameterReferences(classReference, classMetadataFile);
 
         // Inner classes references
         classMetadataFile.getReferences().addAll(
