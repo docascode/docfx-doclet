@@ -76,7 +76,7 @@ public class ClassLookupTest {
 
         String result = classLookup.determineClassContent(element, "SuperHero");
 
-        assertThat("Wrong result", result, is("public class SuperHero extends com.microsoft.samples.subpackage.Person implements java.io.Serializable, java.lang.Cloneable"));
+        assertThat("Wrong result", result, is("public class SuperHero extends Person implements Serializable, Cloneable"));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class ClassLookupTest {
 
         String result = classLookup.determineClassContent(element, "Display<T,R>");
 
-        assertThat("Wrong result", result, is("public interface Display<T,R> extends java.io.Serializable, java.util.List<com.microsoft.samples.subpackage.Person<T>>"));
+        assertThat("Wrong result", result, is("public interface Display<T,R> extends Serializable, List<Person<T>>"));
     }
 
     @Test

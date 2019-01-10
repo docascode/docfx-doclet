@@ -45,18 +45,18 @@ public class ClassItemsLookup extends BaseLookup<Element> {
 
         String modifiers = element.getModifiers().stream().map(String::valueOf).collect(Collectors.joining(" "));
         if (element instanceof ExecutableElement) {
-            result.setConstructorContent(String.format("%s %s", modifiers, elementQName));
-
             ExecutableElement exeElement = (ExecutableElement) element;
             List<MethodParameter> parameters = extractParameters(exeElement);
             String paramsString = parameters.stream()
-                .map(parameter -> String.format("%s %s", parameter.getType(), parameter.getId()))
+                .map(parameter -> String.format("%s %s", makeTypeShort(parameter.getType()), parameter.getId()))
                 .collect(Collectors.joining(", "));
             String nameWithoutBrackets = elementQName.replaceAll("\\(.*\\)", "");
             String methodName = String.format("%s(%s)", nameWithoutBrackets, paramsString);
 
             result.setName(methodName);
-            result.setMethodContent(String.format("%s %s %s", modifiers, exeElement.getReturnType(), result.getName()));
+            result.setMethodContent(String.format("%s %s %s", modifiers,
+                makeTypeShort(String.valueOf(exeElement.getReturnType())), result.getName()));
+            result.setConstructorContent(String.format("%s %s", modifiers, result.getName()));
             result.setParameters(parameters);
             result.setExceptions(extractExceptions(exeElement));
             result.setReturn(extractReturn(exeElement));

@@ -58,13 +58,14 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
         String superclass = determineSuperclass(classElement);
         if (!JAVA_LANG_OBJECT.equals(superclass)) {
-            result += " extends " + superclass;
+            result += " extends " + makeTypeShort(superclass);
         }
 
         List<? extends TypeMirror> interfaces = classElement.getInterfaces();
         if (CollectionUtils.isNotEmpty(interfaces)) {
             String prefix = (classElement.getKind() == ElementKind.INTERFACE) ? " extends " : " implements ";
-            result += prefix + interfaces.stream().map(String::valueOf).collect(Collectors.joining(", "));
+            result += prefix + interfaces.stream().map(String::valueOf).map(this::makeTypeShort)
+                .collect(Collectors.joining(", "));
         }
 
         return result;

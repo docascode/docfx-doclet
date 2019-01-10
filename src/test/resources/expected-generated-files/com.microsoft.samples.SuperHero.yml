@@ -31,7 +31,7 @@ items:
   package: com.microsoft.samples
   summary: Hero is the main entity we will be using to something
   syntax:
-    content: public class SuperHero extends com.microsoft.samples.subpackage.Person implements java.io.Serializable, java.lang.Cloneable
+    content: public class SuperHero extends Person implements Serializable, Cloneable
   inheritance:
   - com.microsoft.samples.subpackage.Person
 - uid: com.microsoft.samples.SuperHero.SuperHero()
@@ -54,14 +54,14 @@ items:
   href: com.microsoft.samples.SuperHero.yml
   langs:
   - java
-  name: SuperHero(java.lang.String heroName, java.lang.String uniquePower, int health, int defense)
-  nameWithType: SuperHero.SuperHero(java.lang.String heroName, java.lang.String uniquePower, int health, int defense)
-  fullName: com.microsoft.samples.SuperHero.SuperHero(java.lang.String heroName, java.lang.String uniquePower, int health, int defense)
+  name: SuperHero(String heroName, String uniquePower, int health, int defense)
+  nameWithType: SuperHero.SuperHero(String heroName, String uniquePower, int health, int defense)
+  fullName: com.microsoft.samples.SuperHero.SuperHero(String heroName, String uniquePower, int health, int defense)
   overload: com.microsoft.samples.SuperHero.SuperHero*
   type: Constructor
   package: com.microsoft.samples
   syntax:
-    content: public SuperHero(java.lang.String,java.lang.String,int,int)
+    content: public SuperHero(String heroName, String uniquePower, int health, int defense)
     parameters:
     - id: heroName
       type: java.lang.String
@@ -77,9 +77,9 @@ items:
   href: com.microsoft.samples.SuperHero.yml
   langs:
   - java
-  name: successfullyAttacked(int incomingDamage, java.lang.String damageType)
-  nameWithType: SuperHero.successfullyAttacked(int incomingDamage, java.lang.String damageType)
-  fullName: com.microsoft.samples.SuperHero.successfullyAttacked(int incomingDamage, java.lang.String damageType)
+  name: successfullyAttacked(int incomingDamage, String damageType)
+  nameWithType: SuperHero.successfullyAttacked(int incomingDamage, String damageType)
+  fullName: com.microsoft.samples.SuperHero.successfullyAttacked(int incomingDamage, String damageType)
   overload: com.microsoft.samples.SuperHero.successfullyAttacked*
   type: Method
   package: com.microsoft.samples
@@ -88,7 +88,7 @@ items:
      <a href="http://www.supermanisthegreatest.com">Superman!</a>
      </p>
   syntax:
-    content: public int successfullyAttacked(int incomingDamage, java.lang.String damageType)
+    content: public int successfullyAttacked(int incomingDamage, String damageType)
     parameters:
     - id: incomingDamage
       type: int
@@ -115,7 +115,7 @@ items:
   type: Method
   package: com.microsoft.samples
   syntax:
-    content: public java.lang.String getHeroName()
+    content: public String getHeroName()
     return:
       type: java.lang.String
 - uid: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
@@ -124,14 +124,14 @@ items:
   href: com.microsoft.samples.SuperHero.yml
   langs:
   - java
-  name: setHeroName(java.lang.String heroName)
-  nameWithType: SuperHero.setHeroName(java.lang.String heroName)
-  fullName: com.microsoft.samples.SuperHero.setHeroName(java.lang.String heroName)
+  name: setHeroName(String heroName)
+  nameWithType: SuperHero.setHeroName(String heroName)
+  fullName: com.microsoft.samples.SuperHero.setHeroName(String heroName)
   overload: com.microsoft.samples.SuperHero.setHeroName*
   type: Method
   package: com.microsoft.samples
   syntax:
-    content: public void setHeroName(java.lang.String heroName)
+    content: public void setHeroName(String heroName)
     parameters:
     - id: heroName
       type: java.lang.String
@@ -151,7 +151,7 @@ items:
     Get capitalized last name. But it's not the end,
      because of multiline comment
   syntax:
-    content: public java.lang.String getLastName()
+    content: public String getLastName()
     return:
       type: java.lang.String
       description: |-
@@ -170,7 +170,7 @@ items:
   type: Method
   package: com.microsoft.samples
   syntax:
-    content: public java.lang.String getUniquePower()
+    content: public String getUniquePower()
     return:
       type: java.lang.String
 - uid: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
@@ -179,14 +179,14 @@ items:
   href: com.microsoft.samples.SuperHero.yml
   langs:
   - java
-  name: setUniquePower(java.lang.String uniquePower)
-  nameWithType: SuperHero.setUniquePower(java.lang.String uniquePower)
-  fullName: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String uniquePower)
+  name: setUniquePower(String uniquePower)
+  nameWithType: SuperHero.setUniquePower(String uniquePower)
+  fullName: com.microsoft.samples.SuperHero.setUniquePower(String uniquePower)
   overload: com.microsoft.samples.SuperHero.setUniquePower*
   type: Method
   package: com.microsoft.samples
   syntax:
-    content: public void setUniquePower(java.lang.String uniquePower)
+    content: public void setUniquePower(String uniquePower)
     parameters:
     - id: uniquePower
       type: java.lang.String
@@ -342,11 +342,11 @@ references:
   type: Class
   summary: Hero is the main entity we will be using to something
   syntax:
-    content: public class SuperHero extends com.microsoft.samples.subpackage.Person implements java.io.Serializable, java.lang.Cloneable
+    content: public class SuperHero extends Person implements Serializable, Cloneable
 - uid: com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
-  name: successfullyAttacked(int incomingDamage, java.lang.String damageType)
-  nameWithType: SuperHero.successfullyAttacked(int incomingDamage, java.lang.String damageType)
-  fullName: com.microsoft.samples.SuperHero.successfullyAttacked(int incomingDamage, java.lang.String damageType)
+  name: successfullyAttacked(int incomingDamage, String damageType)
+  nameWithType: SuperHero.successfullyAttacked(int incomingDamage, String damageType)
+  fullName: com.microsoft.samples.SuperHero.successfullyAttacked(int incomingDamage, String damageType)
   package: com.microsoft.samples
 - uid: com.microsoft.samples.SuperHero.getHeroName()
   name: getHeroName()
@@ -354,9 +354,9 @@ references:
   fullName: com.microsoft.samples.SuperHero.getHeroName()
   package: com.microsoft.samples
 - uid: com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
-  name: setHeroName(java.lang.String heroName)
-  nameWithType: SuperHero.setHeroName(java.lang.String heroName)
-  fullName: com.microsoft.samples.SuperHero.setHeroName(java.lang.String heroName)
+  name: setHeroName(String heroName)
+  nameWithType: SuperHero.setHeroName(String heroName)
+  fullName: com.microsoft.samples.SuperHero.setHeroName(String heroName)
   package: com.microsoft.samples
 - uid: com.microsoft.samples.SuperHero.getLastName()
   name: getLastName()
@@ -369,9 +369,9 @@ references:
   fullName: com.microsoft.samples.SuperHero.getUniquePower()
   package: com.microsoft.samples
 - uid: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
-  name: setUniquePower(java.lang.String uniquePower)
-  nameWithType: SuperHero.setUniquePower(java.lang.String uniquePower)
-  fullName: com.microsoft.samples.SuperHero.setUniquePower(java.lang.String uniquePower)
+  name: setUniquePower(String uniquePower)
+  nameWithType: SuperHero.setUniquePower(String uniquePower)
+  fullName: com.microsoft.samples.SuperHero.setUniquePower(String uniquePower)
   package: com.microsoft.samples
 - uid: com.microsoft.samples.SuperHero.getHealth()
   name: getHealth()

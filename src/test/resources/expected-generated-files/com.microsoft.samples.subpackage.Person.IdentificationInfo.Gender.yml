@@ -49,7 +49,7 @@ items:
   type: Method
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[] values()
+    content: public static Person.IdentificationInfo.Gender[] values()
     return:
       type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
@@ -58,14 +58,14 @@ items:
   href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
   langs:
   - java
-  name: valueOf(java.lang.String name)
-  nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
+  name: valueOf(String name)
+  nameWithType: Person.IdentificationInfo.Gender.valueOf(String name)
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)
   overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*
   type: Method
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public static com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender valueOf(java.lang.String name)
+    content: public static Person.IdentificationInfo.Gender valueOf(String name)
     parameters:
     - id: name
       type: java.lang.String
@@ -118,7 +118,7 @@ references:
   fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
   package: com.microsoft.samples.subpackage
 - uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  name: valueOf(java.lang.String name)
-  nameWithType: Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String name)
+  name: valueOf(String name)
+  nameWithType: Person.IdentificationInfo.Gender.valueOf(String name)
+  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)
   package: com.microsoft.samples.subpackage

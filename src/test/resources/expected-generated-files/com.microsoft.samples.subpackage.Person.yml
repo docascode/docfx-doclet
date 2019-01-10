@@ -55,7 +55,7 @@ items:
   type: Method
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public java.lang.String getFirstName()
+    content: public String getFirstName()
     return:
       type: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
@@ -64,14 +64,14 @@ items:
   href: com.microsoft.samples.subpackage.Person.yml
   langs:
   - java
-  name: setFirstName(java.lang.String firstName)
-  nameWithType: Person<T>.setFirstName(java.lang.String firstName)
-  fullName: com.microsoft.samples.subpackage.Person<T>.setFirstName(java.lang.String firstName)
+  name: setFirstName(String firstName)
+  nameWithType: Person<T>.setFirstName(String firstName)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setFirstName(String firstName)
   overload: com.microsoft.samples.subpackage.Person<T>.setFirstName*
   type: Method
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public void setFirstName(java.lang.String firstName)
+    content: public void setFirstName(String firstName)
     parameters:
     - id: firstName
       type: java.lang.String
@@ -88,7 +88,7 @@ items:
   type: Method
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public java.lang.String getLastName()
+    content: public String getLastName()
     return:
       type: java.lang.String
 - uid: com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
@@ -97,14 +97,14 @@ items:
   href: com.microsoft.samples.subpackage.Person.yml
   langs:
   - java
-  name: setLastName(java.lang.String lastName)
-  nameWithType: Person<T>.setLastName(java.lang.String lastName)
-  fullName: com.microsoft.samples.subpackage.Person<T>.setLastName(java.lang.String lastName)
+  name: setLastName(String lastName)
+  nameWithType: Person<T>.setLastName(String lastName)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setLastName(String lastName)
   overload: com.microsoft.samples.subpackage.Person<T>.setLastName*
   type: Method
   package: com.microsoft.samples.subpackage
   syntax:
-    content: public void setLastName(java.lang.String lastName)
+    content: public void setLastName(String lastName)
     parameters:
     - id: lastName
       type: java.lang.String
@@ -169,9 +169,9 @@ references:
   fullName: com.microsoft.samples.subpackage.Person<T>.getFirstName()
   package: com.microsoft.samples.subpackage
 - uid: com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
-  name: setFirstName(java.lang.String firstName)
-  nameWithType: Person<T>.setFirstName(java.lang.String firstName)
-  fullName: com.microsoft.samples.subpackage.Person<T>.setFirstName(java.lang.String firstName)
+  name: setFirstName(String firstName)
+  nameWithType: Person<T>.setFirstName(String firstName)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setFirstName(String firstName)
   package: com.microsoft.samples.subpackage
 - uid: com.microsoft.samples.subpackage.Person.getLastName()
   name: getLastName()
@@ -179,7 +179,7 @@ references:
   fullName: com.microsoft.samples.subpackage.Person<T>.getLastName()
   package: com.microsoft.samples.subpackage
 - uid: com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
-  name: setLastName(java.lang.String lastName)
-  nameWithType: Person<T>.setLastName(java.lang.String lastName)
-  fullName: com.microsoft.samples.subpackage.Person<T>.setLastName(java.lang.String lastName)
+  name: setLastName(String lastName)
+  nameWithType: Person<T>.setLastName(String lastName)
+  fullName: com.microsoft.samples.subpackage.Person<T>.setLastName(String lastName)
   package: com.microsoft.samples.subpackage

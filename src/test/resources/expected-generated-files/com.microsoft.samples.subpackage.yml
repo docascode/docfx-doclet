@@ -26,7 +26,7 @@ references:
   fullName: com.microsoft.samples.subpackage.Display<T,R>
   type: Interface
   syntax:
-    content: public interface Display<T,R> extends java.io.Serializable, java.util.List<com.microsoft.samples.subpackage.Person<T>>
+    content: public interface Display<T,R> extends Serializable, List<Person<T>>
     typeParameters:
     - id: T
       type: 84
