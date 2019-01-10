@@ -73,15 +73,6 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         return result;
     }
 
-    String makeTypeShort(String value) {
-        if (!value.contains(".")) {
-            return value;
-        }
-        return Stream.of(StringUtils.split(value, "."))
-            .filter(s -> Character.isUpperCase(s.charAt(0)))
-            .collect(Collectors.joining("."));
-    }
-
     List<MethodParameter> extractParameters(ExecutableElement element) {
         return element.getParameters().stream().map(o -> {
             String paramName = String.valueOf(o.getSimpleName());

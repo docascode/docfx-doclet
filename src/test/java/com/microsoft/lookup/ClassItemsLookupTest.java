@@ -239,12 +239,4 @@ public class ClassItemsLookupTest {
             "com.microsoft.samples.SuperHero.SuperHero()"), is(
             "com.microsoft.samples.SuperHero.SuperHero*"));
     }
-
-    @Test
-    public void makeTypeShort() {
-        assertThat("Wrong result for primitive type", classItemsLookup.makeTypeShort("int"), is("int"));
-        assertThat("Wrong result", classItemsLookup.makeTypeShort("java.lang.String"), is("String"));
-        assertThat("Wrong result for inner class", classItemsLookup.makeTypeShort("com.ms.pack.Custom.Type"),
-            is("Custom.Type"));
-    }
 }

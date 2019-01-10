@@ -1,14 +1,13 @@
 package com.microsoft.lookup;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
-import com.microsoft.util.ElementUtil;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.LinkTree;
@@ -84,5 +83,19 @@ public class BaseLookupTest {
         assertThat("Wrong result for method with parameter",
             baseLookup.replaceLinkWithXrefTag("{@link Class2#method15(java.lang.String)}"),
             is("<xref uid=\"\" data-throw-if-not-resolved=\"false\">Class2#method15(java.lang.String)</xref>"));
+    }
+
+    @Test
+    public void makeTypeShort() {
+        assertThat("Wrong result for primitive type", baseLookup.makeTypeShort("int"), is("int"));
+        assertThat("Wrong result", baseLookup.makeTypeShort("java.lang.String"), is("String"));
+        assertThat("Wrong result for inner class",
+            baseLookup.makeTypeShort("com.ms.pack.Custom.Type"), is("Custom.Type"));
+        assertThat("Wrong result for class with generic",
+            baseLookup.makeTypeShort("java.util.List<java.lang.String>"), is("List<String>"));
+        assertThat("Wrong result for inner class with generic",
+            baseLookup.makeTypeShort("java.util.List.Custom<java.lang.Some.String>"), is("List.Custom<Some.String>"));
+        assertThat("Wrong result for inner class with complex generic",
+            baseLookup.makeTypeShort("a.b.c.D.E.G<m.n.A.B<c.d.D.G<a.F.Z>>>"), is("D.E.G<A.B<D.G<F.Z>>>"));
     }
 }

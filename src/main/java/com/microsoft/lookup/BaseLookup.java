@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class BaseLookup<T> {
@@ -161,5 +163,14 @@ public abstract class BaseLookup<T> {
 
     protected Optional<DocCommentTree> getDocCommentTree(Element element) {
         return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
+    }
+
+    protected String makeTypeShort(String value) {
+        if (!value.contains(".")) {
+            return value;
+        }
+        return Stream.of(StringUtils.split(value, "<"))
+            .map(s -> RegExUtils.replaceAll(s, "^[a-z.]+\\.", ""))
+            .collect(Collectors.joining("<"));
     }
 }
