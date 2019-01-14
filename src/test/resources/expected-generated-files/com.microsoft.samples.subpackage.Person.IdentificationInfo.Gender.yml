@@ -1,124 +1,124 @@
 ### YamlMime:ManagedReference
 items:
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  id: Gender
-  parent: com.microsoft.samples.subpackage
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  id: "Gender"
+  parent: "com.microsoft.samples.subpackage"
   children:
-  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
-  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
-  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
-  - java
-  name: Person.IdentificationInfo.Gender
-  nameWithType: Person.IdentificationInfo.Gender
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  type: Enum
-  package: com.microsoft.samples.subpackage
-  summary: Enum describes person's gender
+  - "java"
+  name: "Person.IdentificationInfo.Gender"
+  nameWithType: "Person.IdentificationInfo.Gender"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  type: "Enum"
+  package: "com.microsoft.samples.subpackage"
+  summary: "Enum describes person's gender"
   syntax:
-    content: public enum Person.IdentificationInfo.Gender
+    content: "public enum Person.IdentificationInfo.Gender"
   inheritance:
-  - java.lang.Object
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
-  id: Gender()
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+  - "java.lang.Object"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
+  id: "Gender()"
+  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
-  - java
-  name: Gender()
-  nameWithType: Person.IdentificationInfo.Gender.Gender()
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()
-  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*
-  type: Constructor
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "Gender()"
+  nameWithType: "Person.IdentificationInfo.Gender.Gender()"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
+  overload: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*"
+  type: "Constructor"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: private Gender()
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  id: values()
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+    content: "private Gender()"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  id: "values()"
+  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
-  - java
-  name: values()
-  nameWithType: Person.IdentificationInfo.Gender.values()
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*
-  type: Method
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "values()"
+  nameWithType: "Person.IdentificationInfo.Gender.values()"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  overload: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public static Person.IdentificationInfo.Gender[] values()
+    content: "public static Person.IdentificationInfo.Gender[] values()"
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  id: valueOf(java.lang.String)
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
+  id: "valueOf(java.lang.String)"
+  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
-  - java
-  name: valueOf(String name)
-  nameWithType: Person.IdentificationInfo.Gender.valueOf(String name)
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)
-  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*
-  type: Method
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "valueOf(String name)"
+  nameWithType: "Person.IdentificationInfo.Gender.valueOf(String name)"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)"
+  overload: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public static Person.IdentificationInfo.Gender valueOf(String name)
+    content: "public static Person.IdentificationInfo.Gender valueOf(String name)"
     parameters:
-    - id: name
-      type: java.lang.String
+    - id: "name"
+      type: "java.lang.String"
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
-  id: MALE
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  id: "MALE"
+  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
-  - java
-  name: MALE
-  nameWithType: Person.IdentificationInfo.Gender.MALE
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
-  type: Enum constant
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "MALE"
+  nameWithType: "Person.IdentificationInfo.Gender.MALE"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  type: "Enum constant"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public static final Person.IdentificationInfo.Gender MALE
+    content: "public static final Person.IdentificationInfo.Gender MALE"
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
-  id: FEMALE
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
+      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  id: "FEMALE"
+  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
-  - java
-  name: FEMALE
-  nameWithType: Person.IdentificationInfo.Gender.FEMALE
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
-  type: Enum constant
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "FEMALE"
+  nameWithType: "Person.IdentificationInfo.Gender.FEMALE"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  type: "Enum constant"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public static final Person.IdentificationInfo.Gender FEMALE
+    content: "public static final Person.IdentificationInfo.Gender FEMALE"
     return:
-      type: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
 references:
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  parent: com.microsoft.samples.subpackage
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
-  name: Person.IdentificationInfo.Gender
-  nameWithType: Person.IdentificationInfo.Gender
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  type: Enum
-  summary: Enum describes person's gender
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  parent: "com.microsoft.samples.subpackage"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
+  name: "Person.IdentificationInfo.Gender"
+  nameWithType: "Person.IdentificationInfo.Gender"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  type: "Enum"
+  summary: "Enum describes person's gender"
   syntax:
-    content: public enum Person.IdentificationInfo.Gender
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  name: values()
-  nameWithType: Person.IdentificationInfo.Gender.values()
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  package: com.microsoft.samples.subpackage
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  name: valueOf(String name)
-  nameWithType: Person.IdentificationInfo.Gender.valueOf(String name)
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)
-  package: com.microsoft.samples.subpackage
+    content: "public enum Person.IdentificationInfo.Gender"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  name: "values()"
+  nameWithType: "Person.IdentificationInfo.Gender.values()"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  package: "com.microsoft.samples.subpackage"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
+  name: "valueOf(String name)"
+  nameWithType: "Person.IdentificationInfo.Gender.valueOf(String name)"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)"
+  package: "com.microsoft.samples.subpackage"

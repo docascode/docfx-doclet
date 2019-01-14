@@ -10,7 +10,6 @@ public class YamlUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()
         .disable(Feature.WRITE_DOC_START_MARKER)
-        .enable(Feature.MINIMIZE_QUOTES)
         .disable(Feature.SPLIT_LINES)
     )
         .setSerializationInclusion(Include.NON_NULL)

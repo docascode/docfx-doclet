@@ -21,23 +21,23 @@ public class YamlUtilTest {
 
         assertThat("Wrong result", result, is(""
             + "items:\n"
-            + "- uid: Some uid 3\n"
-            + "  id: Some id3\n"
-            + "  href: Some href3\n"
+            + "- uid: \"Some uid 3\"\n"
+            + "  id: \"Some id3\"\n"
+            + "  href: \"Some href3\"\n"
             + "  syntax:\n"
             + "    parameters:\n"
-            + "    - id: Some id 3\n"
-            + "      type: Some type 3\n"
-            + "      description: Some desc 3\n"
+            + "    - id: \"Some id 3\"\n"
+            + "      type: \"Some type 3\"\n"
+            + "      description: \"Some desc 3\"\n"
             + "references:\n"
-            + "- uid: Some uid 5\n"
-            + "  id: Some id5\n"
-            + "  href: Some href5\n"
+            + "- uid: \"Some uid 5\"\n"
+            + "  id: \"Some id5\"\n"
+            + "  href: \"Some href5\"\n"
             + "  syntax:\n"
             + "    parameters:\n"
-            + "    - id: Some id 5\n"
-            + "      type: Some type 5\n"
-            + "      description: Some desc 5\n"));
+            + "    - id: \"Some id 5\"\n"
+            + "      type: \"Some type 5\"\n"
+            + "      description: \"Some desc 5\"\n"));
     }
 
     private MetadataFileItem buildMetadataFileItem(int seed) {

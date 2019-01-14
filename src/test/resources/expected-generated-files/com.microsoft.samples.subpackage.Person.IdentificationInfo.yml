@@ -1,56 +1,56 @@
 ### YamlMime:ManagedReference
 items:
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
-  id: IdentificationInfo
-  parent: com.microsoft.samples.subpackage
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+  id: "IdentificationInfo"
+  parent: "com.microsoft.samples.subpackage"
   children:
-  - com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
-  - com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"
   langs:
-  - java
-  name: Person.IdentificationInfo
-  nameWithType: Person.IdentificationInfo
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
-  type: Class
-  package: com.microsoft.samples.subpackage
-  summary: Class that describes person's identification
+  - "java"
+  name: "Person.IdentificationInfo"
+  nameWithType: "Person.IdentificationInfo"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+  type: "Class"
+  package: "com.microsoft.samples.subpackage"
+  summary: "Class that describes person's identification"
   syntax:
-    content: public static class Person.IdentificationInfo
+    content: "public static class Person.IdentificationInfo"
   inheritance:
-  - java.lang.Object
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
-  id: IdentificationInfo()
-  parent: com.microsoft.samples.subpackage.Person.IdentificationInfo
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
+  - "java.lang.Object"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
+  id: "IdentificationInfo()"
+  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"
   langs:
-  - java
-  name: IdentificationInfo()
-  nameWithType: Person.IdentificationInfo.IdentificationInfo()
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
-  overload: com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo*
-  type: Constructor
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "IdentificationInfo()"
+  nameWithType: "Person.IdentificationInfo.IdentificationInfo()"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
+  overload: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo*"
+  type: "Constructor"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public IdentificationInfo()
+    content: "public IdentificationInfo()"
 references:
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
-  parent: com.microsoft.samples.subpackage
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.yml
-  name: Person.IdentificationInfo
-  nameWithType: Person.IdentificationInfo
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
-  type: Class
-  summary: Class that describes person's identification
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+  parent: "com.microsoft.samples.subpackage"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"
+  name: "Person.IdentificationInfo"
+  nameWithType: "Person.IdentificationInfo"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+  type: "Class"
+  summary: "Class that describes person's identification"
   syntax:
-    content: public static class Person.IdentificationInfo
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  parent: com.microsoft.samples.subpackage
-  href: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml
-  name: Person.IdentificationInfo.Gender
-  nameWithType: Person.IdentificationInfo.Gender
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-  type: Enum
-  summary: Enum describes person's gender
+    content: "public static class Person.IdentificationInfo"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  parent: "com.microsoft.samples.subpackage"
+  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
+  name: "Person.IdentificationInfo.Gender"
+  nameWithType: "Person.IdentificationInfo.Gender"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  type: "Enum"
+  summary: "Enum describes person's gender"
   syntax:
-    content: public enum Person.IdentificationInfo.Gender
+    content: "public enum Person.IdentificationInfo.Gender"

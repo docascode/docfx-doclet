@@ -1,78 +1,78 @@
 ### YamlMime:ManagedReference
 items:
-- uid: com.microsoft.samples.subpackage.Display
-  id: Display
-  parent: com.microsoft.samples.subpackage
+- uid: "com.microsoft.samples.subpackage.Display"
+  id: "Display"
+  parent: "com.microsoft.samples.subpackage"
   children:
-  - com.microsoft.samples.subpackage.Display.show()
-  - com.microsoft.samples.subpackage.Display.hide()
-  href: com.microsoft.samples.subpackage.Display.yml
+  - "com.microsoft.samples.subpackage.Display.show()"
+  - "com.microsoft.samples.subpackage.Display.hide()"
+  href: "com.microsoft.samples.subpackage.Display.yml"
   langs:
-  - java
-  name: Display<T,R>
-  nameWithType: Display<T,R>
-  fullName: com.microsoft.samples.subpackage.Display<T,R>
-  type: Interface
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "Display<T,R>"
+  nameWithType: "Display<T,R>"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>"
+  type: "Interface"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public interface Display<T,R> extends Serializable, List<Person<T>>
+    content: "public interface Display<T,R> extends Serializable, List<Person<T>>"
     typeParameters:
-    - id: T
-      type: 84
-    - id: R
-      type: 82
+    - id: "T"
+      type: "84"
+    - id: "R"
+      type: "82"
   inheritance:
-  - java.lang.Object
-- uid: com.microsoft.samples.subpackage.Display.show()
-  id: show()
-  parent: com.microsoft.samples.subpackage.Display
-  href: com.microsoft.samples.subpackage.Display.yml
+  - "java.lang.Object"
+- uid: "com.microsoft.samples.subpackage.Display.show()"
+  id: "show()"
+  parent: "com.microsoft.samples.subpackage.Display"
+  href: "com.microsoft.samples.subpackage.Display.yml"
   langs:
-  - java
-  name: show()
-  nameWithType: Display<T,R>.show()
-  fullName: com.microsoft.samples.subpackage.Display<T,R>.show()
-  overload: com.microsoft.samples.subpackage.Display<T,R>.show*
-  type: Method
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "show()"
+  nameWithType: "Display<T,R>.show()"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show()"
+  overload: "com.microsoft.samples.subpackage.Display<T,R>.show*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public abstract void show()
-- uid: com.microsoft.samples.subpackage.Display.hide()
-  id: hide()
-  parent: com.microsoft.samples.subpackage.Display
-  href: com.microsoft.samples.subpackage.Display.yml
+    content: "public abstract void show()"
+- uid: "com.microsoft.samples.subpackage.Display.hide()"
+  id: "hide()"
+  parent: "com.microsoft.samples.subpackage.Display"
+  href: "com.microsoft.samples.subpackage.Display.yml"
   langs:
-  - java
-  name: hide()
-  nameWithType: Display<T,R>.hide()
-  fullName: com.microsoft.samples.subpackage.Display<T,R>.hide()
-  overload: com.microsoft.samples.subpackage.Display<T,R>.hide*
-  type: Method
-  package: com.microsoft.samples.subpackage
+  - "java"
+  name: "hide()"
+  nameWithType: "Display<T,R>.hide()"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>.hide()"
+  overload: "com.microsoft.samples.subpackage.Display<T,R>.hide*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
   syntax:
-    content: public abstract void hide()
+    content: "public abstract void hide()"
 references:
-- uid: com.microsoft.samples.subpackage.Display
-  parent: com.microsoft.samples.subpackage
-  href: com.microsoft.samples.subpackage.Display.yml
-  name: Display<T,R>
-  nameWithType: Display<T,R>
-  fullName: com.microsoft.samples.subpackage.Display<T,R>
-  type: Interface
+- uid: "com.microsoft.samples.subpackage.Display"
+  parent: "com.microsoft.samples.subpackage"
+  href: "com.microsoft.samples.subpackage.Display.yml"
+  name: "Display<T,R>"
+  nameWithType: "Display<T,R>"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>"
+  type: "Interface"
   syntax:
-    content: public interface Display<T,R> extends Serializable, List<Person<T>>
+    content: "public interface Display<T,R> extends Serializable, List<Person<T>>"
     typeParameters:
-    - id: T
-      type: 84
-    - id: R
-      type: 82
-- uid: com.microsoft.samples.subpackage.Display.show()
-  name: show()
-  nameWithType: Display<T,R>.show()
-  fullName: com.microsoft.samples.subpackage.Display<T,R>.show()
-  package: com.microsoft.samples.subpackage
-- uid: com.microsoft.samples.subpackage.Display.hide()
-  name: hide()
-  nameWithType: Display<T,R>.hide()
-  fullName: com.microsoft.samples.subpackage.Display<T,R>.hide()
-  package: com.microsoft.samples.subpackage
+    - id: "T"
+      type: "84"
+    - id: "R"
+      type: "82"
+- uid: "com.microsoft.samples.subpackage.Display.show()"
+  name: "show()"
+  nameWithType: "Display<T,R>.show()"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show()"
+  package: "com.microsoft.samples.subpackage"
+- uid: "com.microsoft.samples.subpackage.Display.hide()"
+  name: "hide()"
+  nameWithType: "Display<T,R>.hide()"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>.hide()"
+  package: "com.microsoft.samples.subpackage"

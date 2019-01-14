@@ -1,27 +1,27 @@
 ### YamlMime:ManagedReference
 items:
-- uid: com.microsoft.samples
-  id: samples
+- uid: "com.microsoft.samples"
+  id: "samples"
   children:
-  - com.microsoft.samples.SuperHero
-  href: com.microsoft.samples.yml
+  - "com.microsoft.samples.SuperHero"
+  href: "com.microsoft.samples.yml"
   langs:
-  - java
-  name: com.microsoft.samples
-  nameWithType: com.microsoft.samples
-  fullName: com.microsoft.samples
-  type: Namespace
-  summary: This package contains the sample set of classes for testing DocFx doclet.
+  - "java"
+  name: "com.microsoft.samples"
+  nameWithType: "com.microsoft.samples"
+  fullName: "com.microsoft.samples"
+  type: "Namespace"
+  summary: "This package contains the sample set of classes for testing DocFx doclet."
   syntax:
-    content: package com.microsoft.samples
+    content: "package com.microsoft.samples"
 references:
-- uid: com.microsoft.samples.SuperHero
-  parent: com.microsoft.samples
-  href: com.microsoft.samples.SuperHero.yml
-  name: SuperHero
-  nameWithType: SuperHero
-  fullName: com.microsoft.samples.SuperHero
-  type: Class
-  summary: Hero is the main entity we will be using to something
+- uid: "com.microsoft.samples.SuperHero"
+  parent: "com.microsoft.samples"
+  href: "com.microsoft.samples.SuperHero.yml"
+  name: "SuperHero"
+  nameWithType: "SuperHero"
+  fullName: "com.microsoft.samples.SuperHero"
+  type: "Class"
+  summary: "Hero is the main entity we will be using to something"
   syntax:
-    content: public class SuperHero extends Person implements Serializable, Cloneable
+    content: "public class SuperHero extends Person implements Serializable, Cloneable"
