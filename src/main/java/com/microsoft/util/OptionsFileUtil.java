@@ -23,9 +23,7 @@ public class OptionsFileUtil {
 
     public static String readOptionsFromFile(String filename) {
         StringBuffer buffer = new StringBuffer();
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new FileReader(filename));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 buffer.append(line).append("\n");
@@ -33,14 +31,6 @@ public class OptionsFileUtil {
         } catch (final IOException ioe) {
             ioe.printStackTrace();
             buffer.setLength(0);
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
-            }
         }
 
         return buffer.toString();
