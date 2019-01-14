@@ -77,8 +77,7 @@ public class YmlFilesBuilder {
 
     void buildPackageYmlFile(PackageElement packageElement, String fileName) {
         MetadataFile metadataFile = new MetadataFile(outputPath, fileName);
-        MetadataFileItem packageItem = new MetadataFileItem(LANGS);
-        packageItem.setUid(packageLookup.extractUid(packageElement));
+        MetadataFileItem packageItem = new MetadataFileItem(LANGS, packageLookup.extractUid(packageElement));
         packageItem.setId(packageLookup.extractId(packageElement));
         addChildrenReferences(packageElement, packageItem.getChildren(),
             metadataFile.getReferences());
@@ -105,8 +104,7 @@ public class YmlFilesBuilder {
     }
 
     MetadataFileItem buildClassReference(TypeElement classElement) {
-        MetadataFileItem referenceItem = new MetadataFileItem();
-        referenceItem.setUid(classLookup.extractUid(classElement));
+        MetadataFileItem referenceItem = new MetadataFileItem(classLookup.extractUid(classElement));
         referenceItem.setParent(classLookup.extractParent(classElement));
         referenceItem.setHref(classLookup.extractHref(classElement));
         referenceItem.setName(classLookup.extractName(classElement));
@@ -131,8 +129,7 @@ public class YmlFilesBuilder {
     }
 
     void addClassInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        MetadataFileItem classItem = new MetadataFileItem(LANGS);
-        classItem.setUid(classLookup.extractUid(classElement));
+        MetadataFileItem classItem = new MetadataFileItem(LANGS, classLookup.extractUid(classElement));
         classItem.setId(classLookup.extractId(classElement));
         classItem.setParent(classLookup.extractParent(classElement));
         addChildren(classElement, classItem.getChildren());
@@ -219,8 +216,7 @@ public class YmlFilesBuilder {
 
     List<MetadataFileItem> buildMethodsReferences(TypeElement classElement) {
         return ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
-            .map(methodElement -> new MetadataFileItem() {{
-                setUid(classItemsLookup.extractUid(methodElement));
+            .map(methodElement -> new MetadataFileItem(classItemsLookup.extractUid(methodElement)) {{
                 setName(classItemsLookup.extractName(methodElement));
                 setNameWithType(classItemsLookup.extractNameWithType(methodElement));
                 setFullName(classItemsLookup.extractFullName(methodElement));
@@ -229,8 +225,7 @@ public class YmlFilesBuilder {
     }
 
     MetadataFileItem buildMetadataFileItem(Element element) {
-        return new MetadataFileItem(LANGS) {{
-            setUid(classItemsLookup.extractUid(element));
+        return new MetadataFileItem(LANGS, classItemsLookup.extractUid(element)) {{
             setId(classItemsLookup.extractId(element));
             setParent(classItemsLookup.extractParent(element));
             setHref(classItemsLookup.extractHref(element));
@@ -272,8 +267,7 @@ public class YmlFilesBuilder {
             methodItem.getSyntax().getTypeParameters().stream()
                 .map(typeParameter -> {
                     String id = typeParameter.getId();
-                    MetadataFileItem metadataFileItem = new MetadataFileItem();
-                    metadataFileItem.setUid(generateHexString(id));
+                    MetadataFileItem metadataFileItem = new MetadataFileItem(generateHexString(id));
                     metadataFileItem.setSpecJava(new SpecJava(id, id));
                     return metadataFileItem;
                 }).collect(Collectors.toList()));
@@ -290,8 +284,7 @@ public class YmlFilesBuilder {
             field.set(object, convertedValue);
             field.setAccessible(accessible);
 
-            MetadataFileItem metadataFileItem = new MetadataFileItem();
-            metadataFileItem.setUid(convertedValue);
+            MetadataFileItem metadataFileItem = new MetadataFileItem(convertedValue);
             metadataFileItem.setSpecJava(new SpecJava(value, value));
             return metadataFileItem;
         } catch (NoSuchFieldException | IllegalAccessException e) {

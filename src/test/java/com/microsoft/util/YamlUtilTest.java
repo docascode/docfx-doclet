@@ -41,8 +41,7 @@ public class YamlUtilTest {
     }
 
     private MetadataFileItem buildMetadataFileItem(int seed) {
-        MetadataFileItem metadataFileItem = new MetadataFileItem();
-        metadataFileItem.setUid("Some uid " + seed);
+        MetadataFileItem metadataFileItem = new MetadataFileItem("Some uid " + seed);
         metadataFileItem.setId("Some id" + seed);
         metadataFileItem.setHref("Some href" + seed);
         metadataFileItem.setParameters(Collections.singletonList(

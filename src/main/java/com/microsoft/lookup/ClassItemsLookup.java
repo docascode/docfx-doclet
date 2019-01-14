@@ -32,8 +32,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName.concat("."), "");
         String uid = String.format("%s.%s", classQName, elementQName);
 
-        ExtendedMetadataFileItem result = new ExtendedMetadataFileItem() {{
-            setUid(uid);
+        ExtendedMetadataFileItem result = new ExtendedMetadataFileItem(uid) {{
             setId(elementQName);
             setParent(classQName);
             setHref(classQName + ".yml");

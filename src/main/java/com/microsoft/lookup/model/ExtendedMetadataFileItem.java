@@ -21,6 +21,10 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     private String superclass;
     private String tocName;
 
+    public ExtendedMetadataFileItem(String uid) {
+        super(uid);
+    }
+
     public String getMethodContent() {
         return methodContent;
     }

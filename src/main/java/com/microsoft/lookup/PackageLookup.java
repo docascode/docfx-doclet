@@ -16,8 +16,7 @@ public class PackageLookup extends BaseLookup<PackageElement> {
         String qName = String.valueOf(packageElement.getQualifiedName());
         String sName = String.valueOf(packageElement.getSimpleName());
 
-        ExtendedMetadataFileItem result = new ExtendedMetadataFileItem();
-        result.setUid(qName);
+        ExtendedMetadataFileItem result = new ExtendedMetadataFileItem(qName);
         result.setId(sName);
         result.setHref(qName + ".yml");
         result.setName(qName);

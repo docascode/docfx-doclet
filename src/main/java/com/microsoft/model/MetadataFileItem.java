@@ -9,7 +9,7 @@ import java.util.List;
     "type", "package", "summary", "syntax", "inheritance", "exceptions", "spec.java"})
 public class MetadataFileItem {
 
-    private String uid;
+    private final String uid;
     private String id;
     private String parent;
     private List<String> children = new ArrayList<>();
@@ -30,19 +30,17 @@ public class MetadataFileItem {
     @JsonProperty("spec.java")
     private SpecJava specJava;
 
-    public MetadataFileItem(String[] langs) {
+    public MetadataFileItem(String[] langs, String uid) {
+        this(uid);
         this.langs = langs;
     }
 
-    public MetadataFileItem() {
+    public MetadataFileItem(String uid) {
+        this.uid = uid;
     }
 
     public String getUid() {
         return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 
     public String getId() {

@@ -28,8 +28,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
         String classSNameWithGenericsSupport = classQNameWithGenericsSupport.replace(packageName.concat("."), "");
 
-        ExtendedMetadataFileItem result = new ExtendedMetadataFileItem();
-        result.setUid(classQName);
+        ExtendedMetadataFileItem result = new ExtendedMetadataFileItem(classQName);
         result.setId(classSName);
         result.setParent(packageName);
         result.setHref(classQName + ".yml");
