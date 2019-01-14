@@ -1,8 +1,11 @@
 package com.microsoft.model;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 
 public class MetadataFileItemTest {
@@ -26,5 +29,101 @@ public class MetadataFileItemTest {
         MetadataFileItem object = new MetadataFileItem(uid);
 
         assertThat("Wrong result", object.hashCode(), is(uid.hashCode()));
+    }
+
+    @Test
+    public void setTypeParameters() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        List<TypeParameter> typeParams = new ArrayList<>();
+
+        object.setTypeParameters(typeParams);
+
+        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
+        assertThat("Wrong typeParameters value", object.getSyntax().getTypeParameters(), is(typeParams));
+    }
+
+    @Test
+    public void setTypeParametersWhenSyntaxAlreadyPresent() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        Syntax existingSyntax = new Syntax();
+        object.setSyntax(existingSyntax);
+        List<TypeParameter> typeParams = new ArrayList<>();
+
+        object.setTypeParameters(typeParams);
+
+        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
+        assertThat("Wrong typeParameters value", object.getSyntax().getTypeParameters(), is(typeParams));
+    }
+
+    @Test
+    public void setParameters() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        List<MethodParameter> params = new ArrayList<>();
+
+        object.setParameters(params);
+
+        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
+        assertThat("Wrong parameters value", object.getSyntax().getParameters(), is(params));
+    }
+
+    @Test
+    public void setParametersWhenSyntaxAlreadyPresent() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        Syntax existingSyntax = new Syntax();
+        object.setSyntax(existingSyntax);
+        List<MethodParameter> params = new ArrayList<>();
+
+        object.setParameters(params);
+
+        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
+        assertThat("Wrong parameters value", object.getSyntax().getParameters(), is(params));
+    }
+
+    @Test
+    public void setReturn() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        Return returnValue = new Return("type");
+
+        object.setReturn(returnValue);
+
+        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
+        assertThat("Wrong return value", object.getSyntax().getReturnValue(), is(returnValue));
+    }
+
+    @Test
+    public void setReturnWhenSyntaxAlreadyPresent() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        Syntax existingSyntax = new Syntax();
+        object.setSyntax(existingSyntax);
+        Return returnValue = new Return("type");
+
+        object.setReturn(returnValue);
+
+        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
+        assertThat("Wrong return value", object.getSyntax().getReturnValue(), is(returnValue));
+    }
+
+    @Test
+    public void setContent() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        String content = "Some content";
+
+        object.setContent(content);
+
+        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
+        assertThat("Wrong content value", object.getSyntax().getContent(), is(content));
+    }
+
+    @Test
+    public void setContentWhenSyntaxAlreadyPresent() {
+        MetadataFileItem object = new MetadataFileItem("123");
+        Syntax existingSyntax = new Syntax();
+        object.setSyntax(existingSyntax);
+        String content = "Some content";
+
+        object.setContent(content);
+
+        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
+        assertThat("Wrong content value", object.getSyntax().getContent(), is(content));
     }
 }

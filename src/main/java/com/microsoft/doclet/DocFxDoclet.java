@@ -25,11 +25,6 @@ public class DocFxDoclet implements Doclet {
 
     @Override
     public boolean run(DocletEnvironment environment) {
-        if (StringUtils.isBlank(this.outputPath)) {
-            reporter.print(Kind.ERROR, "Output path not specified");
-            return false;
-        }
-
         reporter.print(Kind.NOTE, "Output path: " + outputPath);
         reporter.print(Kind.NOTE, "Excluded packages: " + Arrays.toString(excludePackages));
         reporter.print(Kind.NOTE, "Excluded classes: " + Arrays.toString(excludeClasses));
@@ -57,14 +52,16 @@ public class DocFxDoclet implements Doclet {
                     return true;
                 }
             },
-            new CustomOption("Exclude packages", Arrays.asList("-excludepackages", "--exclude-packages", "-ep"), "packages") {
+            new CustomOption("Exclude packages", Arrays.asList("-excludepackages", "--exclude-packages", "-ep"),
+                "packages") {
                 @Override
                 public boolean process(String option, List<String> arguments) {
                     excludePackages = StringUtils.split(arguments.get(0), ":");
                     return true;
                 }
             },
-            new CustomOption("Exclude classes", Arrays.asList("-excludeclasses", "--exclude-classes", "-ec"), "classes") {
+            new CustomOption("Exclude classes", Arrays.asList("-excludeclasses", "--exclude-classes", "-ec"),
+                "classes") {
                 @Override
                 public boolean process(String option, List<String> arguments) {
                     excludeClasses = StringUtils.split(arguments.get(0), ":");

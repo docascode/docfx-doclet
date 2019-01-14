@@ -17,7 +17,7 @@ public class DocletRunner {
             return;
         }
         if (!(new java.io.File(args[0])).isFile()) {
-            System.err.println(String.format("File '%s' not exists", args[0]));
+            System.err.println(String.format("File '%s' does not exist", args[0]));
             return;
         }
 
