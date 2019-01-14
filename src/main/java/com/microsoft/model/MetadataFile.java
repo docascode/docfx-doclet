@@ -25,16 +25,8 @@ public class MetadataFile implements YmlFile {
         return items;
     }
 
-    public void setItems(List<MetadataFileItem> items) {
-        this.items = items;
-    }
-
     public Set<MetadataFileItem> getReferences() {
         return references;
-    }
-
-    public void setReferences(Set<MetadataFileItem> references) {
-        this.references = references;
     }
 
     @JsonIgnore

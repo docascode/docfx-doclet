@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Return {
 
     @JsonProperty("type")
-    private String returnType;
+    private final String returnType;
     @JsonProperty("description")
     private String returnDescription;
 
@@ -22,15 +22,7 @@ public class Return {
         return returnType;
     }
 
-    public void setReturnType(String returnType) {
-        this.returnType = returnType;
-    }
-
     public String getReturnDescription() {
         return returnDescription;
-    }
-
-    public void setReturnDescription(String returnDescription) {
-        this.returnDescription = returnDescription;
     }
 }

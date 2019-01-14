@@ -63,10 +63,6 @@ public class MetadataFileItem {
         return children;
     }
 
-    public void setChildren(List<String> children) {
-        this.children = children;
-    }
-
     public String getHref() {
         return href;
     }

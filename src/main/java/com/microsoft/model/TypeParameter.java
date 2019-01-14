@@ -2,8 +2,8 @@ package com.microsoft.model;
 
 public class TypeParameter {
 
-    private String id;
-    private String type;
+    private final String id;
+    private final String type;
 
     public TypeParameter(String id, String type) {
         this.id = id;
@@ -14,15 +14,7 @@ public class TypeParameter {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
