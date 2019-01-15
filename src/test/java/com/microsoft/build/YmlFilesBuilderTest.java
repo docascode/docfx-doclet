@@ -2,7 +2,7 @@ package com.microsoft.build;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import com.google.testing.compile.CompilationRule;
@@ -10,12 +10,10 @@ import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.sun.source.util.DocTrees;
 import java.io.File;
-import java.util.List;
-import java.util.function.Function;
+import java.util.Collection;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,7 +62,7 @@ public class YmlFilesBuilderTest {
         ymlFilesBuilder.addConstructorsInfo(element, container);
 
         assertThat("Wrong file name", container.getFileName(), is("output" + File.separator + "name"));
-        List<MetadataFileItem> constructorItems = container.getItems();
+        Collection<MetadataFileItem> constructorItems = container.getItems();
         assertThat("Container should contain 2 constructor items", constructorItems.size(), is(2));
     }
 
@@ -81,13 +79,23 @@ public class YmlFilesBuilderTest {
         assertThat("Wrong fullName", result.getSpecJava().getFullName(), is(value));
     }
 
+    @Test
+    public void buildSpecJavaRefItemWhenNoSuchField() {
+        CustomClass customClass = new CustomClass();
+        String value = "Some value";
+        customClass.setSomeField(value);
+
+        try {
+            ymlFilesBuilder.buildSpecJavaRefItem(customClass, "someAnotherField");
+            fail("Exception should be thrown");
+        } catch (RuntimeException re) {
+            assertThat("Wrong exception message", re.getMessage(), is("Error during field replacement"));
+        }
+    }
+
     private class CustomClass {
 
         private String someField;
-
-        public String getSomeField() {
-            return someField;
-        }
 
         public void setSomeField(String someField) {
             this.someField = someField;

@@ -13,7 +13,7 @@ public class MetadataFile implements YmlFile {
     private final static String METADATA_FILE_HEADER = "### YamlMime:ManagedReference\n";
     private final String outputPath;
     private final String fileName;
-    private List<MetadataFileItem> items = new ArrayList<>();
+    private Set<MetadataFileItem> items = new LinkedHashSet<>();
     private Set<MetadataFileItem> references = new LinkedHashSet<>();
 
     public MetadataFile(String outputPath, String fileName) {
@@ -21,7 +21,7 @@ public class MetadataFile implements YmlFile {
         this.fileName = fileName;
     }
 
-    public List<MetadataFileItem> getItems() {
+    public Set<MetadataFileItem> getItems() {
         return items;
     }
 

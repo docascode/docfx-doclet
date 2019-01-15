@@ -110,7 +110,3 @@ references:
   spec.java:
     name: "String"
     fullName: "String"
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  spec.java:
-    name: "Person.IdentificationInfo.Gender"
-    fullName: "Person.IdentificationInfo.Gender"

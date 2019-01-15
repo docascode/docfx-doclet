@@ -225,6 +225,7 @@ public class YmlFilesBuilder {
         classMetadataFile.getReferences().addAll(
             methodItem.getSyntax().getParameters().stream()
                 .map(parameter -> buildSpecJavaRefItem(parameter, "type"))
+                .filter(o -> !classMetadataFile.getItems().contains(o))
                 .collect(Collectors.toList()));
     }
 
@@ -233,6 +234,7 @@ public class YmlFilesBuilder {
             Stream.of(methodItem.getSyntax().getReturnValue())
                 .filter(Objects::nonNull)
                 .map(returnValue -> buildSpecJavaRefItem(returnValue, "returnType"))
+                .filter(o -> !classMetadataFile.getItems().contains(o))
                 .collect(Collectors.toList()));
     }
 
@@ -240,6 +242,7 @@ public class YmlFilesBuilder {
         classMetadataFile.getReferences().addAll(
             methodItem.getExceptions().stream()
                 .map(exceptionItem -> buildSpecJavaRefItem(exceptionItem, "type"))
+                .filter(o -> !classMetadataFile.getItems().contains(o))
                 .collect(Collectors.toList()));
     }
 
@@ -269,7 +272,7 @@ public class YmlFilesBuilder {
             String shortValue = classLookup.makeTypeShort(value);
             metadataFileItem.setSpecJava(new SpecJava(shortValue, shortValue));
             return metadataFileItem;
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (ReflectiveOperationException e) {
             throw new RuntimeException("Error during field replacement", e);
         }
     }
