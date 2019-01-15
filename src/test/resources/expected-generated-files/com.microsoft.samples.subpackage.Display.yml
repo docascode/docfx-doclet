@@ -50,18 +50,6 @@ items:
   syntax:
     content: "public abstract void hide()"
 references:
-- uid: "com.microsoft.samples.subpackage.Display"
-  parent: "com.microsoft.samples.subpackage"
-  href: "com.microsoft.samples.subpackage.Display.yml"
-  name: "Display<T,R>"
-  nameWithType: "Display<T,R>"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>"
-  type: "Interface"
-  syntax:
-    content: "public interface Display<T,R> extends Serializable, List<Person<T>>"
-    typeParameters:
-    - id: "T"
-    - id: "R"
 - uid: "T"
   isExternal: false
   name: "T"
@@ -72,13 +60,3 @@ references:
   name: "R"
   nameWithType: "R"
   fullName: "R"
-- uid: "com.microsoft.samples.subpackage.Display.show()"
-  name: "show()"
-  nameWithType: "Display<T,R>.show()"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show()"
-  package: "com.microsoft.samples.subpackage"
-- uid: "com.microsoft.samples.subpackage.Display.hide()"
-  name: "hide()"
-  nameWithType: "Display<T,R>.hide()"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>.hide()"
-  package: "com.microsoft.samples.subpackage"

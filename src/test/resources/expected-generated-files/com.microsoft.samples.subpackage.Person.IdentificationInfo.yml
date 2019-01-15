@@ -34,16 +34,6 @@ items:
   syntax:
     content: "public IdentificationInfo()"
 references:
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  parent: "com.microsoft.samples.subpackage"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"
-  name: "Person.IdentificationInfo"
-  nameWithType: "Person.IdentificationInfo"
-  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  type: "Class"
-  summary: "Class that describes person's identification"
-  syntax:
-    content: "public static class Person.IdentificationInfo"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
   parent: "com.microsoft.samples.subpackage"
   href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"

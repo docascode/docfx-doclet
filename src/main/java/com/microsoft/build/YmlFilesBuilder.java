@@ -198,30 +198,14 @@ public class YmlFilesBuilder {
     }
 
     void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        // Owner class reference
-        MetadataFileItem classReference = buildClassReference(classElement);
-        classMetadataFile.getReferences().add(classReference);
         // Type parameter references
-        addTypeParameterReferences(classReference, classMetadataFile);
+        addTypeParameterReferences(buildClassReference(classElement), classMetadataFile);
 
         // Inner classes references
         classMetadataFile.getReferences().addAll(
             ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
                 .map(this::buildClassReference)
                 .collect(Collectors.toList()));
-
-        // Owner class methods references
-        classMetadataFile.getReferences().addAll(buildMethodsReferences(classElement));
-    }
-
-    List<MetadataFileItem> buildMethodsReferences(TypeElement classElement) {
-        return ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
-            .map(methodElement -> new MetadataFileItem(classItemsLookup.extractUid(methodElement)) {{
-                setName(classItemsLookup.extractName(methodElement));
-                setNameWithType(classItemsLookup.extractNameWithType(methodElement));
-                setFullName(classItemsLookup.extractFullName(methodElement));
-                setPackageName(classItemsLookup.extractPackageName(methodElement));
-            }}).collect(Collectors.toList());
     }
 
     MetadataFileItem buildMetadataFileItem(Element element) {

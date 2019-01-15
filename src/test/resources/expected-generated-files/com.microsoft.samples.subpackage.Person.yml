@@ -139,18 +139,6 @@ items:
     return:
       type: "java.lang.String"
 references:
-- uid: "com.microsoft.samples.subpackage.Person"
-  parent: "com.microsoft.samples.subpackage"
-  href: "com.microsoft.samples.subpackage.Person.yml"
-  name: "Person<T>"
-  nameWithType: "Person<T>"
-  fullName: "com.microsoft.samples.subpackage.Person<T>"
-  type: "Class"
-  summary: "Class that describes some person"
-  syntax:
-    content: "public class Person<T>"
-    typeParameters:
-    - id: "T"
 - uid: "T"
   isExternal: false
   name: "T"
@@ -166,23 +154,3 @@ references:
   summary: "Class that describes person's identification"
   syntax:
     content: "public static class Person.IdentificationInfo"
-- uid: "com.microsoft.samples.subpackage.Person.getFirstName()"
-  name: "getFirstName()"
-  nameWithType: "Person<T>.getFirstName()"
-  fullName: "com.microsoft.samples.subpackage.Person<T>.getFirstName()"
-  package: "com.microsoft.samples.subpackage"
-- uid: "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
-  name: "setFirstName(String firstName)"
-  nameWithType: "Person<T>.setFirstName(String firstName)"
-  fullName: "com.microsoft.samples.subpackage.Person<T>.setFirstName(String firstName)"
-  package: "com.microsoft.samples.subpackage"
-- uid: "com.microsoft.samples.subpackage.Person.getLastName()"
-  name: "getLastName()"
-  nameWithType: "Person<T>.getLastName()"
-  fullName: "com.microsoft.samples.subpackage.Person<T>.getLastName()"
-  package: "com.microsoft.samples.subpackage"
-- uid: "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
-  name: "setLastName(String lastName)"
-  nameWithType: "Person<T>.setLastName(String lastName)"
-  fullName: "com.microsoft.samples.subpackage.Person<T>.setLastName(String lastName)"
-  package: "com.microsoft.samples.subpackage"
