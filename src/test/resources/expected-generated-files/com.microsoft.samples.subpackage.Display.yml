@@ -18,9 +18,7 @@ items:
     content: "public interface Display<T,R> extends Serializable, List<Person<T>>"
     typeParameters:
     - id: "T"
-      type: "84"
     - id: "R"
-      type: "82"
   inheritance:
   - "java.lang.Object"
 - uid: "com.microsoft.samples.subpackage.Display.show()"
@@ -63,9 +61,7 @@ references:
     content: "public interface Display<T,R> extends Serializable, List<Person<T>>"
     typeParameters:
     - id: "T"
-      type: "84"
     - id: "R"
-      type: "82"
 - uid: "com.microsoft.samples.subpackage.Display.show()"
   name: "show()"
   nameWithType: "Display<T,R>.show()"

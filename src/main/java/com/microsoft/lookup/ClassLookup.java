@@ -82,14 +82,8 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     List<TypeParameter> determineTypeParameters(TypeElement element) {
-        return element.getTypeParameters().stream().map(typeParameter -> {
-            String key = String.valueOf(typeParameter);
-            String value = generateHexString(key);
-            return new TypeParameter(key, value);
-        }).collect(Collectors.toList());
-    }
-
-    String generateHexString(String key) {
-        return String.valueOf(key.hashCode());
+        return element.getTypeParameters().stream()
+            .map(typeParameter -> new TypeParameter(String.valueOf(typeParameter)))
+            .collect(Collectors.toList());
     }
 }

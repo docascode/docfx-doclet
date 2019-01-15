@@ -25,7 +25,6 @@ items:
     content: "public class Person<T>"
     typeParameters:
     - id: "T"
-      type: "84"
   inheritance:
   - "java.lang.Object"
 - uid: "com.microsoft.samples.subpackage.Person.Person()"
@@ -152,7 +151,6 @@ references:
     content: "public class Person<T>"
     typeParameters:
     - id: "T"
-      type: "84"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
   parent: "com.microsoft.samples.subpackage"
   href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"

@@ -1,6 +1,7 @@
 package com.microsoft.lookup;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import com.google.testing.compile.CompilationRule;
@@ -40,7 +41,7 @@ public class ClassLookupTest {
 
         assertThat("Wrong type params size", result.size(), is(1));
         assertThat("Wrong type parameter id", result.get(0).getId(), is("T"));
-        assertThat("Wrong type parameter type", result.get(0).getType(), is("84"));
+        assertThat("Wrong type parameter type", result.get(0).getType(), is(nullValue()));
     }
 
     @Test
@@ -127,13 +128,5 @@ public class ClassLookupTest {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
 
         assertThat(classLookup.determineType(element), is("Class"));
-    }
-
-
-    @Test
-    public void generateHexString() {
-        assertThat("Wrong result for simple string", classLookup.generateHexString("T"), is("84"));
-        assertThat("Wrong result for complex string", classLookup.generateHexString("? extends SomeClass"),
-            is("-819114916"));
     }
 }
