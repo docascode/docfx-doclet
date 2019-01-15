@@ -170,7 +170,7 @@ public abstract class BaseLookup<T> {
             return value;
         }
         return Stream.of(StringUtils.split(value, "<"))
-            .map(s -> RegExUtils.replaceAll(s, "^[a-z.]+\\.", ""))
+            .map(s -> RegExUtils.replaceAll(s, "\\b[a-z.]+\\.", ""))
             .collect(Collectors.joining("<"));
     }
 }

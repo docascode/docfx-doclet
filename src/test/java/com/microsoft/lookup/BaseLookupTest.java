@@ -97,5 +97,7 @@ public class BaseLookupTest {
             baseLookup.makeTypeShort("java.util.List.Custom<java.lang.Some.String>"), is("List.Custom<Some.String>"));
         assertThat("Wrong result for inner class with complex generic",
             baseLookup.makeTypeShort("a.b.c.D.E.G<m.n.A.B<c.d.D.G<a.F.Z>>>"), is("D.E.G<A.B<D.G<F.Z>>>"));
+        assertThat("Wrong result for inner class with generic & inheritance",
+            baseLookup.makeTypeShort("a.b.G<? extends a.b.List>"), is("G<? extends List>"));
     }
 }
