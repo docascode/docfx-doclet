@@ -4,7 +4,6 @@ items:
   id: "Gender"
   parent: "com.microsoft.samples.subpackage"
   children:
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"

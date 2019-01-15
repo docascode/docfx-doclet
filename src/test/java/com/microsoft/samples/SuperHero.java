@@ -96,4 +96,7 @@ public class SuperHero extends Person implements Serializable, Cloneable {
     public void setDefense(int defense) {
         this.defense = defense;
     }
+
+    private void somePrivateMethod() {
+    }
 }

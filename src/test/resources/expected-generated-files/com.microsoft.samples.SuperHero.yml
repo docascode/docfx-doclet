@@ -16,10 +16,6 @@ items:
   - "com.microsoft.samples.SuperHero.setHealth(int)"
   - "com.microsoft.samples.SuperHero.getDefense()"
   - "com.microsoft.samples.SuperHero.setDefense(int)"
-  - "com.microsoft.samples.SuperHero.heroName"
-  - "com.microsoft.samples.SuperHero.uniquePower"
-  - "com.microsoft.samples.SuperHero.health"
-  - "com.microsoft.samples.SuperHero.defense"
   - "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
   href: "com.microsoft.samples.SuperHero.yml"
   langs:
@@ -248,67 +244,6 @@ items:
     content: "public void setDefense(int defense)"
     parameters:
     - id: "defense"
-      type: "int"
-- uid: "com.microsoft.samples.SuperHero.heroName"
-  id: "heroName"
-  parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
-  langs:
-  - "java"
-  name: "heroName"
-  nameWithType: "SuperHero.heroName"
-  fullName: "com.microsoft.samples.SuperHero.heroName"
-  type: "Field"
-  package: "com.microsoft.samples"
-  summary: "The public name of a hero that is common knowledge"
-  syntax:
-    content: "private String heroName"
-    return:
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.SuperHero.uniquePower"
-  id: "uniquePower"
-  parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
-  langs:
-  - "java"
-  name: "uniquePower"
-  nameWithType: "SuperHero.uniquePower"
-  fullName: "com.microsoft.samples.SuperHero.uniquePower"
-  type: "Field"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "private String uniquePower"
-    return:
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.SuperHero.health"
-  id: "health"
-  parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
-  langs:
-  - "java"
-  name: "health"
-  nameWithType: "SuperHero.health"
-  fullName: "com.microsoft.samples.SuperHero.health"
-  type: "Field"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "private int health"
-    return:
-      type: "int"
-- uid: "com.microsoft.samples.SuperHero.defense"
-  id: "defense"
-  parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
-  langs:
-  - "java"
-  name: "defense"
-  nameWithType: "SuperHero.defense"
-  fullName: "com.microsoft.samples.SuperHero.defense"
-  type: "Field"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "private int defense"
-    return:
       type: "int"
 - uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
   id: "SOME_PUBLIC_STRING"

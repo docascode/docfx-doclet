@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import jdk.javadoc.doclet.DocletEnvironment;
 
@@ -146,15 +146,24 @@ public class YmlFilesBuilder {
     }
 
     void addChildren(TypeElement classElement, List<String> children) {
-        collect(ElementFilter.constructorsIn(classElement.getEnclosedElements()), children,
-            classItemsLookup::extractUid);
-        collect(ElementFilter.methodsIn(classElement.getEnclosedElements()), children, classItemsLookup::extractUid);
-        collect(ElementFilter.fieldsIn(classElement.getEnclosedElements()), children, classItemsLookup::extractUid);
-        collect(ElementFilter.typesIn(classElement.getEnclosedElements()), children, String::valueOf);
+        collect(classElement, children, ElementFilter::constructorsIn, classItemsLookup::extractUid);
+        collect(classElement, children, ElementFilter::methodsIn, classItemsLookup::extractUid);
+        collect(classElement, children, ElementFilter::fieldsIn, classItemsLookup::extractUid);
+        collect(classElement, children, ElementFilter::typesIn, String::valueOf);
     }
 
-    void collect(List<? extends Element> elements, List<String> children, Function<? super Element, String> func) {
-        children.addAll(elements.stream().map(func).collect(Collectors.toList()));
+    List<? extends Element> filterPrivateElements(List<? extends Element> elements) {
+        return elements.stream()
+            .filter(element -> !element.getModifiers().contains(Modifier.PRIVATE)).collect(Collectors.toList());
+    }
+
+    void collect(TypeElement classElement, List<String> children,
+        Function<Iterable<? extends Element>, List<? extends Element>> selectFunc,
+        Function<? super Element, String> mapFunc) {
+
+        List<? extends Element> elements = selectFunc.apply(classElement.getEnclosedElements());
+        children.addAll(filterPrivateElements(elements).stream()
+            .map(mapFunc).collect(Collectors.toList()));
     }
 
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
@@ -170,30 +179,32 @@ public class YmlFilesBuilder {
     }
 
     void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        for (ExecutableElement methodElement : ElementFilter.methodsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
-            methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
-            methodItem.setContent(classItemsLookup.extractMethodContent(methodElement));
-            methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
-            methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
-            methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
-            classMetadataFile.getItems().add(methodItem);
-
-            addExceptionReferences(methodItem, classMetadataFile);
-            addParameterReferences(methodItem, classMetadataFile);
-            addReturnReferences(methodItem, classMetadataFile);
-        }
+        ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
+            .filter(methodElement -> !methodElement.getModifiers().contains(Modifier.PRIVATE))
+            .forEach(methodElement -> {
+                MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
+                methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
+                methodItem.setContent(classItemsLookup.extractMethodContent(methodElement));
+                methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
+                methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
+                methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
+                classMetadataFile.getItems().add(methodItem);
+                addExceptionReferences(methodItem, classMetadataFile);
+                addParameterReferences(methodItem, classMetadataFile);
+                addReturnReferences(methodItem, classMetadataFile);
+            });
     }
 
     void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        for (VariableElement fieldElement : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
-            MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
-            fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
-            fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
-            classMetadataFile.getItems().add(fieldItem);
-
-            addReturnReferences(fieldItem, classMetadataFile);
-        }
+        ElementFilter.fieldsIn(classElement.getEnclosedElements()).stream()
+            .filter(fieldElement -> !fieldElement.getModifiers().contains(Modifier.PRIVATE))
+            .forEach(fieldElement -> {
+                MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
+                fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
+                fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
+                classMetadataFile.getItems().add(fieldItem);
+                addReturnReferences(fieldItem, classMetadataFile);
+            });
     }
 
     void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {

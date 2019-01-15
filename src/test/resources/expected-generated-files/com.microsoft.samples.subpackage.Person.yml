@@ -9,8 +9,6 @@ items:
   - "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
   - "com.microsoft.samples.subpackage.Person.getLastName()"
   - "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
-  - "com.microsoft.samples.subpackage.Person.firstName"
-  - "com.microsoft.samples.subpackage.Person.lastName"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo"
   href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
@@ -106,37 +104,6 @@ items:
     content: "public void setLastName(String lastName)"
     parameters:
     - id: "lastName"
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.subpackage.Person.firstName"
-  id: "firstName"
-  parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
-  langs:
-  - "java"
-  name: "firstName"
-  nameWithType: "Person<T>.firstName"
-  fullName: "com.microsoft.samples.subpackage.Person<T>.firstName"
-  type: "Field"
-  package: "com.microsoft.samples.subpackage"
-  summary: "This is a first name of a <xref uid=\"\" data-throw-if-not-resolved=\"false\">Person</xref> entity"
-  syntax:
-    content: "private String firstName"
-    return:
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.subpackage.Person.lastName"
-  id: "lastName"
-  parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
-  langs:
-  - "java"
-  name: "lastName"
-  nameWithType: "Person<T>.lastName"
-  fullName: "com.microsoft.samples.subpackage.Person<T>.lastName"
-  type: "Field"
-  package: "com.microsoft.samples.subpackage"
-  syntax:
-    content: "private String lastName"
-    return:
       type: "java.lang.String"
 references:
 - uid: "java.lang.String"
