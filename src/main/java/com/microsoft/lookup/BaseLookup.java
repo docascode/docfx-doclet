@@ -165,7 +165,7 @@ public abstract class BaseLookup<T> {
         return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
     }
 
-    protected String makeTypeShort(String value) {
+    public String makeTypeShort(String value) {
         if (!value.contains(".")) {
             return value;
         }

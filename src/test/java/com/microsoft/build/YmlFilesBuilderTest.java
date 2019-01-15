@@ -69,20 +69,16 @@ public class YmlFilesBuilderTest {
     }
 
     @Test
-    public void buildSpecJavaRefItemAndReplaceField() {
+    public void buildSpecJavaRefItem() {
         CustomClass customClass = new CustomClass();
-        String originalValue = "initial value";
-        String expectedUpdatedValue = originalValue.toUpperCase() + "!";
-        customClass.setSomeField(originalValue);
-        Function<String, String> conversionFunc = s -> StringUtils.upperCase(s) + "!";
+        String value = "Some value";
+        customClass.setSomeField(value);
 
-        MetadataFileItem result = ymlFilesBuilder
-            .buildSpecJavaRefItemAndReplaceField(customClass, "someField", conversionFunc);
+        MetadataFileItem result = ymlFilesBuilder.buildSpecJavaRefItem(customClass, "someField");
 
-        assertThat("Field value should be changed", customClass.getSomeField(), is(expectedUpdatedValue));
-        assertThat("Wrong uid", result.getUid(), is(expectedUpdatedValue));
-        assertThat("Wrong name", result.getSpecJava().getName(), is(originalValue));
-        assertThat("Wrong fullName", result.getSpecJava().getFullName(), is(originalValue));
+        assertThat("Wrong uid", result.getUid(), is(value));
+        assertThat("Wrong name", result.getSpecJava().getName(), is(value));
+        assertThat("Wrong fullName", result.getSpecJava().getFullName(), is(value));
     }
 
     private class CustomClass {

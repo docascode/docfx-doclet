@@ -325,3 +325,16 @@ items:
     content: "public final String SOME_PUBLIC_STRING"
     return:
       type: "java.lang.String"
+references:
+- uid: "java.lang.String"
+  spec.java:
+    name: "String"
+    fullName: "String"
+- uid: "int"
+  spec.java:
+    name: "int"
+    fullName: "int"
+- uid: "java.lang.IllegalArgumentException"
+  spec.java:
+    name: "IllegalArgumentException"
+    fullName: "IllegalArgumentException"

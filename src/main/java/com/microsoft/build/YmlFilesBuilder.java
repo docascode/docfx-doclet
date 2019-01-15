@@ -5,7 +5,6 @@ import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.MethodParameter;
 import com.microsoft.model.SpecJava;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
@@ -166,7 +165,7 @@ public class YmlFilesBuilder {
             constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
             classMetadataFile.getItems().add(constructorItem);
 
-//            addParameterReferences(constructorItem, classMetadataFile);
+            addParameterReferences(constructorItem, classMetadataFile);
         }
     }
 
@@ -180,9 +179,9 @@ public class YmlFilesBuilder {
             methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
             classMetadataFile.getItems().add(methodItem);
 
-//            addExceptionReferences(methodItem, classMetadataFile);
-//            addParameterReferences(methodItem, classMetadataFile);
-//            addReturnReferences(methodItem, classMetadataFile);
+            addExceptionReferences(methodItem, classMetadataFile);
+            addParameterReferences(methodItem, classMetadataFile);
+            addReturnReferences(methodItem, classMetadataFile);
         }
     }
 
@@ -193,7 +192,7 @@ public class YmlFilesBuilder {
             fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
             classMetadataFile.getItems().add(fieldItem);
 
-//            addReturnReferences(fieldItem, classMetadataFile);
+            addReturnReferences(fieldItem, classMetadataFile);
         }
     }
 
@@ -225,7 +224,7 @@ public class YmlFilesBuilder {
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
             methodItem.getSyntax().getParameters().stream()
-                .map(parameter -> buildSpecJavaRefItemAndReplaceField(parameter, "type", this::generateHexString))
+                .map(parameter -> buildSpecJavaRefItem(parameter, "type"))
                 .collect(Collectors.toList()));
     }
 
@@ -233,16 +232,14 @@ public class YmlFilesBuilder {
         classMetadataFile.getReferences().addAll(
             Stream.of(methodItem.getSyntax().getReturnValue())
                 .filter(Objects::nonNull)
-                .map(returnValue -> buildSpecJavaRefItemAndReplaceField(returnValue, "returnType",
-                    this::generateHexString))
+                .map(returnValue -> buildSpecJavaRefItem(returnValue, "returnType"))
                 .collect(Collectors.toList()));
     }
 
     void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
             methodItem.getExceptions().stream()
-                .map(exceptionItem -> buildSpecJavaRefItemAndReplaceField(exceptionItem, "type",
-                    this::generateHexString))
+                .map(exceptionItem -> buildSpecJavaRefItem(exceptionItem, "type"))
                 .collect(Collectors.toList()));
     }
 
@@ -260,26 +257,20 @@ public class YmlFilesBuilder {
                 }).collect(Collectors.toList()));
     }
 
-    MetadataFileItem buildSpecJavaRefItemAndReplaceField(Object object, String fieldName,
-        Function<String, String> conversionFunc) {
+    MetadataFileItem buildSpecJavaRefItem(Object object, String fieldName) {
         try {
             Field field = object.getClass().getDeclaredField(fieldName);
             boolean accessible = field.canAccess(object);
             field.setAccessible(true);
             String value = String.valueOf(field.get(object));
-            String convertedValue = conversionFunc.apply(value);
-            field.set(object, convertedValue);
             field.setAccessible(accessible);
 
-            MetadataFileItem metadataFileItem = new MetadataFileItem(convertedValue);
-            metadataFileItem.setSpecJava(new SpecJava(value, value));
+            MetadataFileItem metadataFileItem = new MetadataFileItem(value);
+            String shortValue = classLookup.makeTypeShort(value);
+            metadataFileItem.setSpecJava(new SpecJava(shortValue, shortValue));
             return metadataFileItem;
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException("Error during field replacement", e);
         }
-    }
-
-    String generateHexString(String key) {
-        return String.valueOf(key.hashCode());
     }
 }
