@@ -62,6 +62,16 @@ references:
     typeParameters:
     - id: "T"
     - id: "R"
+- uid: "T"
+  isExternal: false
+  name: "T"
+  nameWithType: "T"
+  fullName: "T"
+- uid: "R"
+  isExternal: false
+  name: "R"
+  nameWithType: "R"
+  fullName: "R"
 - uid: "com.microsoft.samples.subpackage.Display.show()"
   name: "show()"
   nameWithType: "Display<T,R>.show()"

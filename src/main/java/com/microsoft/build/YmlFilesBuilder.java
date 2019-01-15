@@ -202,7 +202,7 @@ public class YmlFilesBuilder {
         MetadataFileItem classReference = buildClassReference(classElement);
         classMetadataFile.getReferences().add(classReference);
         // Type parameter references
-//        addTypeParameterReferences(classReference, classMetadataFile);
+        addTypeParameterReferences(classReference, classMetadataFile);
 
         // Inner classes references
         classMetadataFile.getReferences().addAll(
@@ -267,8 +267,11 @@ public class YmlFilesBuilder {
             methodItem.getSyntax().getTypeParameters().stream()
                 .map(typeParameter -> {
                     String id = typeParameter.getId();
-                    MetadataFileItem metadataFileItem = new MetadataFileItem(generateHexString(id));
-                    metadataFileItem.setSpecJava(new SpecJava(id, id));
+                    MetadataFileItem metadataFileItem = new MetadataFileItem(id);
+                    metadataFileItem.setName(id);
+                    metadataFileItem.setNameWithType(id);
+                    metadataFileItem.setFullName(id);
+                    metadataFileItem.setIsExternal(false);
                     return metadataFileItem;
                 }).collect(Collectors.toList()));
     }

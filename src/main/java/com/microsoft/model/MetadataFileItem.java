@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "name", "nameWithType", "fullName", "overload",
-    "type", "package", "summary", "syntax", "inheritance", "exceptions", "spec.java"})
+@JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
+    "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "exceptions", "spec.java"})
 public class MetadataFileItem {
 
     private final String uid;
@@ -29,6 +29,7 @@ public class MetadataFileItem {
     private List<ExceptionItem> exceptions;
     @JsonProperty("spec.java")
     private SpecJava specJava;
+    private Boolean isExternal;
 
     public MetadataFileItem(String[] langs, String uid) {
         this(uid);
@@ -208,5 +209,13 @@ public class MetadataFileItem {
     @Override
     public int hashCode() {
         return uid.hashCode();
+    }
+
+    public void setIsExternal(Boolean isExternal) {
+        this.isExternal = isExternal;
+    }
+
+    public Boolean getIsExternal() {
+        return isExternal;
     }
 }
