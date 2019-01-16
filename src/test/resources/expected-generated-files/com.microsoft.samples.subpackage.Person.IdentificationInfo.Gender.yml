@@ -101,10 +101,6 @@ items:
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
 references:
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]"
-  spec.java:
-    name: "Person.IdentificationInfo.Gender[]"
-    fullName: "Person.IdentificationInfo.Gender[]"
 - uid: "java.lang.String"
   spec.java:
     name: "String"

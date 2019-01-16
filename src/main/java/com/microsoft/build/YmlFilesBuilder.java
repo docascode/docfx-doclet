@@ -24,6 +24,7 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.RegExUtils;
 
 public class YmlFilesBuilder {
 
@@ -286,6 +287,7 @@ public class YmlFilesBuilder {
             String value = String.valueOf(field.get(object));
             field.setAccessible(accessible);
 
+            value = RegExUtils.removeAll(value, "\\[\\]$");
             MetadataFileItem metadataFileItem = new MetadataFileItem(value);
             String shortValue = classLookup.makeTypeShort(value);
             metadataFileItem.setSpecJava(new SpecJava(shortValue, shortValue));
