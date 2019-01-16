@@ -74,7 +74,6 @@ public class DocFxDoclet implements Doclet {
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        // support the latest release
         return SourceVersion.latest();
     }
 

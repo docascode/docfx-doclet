@@ -208,14 +208,9 @@ public class YmlFilesBuilder {
     }
 
     void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        // Type parameter references
         addTypeParameterReferences(buildClassReference(classElement), classMetadataFile);
-
-        // Inner classes references
-        classMetadataFile.getReferences().addAll(
-            ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
-                .map(this::buildClassReference)
-                .collect(Collectors.toList()));
+        addSuperclassAndInterfacesReferences(classElement, classMetadataFile);
+        addInnerClassesReferences(classElement, classMetadataFile);
     }
 
     MetadataFileItem buildMetadataFileItem(Element element) {
@@ -269,6 +264,18 @@ public class YmlFilesBuilder {
                     metadataFileItem.setIsExternal(false);
                     return metadataFileItem;
                 }).collect(Collectors.toList()));
+    }
+
+    void addSuperclassAndInterfacesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
+        String uid = classLookup.extractUid(classElement);
+        classMetadataFile.getReferences().addAll(classLookup.getReferencesByUid(uid));
+    }
+
+    void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
+        classMetadataFile.getReferences().addAll(
+            ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
+                .map(this::buildClassReference)
+                .collect(Collectors.toList()));
     }
 
     MetadataFileItem buildSpecJavaRefItem(Object object, String fieldName) {

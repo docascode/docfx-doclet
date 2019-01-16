@@ -60,3 +60,11 @@ references:
   name: "R"
   nameWithType: "R"
   fullName: "R"
+- uid: "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
+  spec.java:
+    name: "List<Person<T>>"
+    fullName: "List<Person<T>>"
+- uid: "java.io.Serializable"
+  spec.java:
+    name: "Serializable"
+    fullName: "Serializable"

@@ -273,3 +273,15 @@ references:
   spec.java:
     name: "IllegalArgumentException"
     fullName: "IllegalArgumentException"
+- uid: "com.microsoft.samples.subpackage.Person"
+  spec.java:
+    name: "Person"
+    fullName: "Person"
+- uid: "java.lang.Cloneable"
+  spec.java:
+    name: "Cloneable"
+    fullName: "Cloneable"
+- uid: "java.io.Serializable"
+  spec.java:
+    name: "Serializable"
+    fullName: "Serializable"

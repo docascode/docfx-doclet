@@ -20,6 +20,7 @@
 
   <build>
     <plugins>
+      <!-- Pack doclet into fat jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
