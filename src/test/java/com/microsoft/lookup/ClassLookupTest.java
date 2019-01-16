@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import com.google.testing.compile.CompilationRule;
+import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.TypeParameter;
 import java.util.List;
 import javax.lang.model.element.TypeElement;
@@ -74,38 +75,42 @@ public class ClassLookupTest {
     @Test
     public void determineClassContent() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+        ExtendedMetadataFileItem container = new ExtendedMetadataFileItem("UID");
 
-        String result = classLookup.determineClassContent(element, "SuperHero");
+        classLookup.populateContent(element, "SuperHero", container);
 
-        assertThat("Wrong result", result, is("public class SuperHero extends Person implements Serializable, Cloneable"));
+        assertThat("Wrong result", container.getContent(), is("public class SuperHero extends Person implements Serializable, Cloneable"));
     }
 
     @Test
     public void determineClassContentForInterface() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
+        ExtendedMetadataFileItem container = new ExtendedMetadataFileItem("UID");
 
-        String result = classLookup.determineClassContent(element, "Display<T,R>");
+        classLookup.populateContent(element, "Display<T,R>", container);
 
-        assertThat("Wrong result", result, is("public interface Display<T,R> extends Serializable, List<Person<T>>"));
+        assertThat("Wrong result", container.getContent(), is("public interface Display<T,R> extends Serializable, List<Person<T>>"));
     }
 
     @Test
     public void determineClassContentForEnum() {
         TypeElement element = elements
             .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+        ExtendedMetadataFileItem container = new ExtendedMetadataFileItem("UID");
 
-        String result = classLookup.determineClassContent(element, "Person.IdentificationInfo.Gender");
+        classLookup.populateContent(element, "Person.IdentificationInfo.Gender", container);
 
-        assertThat("Wrong result", result, is("public enum Person.IdentificationInfo.Gender"));
+        assertThat("Wrong result", container.getContent(), is("public enum Person.IdentificationInfo.Gender"));
     }
 
     @Test
     public void determineClassContentForStaticClass() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
+        ExtendedMetadataFileItem container = new ExtendedMetadataFileItem("UID");
 
-        String result = classLookup.determineClassContent(element, "Person.IdentificationInfo");
+        classLookup.populateContent(element, "Person.IdentificationInfo", container);
 
-        assertThat("Wrong result", result, is("public static class Person.IdentificationInfo"));
+        assertThat("Wrong result", container.getContent(), is("public static class Person.IdentificationInfo"));
     }
 
     @Test

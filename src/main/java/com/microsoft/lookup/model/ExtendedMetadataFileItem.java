@@ -4,7 +4,9 @@ import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Just container to keep cached precalculated values for lookup
@@ -20,6 +22,7 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     private List<TypeParameter> typeParameters;
     private String superclass;
     private String tocName;
+    private Set<MetadataFileItem> references = new LinkedHashSet<>();
 
     public ExtendedMetadataFileItem(String uid) {
         super(uid);
@@ -100,5 +103,13 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
 
     public String getTocName() {
         return tocName;
+    }
+
+    public void addReferences(Set<MetadataFileItem> references) {
+        this.references.addAll(references);
+    }
+
+    public Set<MetadataFileItem> getReferences() {
+        return references;
     }
 }

@@ -268,8 +268,7 @@ public class YmlFilesBuilder {
     }
 
     void addSuperclassAndInterfacesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
-        String uid = classLookup.extractUid(classElement);
-        classMetadataFile.getReferences().addAll(classLookup.getReferencesByUid(uid));
+        classMetadataFile.getReferences().addAll(classLookup.extractReferences(classElement));
     }
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {

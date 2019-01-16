@@ -4,11 +4,7 @@ import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.SpecJava;
 import com.microsoft.model.TypeParameter;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.lang.model.element.ElementKind;
@@ -22,7 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 public class ClassLookup extends BaseLookup<TypeElement> {
 
     private static final String JAVA_LANG_OBJECT = "java.lang.Object";
-    private Map<String, Set<MetadataFileItem>> uidToReferencesCacheMap = new HashMap();
 
     public ClassLookup(DocletEnvironment environment) {
         super(environment);
@@ -46,7 +41,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         result.setType(determineType(classElement));
         result.setPackageName(packageName);
         result.setSummary(determineComment(classElement));
-        result.setContent(determineClassContent(classElement, classSNameWithGenericsSupport));
+        populateContent(classElement, classSNameWithGenericsSupport, result);
         result.setSuperclass(determineSuperclass(classElement));
         result.setTypeParameters(determineTypeParameters(classElement));
         result.setTocName(classQName.replace(packageName.concat("."), ""));
@@ -54,14 +49,8 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         return result;
     }
 
-    public Set<MetadataFileItem> getReferencesByUid(String uid) {
-        if (!uidToReferencesCacheMap.containsKey(uid)) {
-            return Collections.emptySet();
-        }
-        return uidToReferencesCacheMap.get(uid);
-    }
-
-    String determineClassContent(TypeElement classElement, String shortNameWithGenericsSupport) {
+    void populateContent(TypeElement classElement, String shortNameWithGenericsSupport,
+        ExtendedMetadataFileItem container) {
         String type = elementKindLookup.get(classElement.getKind());
         String result = String.format("%s %s %s",
             classElement.getModifiers().stream().map(String::valueOf)
@@ -74,7 +63,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         if (!JAVA_LANG_OBJECT.equals(superclass)) {
             result += " extends " + makeTypeShort(superclass);
 
-            addSuperclassToReferencesMap(classElement, superclass);
+            addSuperclassToReferencesMap(superclass, container);
         }
 
         List<? extends TypeMirror> interfaces = classElement.getInterfaces();
@@ -83,30 +72,22 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             result += prefix + interfaces.stream().map(String::valueOf).map(this::makeTypeShort)
                 .collect(Collectors.joining(", "));
 
-            addInterfacesToReferencesMap(classElement, interfaces);
+            addInterfacesToReferencesMap(interfaces, container);
         }
 
-        return result;
+        container.setContent(result);
     }
 
-    void addSuperclassToReferencesMap(TypeElement classElement, String superclass) {
-        String uid = String.valueOf(classElement.getQualifiedName());
-        if (!uidToReferencesCacheMap.containsKey(uid)) {
-            uidToReferencesCacheMap.put(uid, new LinkedHashSet<>());
-        }
-        uidToReferencesCacheMap.get(uid).add(
-            new MetadataFileItem(superclass) {{
+    void addSuperclassToReferencesMap(String superclass, ExtendedMetadataFileItem container) {
+        container.addReferences(
+            Set.of(new MetadataFileItem(superclass) {{
                 String shortValue = makeTypeShort(superclass);
                 setSpecJava(new SpecJava(shortValue, shortValue));
-            }});
+            }}));
     }
 
-    void addInterfacesToReferencesMap(TypeElement classElement, List<? extends TypeMirror> interfaces) {
-        String uid = String.valueOf(classElement.getQualifiedName());
-        if (!uidToReferencesCacheMap.containsKey(uid)) {
-            uidToReferencesCacheMap.put(uid, new LinkedHashSet<>());
-        }
-        uidToReferencesCacheMap.get(uid).addAll(
+    void addInterfacesToReferencesMap(List<? extends TypeMirror> interfaces, ExtendedMetadataFileItem container) {
+        container.addReferences(
             interfaces.stream().map(String::valueOf).map(o -> new MetadataFileItem(o) {{
                 String shortValue = makeTypeShort(o);
                 setSpecJava(new SpecJava(shortValue, shortValue));

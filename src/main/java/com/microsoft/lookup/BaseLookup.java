@@ -2,6 +2,7 @@ package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.ExceptionItem;
+import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.lang.model.element.Element;
@@ -133,6 +135,10 @@ public abstract class BaseLookup<T> {
 
     public String extractTocName(T key) {
         return resolve(key).getTocName();
+    }
+
+    public Set<MetadataFileItem> extractReferences(T key) {
+        return resolve(key).getReferences();
     }
 
     protected String determineType(Element element) {
