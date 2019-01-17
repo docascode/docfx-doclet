@@ -2,7 +2,6 @@ package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.SpecJava;
 import com.microsoft.model.TypeParameter;
 import java.util.List;
 import java.util.Set;
@@ -79,19 +78,15 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     void addSuperclassToReferencesMap(String superclass, ExtendedMetadataFileItem container) {
-        container.addReferences(
-            Set.of(new MetadataFileItem(superclass) {{
-                String shortValue = makeTypeShort(superclass);
-                setSpecJava(new SpecJava(shortValue, shortValue));
-            }}));
+        container.addReferences(Set.of(new MetadataFileItem(superclass, makeTypeShort(superclass), true)));
     }
 
     void addInterfacesToReferencesMap(List<? extends TypeMirror> interfaces, ExtendedMetadataFileItem container) {
-        container.addReferences(
-            interfaces.stream().map(String::valueOf).map(o -> new MetadataFileItem(o) {{
-                String shortValue = makeTypeShort(o);
-                setSpecJava(new SpecJava(shortValue, shortValue));
-            }}).collect(Collectors.toSet()));
+        container.addReferences(interfaces.stream()
+            .map(String::valueOf)
+            .map(o -> new MetadataFileItem(o, makeTypeShort(o), true))
+            .collect(Collectors.toSet())
+        );
     }
 
     String determineSuperclass(TypeElement classElement) {

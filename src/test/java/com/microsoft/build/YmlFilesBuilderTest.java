@@ -75,8 +75,9 @@ public class YmlFilesBuilderTest {
         MetadataFileItem result = ymlFilesBuilder.buildSpecJavaRefItem(customClass, "someField");
 
         assertThat("Wrong uid", result.getUid(), is(value));
-        assertThat("Wrong name", result.getSpecJava().getName(), is(value));
-        assertThat("Wrong fullName", result.getSpecJava().getFullName(), is(value));
+        assertThat("Wrong name", result.getName(), is(value));
+        assertThat("Wrong fullName", result.getFullName(), is(value));
+        assertThat("Wrong nameWithType", result.getNameWithType(), is(value));
     }
 
     @Test

@@ -27,9 +27,7 @@ public class MetadataFileItem {
     @JsonProperty("inheritance")
     private String[] superclass;
     private List<ExceptionItem> exceptions;
-    @JsonProperty("spec.java")
-    private SpecJava specJava;
-    private Boolean isExternal;
+    private boolean isExternal;
 
     public MetadataFileItem(String[] langs, String uid) {
         this(uid);
@@ -38,6 +36,14 @@ public class MetadataFileItem {
 
     public MetadataFileItem(String uid) {
         this.uid = uid;
+    }
+
+    public MetadataFileItem(String uid, String name, boolean isExternal) {
+        this(uid);
+        this.name = name;
+        this.nameWithType = name;
+        this.fullName = name;
+        this.isExternal = isExternal;
     }
 
     public String getUid() {
@@ -156,14 +162,6 @@ public class MetadataFileItem {
         this.exceptions = exceptions;
     }
 
-    public SpecJava getSpecJava() {
-        return specJava;
-    }
-
-    public void setSpecJava(SpecJava specJava) {
-        this.specJava = specJava;
-    }
-
     public void setContent(String content) {
         if (syntax == null) {
             syntax = new Syntax();
@@ -211,11 +209,7 @@ public class MetadataFileItem {
         return uid.hashCode();
     }
 
-    public void setIsExternal(Boolean isExternal) {
-        this.isExternal = isExternal;
-    }
-
     public Boolean getIsExternal() {
-        return isExternal;
+        return isExternal ? true : null;
     }
 }

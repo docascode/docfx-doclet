@@ -262,26 +262,32 @@ items:
       type: "java.lang.String"
 references:
 - uid: "java.lang.String"
-  spec.java:
-    name: "String"
-    fullName: "String"
+  isExternal: true
+  name: "String"
+  nameWithType: "String"
+  fullName: "String"
 - uid: "int"
-  spec.java:
-    name: "int"
-    fullName: "int"
+  isExternal: true
+  name: "int"
+  nameWithType: "int"
+  fullName: "int"
 - uid: "java.lang.IllegalArgumentException"
-  spec.java:
-    name: "IllegalArgumentException"
-    fullName: "IllegalArgumentException"
+  isExternal: true
+  name: "IllegalArgumentException"
+  nameWithType: "IllegalArgumentException"
+  fullName: "IllegalArgumentException"
 - uid: "com.microsoft.samples.subpackage.Person"
-  spec.java:
-    name: "Person"
-    fullName: "Person"
+  isExternal: true
+  name: "Person"
+  nameWithType: "Person"
+  fullName: "Person"
 - uid: "java.lang.Cloneable"
-  spec.java:
-    name: "Cloneable"
-    fullName: "Cloneable"
+  isExternal: true
+  name: "Cloneable"
+  nameWithType: "Cloneable"
+  fullName: "Cloneable"
 - uid: "java.io.Serializable"
-  spec.java:
-    name: "Serializable"
-    fullName: "Serializable"
+  isExternal: true
+  name: "Serializable"
+  nameWithType: "Serializable"
+  fullName: "Serializable"

@@ -5,7 +5,6 @@ import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.SpecJava;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
@@ -258,12 +257,7 @@ public class YmlFilesBuilder {
             methodItem.getSyntax().getTypeParameters().stream()
                 .map(typeParameter -> {
                     String id = typeParameter.getId();
-                    MetadataFileItem metadataFileItem = new MetadataFileItem(id);
-                    metadataFileItem.setName(id);
-                    metadataFileItem.setNameWithType(id);
-                    metadataFileItem.setFullName(id);
-                    metadataFileItem.setIsExternal(false);
-                    return metadataFileItem;
+                    return new MetadataFileItem(id, id, false);
                 }).collect(Collectors.toList()));
     }
 
@@ -287,10 +281,7 @@ public class YmlFilesBuilder {
             field.setAccessible(accessible);
 
             value = RegExUtils.removeAll(value, "\\[\\]$");
-            MetadataFileItem metadataFileItem = new MetadataFileItem(value);
-            String shortValue = classLookup.makeTypeShort(value);
-            metadataFileItem.setSpecJava(new SpecJava(shortValue, shortValue));
-            return metadataFileItem;
+            return new MetadataFileItem(value, classLookup.makeTypeShort(value), true);
         } catch (ReflectiveOperationException e) {
             throw new RuntimeException("Error during field replacement", e);
         }

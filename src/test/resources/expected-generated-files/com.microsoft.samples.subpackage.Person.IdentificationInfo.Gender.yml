@@ -102,6 +102,7 @@ items:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
 references:
 - uid: "java.lang.String"
-  spec.java:
-    name: "String"
-    fullName: "String"
+  isExternal: true
+  name: "String"
+  nameWithType: "String"
+  fullName: "String"
