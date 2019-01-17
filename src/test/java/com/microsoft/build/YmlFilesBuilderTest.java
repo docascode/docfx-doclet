@@ -1,5 +1,6 @@
 package com.microsoft.build;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -11,6 +12,9 @@ import com.microsoft.model.MetadataFileItem;
 import com.sun.source.util.DocTrees;
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -92,6 +96,29 @@ public class YmlFilesBuilderTest {
         } catch (RuntimeException re) {
             assertThat("Wrong exception message", re.getMessage(), is("Error during field replacement"));
         }
+    }
+
+    @Test
+    public void splitUidWithGenericsIntoClassNames() {
+        List<String> result = ymlFilesBuilder.splitUidWithGenericsIntoClassNames("a.b.c.List<df.mn.ClassOne<tr.T>>");
+
+        assertThat("Wrong result list size", result.size(), is(3));
+        assertThat("Wrong result list content", result, hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T"));
+    }
+
+    @Test
+    public void applyPostProcessing() {
+        MetadataFile classMetadataFile = new MetadataFile("path", "name");
+        MetadataFileItem referenceItem = new MetadataFileItem("a.b.c.List<df.mn.ClassOne<tr.T>>");
+        Set<MetadataFileItem> references = classMetadataFile.getReferences();
+        references.add(referenceItem);
+
+        ymlFilesBuilder.applyPostProcessing(classMetadataFile);
+
+        assertThat("Wrong references amount", references.size(), is(3));
+        assertThat("Wrong references content",
+            references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList()),
+            hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T"));
     }
 
     private class CustomClass {

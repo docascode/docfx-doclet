@@ -58,13 +58,18 @@ references:
   name: "R"
   nameWithType: "R"
   fullName: "R"
-- uid: "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
-  isExternal: true
-  name: "List<Person<T>>"
-  nameWithType: "List<Person<T>>"
-  fullName: "List<Person<T>>"
 - uid: "java.io.Serializable"
   isExternal: true
   name: "Serializable"
   nameWithType: "Serializable"
   fullName: "Serializable"
+- uid: "java.util.List"
+  isExternal: true
+  name: "List"
+  nameWithType: "List"
+  fullName: "List"
+- uid: "com.microsoft.samples.subpackage.Person"
+  isExternal: true
+  name: "Person"
+  nameWithType: "Person"
+  fullName: "Person"

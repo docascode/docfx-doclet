@@ -10,6 +10,9 @@ import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -24,6 +27,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class YmlFilesBuilder {
 
@@ -123,6 +127,7 @@ public class YmlFilesBuilder {
         addMethodsInfo(classElement, classMetadataFile);
         addFieldsInfo(classElement, classMetadataFile);
         addReferencesInfo(classElement, classMetadataFile);
+        applyPostProcessing(classMetadataFile);
 
         FileUtil.dumpToFile(classMetadataFile);
     }
@@ -270,6 +275,32 @@ public class YmlFilesBuilder {
             ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
                 .map(this::buildClassReference)
                 .collect(Collectors.toList()));
+    }
+
+    void applyPostProcessing(MetadataFile classMetadataFile) {
+        Set<MetadataFileItem> additionalItems = new LinkedHashSet<>();
+        Iterator<MetadataFileItem> iterator = classMetadataFile.getReferences().iterator();
+        while (iterator.hasNext()) {
+            MetadataFileItem item = iterator.next();
+            String uid = item.getUid();
+            if (uid.contains("<")) {
+                iterator.remove();
+
+                List<String> classNames = splitUidWithGenericsIntoClassNames(uid);
+                additionalItems.addAll(classNames.stream()
+                    .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), true))
+                    .collect(Collectors.toSet()));
+            }
+        }
+        classMetadataFile.getReferences().addAll(additionalItems);
+    }
+
+    List<String> splitUidWithGenericsIntoClassNames(String uid) {
+        if (!uid.contains("<")) {
+            return Arrays.asList(uid);
+        }
+        uid = RegExUtils.removeAll(uid, "[>]+$");
+        return Arrays.asList(StringUtils.split(uid, "<"));
     }
 
     MetadataFileItem buildSpecJavaRefItem(Object object, String fieldName) {
