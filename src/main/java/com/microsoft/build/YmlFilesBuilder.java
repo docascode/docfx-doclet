@@ -296,9 +296,6 @@ public class YmlFilesBuilder {
     }
 
     List<String> splitUidWithGenericsIntoClassNames(String uid) {
-        if (!uid.contains("<")) {
-            return Arrays.asList(uid);
-        }
         uid = RegExUtils.removeAll(uid, "[>]+$");
         return Arrays.asList(StringUtils.split(uid, "<"));
     }

@@ -10,6 +10,9 @@
   name: "com.microsoft.samples.subpackage"
   href: "com.microsoft.samples.subpackage.yml"
   items:
+  - uid: "com.microsoft.samples.subpackage.CustomException"
+    name: "CustomException"
+    href: "com.microsoft.samples.subpackage.CustomException.yml"
   - uid: "com.microsoft.samples.subpackage.Display"
     name: "Display"
     href: "com.microsoft.samples.subpackage.Display.yml"

@@ -9,11 +9,6 @@ public class TypeParameter {
         this.id = id;
     }
 
-    public TypeParameter(String id, String type) {
-        this.id = id;
-        this.type = type;
-    }
-
     public String getId() {
         return id;
     }

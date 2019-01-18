@@ -77,7 +77,7 @@ public class DocFxDoclet implements Doclet {
         return SourceVersion.latest();
     }
 
-    private abstract class CustomOption implements Option {
+    abstract static class CustomOption implements Option {
 
         private final String description;
         private final List<String> names;

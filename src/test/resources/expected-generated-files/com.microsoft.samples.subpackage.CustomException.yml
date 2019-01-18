@@ -1,0 +1,66 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.subpackage.CustomException"
+  id: "CustomException"
+  parent: "com.microsoft.samples.subpackage"
+  children:
+  - "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
+  - "com.microsoft.samples.subpackage.CustomException.makeSomething()"
+  href: "com.microsoft.samples.subpackage.CustomException.yml"
+  langs:
+  - "java"
+  name: "CustomException"
+  nameWithType: "CustomException"
+  fullName: "com.microsoft.samples.subpackage.CustomException"
+  type: "Class"
+  package: "com.microsoft.samples.subpackage"
+  syntax:
+    content: "public class CustomException extends Exception"
+  inheritance:
+  - "java.lang.Exception"
+- uid: "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
+  id: "CustomException(java.lang.String)"
+  parent: "com.microsoft.samples.subpackage.CustomException"
+  href: "com.microsoft.samples.subpackage.CustomException.yml"
+  langs:
+  - "java"
+  name: "CustomException(String message)"
+  nameWithType: "CustomException.CustomException(String message)"
+  fullName: "com.microsoft.samples.subpackage.CustomException.CustomException(String message)"
+  overload: "com.microsoft.samples.subpackage.CustomException.CustomException*"
+  type: "Constructor"
+  package: "com.microsoft.samples.subpackage"
+  syntax:
+    content: "public CustomException(String message)"
+    parameters:
+    - id: "message"
+      type: "java.lang.String"
+- uid: "com.microsoft.samples.subpackage.CustomException.makeSomething()"
+  id: "makeSomething()"
+  parent: "com.microsoft.samples.subpackage.CustomException"
+  href: "com.microsoft.samples.subpackage.CustomException.yml"
+  langs:
+  - "java"
+  name: "makeSomething()"
+  nameWithType: "CustomException.makeSomething()"
+  fullName: "com.microsoft.samples.subpackage.CustomException.makeSomething()"
+  overload: "com.microsoft.samples.subpackage.CustomException.makeSomething*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
+  summary: "We need to have such method that throw exception declared in the same class"
+  syntax:
+    content: "public void makeSomething()"
+  exceptions:
+  - type: "com.microsoft.samples.subpackage.CustomException"
+    description: "with reason message"
+references:
+- uid: "java.lang.String"
+  isExternal: true
+  name: "String"
+  nameWithType: "String"
+  fullName: "String"
+- uid: "java.lang.Exception"
+  isExternal: true
+  name: "Exception"
+  nameWithType: "Exception"
+  fullName: "Exception"

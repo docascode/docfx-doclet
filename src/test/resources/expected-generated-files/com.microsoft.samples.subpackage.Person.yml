@@ -9,6 +9,7 @@ items:
   - "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
   - "com.microsoft.samples.subpackage.Person.getLastName()"
   - "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
+  - "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo"
   href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
@@ -105,6 +106,26 @@ items:
     parameters:
     - id: "lastName"
       type: "java.lang.String"
+- uid: "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
+  id: "buildPerson(com.microsoft.samples.subpackage.Person)"
+  parent: "com.microsoft.samples.subpackage.Person"
+  href: "com.microsoft.samples.subpackage.Person.yml"
+  langs:
+  - "java"
+  name: "buildPerson(Person seed)"
+  nameWithType: "Person<T>.buildPerson(Person seed)"
+  fullName: "com.microsoft.samples.subpackage.Person<T>.buildPerson(Person seed)"
+  overload: "com.microsoft.samples.subpackage.Person<T>.buildPerson*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
+  summary: "We need to have this method that takes parameter and return types declared in the current class"
+  syntax:
+    content: "public static Person buildPerson(Person seed)"
+    parameters:
+    - id: "seed"
+      type: "com.microsoft.samples.subpackage.Person"
+    return:
+      type: "com.microsoft.samples.subpackage.Person"
 references:
 - uid: "java.lang.String"
   isExternal: true

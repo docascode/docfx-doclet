@@ -28,6 +28,13 @@ public class Person<T> {
     }
 
     /**
+     * We need to have this method that takes parameter and return types declared in the current class
+     */
+    public static Person buildPerson(Person seed) {
+        return seed;
+    }
+
+    /**
      * Class that describes person's identification
      */
     public static class IdentificationInfo {

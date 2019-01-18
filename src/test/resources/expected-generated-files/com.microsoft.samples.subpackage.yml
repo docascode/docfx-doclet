@@ -3,6 +3,7 @@ items:
 - uid: "com.microsoft.samples.subpackage"
   id: "subpackage"
   children:
+  - "com.microsoft.samples.subpackage.CustomException"
   - "com.microsoft.samples.subpackage.Display"
   - "com.microsoft.samples.subpackage.Person"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo"
@@ -18,6 +19,15 @@ items:
   syntax:
     content: "package com.microsoft.samples.subpackage"
 references:
+- uid: "com.microsoft.samples.subpackage.CustomException"
+  parent: "com.microsoft.samples.subpackage"
+  href: "com.microsoft.samples.subpackage.CustomException.yml"
+  name: "CustomException"
+  nameWithType: "CustomException"
+  fullName: "com.microsoft.samples.subpackage.CustomException"
+  type: "Class"
+  syntax:
+    content: "public class CustomException extends Exception"
 - uid: "com.microsoft.samples.subpackage.Display"
   parent: "com.microsoft.samples.subpackage"
   href: "com.microsoft.samples.subpackage.Display.yml"
