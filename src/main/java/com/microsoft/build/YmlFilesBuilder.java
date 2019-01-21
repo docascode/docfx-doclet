@@ -9,7 +9,6 @@ import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -235,7 +234,7 @@ public class YmlFilesBuilder {
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
             methodItem.getSyntax().getParameters().stream()
-                .map(parameter -> buildSpecJavaRefItem(parameter, "type"))
+                .map(parameter -> buildRefItem(parameter.getType()))
                 .filter(o -> !classMetadataFile.getItems().contains(o))
                 .collect(Collectors.toList()));
     }
@@ -244,7 +243,7 @@ public class YmlFilesBuilder {
         classMetadataFile.getReferences().addAll(
             Stream.of(methodItem.getSyntax().getReturnValue())
                 .filter(Objects::nonNull)
-                .map(returnValue -> buildSpecJavaRefItem(returnValue, "returnType"))
+                .map(returnValue -> buildRefItem(returnValue.getReturnType()))
                 .filter(o -> !classMetadataFile.getItems().contains(o))
                 .collect(Collectors.toList()));
     }
@@ -252,7 +251,7 @@ public class YmlFilesBuilder {
     void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
             methodItem.getExceptions().stream()
-                .map(exceptionItem -> buildSpecJavaRefItem(exceptionItem, "type"))
+                .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
                 .filter(o -> !classMetadataFile.getItems().contains(o))
                 .collect(Collectors.toList()));
     }
@@ -300,18 +299,8 @@ public class YmlFilesBuilder {
         return Arrays.asList(StringUtils.split(uid, "<"));
     }
 
-    MetadataFileItem buildSpecJavaRefItem(Object object, String fieldName) {
-        try {
-            Field field = object.getClass().getDeclaredField(fieldName);
-            boolean accessible = field.canAccess(object);
-            field.setAccessible(true);
-            String value = String.valueOf(field.get(object));
-            field.setAccessible(accessible);
-
-            value = RegExUtils.removeAll(value, "\\[\\]$");
-            return new MetadataFileItem(value, classLookup.makeTypeShort(value), true);
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException("Error during field replacement", e);
-        }
+    MetadataFileItem buildRefItem(String value) {
+        value = RegExUtils.removeAll(value, "\\[\\]$");
+        return new MetadataFileItem(value, classLookup.makeTypeShort(value), true);
     }
 }

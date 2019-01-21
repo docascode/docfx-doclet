@@ -3,7 +3,6 @@ package com.microsoft.build;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import com.google.testing.compile.CompilationRule;
@@ -71,31 +70,18 @@ public class YmlFilesBuilderTest {
     }
 
     @Test
-    public void buildSpecJavaRefItem() {
-        CustomClass customClass = new CustomClass();
-        String value = "Some value";
-        customClass.setSomeField(value);
-
-        MetadataFileItem result = ymlFilesBuilder.buildSpecJavaRefItem(customClass, "someField");
-
-        assertThat("Wrong uid", result.getUid(), is(value));
-        assertThat("Wrong name", result.getName(), is(value));
-        assertThat("Wrong fullName", result.getFullName(), is(value));
-        assertThat("Wrong nameWithType", result.getNameWithType(), is(value));
+    public void buildRefItem() {
+        buildRefItemAndCheckAssertions("java.lang.Some.String", "java.lang.Some.String", "Some.String");
+        buildRefItemAndCheckAssertions("java.lang.Some.String[]", "java.lang.Some.String", "Some.String");
     }
 
-    @Test
-    public void buildSpecJavaRefItemWhenNoSuchField() {
-        CustomClass customClass = new CustomClass();
-        String value = "Some value";
-        customClass.setSomeField(value);
+    void buildRefItemAndCheckAssertions(String initialValue, String expectedUid, String expectedName) {
+        MetadataFileItem result = ymlFilesBuilder.buildRefItem(initialValue);
 
-        try {
-            ymlFilesBuilder.buildSpecJavaRefItem(customClass, "someAnotherField");
-            fail("Exception should be thrown");
-        } catch (RuntimeException re) {
-            assertThat("Wrong exception message", re.getMessage(), is("Error during field replacement"));
-        }
+        assertThat("Wrong uid", result.getUid(), is(expectedUid));
+        assertThat("Wrong name", result.getName(), is(expectedName));
+        assertThat("Wrong fullName", result.getFullName(), is(expectedName));
+        assertThat("Wrong nameWithType", result.getNameWithType(), is(expectedName));
     }
 
     @Test
@@ -119,14 +105,5 @@ public class YmlFilesBuilderTest {
         assertThat("Wrong references content",
             references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList()),
             hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T"));
-    }
-
-    private class CustomClass {
-
-        private String someField;
-
-        public void setSomeField(String someField) {
-            this.someField = someField;
-        }
     }
 }
