@@ -18,8 +18,8 @@ public class YamlUtil {
     public static String objectToYamlString(Object object) {
         try {
             return mapper.writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Could not serialize object to yaml string", e);
+        } catch (JsonProcessingException jpe) {
+            throw new RuntimeException("Could not serialize object to yaml string", jpe);
         }
     }
 }

@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 public class OptionsFileUtil {
 
-    public static String[] processOptionsFile(final String filename) {
+    public static String[] processOptionsFile(String filename) {
         List<String> jargs = new ArrayList<>();
 
         String options = readOptionsFromFile(filename);
@@ -28,9 +28,9 @@ public class OptionsFileUtil {
             while ((line = bufferedReader.readLine()) != null) {
                 buffer.append(line).append("\n");
             }
-        } catch (final IOException ioe) {
-            ioe.printStackTrace();
+        } catch (IOException ioe) {
             buffer.setLength(0);
+            throw new RuntimeException("Error during reading options from file", ioe);
         }
 
         return buffer.toString();

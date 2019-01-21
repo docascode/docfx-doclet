@@ -18,11 +18,11 @@ public class FileUtil {
             Files.createDirectories(path.getParent());
             Files.write(path, content.getBytes());
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            throw new RuntimeException("Error during dump to file", ioe);
         }
     }
 
-    public static void dumpToFile(YmlFile tocFile) {
-        dumpToFile(tocFile.getFileContent(), tocFile.getFileName());
+    public static void dumpToFile(YmlFile ymlFile) {
+        dumpToFile(ymlFile.getFileContent(), ymlFile.getFileName());
     }
 }
