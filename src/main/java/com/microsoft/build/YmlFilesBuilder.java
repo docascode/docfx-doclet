@@ -107,7 +107,7 @@ public class YmlFilesBuilder {
         return referenceItem;
     }
 
-    void populateItemFields(MetadataFileItem item, BaseLookup lookup, Element element) {
+    <T> void populateItemFields(MetadataFileItem item, BaseLookup<T> lookup, T element) {
         item.setHref(lookup.extractHref(element));
         item.setName(lookup.extractName(element));
         item.setNameWithType(lookup.extractNameWithType(element));
