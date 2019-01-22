@@ -6,7 +6,6 @@ items:
   children:
   - "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
   - "com.microsoft.samples.subpackage.CustomException.makeSomething()"
-  href: "com.microsoft.samples.subpackage.CustomException.yml"
   langs:
   - "java"
   name: "CustomException"
@@ -21,7 +20,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
   id: "CustomException(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.CustomException"
-  href: "com.microsoft.samples.subpackage.CustomException.yml"
   langs:
   - "java"
   name: "CustomException(String message)"
@@ -38,7 +36,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.CustomException.makeSomething()"
   id: "makeSomething()"
   parent: "com.microsoft.samples.subpackage.CustomException"
-  href: "com.microsoft.samples.subpackage.CustomException.yml"
   langs:
   - "java"
   name: "makeSomething()"

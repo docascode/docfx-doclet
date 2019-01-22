@@ -8,7 +8,6 @@ items:
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
   - "java"
   name: "Person.IdentificationInfo.Gender"
@@ -24,7 +23,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
   id: "Gender()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
   - "java"
   name: "Gender()"
@@ -38,7 +36,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
   id: "values()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
   - "java"
   name: "values()"
@@ -54,7 +51,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
   id: "valueOf(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
   - "java"
   name: "valueOf(String name)"
@@ -73,7 +69,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
   id: "MALE"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
   - "java"
   name: "MALE"
@@ -88,7 +83,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
   id: "FEMALE"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   langs:
   - "java"
   name: "FEMALE"

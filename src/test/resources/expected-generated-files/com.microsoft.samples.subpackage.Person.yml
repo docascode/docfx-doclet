@@ -11,7 +11,6 @@ items:
   - "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
   - "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
   - "java"
   name: "Person<T>"
@@ -29,7 +28,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.Person()"
   id: "Person()"
   parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
   - "java"
   name: "Person()"
@@ -43,7 +41,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.getFirstName()"
   id: "getFirstName()"
   parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
   - "java"
   name: "getFirstName()"
@@ -59,7 +56,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
   id: "setFirstName(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
   - "java"
   name: "setFirstName(String firstName)"
@@ -76,7 +72,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.getLastName()"
   id: "getLastName()"
   parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
   - "java"
   name: "getLastName()"
@@ -92,7 +87,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
   id: "setLastName(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
   - "java"
   name: "setLastName(String lastName)"
@@ -109,7 +103,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
   id: "buildPerson(com.microsoft.samples.subpackage.Person)"
   parent: "com.microsoft.samples.subpackage.Person"
-  href: "com.microsoft.samples.subpackage.Person.yml"
   langs:
   - "java"
   name: "buildPerson(Person seed)"
@@ -137,12 +130,6 @@ references:
   nameWithType: "T"
   fullName: "T"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  parent: "com.microsoft.samples.subpackage"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"
   name: "Person.IdentificationInfo"
   nameWithType: "Person.IdentificationInfo"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  type: "Class"
-  summary: "Class that describes person's identification"
-  syntax:
-    content: "public static class Person.IdentificationInfo"

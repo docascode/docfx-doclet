@@ -6,7 +6,6 @@ items:
   children:
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"
   langs:
   - "java"
   name: "Person.IdentificationInfo"
@@ -22,7 +21,6 @@ items:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   id: "IdentificationInfo()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.yml"
   langs:
   - "java"
   name: "IdentificationInfo()"
@@ -35,12 +33,6 @@ items:
     content: "public IdentificationInfo()"
 references:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  parent: "com.microsoft.samples.subpackage"
-  href: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.yml"
   name: "Person.IdentificationInfo.Gender"
   nameWithType: "Person.IdentificationInfo.Gender"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  type: "Enum"
-  summary: "Enum describes person's gender"
-  syntax:
-    content: "public enum Person.IdentificationInfo.Gender"

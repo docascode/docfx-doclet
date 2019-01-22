@@ -54,10 +54,9 @@ public class YmlFilesBuilder {
         TocFile tocFile = new TocFile(outputPath);
         for (PackageElement packageElement : elementUtil.extractPackageElements(environment.getIncludedElements())) {
             String uid = packageLookup.extractUid(packageElement);
-            String href = packageLookup.extractHref(packageElement);
-            buildPackageYmlFile(packageElement, href);
+            buildPackageYmlFile(packageElement);
 
-            TocItem packageTocItem = new TocItem(uid, uid, href);
+            TocItem packageTocItem = new TocItem(uid, uid);
             buildFilesForInnerClasses(packageElement, packageTocItem.getItems());
             tocFile.addTocItem(packageTocItem);
         }
@@ -69,16 +68,16 @@ public class YmlFilesBuilder {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             String uid = classLookup.extractUid(classElement);
             String name = classLookup.extractTocName(classElement);
-            String href = classLookup.extractHref(classElement);
 
-            listToAddItems.add(new TocItem(uid, name, href));
+            listToAddItems.add(new TocItem(uid, name));
 
-            buildClassYmlFile(classElement, href);
+            buildClassYmlFile(classElement);
             buildFilesForInnerClasses(classElement, listToAddItems);
         }
     }
 
-    void buildPackageYmlFile(PackageElement packageElement, String fileName) {
+    void buildPackageYmlFile(PackageElement packageElement) {
+        String fileName = packageLookup.extractHref(packageElement);
         MetadataFile packageMetadataFile = new MetadataFile(outputPath, fileName);
         MetadataFileItem packageItem = new MetadataFileItem(LANGS, packageLookup.extractUid(packageElement));
         packageItem.setId(packageLookup.extractId(packageElement));
@@ -101,14 +100,13 @@ public class YmlFilesBuilder {
 
     MetadataFileItem buildClassReference(TypeElement classElement) {
         MetadataFileItem referenceItem = new MetadataFileItem(classLookup.extractUid(classElement));
-        referenceItem.setParent(classLookup.extractParent(classElement));
-        populateItemFields(referenceItem, classLookup, classElement);
-        referenceItem.setTypeParameters(classLookup.extractTypeParameters(classElement));
+        referenceItem.setName(classLookup.extractName(classElement));
+        referenceItem.setNameWithType(classLookup.extractNameWithType(classElement));
+        referenceItem.setFullName(classLookup.extractFullName(classElement));
         return referenceItem;
     }
 
     <T> void populateItemFields(MetadataFileItem item, BaseLookup<T> lookup, T element) {
-        item.setHref(lookup.extractHref(element));
         item.setName(lookup.extractName(element));
         item.setNameWithType(lookup.extractNameWithType(element));
         item.setFullName(lookup.extractFullName(element));
@@ -117,7 +115,8 @@ public class YmlFilesBuilder {
         item.setContent(lookup.extractContent(element));
     }
 
-    void buildClassYmlFile(TypeElement classElement, String fileName) {
+    void buildClassYmlFile(TypeElement classElement) {
+        String fileName = classLookup.extractHref(classElement);
         MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
         addClassInfo(classElement, classMetadataFile);
         addConstructorsInfo(classElement, classMetadataFile);
@@ -204,7 +203,12 @@ public class YmlFilesBuilder {
     }
 
     void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        addTypeParameterReferences(buildClassReference(classElement), classMetadataFile);
+        MetadataFileItem classReference = new MetadataFileItem(classLookup.extractUid(classElement));
+        classReference.setParent(classLookup.extractParent(classElement));
+        populateItemFields(classReference, classLookup, classElement);
+        classReference.setTypeParameters(classLookup.extractTypeParameters(classElement));
+
+        addTypeParameterReferences(classReference, classMetadataFile);
         addSuperclassAndInterfacesReferences(classElement, classMetadataFile);
         addInnerClassesReferences(classElement, classMetadataFile);
     }
@@ -213,7 +217,6 @@ public class YmlFilesBuilder {
         return new MetadataFileItem(LANGS, classItemsLookup.extractUid(element)) {{
             setId(classItemsLookup.extractId(element));
             setParent(classItemsLookup.extractParent(element));
-            setHref(classItemsLookup.extractHref(element));
             setName(classItemsLookup.extractName(element));
             setNameWithType(classItemsLookup.extractNameWithType(element));
             setFullName(classItemsLookup.extractFullName(element));

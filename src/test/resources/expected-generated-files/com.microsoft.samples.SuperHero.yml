@@ -17,7 +17,6 @@ items:
   - "com.microsoft.samples.SuperHero.getDefense()"
   - "com.microsoft.samples.SuperHero.setDefense(int)"
   - "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "SuperHero"
@@ -33,7 +32,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.SuperHero()"
   id: "SuperHero()"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "SuperHero()"
@@ -47,7 +45,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.SuperHero(java.lang.String,java.lang.String,int,int)"
   id: "SuperHero(java.lang.String,java.lang.String,int,int)"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "SuperHero(String heroName, String uniquePower, int health, int defense)"
@@ -70,7 +67,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"
   id: "successfullyAttacked(int,java.lang.String)"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "successfullyAttacked(int incomingDamage, String damageType)"
@@ -98,7 +94,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.getHeroName()"
   id: "getHeroName()"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "getHeroName()"
@@ -114,7 +109,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.setHeroName(java.lang.String)"
   id: "setHeroName(java.lang.String)"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "setHeroName(String heroName)"
@@ -131,7 +125,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.getLastName()"
   id: "getLastName()"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "getLastName()"
@@ -149,7 +142,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.getUniquePower()"
   id: "getUniquePower()"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "getUniquePower()"
@@ -165,7 +157,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)"
   id: "setUniquePower(java.lang.String)"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "setUniquePower(String uniquePower)"
@@ -182,7 +173,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.getHealth()"
   id: "getHealth()"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "getHealth()"
@@ -198,7 +188,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.setHealth(int)"
   id: "setHealth(int)"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "setHealth(int health)"
@@ -215,7 +204,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.getDefense()"
   id: "getDefense()"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "getDefense()"
@@ -231,7 +219,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.setDefense(int)"
   id: "setDefense(int)"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "setDefense(int defense)"
@@ -248,7 +235,6 @@ items:
 - uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
   id: "SOME_PUBLIC_STRING"
   parent: "com.microsoft.samples.SuperHero"
-  href: "com.microsoft.samples.SuperHero.yml"
   langs:
   - "java"
   name: "SOME_PUBLIC_STRING"
