@@ -105,4 +105,4 @@ references:
   isExternal: true
   name: "String"
   nameWithType: "String"
-  fullName: "String"
+  fullName: "java.lang.String"

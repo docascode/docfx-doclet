@@ -131,7 +131,7 @@ references:
   isExternal: true
   name: "String"
   nameWithType: "String"
-  fullName: "String"
+  fullName: "java.lang.String"
 - uid: "T"
   name: "T"
   nameWithType: "T"

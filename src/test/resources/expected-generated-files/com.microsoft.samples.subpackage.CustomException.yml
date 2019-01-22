@@ -58,9 +58,9 @@ references:
   isExternal: true
   name: "String"
   nameWithType: "String"
-  fullName: "String"
+  fullName: "java.lang.String"
 - uid: "java.lang.Exception"
   isExternal: true
   name: "Exception"
   nameWithType: "Exception"
-  fullName: "Exception"
+  fullName: "java.lang.Exception"

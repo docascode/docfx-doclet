@@ -42,7 +42,7 @@ public class MetadataFileItem {
         this(uid);
         this.name = name;
         this.nameWithType = name;
-        this.fullName = name;
+        this.fullName = uid;
         this.isExternal = isExternal;
     }
 

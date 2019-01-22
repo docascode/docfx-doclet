@@ -265,7 +265,7 @@ references:
   isExternal: true
   name: "String"
   nameWithType: "String"
-  fullName: "String"
+  fullName: "java.lang.String"
 - uid: "int"
   isExternal: true
   name: "int"
@@ -275,19 +275,19 @@ references:
   isExternal: true
   name: "IllegalArgumentException"
   nameWithType: "IllegalArgumentException"
-  fullName: "IllegalArgumentException"
+  fullName: "java.lang.IllegalArgumentException"
 - uid: "com.microsoft.samples.subpackage.Person"
   isExternal: true
   name: "Person"
   nameWithType: "Person"
-  fullName: "Person"
+  fullName: "com.microsoft.samples.subpackage.Person"
 - uid: "java.lang.Cloneable"
   isExternal: true
   name: "Cloneable"
   nameWithType: "Cloneable"
-  fullName: "Cloneable"
+  fullName: "java.lang.Cloneable"
 - uid: "java.io.Serializable"
   isExternal: true
   name: "Serializable"
   nameWithType: "Serializable"
-  fullName: "Serializable"
+  fullName: "java.io.Serializable"

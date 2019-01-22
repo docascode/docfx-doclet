@@ -62,14 +62,14 @@ references:
   isExternal: true
   name: "Serializable"
   nameWithType: "Serializable"
-  fullName: "Serializable"
+  fullName: "java.io.Serializable"
 - uid: "java.util.List"
   isExternal: true
   name: "List"
   nameWithType: "List"
-  fullName: "List"
+  fullName: "java.util.List"
 - uid: "com.microsoft.samples.subpackage.Person"
   isExternal: true
   name: "Person"
   nameWithType: "Person"
-  fullName: "Person"
+  fullName: "com.microsoft.samples.subpackage.Person"

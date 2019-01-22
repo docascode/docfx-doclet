@@ -80,7 +80,7 @@ public class YmlFilesBuilderTest {
 
         assertThat("Wrong uid", result.getUid(), is(expectedUid));
         assertThat("Wrong name", result.getName(), is(expectedName));
-        assertThat("Wrong fullName", result.getFullName(), is(expectedName));
+        assertThat("Wrong fullName", result.getFullName(), is(expectedUid));
         assertThat("Wrong nameWithType", result.getNameWithType(), is(expectedName));
     }
 
