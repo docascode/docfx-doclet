@@ -271,6 +271,15 @@ public class YmlFilesBuilder {
                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Replace one record in 'references' with several records in this way:
+     * <pre>
+     * a.b.c.List<df.mn.ClassOne<tr.T>> ->
+     *     - a.b.c.List
+     *     - df.mn.ClassOne
+     *     - tr.T
+     * </pre>
+     */
     void applyPostProcessing(MetadataFile classMetadataFile) {
         Set<MetadataFileItem> additionalItems = new LinkedHashSet<>();
         Iterator<MetadataFileItem> iterator = classMetadataFile.getReferences().iterator();
