@@ -27,7 +27,7 @@ public abstract class BaseLookup<T> {
         put(ElementKind.PACKAGE, "Namespace");
         put(ElementKind.CLASS, "Class");
         put(ElementKind.ENUM, "Enum");
-        put(ElementKind.ENUM_CONSTANT, "Enum constant");
+        put(ElementKind.ENUM_CONSTANT, "Field");
         put(ElementKind.INTERFACE, "Interface");
         put(ElementKind.ANNOTATION_TYPE, "Interface");
         put(ElementKind.CONSTRUCTOR, "Constructor");

@@ -79,7 +79,7 @@ items:
   name: "MALE"
   nameWithType: "Person.IdentificationInfo.Gender.MALE"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
-  type: "Enum constant"
+  type: "Field"
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "public static final Person.IdentificationInfo.Gender MALE"
@@ -94,7 +94,7 @@ items:
   name: "FEMALE"
   nameWithType: "Person.IdentificationInfo.Gender.FEMALE"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
-  type: "Enum constant"
+  type: "Field"
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "public static final Person.IdentificationInfo.Gender FEMALE"
