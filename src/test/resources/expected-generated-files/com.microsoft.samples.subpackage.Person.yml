@@ -10,6 +10,7 @@ items:
   - "com.microsoft.samples.subpackage.Person.getLastName()"
   - "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
   - "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
+  - "com.microsoft.samples.subpackage.Person.age"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo"
   langs:
   - "java"
@@ -18,7 +19,7 @@ items:
   fullName: "com.microsoft.samples.subpackage.Person<T>"
   type: "Class"
   package: "com.microsoft.samples.subpackage"
-  summary: "Class that describes some person"
+  summary: "Class that describes some person\n\n This comment has links to:\n <ul>\n   <li>Class <xref uid=\"\" data-throw-if-not-resolved=\"false\">Person</xref></li>\n   <li>Its method <xref uid=\"\" data-throw-if-not-resolved=\"false\">Person#setLastName(String)</xref></li>\n   <li>Its public field <xref uid=\"\" data-throw-if-not-resolved=\"false\">Person#age</xref></li>\n   <li>Another class <xref uid=\"\" data-throw-if-not-resolved=\"false\">List</xref></li>\n </ul>"
   syntax:
     content: "public class Person<T>"
     typeParameters:
@@ -119,12 +120,31 @@ items:
       type: "com.microsoft.samples.subpackage.Person"
     return:
       type: "com.microsoft.samples.subpackage.Person"
+- uid: "com.microsoft.samples.subpackage.Person.age"
+  id: "age"
+  parent: "com.microsoft.samples.subpackage.Person"
+  langs:
+  - "java"
+  name: "age"
+  nameWithType: "Person<T>.age"
+  fullName: "com.microsoft.samples.subpackage.Person<T>.age"
+  type: "Field"
+  package: "com.microsoft.samples.subpackage"
+  syntax:
+    content: "public int age"
+    return:
+      type: "int"
 references:
 - uid: "java.lang.String"
   isExternal: true
   name: "String"
   nameWithType: "String"
   fullName: "java.lang.String"
+- uid: "int"
+  isExternal: true
+  name: "int"
+  nameWithType: "int"
+  fullName: "int"
 - uid: "T"
   name: "T"
   nameWithType: "T"

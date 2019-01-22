@@ -1,15 +1,24 @@
 package com.microsoft.samples.subpackage;
 
+import java.util.List;
+
 /**
  * Class that describes some person
+ *
+ * This comment has links to:
+ * <ul>
+ *   <li>Class {@link Person}</li>
+ *   <li>Its method {@link Person#setLastName(String)}</li>
+ *   <li>Its public field {@link Person#age}</li>
+ *   <li>Another class {@link List}</li>
+ * </ul>
+ * @see Display
  */
 public class Person<T> {
 
-    /**
-     * This is a first name of a {@link Person} entity
-     */
     private String firstName;
     private String lastName;
+    public int age;
 
     public String getFirstName() {
         return firstName;
