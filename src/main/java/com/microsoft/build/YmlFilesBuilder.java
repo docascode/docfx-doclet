@@ -271,6 +271,10 @@ public class YmlFilesBuilder {
                 .collect(Collectors.toList()));
     }
 
+    void applyPostProcessing(MetadataFile classMetadataFile) {
+        expandComplexGenericsInReferences(classMetadataFile);
+    }
+
     /**
      * Replace one record in 'references' with several records in this way:
      * <pre>
@@ -280,7 +284,7 @@ public class YmlFilesBuilder {
      *     - tr.T
      * </pre>
      */
-    void applyPostProcessing(MetadataFile classMetadataFile) {
+    void expandComplexGenericsInReferences(MetadataFile classMetadataFile) {
         Set<MetadataFileItem> additionalItems = new LinkedHashSet<>();
         Iterator<MetadataFileItem> iterator = classMetadataFile.getReferences().iterator();
         while (iterator.hasNext()) {
