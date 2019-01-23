@@ -65,11 +65,13 @@ public class ClassLookupTest {
 
     @Test
     public void determineSuperclassForEnum() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+        TypeElement element = elements
+            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
 
         String result = classLookup.determineSuperclass(element);
 
-        assertThat("Wrong result", result, is("java.lang.Object"));
+        assertThat("Wrong result", result,
+            is("java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"));
     }
 
     @Test
@@ -79,7 +81,8 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "SuperHero", container);
 
-        assertThat("Wrong result", container.getContent(), is("public class SuperHero extends Person implements Serializable, Cloneable"));
+        assertThat("Wrong result", container.getContent(),
+            is("public class SuperHero extends Person implements Serializable, Cloneable"));
     }
 
     @Test
@@ -89,7 +92,8 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "Display<T,R>", container);
 
-        assertThat("Wrong result", container.getContent(), is("public interface Display<T,R> extends Serializable, List<Person<T>>"));
+        assertThat("Wrong result", container.getContent(),
+            is("public interface Display<T,R> extends Serializable, List<Person<T>>"));
     }
 
     @Test
@@ -100,7 +104,8 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "Person.IdentificationInfo.Gender", container);
 
-        assertThat("Wrong result", container.getContent(), is("public enum Person.IdentificationInfo.Gender"));
+        assertThat("Wrong result", container.getContent(),
+            is("public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>"));
     }
 
     @Test

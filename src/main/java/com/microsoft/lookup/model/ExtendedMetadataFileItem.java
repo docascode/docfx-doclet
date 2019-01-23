@@ -92,7 +92,6 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
         return superclass;
     }
 
-    @Override
     public void setSuperclass(String superclass) {
         this.superclass = superclass;
     }

@@ -59,7 +59,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             StringUtils.lowerCase(type), shortNameWithGenericsSupport);
 
         String superclass = determineSuperclass(classElement);
-        if (!JAVA_LANG_OBJECT.equals(superclass)) {
+        if (superclass != null && !JAVA_LANG_OBJECT.equals(superclass)) {
             result += " extends " + makeTypeShort(superclass);
 
             addSuperclassToReferencesMap(superclass, container);
@@ -90,12 +90,9 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     String determineSuperclass(TypeElement classElement) {
-        if (classElement.getKind() == ElementKind.ENUM) {
-            return JAVA_LANG_OBJECT;
-        }
         TypeMirror superclass = classElement.getSuperclass();
         if (superclass.getKind() == TypeKind.NONE) {
-            return JAVA_LANG_OBJECT;
+            return null;
         }
         return String.valueOf(superclass);
     }

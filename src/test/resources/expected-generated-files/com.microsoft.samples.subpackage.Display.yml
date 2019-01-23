@@ -18,8 +18,6 @@ items:
     typeParameters:
     - id: "T"
     - id: "R"
-  inheritance:
-  - "java.lang.Object"
 - uid: "com.microsoft.samples.subpackage.Display.show()"
   id: "show()"
   parent: "com.microsoft.samples.subpackage.Display"

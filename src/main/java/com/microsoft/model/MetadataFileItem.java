@@ -3,6 +3,7 @@ package com.microsoft.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
@@ -24,8 +25,7 @@ public class MetadataFileItem {
     private String packageName;
     private String summary;
     private Syntax syntax;
-    @JsonProperty("inheritance")
-    private String[] superclass;
+    private List<String> inheritance;
     private List<ExceptionItem> exceptions;
     private boolean isExternal;
 
@@ -146,12 +146,12 @@ public class MetadataFileItem {
         this.syntax = syntax;
     }
 
-    public String[] getSuperclass() {
-        return superclass;
+    public List<String> getInheritance() {
+        return inheritance;
     }
 
-    public void setSuperclass(String superclass) {
-        this.superclass = new String[]{superclass};
+    public void setInheritance(String superclass) {
+        this.inheritance = (superclass == null) ? null : Arrays.asList(superclass);
     }
 
     public List<ExceptionItem> getExceptions() {

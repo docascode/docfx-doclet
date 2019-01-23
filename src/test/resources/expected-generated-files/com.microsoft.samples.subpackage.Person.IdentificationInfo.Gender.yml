@@ -17,9 +17,9 @@ items:
   package: "com.microsoft.samples.subpackage"
   summary: "Enum describes person's gender"
   syntax:
-    content: "public enum Person.IdentificationInfo.Gender"
+    content: "public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>"
   inheritance:
-  - "java.lang.Object"
+  - "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
   id: "Gender()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -100,3 +100,8 @@ references:
   name: "String"
   nameWithType: "String"
   fullName: "java.lang.String"
+- uid: "java.lang.Enum"
+  isExternal: true
+  name: "Enum"
+  nameWithType: "Enum"
+  fullName: "java.lang.Enum"

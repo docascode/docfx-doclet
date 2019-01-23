@@ -136,7 +136,7 @@ public class YmlFilesBuilder {
         populateItemFields(classItem, classLookup, classElement);
         classItem.setPackageName(classLookup.extractPackageName(classElement));
         classItem.setTypeParameters(classLookup.extractTypeParameters(classElement));
-        classItem.setSuperclass(classLookup.extractSuperclass(classElement));
+        classItem.setInheritance(classLookup.extractSuperclass(classElement));
         classMetadataFile.getItems().add(classItem);
     }
 
@@ -295,6 +295,9 @@ public class YmlFilesBuilder {
                     .collect(Collectors.toSet()));
             }
         }
+        // Remove items which already exist in 'items' section (compared by 'uid' field)
+        additionalItems.removeAll(classMetadataFile.getItems());
+
         classMetadataFile.getReferences().addAll(additionalItems);
     }
 
