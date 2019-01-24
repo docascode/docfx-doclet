@@ -60,8 +60,6 @@ public class BaseLookupTest {
         when(environment.getDocTrees()).thenReturn(docTrees);
         when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(textTree, linkTree)).when(docCommentTree).getFullBody();
-        when(textTree.getKind()).thenReturn(Kind.TEXT);
-        when(linkTree.getKind()).thenReturn(Kind.LINK);
         when(textTree.toString()).thenReturn("Some text 1");
         when(linkTree.toString()).thenReturn("{@link a.b.SomeClass#method(bla)}");
 
@@ -70,21 +68,8 @@ public class BaseLookupTest {
         verify(environment).getDocTrees();
         verify(docTrees).getDocCommentTree(element);
         verify(docCommentTree).getFullBody();
-        verify(textTree).getKind();
-        verify(linkTree).getKind();
         assertThat("Wrong result", result,
-            is("Some text 1<xref uid=\"\" data-throw-if-not-resolved=\"false\">a.b.SomeClass#method(bla)</xref>"));
-    }
-
-    @Test
-    public void replaceLinkWithXrefTag() {
-        assertThat("Wrong result for class", baseLookup.buildXrefTagByLink("{@link a.b.Class1}"),
-            is("<xref uid=\"\" data-throw-if-not-resolved=\"false\">a.b.Class1</xref>"));
-        assertThat("Wrong result for method", baseLookup.buildXrefTagByLink("{@link mn.rt.Class1#method10()}"),
-            is("<xref uid=\"\" data-throw-if-not-resolved=\"false\">mn.rt.Class1#method10()</xref>"));
-        assertThat("Wrong result for method with parameter",
-            baseLookup.buildXrefTagByLink("{@link a.q.Class2#method15(java.lang.String)}"),
-            is("<xref uid=\"\" data-throw-if-not-resolved=\"false\">a.q.Class2#method15(java.lang.String)</xref>"));
+            is("Some text 1{@link a.b.SomeClass#method(bla)}"));
     }
 
     @Test

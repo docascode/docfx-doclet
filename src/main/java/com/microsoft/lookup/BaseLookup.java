@@ -7,14 +7,11 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
-import com.sun.source.doctree.DocTree.Kind;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.lang.model.element.Element;
@@ -36,7 +33,6 @@ public abstract class BaseLookup<T> {
         put(ElementKind.METHOD, "Method");
         put(ElementKind.FIELD, "Field");
     }};
-    private final Pattern LINK_PATTERN = Pattern.compile("(?<=\\{@link ).*(?=\\})");
 
     protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
     private final DocletEnvironment environment;
@@ -153,24 +149,9 @@ public abstract class BaseLookup<T> {
     }
 
     protected String determineComment(Element element) {
-        return getDocCommentTree(element).map(docTree -> docTree.getFullBody().stream()
-            .map(o -> {
-                if (o.getKind() == Kind.LINK) {
-                    return buildXrefTagByLink(String.valueOf(o));
-                }
-                return String.valueOf(o);
-            }).collect(Collectors.joining())
+        return getDocCommentTree(element).map(docTree ->
+            docTree.getFullBody().stream().map(String::valueOf).collect(Collectors.joining())
         ).orElse(null);
-    }
-
-    String buildXrefTagByLink(String text) {
-        Matcher matcher = LINK_PATTERN.matcher(text);
-        if (matcher.find()) {
-            text = matcher.group();
-            String uidContent = "";         // TODO: determine uid content
-            return "<xref uid=\"" + uidContent + "\" data-throw-if-not-resolved=\"false\">" + text + "</xref>";
-        }
-        return text;
     }
 
     protected Optional<DocCommentTree> getDocCommentTree(Element element) {

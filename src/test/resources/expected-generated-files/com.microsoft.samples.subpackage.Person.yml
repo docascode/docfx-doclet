@@ -19,7 +19,7 @@ items:
   fullName: "com.microsoft.samples.subpackage.Person<T>"
   type: "Class"
   package: "com.microsoft.samples.subpackage"
-  summary: "Class that describes some person\n\n This comment has links to:\n <ul>\n   <li>Class <xref uid=\"\" data-throw-if-not-resolved=\"false\">Person</xref></li>\n   <li>Its method <xref uid=\"\" data-throw-if-not-resolved=\"false\">Person#setLastName(String)</xref></li>\n   <li>Its public field <xref uid=\"\" data-throw-if-not-resolved=\"false\">Person#age</xref></li>\n   <li>Another class <xref uid=\"\" data-throw-if-not-resolved=\"false\">List</xref></li>\n </ul>"
+  summary: "Class that describes some person\n\n This comment has links to:\n <ul>\n   <li>Class {@link Person}</li>\n   <li>Its method {@link Person#setLastName(String)}</li>\n   <li>Its public field {@link Person#age}</li>\n   <li>Another class {@link List}</li>\n </ul>"
   syntax:
     content: "public class Person<T>"
     typeParameters:
