@@ -11,12 +11,16 @@ import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.lang.model.element.Element;
@@ -32,6 +36,8 @@ import org.apache.commons.lang3.StringUtils;
 public class YmlFilesBuilder {
 
     private final static String[] LANGS = {"java"};
+    private final Pattern LINK_PATTERN = Pattern.compile("\\{@link .*?\\}");
+    private final Pattern LINK_CONTENT_PATTERN = Pattern.compile("(?<=\\{@link ).*?(?=\\})");
 
     private DocletEnvironment environment;
     private String outputPath;
@@ -273,6 +279,7 @@ public class YmlFilesBuilder {
 
     void applyPostProcessing(MetadataFile classMetadataFile) {
         expandComplexGenericsInReferences(classMetadataFile);
+        replaceLinksWithXrefTags(classMetadataFile);
     }
 
     /**
@@ -303,6 +310,46 @@ public class YmlFilesBuilder {
         additionalItems.removeAll(classMetadataFile.getItems());
 
         classMetadataFile.getReferences().addAll(additionalItems);
+    }
+
+    void replaceLinksWithXrefTags(MetadataFile classMetadataFile) {
+        Map<String, String> uidByShortNameLookup = new HashMap<>();
+        classMetadataFile.getItems().forEach(
+            item -> uidByShortNameLookup.put(RegExUtils.removeAll(item.getNameWithType(), "<.*?>"), item.getUid()));
+        classMetadataFile.getReferences().forEach(
+            item -> uidByShortNameLookup.put(item.getNameWithType(), item.getUid()));
+
+        for (MetadataFileItem item : classMetadataFile.getItems()) {
+            String summary = item.getSummary();
+            if (StringUtils.isBlank(summary)) {
+                continue;
+            }
+
+            Matcher linkMatcher = LINK_PATTERN.matcher(summary);
+            while (linkMatcher.find()) {
+                String link = linkMatcher.group();
+                Matcher linkContentMatcher = LINK_CONTENT_PATTERN.matcher(link);
+                if (!linkContentMatcher.find()) {
+                    continue;
+                }
+
+                String linkContent = linkContentMatcher.group();
+                String uid = determineUidByLinkContent(linkContent, uidByShortNameLookup);
+                String xrefTag =
+                    "<xref uid=\"" + uid + "\" data-throw-if-not-resolved=\"false\">" + linkContent + "</xref>";
+                summary = StringUtils.replace(summary, link, xrefTag);
+            }
+            item.setSummary(summary);
+        }
+    }
+
+    String determineUidByLinkContent(String linkContent, Map<String, String> uidLookup) {
+        if (StringUtils.isBlank(linkContent)) {
+            return "";
+        }
+
+        linkContent = linkContent.trim().replace("#", ".");
+        return uidLookup.containsKey(linkContent) ? uidLookup.get(linkContent) : "";
     }
 
     List<String> splitUidWithGenericsIntoClassNames(String uid) {

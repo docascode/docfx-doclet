@@ -11,7 +11,9 @@ import com.microsoft.model.MetadataFileItem;
 import com.sun.source.util.DocTrees;
 import java.io.File;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.lang.model.element.TypeElement;
@@ -75,13 +77,53 @@ public class YmlFilesBuilderTest {
         buildRefItemAndCheckAssertions("java.lang.Some.String[]", "java.lang.Some.String", "Some.String");
     }
 
-    void buildRefItemAndCheckAssertions(String initialValue, String expectedUid, String expectedName) {
+    private void buildRefItemAndCheckAssertions(String initialValue, String expectedUid, String expectedName) {
         MetadataFileItem result = ymlFilesBuilder.buildRefItem(initialValue);
 
         assertThat("Wrong uid", result.getUid(), is(expectedUid));
         assertThat("Wrong name", result.getName(), is(expectedName));
         assertThat("Wrong fullName", result.getFullName(), is(expectedUid));
         assertThat("Wrong nameWithType", result.getNameWithType(), is(expectedName));
+    }
+
+    @Test
+    public void replaceLinkWithXrefTag() {
+        MetadataFile classMetadataFile = new MetadataFile("output", "name");
+
+        MetadataFileItem item = new MetadataFileItem("UID");
+        item.setSummary("Bla bla {@link UnknownClass} and {@link SomeClass#someMethod(String param)} bla");
+        classMetadataFile.getItems().add(item);
+        MetadataFileItem reference = new MetadataFileItem("a.b.SomeClass.someMethod(String param)");
+        reference.setNameWithType("SomeClass.someMethod(String param)");
+        classMetadataFile.getReferences().add(reference);
+
+        ymlFilesBuilder.replaceLinksWithXrefTags(classMetadataFile);
+
+        assertThat("Wrong summary", item.getSummary(),
+            is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref>"
+                + " and <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla"));
+    }
+
+    @Test
+    public void determineUidByLinkContent() {
+        Map<String, String> lookup = new HashMap<>() {{
+            put("SomeClass", "a.b.c.SomeClass");
+            put("SomeClass.someMethod()", "a.b.c.SomeClass.someMethod()");
+            put("SomeClass.someMethod(String param)", "a.b.c.SomeClass.someMethod(String param)");
+        }};
+
+        assertThat("Wrong result for class", ymlFilesBuilder.
+            determineUidByLinkContent("SomeClass", lookup), is("a.b.c.SomeClass"));
+        assertThat("Wrong result for method", ymlFilesBuilder.
+            determineUidByLinkContent("SomeClass#someMethod()", lookup), is("a.b.c.SomeClass.someMethod()"));
+        assertThat("Wrong result for method with param", ymlFilesBuilder.
+                determineUidByLinkContent("SomeClass#someMethod(String param)", lookup),
+            is("a.b.c.SomeClass.someMethod(String param)"));
+
+        assertThat("Wrong result for unknown class", ymlFilesBuilder.
+            determineUidByLinkContent("UnknownClass", lookup), is(""));
+        assertThat("Wrong result for null", ymlFilesBuilder.determineUidByLinkContent(null, lookup), is(""));
+        assertThat("Wrong result for whitespace", ymlFilesBuilder.determineUidByLinkContent(" ", lookup), is(""));
     }
 
     @Test

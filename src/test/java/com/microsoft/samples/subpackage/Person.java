@@ -1,17 +1,24 @@
 package com.microsoft.samples.subpackage;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class that describes some person
  *
  * This comment has links to:
  * <ul>
- *   <li>Class {@link Person}</li>
- *   <li>Its method {@link Person#setLastName(String)}</li>
- *   <li>Its public field {@link Person#age}</li>
- *   <li>Another class {@link List}</li>
+ * <li>Owner class {@link Person}</li>
+ * <li>Its inner class {@link Person.IdentificationInfo}</li>
+ * <li>Its method {@link Person#setLastName(String lastName)}</li>
+ * <li>Its method without params {@link Person#setLastName()}</li>
+ * <li>Its public field {@link Person#age}</li>
+ * <li>Another class which used here {@link Set}</li>
+ * <li>Another class which not used here {@link List}</li>
+ * <li>Broken link {@link sdfdsagdsfghfgh}</li>
  * </ul>
+ *
  * @see Display
  */
 public class Person<T> {
@@ -36,6 +43,14 @@ public class Person<T> {
         this.lastName = lastName;
     }
 
+    public void setLastName() {
+        this.lastName = null;
+    }
+
+    public Set<String> getSomeSet() {
+        return Collections.emptySet();
+    }
+
     /**
      * We need to have this method that takes parameter and return types declared in the current class
      */
@@ -47,6 +62,7 @@ public class Person<T> {
      * Class that describes person's identification
      */
     public static class IdentificationInfo {
+
         /**
          * Enum describes person's gender
          */
