@@ -176,6 +176,7 @@ public class YmlFilesBuilder {
             classMetadataFile.getItems().add(constructorItem);
 
             addParameterReferences(constructorItem, classMetadataFile);
+            addOverloadReferences(constructorItem, classMetadataFile);
         }
     }
 
@@ -189,10 +190,12 @@ public class YmlFilesBuilder {
                 methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
                 methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
                 methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
+
                 classMetadataFile.getItems().add(methodItem);
                 addExceptionReferences(methodItem, classMetadataFile);
                 addParameterReferences(methodItem, classMetadataFile);
                 addReturnReferences(methodItem, classMetadataFile);
+                addOverloadReferences(methodItem, classMetadataFile);
             });
     }
 
@@ -277,6 +280,15 @@ public class YmlFilesBuilder {
                 .collect(Collectors.toList()));
     }
 
+    void addOverloadReferences(MetadataFileItem item, MetadataFile classMetadataFile) {
+        MetadataFileItem overloadRefItem = new MetadataFileItem(item.getOverload()) {{
+            setName(RegExUtils.removeAll(item.getName(), "\\(.*\\)$"));
+            setNameWithType(RegExUtils.removeAll(item.getNameWithType(), "\\(.*\\)$"));
+            setFullName(RegExUtils.removeAll(item.getFullName(), "\\(.*\\)$"));
+        }};
+        classMetadataFile.getReferences().add(overloadRefItem);
+    }
+
     void applyPostProcessing(MetadataFile classMetadataFile) {
         expandComplexGenericsInReferences(classMetadataFile);
         replaceLinksWithXrefTags(classMetadataFile);
@@ -297,7 +309,7 @@ public class YmlFilesBuilder {
         while (iterator.hasNext()) {
             MetadataFileItem item = iterator.next();
             String uid = item.getUid();
-            if (uid.contains("<")) {
+            if (!uid.endsWith("*") && uid.contains("<")) {
                 iterator.remove();
 
                 List<String> classNames = splitUidWithGenericsIntoClassNames(uid);

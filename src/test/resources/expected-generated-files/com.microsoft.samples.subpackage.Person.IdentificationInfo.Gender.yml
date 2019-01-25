@@ -95,11 +95,23 @@ items:
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
 references:
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*"
+  name: "Gender"
+  nameWithType: "Person.IdentificationInfo.Gender.Gender"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*"
+  name: "values"
+  nameWithType: "Person.IdentificationInfo.Gender.values"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values"
 - uid: "java.lang.String"
   isExternal: true
   name: "String"
   nameWithType: "String"
   fullName: "java.lang.String"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*"
+  name: "valueOf"
+  nameWithType: "Person.IdentificationInfo.Gender.valueOf"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf"
 - uid: "java.lang.Enum"
   isExternal: true
   name: "Enum"

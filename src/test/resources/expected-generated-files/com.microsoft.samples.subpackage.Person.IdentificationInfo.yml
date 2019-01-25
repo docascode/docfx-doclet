@@ -32,6 +32,10 @@ items:
   syntax:
     content: "public IdentificationInfo()"
 references:
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo*"
+  name: "IdentificationInfo"
+  nameWithType: "Person.IdentificationInfo.IdentificationInfo"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
   name: "Person.IdentificationInfo.Gender"
   nameWithType: "Person.IdentificationInfo.Gender"
