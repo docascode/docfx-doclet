@@ -1,5 +1,8 @@
 package com.microsoft.lookup;
 
+import static com.sun.source.doctree.DocTree.Kind.LINK;
+import static com.sun.source.doctree.DocTree.Kind.LINK_PLAIN;
+
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MetadataFileItem;
@@ -7,6 +10,8 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.LinkTree;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +41,7 @@ public abstract class BaseLookup<T> {
 
     protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
     private final DocletEnvironment environment;
+    private final Set<Kind> LINK_KINDS_SET = Set.of(LINK, LINK_PLAIN);
 
     protected BaseLookup(DocletEnvironment environment) {
         this.environment = environment;
@@ -150,8 +156,23 @@ public abstract class BaseLookup<T> {
 
     protected String determineComment(Element element) {
         return getDocCommentTree(element).map(docTree ->
-            docTree.getFullBody().stream().map(String::valueOf).collect(Collectors.joining())
+            docTree.getFullBody().stream()
+                .map(bodyItem -> {
+                    if (LINK_KINDS_SET.contains(bodyItem.getKind())) {
+                        return buildXrefTag((LinkTree) bodyItem);
+                    }
+                    return String.valueOf(bodyItem);
+                }).collect(Collectors.joining())
         ).orElse(null);
+    }
+
+    private String buildXrefTag(LinkTree linkTree) {
+        String signature = linkTree.getReference().getSignature();
+        String label = linkTree.getLabel().stream().map(String::valueOf).collect(Collectors.joining(" "));
+        if (StringUtils.isEmpty(label)) {
+            label = signature;
+        }
+        return String.format("<xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref>", signature, label);
     }
 
     protected Optional<DocCommentTree> getDocCommentTree(Element element) {

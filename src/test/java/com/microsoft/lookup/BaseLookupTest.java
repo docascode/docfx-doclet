@@ -11,6 +11,7 @@ import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.LinkTree;
+import com.sun.source.doctree.ReferenceTree;
 import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ public class BaseLookupTest {
     private DocCommentTree docCommentTree;
     private TextTree textTree;
     private LinkTree linkTree;
+    private ReferenceTree referenceTree;
     private BaseLookup baseLookup;
 
     @Before
@@ -45,6 +47,7 @@ public class BaseLookupTest {
         docCommentTree = Mockito.mock(DocCommentTree.class);
         textTree = Mockito.mock(TextTree.class);
         linkTree = Mockito.mock(LinkTree.class);
+        referenceTree = Mockito.mock(ReferenceTree.class);
 
         baseLookup = new BaseLookup(environment) {
             @Override
@@ -60,16 +63,23 @@ public class BaseLookupTest {
         when(environment.getDocTrees()).thenReturn(docTrees);
         when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(textTree, linkTree)).when(docCommentTree).getFullBody();
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        when(linkTree.getKind()).thenReturn(Kind.LINK);
+        when(linkTree.getReference()).thenReturn(referenceTree);
+        when(referenceTree.getSignature()).thenReturn("Some#signature");
         when(textTree.toString()).thenReturn("Some text 1");
-        when(linkTree.toString()).thenReturn("{@link a.b.SomeClass#method(bla)}");
 
         String result = baseLookup.determineComment(element);
 
         verify(environment).getDocTrees();
         verify(docTrees).getDocCommentTree(element);
         verify(docCommentTree).getFullBody();
+        verify(textTree).getKind();
+        verify(linkTree).getKind();
+        verify(linkTree).getReference();
+        verify(linkTree).getLabel();
         assertThat("Wrong result", result,
-            is("Some text 1{@link a.b.SomeClass#method(bla)}"));
+            is("Some text 1<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>"));
     }
 
     @Test

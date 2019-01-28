@@ -18,6 +18,7 @@ import java.util.Set;
  * <li>Another class which not used here {@link List}</li>
  * <li>Broken link {@link sdfdsagdsfghfgh}</li>
  * <li>Plain link {@linkplain someContent}</li>
+ * <li>Link that starts from '#' {@link #setLastName()}</li>
  * </ul>
  *
  * @see Display

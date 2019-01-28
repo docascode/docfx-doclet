@@ -10,6 +10,7 @@ import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.sun.source.util.DocTrees;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -87,21 +88,37 @@ public class YmlFilesBuilderTest {
     }
 
     @Test
-    public void replaceLinkWithXrefTag() {
+    public void replaceLinksWithXrefTags() {
         MetadataFile classMetadataFile = new MetadataFile("output", "name");
 
-        MetadataFileItem item = new MetadataFileItem("UID");
-        item.setSummary("Bla bla {@link UnknownClass} and {@link SomeClass#someMethod(String param)} bla");
-        classMetadataFile.getItems().add(item);
-        MetadataFileItem reference = new MetadataFileItem("a.b.SomeClass.someMethod(String param)");
-        reference.setNameWithType("SomeClass.someMethod(String param)");
-        classMetadataFile.getReferences().add(reference);
+        MetadataFileItem ownerClassItem = buildMetadataFileItem("a.b.OwnerClass", "Not important summary value");
+        ownerClassItem.setNameWithType("OwnerClass");
+        MetadataFileItem item1 = buildMetadataFileItem("UID unknown class", "UnknownClass");
+        MetadataFileItem item2 = buildMetadataFileItem("UID known class", "SomeClass#someMethod(String param)");
+        MetadataFileItem item3 = buildMetadataFileItem("UID method only", "#someMethod2(String p1, String p2)");
+        classMetadataFile.getItems().addAll(Arrays.asList(ownerClassItem, item1, item2, item3));
+
+        MetadataFileItem reference1 = new MetadataFileItem("a.b.SomeClass.someMethod(String param)");
+        reference1.setNameWithType("SomeClass.someMethod(String param)");
+        MetadataFileItem reference2 = new MetadataFileItem("a.b.OwnerClass.someMethod2(String p1, String p2)");
+        reference2.setNameWithType("OwnerClass.someMethod2(String p1, String p2)");
+        classMetadataFile.getReferences().addAll(Arrays.asList(reference1, reference2));
 
         ymlFilesBuilder.replaceLinksWithXrefTags(classMetadataFile);
 
-        assertThat("Wrong summary", item.getSummary(),
-            is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref>"
-                + " and <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla"));
+        assertThat("Wrong summary for unknown class", item1.getSummary(),
+            is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla"));
+        assertThat("Wrong summary for known class", item2.getSummary(),
+            is("Bla bla <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla"));
+        assertThat("Wrong summary for method", item3.getSummary(),
+            is("Bla bla <xref uid=\"a.b.OwnerClass.someMethod2(String p1, String p2)\" data-throw-if-not-resolved=\"false\">#someMethod2(String p1, String p2)</xref> bla"));
+    }
+
+    private MetadataFileItem buildMetadataFileItem(String uid, String value) {
+        MetadataFileItem item = new MetadataFileItem(uid);
+        item.setSummary(
+            String.format("Bla bla <xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref> bla", value, value));
+        return item;
     }
 
     @Test
@@ -113,17 +130,17 @@ public class YmlFilesBuilderTest {
         }};
 
         assertThat("Wrong result for class", ymlFilesBuilder.
-            determineUidByLinkContent("SomeClass", lookup), is("a.b.c.SomeClass"));
+            resolveUidByLookup("SomeClass", lookup), is("a.b.c.SomeClass"));
         assertThat("Wrong result for method", ymlFilesBuilder.
-            determineUidByLinkContent("SomeClass#someMethod()", lookup), is("a.b.c.SomeClass.someMethod()"));
+            resolveUidByLookup("SomeClass#someMethod()", lookup), is("a.b.c.SomeClass.someMethod()"));
         assertThat("Wrong result for method with param", ymlFilesBuilder.
-                determineUidByLinkContent("SomeClass#someMethod(String param)", lookup),
+                resolveUidByLookup("SomeClass#someMethod(String param)", lookup),
             is("a.b.c.SomeClass.someMethod(String param)"));
 
         assertThat("Wrong result for unknown class", ymlFilesBuilder.
-            determineUidByLinkContent("UnknownClass", lookup), is(""));
-        assertThat("Wrong result for null", ymlFilesBuilder.determineUidByLinkContent(null, lookup), is(""));
-        assertThat("Wrong result for whitespace", ymlFilesBuilder.determineUidByLinkContent(" ", lookup), is(""));
+            resolveUidByLookup("UnknownClass", lookup), is(""));
+        assertThat("Wrong result for null", ymlFilesBuilder.resolveUidByLookup(null, lookup), is(""));
+        assertThat("Wrong result for whitespace", ymlFilesBuilder.resolveUidByLookup(" ", lookup), is(""));
     }
 
     @Test
