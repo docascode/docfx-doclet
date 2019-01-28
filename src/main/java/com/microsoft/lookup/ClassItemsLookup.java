@@ -7,13 +7,13 @@ import com.microsoft.model.Return;
 import com.sun.source.doctree.DocTree.Kind;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ClassItemsLookup extends BaseLookup<Element> {
@@ -84,11 +84,8 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         return getDocCommentTree(method).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.PARAM)
             .map(String::valueOf)
-            .map(o -> StringUtils.remove(o, "@param"))
-            .map(StringUtils::trim)
-            .filter(o -> o.startsWith(paramName))
-            .map(o -> StringUtils.replace(o, paramName, ""))
-            .map(StringUtils::trim)
+            .filter(o -> o.startsWith("@param " + paramName))
+            .map(o -> RegExUtils.removeFirst(o, "^@param " + paramName + " "))
             .findFirst().orElse(null)
         ).orElse(null);
     }

@@ -84,7 +84,7 @@ items:
       description: "the amount of incoming damage"
     - id: "damageType"
       type: "java.lang.String"
-      description: "type of damage"
+      description: "type of damage with similar word damageTypeLong, sure"
     return:
       type: "int"
       description: "the amount of health hero has after attack"

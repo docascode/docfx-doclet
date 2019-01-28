@@ -97,14 +97,14 @@ public class ClassItemsLookupTest {
         when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(paramTree)).when(docCommentTree).getBlockTags();
         when(paramTree.getKind()).thenReturn(Kind.PARAM);
-        when(paramTree.toString()).thenReturn("@param incomingDamage some text bla");
+        when(paramTree.toString()).thenReturn("@param incomingDamage some text incomingDamageWord bla");
 
         String result = classItemsLookup.extractParameterDescription(method, paramName);
 
         verify(environment).getDocTrees();
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
-        assertThat("Wrong param description", result, is("some text bla"));
+        assertThat("Wrong param description", result, is("some text incomingDamageWord bla"));
     }
 
     @Test

@@ -37,7 +37,7 @@ public class SuperHero extends Person implements Serializable, Cloneable {
      * </p>
      *
      * @param incomingDamage the amount of incoming damage
-     * @param damageType type of damage
+     * @param damageType type of damage with similar word damageTypeLong, sure
      * @return the amount of health hero has after attack
      * @throws IllegalArgumentException when incomingDamage is negative
      * @version 1.2
