@@ -25,4 +25,8 @@ public class Return {
     public String getReturnDescription() {
         return returnDescription;
     }
+
+    public void setReturnDescription(String returnDescription) {
+        this.returnDescription = returnDescription;
+    }
 }

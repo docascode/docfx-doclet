@@ -4,7 +4,7 @@ public class MethodParameter {
 
     private final String id;
     private final String type;
-    private final String description;
+    private String description;
 
     public MethodParameter(String id, String type, String description) {
         this.id = id;
@@ -22,5 +22,9 @@ public class MethodParameter {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

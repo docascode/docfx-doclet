@@ -6,6 +6,7 @@ import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.Syntax;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
@@ -17,6 +18,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -332,27 +334,43 @@ public class YmlFilesBuilder {
             item -> uidByShortNameLookup.put(item.getNameWithType(), item.getUid()));
 
         for (MetadataFileItem item : classMetadataFile.getItems()) {
-            String summary = item.getSummary();
-            if (StringUtils.isBlank(summary)) {
+            item.setSummary(replaceLinksWithXrefTags(item.getSummary(), uidByShortNameLookup));
+
+            Syntax syntax = item.getSyntax();
+            if (syntax == null) {
+                continue;
+            }
+            Optional.ofNullable(syntax.getParameters()).ifPresent(
+                methodParameters -> methodParameters.forEach(parameter -> {
+                    parameter
+                        .setDescription(replaceLinksWithXrefTags(parameter.getDescription(), uidByShortNameLookup));
+                }));
+            Optional.ofNullable(syntax.getReturnValue()).ifPresent(
+                aReturn -> aReturn.setReturnDescription(
+                    replaceLinksWithXrefTags(syntax.getReturnValue().getReturnDescription(), uidByShortNameLookup)));
+        }
+    }
+
+    String replaceLinksWithXrefTags(String text, Map<String, String> uidByShortNameLookup) {
+        if (StringUtils.isBlank(text)) {
+            return text;
+        }
+
+        Matcher linkMatcher = LINK_PATTERN.matcher(text);
+        while (linkMatcher.find()) {
+            String link = linkMatcher.group();
+            Matcher linkContentMatcher = LINK_CONTENT_PATTERN.matcher(link);
+            if (!linkContentMatcher.find()) {
                 continue;
             }
 
-            Matcher linkMatcher = LINK_PATTERN.matcher(summary);
-            while (linkMatcher.find()) {
-                String link = linkMatcher.group();
-                Matcher linkContentMatcher = LINK_CONTENT_PATTERN.matcher(link);
-                if (!linkContentMatcher.find()) {
-                    continue;
-                }
-
-                String linkContent = linkContentMatcher.group();
-                String uid = determineUidByLinkContent(linkContent, uidByShortNameLookup);
-                String xrefTag =
-                    "<xref uid=\"" + uid + "\" data-throw-if-not-resolved=\"false\">" + linkContent + "</xref>";
-                summary = StringUtils.replace(summary, link, xrefTag);
-            }
-            item.setSummary(summary);
+            String linkContent = linkContentMatcher.group();
+            String uid = determineUidByLinkContent(linkContent, uidByShortNameLookup);
+            String xrefTag =
+                "<xref uid=\"" + uid + "\" data-throw-if-not-resolved=\"false\">" + linkContent + "</xref>";
+            text = StringUtils.replace(text, link, xrefTag);
         }
+        return text;
     }
 
     String determineUidByLinkContent(String linkContent, Map<String, String> uidLookup) {
