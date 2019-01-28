@@ -17,6 +17,7 @@ import java.util.Set;
  * <li>Another class which used here {@link Set}</li>
  * <li>Another class which not used here {@link List}</li>
  * <li>Broken link {@link sdfdsagdsfghfgh}</li>
+ * <li>Plain link {@linkplain someContent}</li>
  * </ul>
  *
  * @see Display

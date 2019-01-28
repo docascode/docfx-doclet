@@ -38,8 +38,8 @@ import org.apache.commons.lang3.StringUtils;
 public class YmlFilesBuilder {
 
     private final static String[] LANGS = {"java"};
-    private final Pattern LINK_PATTERN = Pattern.compile("\\{@link .*?\\}");
-    private final Pattern LINK_CONTENT_PATTERN = Pattern.compile("(?<=\\{@link ).*?(?=\\})");
+    private final Pattern LINK_PATTERN = Pattern.compile("\\{@link(plain)? .*?\\}");
+    private final Pattern LINK_CONTENT_PATTERN = Pattern.compile("(?<=\\{@link(plain)? ).*?(?=\\})");
 
     private DocletEnvironment environment;
     private String outputPath;
