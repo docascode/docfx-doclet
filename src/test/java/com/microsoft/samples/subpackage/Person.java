@@ -19,6 +19,7 @@ import java.util.Set;
  * <li>Broken link {@link sdfdsagdsfghfgh}</li>
  * <li>Plain link {@linkplain someContent}</li>
  * <li>Link that starts from '#' {@link #setLastName()}</li>
+ * <li>Link with label {@link Set WordOne}</li>
  * </ul>
  *
  * @see Display

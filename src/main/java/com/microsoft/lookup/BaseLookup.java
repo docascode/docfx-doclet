@@ -173,6 +173,9 @@ public abstract class BaseLookup<T> {
         ).collect(Collectors.joining());
     }
 
+    /**
+     * By using this way of processing links we provide support of @links with label, like this: {@link List someLabel}
+     */
     private String buildXrefTag(LinkTree linkTree) {
         String signature = linkTree.getReference().getSignature();
         String label = linkTree.getLabel().stream().map(String::valueOf).collect(Collectors.joining(" "));
