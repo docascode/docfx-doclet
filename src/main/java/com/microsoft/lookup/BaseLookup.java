@@ -10,6 +10,7 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.LinkTree;
 import java.util.HashMap;
@@ -155,15 +156,21 @@ public abstract class BaseLookup<T> {
     }
 
     protected String determineComment(Element element) {
-        return getDocCommentTree(element).map(docTree ->
-            docTree.getFullBody().stream()
-                .map(bodyItem -> {
-                    if (LINK_KINDS_SET.contains(bodyItem.getKind())) {
-                        return buildXrefTag((LinkTree) bodyItem);
-                    }
-                    return String.valueOf(bodyItem);
-                }).collect(Collectors.joining())
-        ).orElse(null);
+        return getDocCommentTree(element)
+            .map(DocCommentTree::getFullBody)
+            .map(this::replaceLinksWithXrefTags)
+            .orElse(null);
+    }
+
+    String replaceLinksWithXrefTags(List<? extends DocTree> items) {
+        return items.stream().map(
+            bodyItem -> {
+                if (LINK_KINDS_SET.contains(bodyItem.getKind())) {
+                    return buildXrefTag((LinkTree) bodyItem);
+                }
+                return String.valueOf(bodyItem);
+            }
+        ).collect(Collectors.joining());
     }
 
     private String buildXrefTag(LinkTree linkTree) {

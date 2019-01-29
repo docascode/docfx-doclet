@@ -5,6 +5,9 @@ import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.ParamTree;
+import com.sun.source.doctree.ReturnTree;
+import com.sun.source.doctree.ThrowsTree;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
@@ -13,7 +16,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import jdk.javadoc.doclet.DocletEnvironment;
-import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ClassItemsLookup extends BaseLookup<Element> {
@@ -83,9 +85,9 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     String extractParameterDescription(ExecutableElement method, String paramName) {
         return getDocCommentTree(method).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.PARAM)
-            .map(String::valueOf)
-            .filter(o -> o.startsWith("@param " + paramName))
-            .map(o -> RegExUtils.removeFirst(o, "^@param " + paramName + " "))
+            .map(o -> (ParamTree) o)
+            .filter(o -> paramName.equals(String.valueOf(o.getName())))
+            .map(o -> replaceLinksWithXrefTags(o.getDescription()))
             .findFirst().orElse(null)
         ).orElse(null);
     }
@@ -93,20 +95,15 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     List<ExceptionItem> extractExceptions(ExecutableElement methodElement) {
         return methodElement.getThrownTypes().stream().map(o -> {
             String exceptionType = String.valueOf(o);
-            return new ExceptionItem(exceptionType, extractExceptionDescription(methodElement, exceptionType));
+            return new ExceptionItem(exceptionType, extractExceptionDescription(methodElement));
         }).collect(Collectors.toList());
     }
 
-    String extractExceptionDescription(ExecutableElement methodElement, String exceptionType) {
+    String extractExceptionDescription(ExecutableElement methodElement) {
         return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.THROWS)
-            .map(String::valueOf)
-            .map(o -> StringUtils.remove(o, "@throws"))
-            .map(StringUtils::trim)
-            .filter(o -> o.contains(" "))
-            .filter(o -> StringUtils.contains(exceptionType, o.substring(0, o.indexOf(" "))))
-            .map(o -> StringUtils.replace(o, o.substring(0, o.indexOf(" ")), ""))
-            .map(StringUtils::trim)
+            .map(o -> (ThrowsTree) o)
+            .map(o -> replaceLinksWithXrefTags(o.getDescription()))
             .findFirst().orElse(null)
         ).orElse(null);
     }
@@ -121,9 +118,8 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     String extractReturnDescription(ExecutableElement methodElement) {
         return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.RETURN)
-            .map(String::valueOf)
-            .map(o -> StringUtils.remove(o, "@return"))
-            .map(StringUtils::trim)
+            .map(o -> (ReturnTree)o)
+            .map(o -> replaceLinksWithXrefTags(o.getDescription()))
             .findFirst().orElse(null)
         ).orElse(null);
     }

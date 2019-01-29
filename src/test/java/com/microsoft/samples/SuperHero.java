@@ -36,10 +36,10 @@ public class SuperHero extends Person implements Serializable, Cloneable {
      * <a href="http://www.supermanisthegreatest.com">Superman!</a>
      * </p>
      *
-     * @param incomingDamage the amount of incoming damage
+     * @param incomingDamage the amount of incoming damage for {@link SuperHero}
      * @param damageType type of damage with similar word damageTypeLong, sure
      * @return the amount of health hero has after attack
-     * @throws IllegalArgumentException when incomingDamage is negative
+     * @throws IllegalArgumentException when incomingDamage is negative and thanks for {@link Exception}
      * @version 1.2
      * @see <a href="http://www.link_to_jira/HERO-402">HERO-402</a>
      * @since 1.0

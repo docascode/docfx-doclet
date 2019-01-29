@@ -14,8 +14,10 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.IdentifierTree;
 import com.sun.source.doctree.ParamTree;
 import com.sun.source.doctree.ReturnTree;
+import com.sun.source.doctree.TextTree;
 import com.sun.source.doctree.ThrowsTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
@@ -45,6 +47,8 @@ public class ClassItemsLookupTest {
     private ParamTree paramTree;
     private ThrowsTree throwsTree;
     private ReturnTree returnTree;
+    private TextTree textTree;
+    private IdentifierTree identifierTree;
     private ClassItemsLookup classItemsLookup;
 
     @Before
@@ -56,6 +60,8 @@ public class ClassItemsLookupTest {
         paramTree = Mockito.mock(ParamTree.class);
         throwsTree = Mockito.mock(ThrowsTree.class);
         returnTree = Mockito.mock(ReturnTree.class);
+        textTree = Mockito.mock(TextTree.class);
+        identifierTree = Mockito.mock(IdentifierTree.class);
         classItemsLookup = new ClassItemsLookup(environment);
     }
 
@@ -68,8 +74,11 @@ public class ClassItemsLookupTest {
         when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(paramTree)).when(docCommentTree).getBlockTags();
         when(paramTree.getKind()).thenReturn(Kind.PARAM);
-        when(paramTree.toString())
-            .thenReturn("@param incomingDamage some text bla", "@param damageType some text bla-bla");
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        when(paramTree.getName()).thenReturn(identifierTree);
+        doReturn(Arrays.asList(textTree)).when(paramTree).getDescription();
+        when(textTree.toString()).thenReturn("some text bla", "some text bla-bla");
+        when(identifierTree.toString()).thenReturn("incomingDamage", "damageType");
 
         List<MethodParameter> result = classItemsLookup.extractParameters(method);
 
@@ -97,14 +106,18 @@ public class ClassItemsLookupTest {
         when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(paramTree)).when(docCommentTree).getBlockTags();
         when(paramTree.getKind()).thenReturn(Kind.PARAM);
-        when(paramTree.toString()).thenReturn("@param incomingDamage some text incomingDamageWord bla");
+        doReturn(identifierTree).when(paramTree).getName();
+        doReturn(Arrays.asList(textTree)).when(paramTree).getDescription();
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        when(textTree.toString()).thenReturn("some weird text");
+        when(identifierTree.toString()).thenReturn(paramName);
 
         String result = classItemsLookup.extractParameterDescription(method, paramName);
 
         verify(environment).getDocTrees();
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
-        assertThat("Wrong param description", result, is("some text incomingDamageWord bla"));
+        assertThat("Wrong param description", result, is("some weird text"));
     }
 
     @Test
@@ -116,7 +129,9 @@ public class ClassItemsLookupTest {
         when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(throwsTree)).when(docCommentTree).getBlockTags();
         when(throwsTree.getKind()).thenReturn(Kind.THROWS);
-        when(throwsTree.toString()).thenReturn("@throws IllegalArgumentException some text");
+        doReturn(Arrays.asList(textTree)).when(throwsTree).getDescription();
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        when(textTree.toString()).thenReturn("some text");
 
         List<ExceptionItem> result = classItemsLookup.extractExceptions(method);
 
@@ -138,15 +153,17 @@ public class ClassItemsLookupTest {
         when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(throwsTree)).when(docCommentTree).getBlockTags();
         when(throwsTree.getKind()).thenReturn(Kind.THROWS);
-        when(throwsTree.toString()).thenReturn("@throws IllegalArgumentException some strange text");
+        doReturn(Arrays.asList(textTree)).when(throwsTree).getDescription();
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        when(textTree.toString()).thenReturn("some weird text");
 
-        String result = classItemsLookup.extractExceptionDescription(method, "java.lang.IllegalArgumentException");
+        String result = classItemsLookup.extractExceptionDescription(method);
 
         verify(environment).getDocTrees();
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
         verify(throwsTree).getKind();
-        assertThat("Wrong description", result, is("some strange text"));
+        assertThat("Wrong description", result, is("some weird text"));
     }
 
     @Test
@@ -161,7 +178,9 @@ public class ClassItemsLookupTest {
         when(docTrees.getDocCommentTree(method1)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(returnTree)).when(docCommentTree).getBlockTags();
         when(returnTree.getKind()).thenReturn(Kind.RETURN);
-        when(returnTree.toString()).thenReturn("@return bla", "@return bla-bla");
+        doReturn(Arrays.asList(textTree)).when(returnTree).getDescription();
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        when(textTree.toString()).thenReturn("bla", "bla-bla");
 
         checkReturnForExecutableElement(method0, "int", "bla");
         checkReturnForExecutableElement(method1, "java.lang.String", "bla-bla");
@@ -172,6 +191,7 @@ public class ClassItemsLookupTest {
         verify(docTrees).getDocCommentTree(method1);
         verify(docCommentTree, times(2)).getBlockTags();
         verify(returnTree, times(2)).getKind();
+        verify(textTree, times(2)).getKind();
     }
 
     private void checkReturnForExecutableElement(ExecutableElement executableElement, String expectedType,
@@ -195,7 +215,9 @@ public class ClassItemsLookupTest {
         when(docTrees.getDocCommentTree(method0)).thenReturn(docCommentTree);
         doReturn(Arrays.asList(returnTree)).when(docCommentTree).getBlockTags();
         when(returnTree.getKind()).thenReturn(Kind.RETURN);
-        when(returnTree.toString()).thenReturn("@return bla-bla description");
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+        doReturn(Arrays.asList(textTree)).when(returnTree).getDescription();
+        when(textTree.toString()).thenReturn("bla-bla description");
 
         String result = classItemsLookup.extractReturnDescription(method0);
 
