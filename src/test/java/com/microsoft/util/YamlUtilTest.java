@@ -1,12 +1,16 @@
 package com.microsoft.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 public class YamlUtilTest {
@@ -38,6 +42,17 @@ public class YamlUtilTest {
             + "    - id: \"Some id 5\"\n"
             + "      type: \"Some type 5\"\n"
             + "      description: \"Some desc 5\"\n"));
+    }
+
+    @Test
+    public void convertHtmlToMarkdown() throws IOException {
+        String text = FileUtils.readFileToString(new File("target/test-classes/html2md/initial.html"), UTF_8);
+        String expectedResult = FileUtils.readFileToString(new File("target/test-classes/html2md/converted.md"), UTF_8);
+
+        String result = YamlUtil.convertHtmlToMarkdown(text);
+
+        result = result.replaceAll("\r\n", "\n");
+        assertThat("Wrong result", result, is(expectedResult));
     }
 
     private MetadataFileItem buildMetadataFileItem(int seed) {
