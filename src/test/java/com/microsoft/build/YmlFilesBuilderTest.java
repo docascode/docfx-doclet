@@ -88,7 +88,7 @@ public class YmlFilesBuilderTest {
     }
 
     @Test
-    public void replaceLinksWithXrefTags() {
+    public void populateUidValues() {
         MetadataFile classMetadataFile = new MetadataFile("output", "name");
 
         MetadataFileItem ownerClassItem = buildMetadataFileItem("a.b.OwnerClass", "Not important summary value");
@@ -104,7 +104,7 @@ public class YmlFilesBuilderTest {
         reference2.setNameWithType("OwnerClass.someMethod2(String p1, String p2)");
         classMetadataFile.getReferences().addAll(Arrays.asList(reference1, reference2));
 
-        ymlFilesBuilder.replaceLinksWithXrefTags(classMetadataFile);
+        ymlFilesBuilder.populateUidValues(classMetadataFile);
 
         assertThat("Wrong summary for unknown class", item1.getSummary(),
             is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla"));

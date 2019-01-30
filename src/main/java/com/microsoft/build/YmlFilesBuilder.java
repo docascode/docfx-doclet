@@ -10,6 +10,7 @@ import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -58,32 +59,40 @@ public class YmlFilesBuilder {
     }
 
     public boolean build() {
+        List<MetadataFile> packageMetadataFiles = new ArrayList<>();
+        List<MetadataFile> classMetadataFiles = new ArrayList<>();
+
         TocFile tocFile = new TocFile(outputPath);
         for (PackageElement packageElement : elementUtil.extractPackageElements(environment.getIncludedElements())) {
             String uid = packageLookup.extractUid(packageElement);
-            buildPackageYmlFile(packageElement);
+            packageMetadataFiles.add(buildPackageMetadataFile(packageElement));
 
             TocItem packageTocItem = new TocItem(uid, uid);
-            buildFilesForInnerClasses(packageElement, packageTocItem.getItems());
+            buildFilesForInnerClasses(packageElement, packageTocItem.getItems(), classMetadataFiles);
             tocFile.addTocItem(packageTocItem);
         }
         FileUtil.dumpToFile(tocFile);
+
+        populateUidValues(packageMetadataFiles, classMetadataFiles);
+        packageMetadataFiles.forEach(FileUtil::dumpToFile);
+        classMetadataFiles.forEach(FileUtil::dumpToFile);
+
         return true;
     }
 
-    void buildFilesForInnerClasses(Element element, List<TocItem> listToAddItems) {
+    void buildFilesForInnerClasses(Element element, List<TocItem> listToAddItems, List<MetadataFile> container) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             String uid = classLookup.extractUid(classElement);
             String name = classLookup.extractTocName(classElement);
 
             listToAddItems.add(new TocItem(uid, name));
 
-            buildClassYmlFile(classElement);
-            buildFilesForInnerClasses(classElement, listToAddItems);
+            container.add(buildClassYmlFile(classElement));
+            buildFilesForInnerClasses(classElement, listToAddItems, container);
         }
     }
 
-    void buildPackageYmlFile(PackageElement packageElement) {
+    MetadataFile buildPackageMetadataFile(PackageElement packageElement) {
         String fileName = packageLookup.extractHref(packageElement);
         MetadataFile packageMetadataFile = new MetadataFile(outputPath, fileName);
         MetadataFileItem packageItem = new MetadataFileItem(LANGS, packageLookup.extractUid(packageElement));
@@ -91,8 +100,7 @@ public class YmlFilesBuilder {
         addChildrenReferences(packageElement, packageItem.getChildren(), packageMetadataFile.getReferences());
         populateItemFields(packageItem, packageLookup, packageElement);
         packageMetadataFile.getItems().add(packageItem);
-
-        FileUtil.dumpToFile(packageMetadataFile);
+        return packageMetadataFile;
     }
 
     void addChildrenReferences(Element element, List<String> packageChildren,
@@ -122,7 +130,7 @@ public class YmlFilesBuilder {
         item.setContent(lookup.extractContent(element));
     }
 
-    void buildClassYmlFile(TypeElement classElement) {
+    MetadataFile buildClassYmlFile(TypeElement classElement) {
         String fileName = classLookup.extractHref(classElement);
         MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
         addClassInfo(classElement, classMetadataFile);
@@ -131,8 +139,7 @@ public class YmlFilesBuilder {
         addFieldsInfo(classElement, classMetadataFile);
         addReferencesInfo(classElement, classMetadataFile);
         applyPostProcessing(classMetadataFile);
-
-        FileUtil.dumpToFile(classMetadataFile);
+        return classMetadataFile;
     }
 
     void addClassInfo(TypeElement classElement, MetadataFile classMetadataFile) {
@@ -292,7 +299,7 @@ public class YmlFilesBuilder {
 
     void applyPostProcessing(MetadataFile classMetadataFile) {
         expandComplexGenericsInReferences(classMetadataFile);
-        replaceLinksWithXrefTags(classMetadataFile);
+        populateUidValues(classMetadataFile);
     }
 
     /**
@@ -325,7 +332,13 @@ public class YmlFilesBuilder {
         classMetadataFile.getReferences().addAll(additionalItems);
     }
 
-    void replaceLinksWithXrefTags(MetadataFile classMetadataFile) {
+    void populateUidValues(List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
+        // TODO: build lookup
+
+        // TODO: populate uid values
+    }
+
+    void populateUidValues(MetadataFile classMetadataFile) {
         /**
          * It's important to use LinkedHashMap here, to put item related with owner class on first place.
          * Logic of {@link #resolveUidByLookup} based on this (for case when @link started from '#')
