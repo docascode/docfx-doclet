@@ -31,9 +31,11 @@ public class Lookup {
             Map<String, String> map = new LinkedHashMap<>();
             file.getItems().forEach(item -> {
                 map.put(RegExUtils.removeAll(item.getNameWithType(), "<.*?>"), item.getUid());
+                map.put(item.getUid(), item.getUid());
             });
             file.getReferences().forEach(item -> {
                 map.put(item.getNameWithType(), item.getUid());
+                map.put(item.getUid(), item.getUid());
             });
 
             localLookupByFileName.put(file.getFileName(), map);

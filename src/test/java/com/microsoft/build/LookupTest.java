@@ -43,6 +43,11 @@ public class LookupTest {
         assertThat("Context should contain global key", context.containsKey(packageNameWithType), is(true));
         assertThat("Wrong value for local key", context.resolve(classNameWithType), is(classUid));
         assertThat("Wrong value for global key", context.resolve(packageNameWithType), is(packageUid));
+
+        assertThat("Context should contain local value as a key", context.containsKey(classUid), is(true));
+        assertThat("Wrong value for local value as a key", context.resolve(classUid), is(classUid));
+        assertThat("Context should contain global value as a key", context.containsKey(packageUid), is(true));
+        assertThat("Wrong value for local value as a key", context.resolve(packageUid), is(packageUid));
     }
 
     private MetadataFileItem buildMetadataFileItem(String uid, String nameWithType) {
