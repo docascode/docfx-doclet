@@ -5,14 +5,24 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator.Feature;
+import com.overzealous.remark.IgnoredHtmlElement;
+import com.overzealous.remark.Options;
 import com.overzealous.remark.Remark;
+import org.apache.commons.lang3.StringUtils;
 
 public class YamlUtil {
 
+    /**
+     * Same instance of {@link Remark} class reused for better performance according to authors recommendations.
+     * <p>
+     * It wrapped in ThreadLocal because of its non-thread safe nature
+     */
     private static ThreadLocal<Remark> remark = new ThreadLocal<>() {
         @Override
         protected Remark initialValue() {
-            return new Remark();
+            Options options = Options.markdown();
+            options.ignoredHtmlElements.add(IgnoredHtmlElement.create("xref", "uid", "data-throw-if-not-resolved"));
+            return new Remark(options);
         }
     };
 
@@ -32,6 +42,9 @@ public class YamlUtil {
     }
 
     public static String convertHtmlToMarkdown(String text) {
+        if (StringUtils.isBlank(text)) {
+            return text;
+        }
         return remark.get().convertFragment(text);
     }
 }

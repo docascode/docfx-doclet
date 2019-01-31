@@ -2,6 +2,7 @@ package com.microsoft.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import com.microsoft.model.MetadataFile;
@@ -53,6 +54,12 @@ public class YamlUtilTest {
 
         result = result.replaceAll("\r\n", "\n");
         assertThat("Wrong result", result, is(expectedResult));
+    }
+
+    @Test
+    public void convertHtmlToMarkdownForBlankParam() {
+        assertThat("Wrong result for null", YamlUtil.convertHtmlToMarkdown(null), is(nullValue()));
+        assertThat("Wrong result for empty string", YamlUtil.convertHtmlToMarkdown(""), is(""));
     }
 
     private MetadataFileItem buildMetadataFileItem(int seed) {

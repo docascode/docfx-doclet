@@ -3,8 +3,8 @@ A test case defines the fixture to run multiple tests. To define a test case
 
 1.  implement a subclass of `TestCase`
 2.  define instance variables that store the state of the fixture
-3.  initialize the fixture state by overriding \{@link \#setUp()\}
-4.  clean-up after a test by overriding \{@link \#tearDown()\}.
+3.  initialize the fixture state by overriding <xref uid="\&quot;#setUp()\&quot;" data-throw-if-not-resolved="\&quot;false\&quot;">#setUp()</xref>
+4.  clean-up after a test by overriding <xref uid="\&quot;#tearDown()\&quot;" data-throw-if-not-resolved="\&quot;false\&quot;">#tearDown()</xref>.
 
 Each test runs in its own fixture so there can be no side effects among test runs. Here is an example:
 
@@ -18,7 +18,7 @@ Each test runs in its own fixture so there can be no side effects among test run
        }
     }
 
-For each test implement a method which interacts with the fixture. Verify the expected results with assertions specified by calling \{@link junit.framework.Assert\#assertTrue(String, boolean)\} with a boolean.
+For each test implement a method which interacts with the fixture. Verify the expected results with assertions specified by calling <xref uid="\&quot;junit.framework.Assert#assertTrue(String," data-throw-if-not-resolved="\&quot;false\&quot;">junit.framework.Assert#assertTrue(String, boolean)</xref> with a boolean.
 
     public void testAdd() {
           double result= fValue1 + fValue2;
@@ -34,7 +34,7 @@ Once the methods are defined you can run them. The framework supports both a sta
     };
     test.run();
 
-The dynamic way uses reflection to implement \{@link \#runTest()\}. It dynamically finds and invokes a method. In this case the name of the test case has to correspond to the test method to be run.
+The dynamic way uses reflection to implement <xref uid="\&quot;#runTest()\&quot;" data-throw-if-not-resolved="\&quot;false\&quot;">#runTest()</xref>. It dynamically finds and invokes a method. In this case the name of the test case has to correspond to the test method to be run.
 
     TestCase test= new MathTest("testAdd");
     test.run();
