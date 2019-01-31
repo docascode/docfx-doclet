@@ -75,7 +75,7 @@ items:
   overload: "com.microsoft.samples.SuperHero.successfullyAttacked*"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "<p>This is a simple description of the method. . .\n <a href=\"http://www.supermanisthegreatest.com\">Superman!</a>\n </p>"
+  summary: "This is a simple description of the method. . . [Superman!][Superman]\r\n\r\n\n[Superman]: http://www.supermanisthegreatest.com"
   syntax:
     content: "public int successfullyAttacked(int incomingDamage, String damageType)"
     parameters:
@@ -133,7 +133,7 @@ items:
   overload: "com.microsoft.samples.SuperHero.getLastName*"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "Get capitalized last name. But it's not the end,\n because of multiline comment"
+  summary: "Get capitalized last name. But it's not the end, because of multiline comment"
   syntax:
     content: "public String getLastName()"
     return:

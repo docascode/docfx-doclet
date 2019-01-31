@@ -10,6 +10,7 @@ import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
+import com.microsoft.util.YamlUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -336,7 +337,9 @@ public class YmlFilesBuilder {
             LookupContext lookupContext = lookup.buildContext(classMetadataFile);
 
             for (MetadataFileItem item : classMetadataFile.getItems()) {
-                item.setSummary(populateUidValues(item.getSummary(), lookupContext));
+                item.setSummary(YamlUtil.convertHtmlToMarkdown(
+                    populateUidValues(item.getSummary(), lookupContext)
+                ));
 
                 Optional.ofNullable(item.getSyntax()).ifPresent(syntax -> {
                         Optional.ofNullable(syntax.getParameters()).ifPresent(
