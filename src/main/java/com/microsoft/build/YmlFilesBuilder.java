@@ -13,10 +13,8 @@ import com.microsoft.util.FileUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -299,7 +297,6 @@ public class YmlFilesBuilder {
 
     void applyPostProcessing(MetadataFile classMetadataFile) {
         expandComplexGenericsInReferences(classMetadataFile);
-        populateUidValues(classMetadataFile);
     }
 
     /**
@@ -333,43 +330,33 @@ public class YmlFilesBuilder {
     }
 
     void populateUidValues(List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
-        // TODO: build lookup
+        Lookup lookup = new Lookup(packageMetadataFiles, classMetadataFiles);
 
-        // TODO: populate uid values
+        classMetadataFiles.forEach(classMetadataFile -> {
+            LookupContext lookupContext = lookup.buildContext(classMetadataFile);
+
+            for (MetadataFileItem item : classMetadataFile.getItems()) {
+                item.setSummary(populateUidValues(item.getSummary(), lookupContext));
+
+                Optional.ofNullable(item.getSyntax()).ifPresent(syntax -> {
+                        Optional.ofNullable(syntax.getParameters()).ifPresent(
+                            methodParams -> methodParams.forEach(
+                                param -> {
+                                    param.setDescription(populateUidValues(param.getDescription(), lookupContext));
+                                })
+                        );
+                        Optional.ofNullable(syntax.getReturnValue()).ifPresent(returnValue ->
+                            returnValue.setReturnDescription(
+                                populateUidValues(syntax.getReturnValue().getReturnDescription(), lookupContext)
+                            )
+                        );
+                    }
+                );
+            }
+        });
     }
 
-    void populateUidValues(MetadataFile classMetadataFile) {
-        /**
-         * It's important to use LinkedHashMap here, to put item related with owner class on first place.
-         * Logic of {@link #resolveUidByLookup} based on this (for case when @link started from '#')
-         */
-        Map<String, String> uidByShortNameLookup = new LinkedHashMap<>();
-        classMetadataFile.getItems().forEach(
-            item -> uidByShortNameLookup.put(RegExUtils.removeAll(item.getNameWithType(), "<.*?>"), item.getUid()));
-        classMetadataFile.getReferences().forEach(
-            item -> uidByShortNameLookup.put(item.getNameWithType(), item.getUid()));
-
-        for (MetadataFileItem item : classMetadataFile.getItems()) {
-            item.setSummary(populateUidValues(item.getSummary(), uidByShortNameLookup));
-
-            Optional.ofNullable(item.getSyntax()).ifPresent(syntax -> {
-                    Optional.ofNullable(syntax.getParameters()).ifPresent(
-                        methodParams -> methodParams.forEach(
-                            param -> {
-                                param.setDescription(populateUidValues(param.getDescription(), uidByShortNameLookup));
-                            })
-                    );
-                    Optional.ofNullable(syntax.getReturnValue()).ifPresent(returnValue ->
-                        returnValue.setReturnDescription(
-                            populateUidValues(syntax.getReturnValue().getReturnDescription(), uidByShortNameLookup)
-                        )
-                    );
-                }
-            );
-        }
-    }
-
-    String populateUidValues(String text, Map<String, String> uidByShortNameLookup) {
+    String populateUidValues(String text, LookupContext lookupContext) {
         if (StringUtils.isBlank(text)) {
             return text;
         }
@@ -383,25 +370,25 @@ public class YmlFilesBuilder {
             }
 
             String linkContent = linkContentMatcher.group();
-            String uid = resolveUidByLookup(linkContent, uidByShortNameLookup);
+            String uid = resolveUidByLookup(linkContent, lookupContext);
             String updatedLink = linkContentMatcher.replaceAll(uid);
             text = StringUtils.replace(text, link, updatedLink);
         }
         return text;
     }
 
-    String resolveUidByLookup(String linkContent, Map<String, String> uidLookup) {
+    String resolveUidByLookup(String linkContent, LookupContext lookupContext) {
         if (StringUtils.isBlank(linkContent)) {
             return "";
         }
 
         linkContent = linkContent.trim();
         if (linkContent.startsWith("#")) {
-            String firstKey = uidLookup.keySet().iterator().next();
+            String firstKey = lookupContext.getOwnerUid();
             linkContent = firstKey + linkContent;
         }
         linkContent = linkContent.replace("#", ".");
-        return uidLookup.containsKey(linkContent) ? uidLookup.get(linkContent) : "";
+        return lookupContext.containsKey(linkContent) ? lookupContext.resolve(linkContent) : "";
     }
 
     List<String> splitUidWithGenericsIntoClassNames(String uid) {

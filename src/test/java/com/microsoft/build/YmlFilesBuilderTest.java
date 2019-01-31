@@ -12,6 +12,7 @@ import com.sun.source.util.DocTrees;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,7 +105,7 @@ public class YmlFilesBuilderTest {
         reference2.setNameWithType("OwnerClass.someMethod2(String p1, String p2)");
         classMetadataFile.getReferences().addAll(Arrays.asList(reference1, reference2));
 
-        ymlFilesBuilder.populateUidValues(classMetadataFile);
+        ymlFilesBuilder.populateUidValues(Collections.emptyList(), Arrays.asList(classMetadataFile));
 
         assertThat("Wrong summary for unknown class", item1.getSummary(),
             is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla"));
@@ -129,18 +130,19 @@ public class YmlFilesBuilderTest {
             put("SomeClass.someMethod(String param)", "a.b.c.SomeClass.someMethod(String param)");
         }};
 
+        LookupContext lookupContext = new LookupContext(lookup, lookup);
         assertThat("Wrong result for class", ymlFilesBuilder.
-            resolveUidByLookup("SomeClass", lookup), is("a.b.c.SomeClass"));
+            resolveUidByLookup("SomeClass", lookupContext), is("a.b.c.SomeClass"));
         assertThat("Wrong result for method", ymlFilesBuilder.
-            resolveUidByLookup("SomeClass#someMethod()", lookup), is("a.b.c.SomeClass.someMethod()"));
+            resolveUidByLookup("SomeClass#someMethod()", lookupContext), is("a.b.c.SomeClass.someMethod()"));
         assertThat("Wrong result for method with param", ymlFilesBuilder.
-                resolveUidByLookup("SomeClass#someMethod(String param)", lookup),
+                resolveUidByLookup("SomeClass#someMethod(String param)", lookupContext),
             is("a.b.c.SomeClass.someMethod(String param)"));
 
         assertThat("Wrong result for unknown class", ymlFilesBuilder.
-            resolveUidByLookup("UnknownClass", lookup), is(""));
-        assertThat("Wrong result for null", ymlFilesBuilder.resolveUidByLookup(null, lookup), is(""));
-        assertThat("Wrong result for whitespace", ymlFilesBuilder.resolveUidByLookup(" ", lookup), is(""));
+            resolveUidByLookup("UnknownClass", lookupContext), is(""));
+        assertThat("Wrong result for null", ymlFilesBuilder.resolveUidByLookup(null, lookupContext), is(""));
+        assertThat("Wrong result for whitespace", ymlFilesBuilder.resolveUidByLookup(" ", lookupContext), is(""));
     }
 
     @Test
