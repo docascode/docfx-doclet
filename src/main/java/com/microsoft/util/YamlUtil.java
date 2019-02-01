@@ -20,7 +20,8 @@ public class YamlUtil {
     private static ThreadLocal<Remark> remark = new ThreadLocal<>() {
         @Override
         protected Remark initialValue() {
-            Options options = Options.markdown();
+            Options options = Options.github();
+            options.fencedCodeBlocksWidth = 3;
             options.ignoredHtmlElements.add(IgnoredHtmlElement.create("xref", "uid", "data-throw-if-not-resolved"));
             return new Remark(options);
         }
@@ -45,6 +46,8 @@ public class YamlUtil {
         if (StringUtils.isBlank(text)) {
             return text;
         }
-        return remark.get().convertFragment(text).replaceAll("\r\n", "\n");
+        return remark.get().convertFragment(text)
+            .replaceAll("\r\n", "\n")
+            .replaceAll("\n\n```\n", "\n\n```java\n");
     }
 }
