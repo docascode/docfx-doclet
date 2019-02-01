@@ -45,6 +45,6 @@ public class YamlUtil {
         if (StringUtils.isBlank(text)) {
             return text;
         }
-        return remark.get().convertFragment(text);
+        return remark.get().convertFragment(text).replaceAll("\r\n", "\n");
     }
 }

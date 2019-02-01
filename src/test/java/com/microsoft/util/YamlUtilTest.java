@@ -52,7 +52,6 @@ public class YamlUtilTest {
 
         String result = YamlUtil.convertHtmlToMarkdown(text);
 
-        result = result.replaceAll("\r\n", "\n");
         assertThat("Wrong result", result, is(expectedResult));
     }
 
