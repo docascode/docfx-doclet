@@ -91,7 +91,7 @@ public class BaseLookupTest {
         assertThat("Wrong result for primitive type", baseLookup.makeTypeShort("int"), is("int"));
         assertThat("Wrong result", baseLookup.makeTypeShort("java.lang.String"), is("String"));
         assertThat("Wrong result for inner class",
-            baseLookup.makeTypeShort("com.ms.pack.Custom.Type"), is("Custom.Type"));
+            baseLookup.makeTypeShort("org.apache.commons.lang3.arch.Processor.Arch"), is("Processor.Arch"));
         assertThat("Wrong result for class with generic",
             baseLookup.makeTypeShort("java.util.List<java.lang.String>"), is("List<String>"));
         assertThat("Wrong result for inner class with generic",

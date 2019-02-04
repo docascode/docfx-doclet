@@ -200,12 +200,15 @@ public abstract class BaseLookup<T> {
         return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
     }
 
+    /**
+     * We make type shortening in assumption that package name doesn't contain uppercase characters
+     */
     public String makeTypeShort(String value) {
         if (!value.contains(".")) {
             return value;
         }
         return Stream.of(StringUtils.split(value, "<"))
-            .map(s -> RegExUtils.replaceAll(s, "\\b[a-z.]+\\.", ""))
+            .map(s -> RegExUtils.removeAll(s, "\\b[a-z0-9_.]+\\."))
             .collect(Collectors.joining("<"));
     }
 }
