@@ -16,7 +16,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import jdk.javadoc.doclet.DocletEnvironment;
-import org.apache.commons.lang3.StringUtils;
 
 public class ClassItemsLookup extends BaseLookup<Element> {
 
@@ -87,7 +86,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             .filter(o -> o.getKind() == Kind.PARAM)
             .map(o -> (ParamTree) o)
             .filter(o -> paramName.equals(String.valueOf(o.getName())))
-            .map(o -> replaceLinksWithXrefTags(o.getDescription()))
+            .map(o -> replaceLinksAndCodes(o.getDescription()))
             .findFirst().orElse(null)
         ).orElse(null);
     }
@@ -103,7 +102,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.THROWS)
             .map(o -> (ThrowsTree) o)
-            .map(o -> replaceLinksWithXrefTags(o.getDescription()))
+            .map(o -> replaceLinksAndCodes(o.getDescription()))
             .findFirst().orElse(null)
         ).orElse(null);
     }
@@ -119,7 +118,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         return getDocCommentTree(methodElement).map(docTree -> docTree.getBlockTags().stream()
             .filter(o -> o.getKind() == Kind.RETURN)
             .map(o -> (ReturnTree)o)
-            .map(o -> replaceLinksWithXrefTags(o.getDescription()))
+            .map(o -> replaceLinksAndCodes(o.getDescription()))
             .findFirst().orElse(null)
         ).orElse(null);
     }

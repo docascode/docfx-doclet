@@ -11,10 +11,12 @@ import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.LinkTree;
+import com.sun.source.doctree.LiteralTree;
 import com.sun.source.doctree.ReferenceTree;
 import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
+import java.util.Collections;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -37,6 +39,7 @@ public class BaseLookupTest {
     private TextTree textTree;
     private LinkTree linkTree;
     private ReferenceTree referenceTree;
+    private LiteralTree literalTree;
     private BaseLookup baseLookup;
 
     @Before
@@ -48,6 +51,7 @@ public class BaseLookupTest {
         textTree = Mockito.mock(TextTree.class);
         linkTree = Mockito.mock(LinkTree.class);
         referenceTree = Mockito.mock(ReferenceTree.class);
+        literalTree = Mockito.mock(LiteralTree.class);
 
         baseLookup = new BaseLookup(environment) {
             @Override
@@ -96,5 +100,60 @@ public class BaseLookupTest {
             baseLookup.makeTypeShort("a.b.c.D.E.G<m.n.A.B<c.d.D.G<a.F.Z>>>"), is("D.E.G<A.B<D.G<F.Z>>>"));
         assertThat("Wrong result for inner class with generic & inheritance",
             baseLookup.makeTypeShort("a.b.G<? extends a.b.List>"), is("G<? extends List>"));
+    }
+
+    @Test
+    public void buildXrefTag() {
+        when(linkTree.getReference()).thenReturn(referenceTree);
+        when(referenceTree.getSignature()).thenReturn("Some#signature");
+        when(linkTree.getLabel()).thenReturn(Collections.emptyList());
+
+        String result = baseLookup.buildXrefTag(linkTree);
+
+        assertThat("Wrong result", result,
+            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>"));
+    }
+
+    @Test
+    public void buildXrefTagWhenLabelPresents() {
+        when(linkTree.getReference()).thenReturn(referenceTree);
+        when(referenceTree.getSignature()).thenReturn("Some#signature");
+        doReturn(Arrays.asList(textTree)).when(linkTree).getLabel();
+        String labelValue = "IamLabel";
+        when(textTree.toString()).thenReturn(labelValue);
+
+        String result = baseLookup.buildXrefTag(linkTree);
+
+        assertThat("Wrong result", result,
+            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">" + labelValue + "</xref>"));
+    }
+
+    @Test
+    public void buildCodeTag() {
+        String tagContent = "Some text";
+        when(literalTree.getBody()).thenReturn(textTree);
+        when(textTree.toString()).thenReturn(tagContent);
+
+        String result = baseLookup.buildCodeTag(literalTree);
+
+        assertThat("Wrong result", result, is("<code>" + tagContent + "</code>"));
+    }
+
+    @Test
+    public void replaceLinksAndCodes() {
+        when(linkTree.getReference()).thenReturn(referenceTree);
+        when(referenceTree.getSignature()).thenReturn("Some#signature");
+        when(linkTree.getLabel()).thenReturn(Collections.emptyList());
+        String textTreeContent = "Some text content";
+        when(literalTree.getBody()).thenReturn(textTree);
+        when(textTree.toString()).thenReturn(textTreeContent);
+        when(linkTree.getKind()).thenReturn(Kind.LINK);
+        when(literalTree.getKind()).thenReturn(Kind.CODE);
+        when(textTree.getKind()).thenReturn(Kind.TEXT);
+
+        String result = baseLookup.replaceLinksAndCodes(Arrays.asList(linkTree, literalTree, textTree));
+
+        assertThat("Wrong result", result, is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">"
+            + "Some#signature</xref><code>Some text content</code>" + textTreeContent));
     }
 }

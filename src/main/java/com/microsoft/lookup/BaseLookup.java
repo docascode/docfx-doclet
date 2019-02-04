@@ -1,8 +1,5 @@
 package com.microsoft.lookup;
 
-import static com.sun.source.doctree.DocTree.Kind.LINK;
-import static com.sun.source.doctree.DocTree.Kind.LINK_PLAIN;
-
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MetadataFileItem;
@@ -11,8 +8,8 @@ import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
-import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.LinkTree;
+import com.sun.source.doctree.LiteralTree;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +39,6 @@ public abstract class BaseLookup<T> {
 
     protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
     private final DocletEnvironment environment;
-    private final Set<Kind> LINK_KINDS_SET = Set.of(LINK, LINK_PLAIN);
 
     protected BaseLookup(DocletEnvironment environment) {
         this.environment = environment;
@@ -158,17 +154,28 @@ public abstract class BaseLookup<T> {
     protected String determineComment(Element element) {
         return getDocCommentTree(element)
             .map(DocCommentTree::getFullBody)
-            .map(this::replaceLinksWithXrefTags)
+            .map(this::replaceLinksAndCodes)
             .orElse(null);
     }
 
-    String replaceLinksWithXrefTags(List<? extends DocTree> items) {
+    /**
+     * <ul>
+     * <li>Replace @link and @linkplain with <xref> tags</li>
+     * <li>Replace @code with <code> tags</li>
+     * </ul>
+     */
+    String replaceLinksAndCodes(List<? extends DocTree> items) {
         return items.stream().map(
             bodyItem -> {
-                if (LINK_KINDS_SET.contains(bodyItem.getKind())) {
-                    return buildXrefTag((LinkTree) bodyItem);
+                switch (bodyItem.getKind()) {
+                    case LINK:
+                    case LINK_PLAIN:
+                        return buildXrefTag((LinkTree) bodyItem);
+                    case CODE:
+                        return buildCodeTag((LiteralTree) bodyItem);
+                    default:
+                        return String.valueOf(bodyItem);
                 }
-                return String.valueOf(bodyItem);
             }
         ).collect(Collectors.joining());
     }
@@ -176,13 +183,17 @@ public abstract class BaseLookup<T> {
     /**
      * By using this way of processing links we provide support of @links with label, like this: {@link List someLabel}
      */
-    private String buildXrefTag(LinkTree linkTree) {
+    String buildXrefTag(LinkTree linkTree) {
         String signature = linkTree.getReference().getSignature();
         String label = linkTree.getLabel().stream().map(String::valueOf).collect(Collectors.joining(" "));
         if (StringUtils.isEmpty(label)) {
             label = signature;
         }
         return String.format("<xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref>", signature, label);
+    }
+
+    String buildCodeTag(LiteralTree literalTree) {
+        return String.format("<code>%s</code>", literalTree.getBody());
     }
 
     protected Optional<DocCommentTree> getDocCommentTree(Element element) {

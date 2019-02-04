@@ -13,6 +13,7 @@ items:
   fullName: "com.microsoft.samples.subpackage.Display<T,R>"
   type: "Interface"
   package: "com.microsoft.samples.subpackage"
+  summary: "Do you see some `First` code block?\n\nOr this `Second` code block?"
   syntax:
     content: "public interface Display<T,R> extends Serializable, List<Person<T>>"
     typeParameters:
