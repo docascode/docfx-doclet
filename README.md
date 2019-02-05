@@ -39,7 +39,7 @@ javadoc \
 -subpackages org:junit
 </pre>
 
-In addition see `generate-yml-files.bat` script in `sandbox` folder
+In addition see this script: `sandbox/generate-yml-files.bat`
 
 ### For development it could be useful to use DocletRunner placed here
 - Create Run/Debug configuration with main class `com.microsoft.doclet.DocletRunner`
@@ -47,3 +47,9 @@ In addition see `generate-yml-files.bat` script in `sandbox` folder
 
 No we could run/debug doclet versus source code classes located at `com.microsoft.samples` 
 as mentioned in `test-doclet-params.txt` config file
+
+### Serve DocFx documentation
+According to instruction from [Getting started page](https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html) 
+install Chocolately firstly  
+After that use this script for generated files: `sandbox/serve-docs.bat`  
+Connect to http://localhost:8080 to see how it looks like
