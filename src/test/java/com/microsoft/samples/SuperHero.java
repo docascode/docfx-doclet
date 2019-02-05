@@ -45,6 +45,7 @@ public class SuperHero extends Person implements Serializable, Cloneable {
      * @since 1.0
      * @deprecated As of version 1.1, use . . . instead
      */
+    @Deprecated
     public int successfullyAttacked(int incomingDamage, String damageType) throws IllegalArgumentException {
         // do things
         if (incomingDamage < 0) {
