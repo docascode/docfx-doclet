@@ -15,7 +15,7 @@ public class LookupTest {
     private Lookup lookup;
     private String packageUid = "package uid";
     private String packageNameWithType = "package name with type";
-    private String classUid = "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)";
+    private String classUid = "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String,boolean)";
     private String classNameWithType = "Person<T>.setFirstName(String firstName, boolean flag)";
 
     private List<MetadataFile> packageFiles = new ArrayList<>() {{
@@ -39,20 +39,29 @@ public class LookupTest {
         LookupContext context = lookup.buildContext(classFiles.get(0));
 
         String[] localKeys = {
-            // Name with type without generics
-            "Person.setFirstName(String firstName, boolean flag)",
             // Uid as is
+            "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String,boolean)",
+            // Uid as is with spaces between params
             "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)",
             // Uid with param types without package
+            "com.microsoft.samples.subpackage.Person.setFirstName(String,boolean)",
+            // Uid with param types without package with spaces between params
             "com.microsoft.samples.subpackage.Person.setFirstName(String, boolean)",
             // Uid without package
+            "Person.setFirstName(java.lang.String,boolean)",
+            // Uid without package with spaces between params
             "Person.setFirstName(java.lang.String, boolean)",
+
+            // Name with type as is
+            "Person<T>.setFirstName(String, boolean)",
+            // Name with type without generics
+            "Person.setFirstName(String firstName, boolean flag)",
             // Name with type without generics and param names
             "Person.setFirstName(String, boolean)",
-            // Name with type as is
-            "Person<T>.setFirstName(String, boolean)"
+            // Name with type without generics and param names without spaces between params
+            "Person.setFirstName(String,boolean)"
         };
-        assertThat("Wrong owner uid", context.getOwnerUid(), is(localKeys[0]));
+        assertThat("Wrong owner uid", context.getOwnerUid(), is("Person.setFirstName(String firstName, boolean flag)"));
 
         for (String localKey : localKeys) {
             assertThat("Context should contain local key=" + localKey, context.containsKey(localKey), is(true));

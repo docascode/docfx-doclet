@@ -1,6 +1,7 @@
 package com.microsoft.build;
 
 import static org.apache.commons.lang3.RegExUtils.removeAll;
+import static org.apache.commons.lang3.RegExUtils.replaceAll;
 
 import com.microsoft.model.MetadataFile;
 import java.util.HashMap;
@@ -64,6 +65,11 @@ public class Lookup {
                 map.put(removeAll(uid, UID_PACKAGE_NAME_REGEXP), uid);
                 map.put(removeAll(nameWithTypeWithoutGenerics, METHOD_PARAMS_REGEXP), uid);
                 map.put(removeAll(nameWithType, METHOD_PARAMS_REGEXP), uid);
+
+                map.put(replaceAll(uid, ",", ", "), uid);
+                map.put(replaceAll(removeAll(uid, PARAM_PACKAGE_NAME_REGEXP), ",", ", "), uid);
+                map.put(replaceAll(removeAll(uid, UID_PACKAGE_NAME_REGEXP), ",", ", "), uid);
+                map.put(replaceAll(removeAll(nameWithTypeWithoutGenerics, METHOD_PARAMS_REGEXP), ", ", ","), uid);
             });
             file.getReferences().forEach(item -> {
                 map.put(item.getNameWithType(), item.getUid());
