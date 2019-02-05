@@ -1,16 +1,20 @@
 package com.microsoft.build;
 
+import static org.apache.commons.lang3.RegExUtils.removeAll;
+
 import com.microsoft.model.MetadataFile;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang3.RegExUtils;
 
 public class Lookup {
 
     private Map<String, String> globalLookup = new HashMap<>();
     private Map<String, Map<String, String>> localLookupByFileName = new HashMap<>();
+
+    private final String UID_PACKAGE_NAME_REGEXP = "^.*?\\.(?=[A-Z].*)";
+    private final String PARAM_PACKAGE_NAME_REGEXP = "(?<=[\\( ]).*?(?=[A-Z].*)";
     private final String METHOD_PARAMS_REGEXP = "\\s[^\\s]+?(?=[,)])";
 
     public Lookup(List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
@@ -26,16 +30,21 @@ public class Lookup {
     /**
      * For each such item from items and references of metadata file:
      * <pre>
-     * - uid: "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
-     *   nameWithType: "Person<T>.setFirstName(String firstName)"
+     * - uid: "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)"
+     *   nameWithType: "Person<T>.setFirstName(String firstName, boolean flag)"
      *   ...
      * </pre>
-     * We add next records to lookup:
+     * add several key-value pairs to lookup where keys are:
      * <ul>
-     *     <li>Person.setFirstName(String firstName) -> com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)</li>
-     *     <li>com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String) -> com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)</li>
-     *     <li>Person.setFirstName(String) -> com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)</li>
+     * <li>Name with type without generics: <br/>Person.setFirstName(String firstName, boolean flag)</li>
+     * <li>Uid as is: <br/>com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)</li>
+     * <li>Uid with param types without package: <br/>com.microsoft.samples.subpackage.Person.setFirstName(String,
+     * boolean)</li>
+     * <li>Uid without package: <br/>Person.setFirstName(java.lang.String, boolean)</li>
+     * <li>Name with type without generics and param names: <br/>Person.setFirstName(String, boolean)</li>
+     * <li>Name with type as is: <br/>Person<T>.setFirstName(String, boolean)</li>
      * </ul>
+     * and value equals to uid: <br/>com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
      */
     private void consume(List<MetadataFile> metadataFiles) {
         metadataFiles.forEach(file -> {
@@ -46,10 +55,15 @@ public class Lookup {
             Map<String, String> map = new LinkedHashMap<>();
             file.getItems().forEach(item -> {
                 String uid = item.getUid();
+                String nameWithType = item.getNameWithType();
+                String nameWithTypeWithoutGenerics = removeAll(nameWithType, "<.*?>");
 
-                map.put(RegExUtils.removeAll(item.getNameWithType(), "<.*?>"), uid);
+                map.put(nameWithTypeWithoutGenerics, uid);    // This item should go first
                 map.put(uid, uid);
-                map.put(RegExUtils.removeAll(item.getNameWithType(), METHOD_PARAMS_REGEXP), uid);
+                map.put(removeAll(uid, PARAM_PACKAGE_NAME_REGEXP), uid);
+                map.put(removeAll(uid, UID_PACKAGE_NAME_REGEXP), uid);
+                map.put(removeAll(nameWithTypeWithoutGenerics, METHOD_PARAMS_REGEXP), uid);
+                map.put(removeAll(nameWithType, METHOD_PARAMS_REGEXP), uid);
             });
             file.getReferences().forEach(item -> {
                 map.put(item.getNameWithType(), item.getUid());
