@@ -16,6 +16,7 @@ popd
 
 echo "Generate yml files"
 javadoc ^
+-encoding UTF-8 ^
 -docletpath ../target/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar ^
 -doclet com.microsoft.doclet.DocFxDoclet ^
 -cp ./hamcrest-core-1.3.jar ^

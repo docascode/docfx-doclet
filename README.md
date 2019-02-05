@@ -9,6 +9,7 @@ For details - see how `maven-javadoc-plugin` configured in `pom.xml`
 ### To use doclet standalone, without maven:
 <pre>
 javadoc \
+-encoding UTF-8 \
 -docletpath ./target/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -sourcepath ./src/test/java \
@@ -27,6 +28,7 @@ For example for [junit-4.12-sources](https://mvnrepository.com/artifact/junit/ju
 that it depends on hamcrest-core-1.3.jar library, so downloaded this hamcrest library, unpack sources jar and run:
 <pre>
 javadoc \
+-encoding UTF-8 \
 -docletpath ./docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \
 -doclet com.microsoft.doclet.DocFxDoclet \
 -cp ./hamcrest-core-1.3.jar \
@@ -36,6 +38,8 @@ javadoc \
 -excludeclasses .*SomeClass:com\.ms\..*AnyClass       # Not mandatory parameter
 -subpackages org:junit
 </pre>
+
+In addition see `generate-yml-files.bat` script in `sandbox` folder
 
 ### For development it could be useful to use DocletRunner placed here
 - Create Run/Debug configuration with main class `com.microsoft.doclet.DocletRunner`
