@@ -17,6 +17,7 @@ import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
 import java.util.Collections;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -40,7 +41,7 @@ public class BaseLookupTest {
     private LinkTree linkTree;
     private ReferenceTree referenceTree;
     private LiteralTree literalTree;
-    private BaseLookup baseLookup;
+    private BaseLookup<Element> baseLookup;
 
     @Before
     public void setup() {
@@ -53,9 +54,9 @@ public class BaseLookupTest {
         referenceTree = Mockito.mock(ReferenceTree.class);
         literalTree = Mockito.mock(LiteralTree.class);
 
-        baseLookup = new BaseLookup(environment) {
+        baseLookup = new BaseLookup<>(environment) {
             @Override
-            protected ExtendedMetadataFileItem buildMetadataFileItem(Object key) {
+            protected ExtendedMetadataFileItem buildMetadataFileItem(Element key) {
                 return null;
             }
         };

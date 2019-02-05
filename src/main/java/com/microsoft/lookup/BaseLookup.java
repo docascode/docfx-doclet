@@ -23,7 +23,7 @@ import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public abstract class BaseLookup<T> {
+public abstract class BaseLookup<T extends Element> {
 
     protected final Map<ElementKind, String> elementKindLookup = new HashMap<>() {{
         put(ElementKind.PACKAGE, "Namespace");
@@ -143,15 +143,15 @@ public abstract class BaseLookup<T> {
         return resolve(key).getReferences();
     }
 
-    protected String determineType(Element element) {
+    protected String determineType(T element) {
         return elementKindLookup.get(element.getKind());
     }
 
-    protected String determinePackageName(Element element) {
+    protected String determinePackageName(T element) {
         return String.valueOf(environment.getElementUtils().getPackageOf(element));
     }
 
-    protected String determineComment(Element element) {
+    protected String determineComment(T element) {
         return getDocCommentTree(element)
             .map(DocCommentTree::getFullBody)
             .map(this::replaceLinksAndCodes)
@@ -196,7 +196,7 @@ public abstract class BaseLookup<T> {
         return String.format("<code>%s</code>", literalTree.getBody());
     }
 
-    protected Optional<DocCommentTree> getDocCommentTree(Element element) {
+    protected Optional<DocCommentTree> getDocCommentTree(T element) {
         return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
     }
 

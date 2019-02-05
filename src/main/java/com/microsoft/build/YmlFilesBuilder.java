@@ -120,7 +120,7 @@ public class YmlFilesBuilder {
         return referenceItem;
     }
 
-    <T> void populateItemFields(MetadataFileItem item, BaseLookup<T> lookup, T element) {
+    <T extends Element> void populateItemFields(MetadataFileItem item, BaseLookup<T> lookup, T element) {
         item.setName(lookup.extractName(element));
         item.setNameWithType(lookup.extractNameWithType(element));
         item.setFullName(lookup.extractFullName(element));
