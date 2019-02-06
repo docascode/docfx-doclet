@@ -37,7 +37,7 @@ public class MetadataFile implements YmlFile {
 
     @JsonIgnore
     @Override
-    public String getFileName() {
+    public String getFileNameWithPath() {
         return outputPath + File.separator + fileName;
     }
 }

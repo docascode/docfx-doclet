@@ -4,5 +4,5 @@ public interface YmlFile {
 
     String getFileContent();
 
-    String getFileName();
+    String getFileNameWithPath();
 }

@@ -23,6 +23,6 @@ public class FileUtil {
     }
 
     public static void dumpToFile(YmlFile ymlFile) {
-        dumpToFile(ymlFile.getFileContent(), ymlFile.getFileName());
+        dumpToFile(ymlFile.getFileContent(), ymlFile.getFileNameWithPath());
     }
 }

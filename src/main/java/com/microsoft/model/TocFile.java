@@ -24,7 +24,7 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
     }
 
     @Override
-    public String getFileName() {
+    public String getFileNameWithPath() {
         return outputPath + File.separator + TOC_FILE_NAME;
     }
 }

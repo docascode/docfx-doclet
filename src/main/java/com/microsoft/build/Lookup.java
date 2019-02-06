@@ -24,7 +24,7 @@ public class Lookup {
     }
 
     public LookupContext buildContext(MetadataFile metadataFile) {
-        Map<String, String> localLookup = localLookupByFileName.get(metadataFile.getFileName());
+        Map<String, String> localLookup = localLookupByFileName.get(metadataFile.getFileNameWithPath());
         return new LookupContext(globalLookup, localLookup);
     }
 
@@ -76,7 +76,7 @@ public class Lookup {
                 map.put(item.getUid(), item.getUid());
             });
 
-            localLookupByFileName.put(file.getFileName(), map);
+            localLookupByFileName.put(file.getFileNameWithPath(), map);
             globalLookup.putAll(map);
         });
     }
