@@ -3,6 +3,7 @@ items:
 - uid: "com.microsoft.samples"
   id: "samples"
   children:
+  - "com.microsoft.samples.Subpackage"
   - "com.microsoft.samples.SuperHero"
   langs:
   - "java"
@@ -14,6 +15,10 @@ items:
   syntax:
     content: "package com.microsoft.samples"
 references:
+- uid: "com.microsoft.samples.Subpackage"
+  name: "Subpackage"
+  nameWithType: "Subpackage"
+  fullName: "com.microsoft.samples.Subpackage"
 - uid: "com.microsoft.samples.SuperHero"
   name: "SuperHero"
   nameWithType: "SuperHero"

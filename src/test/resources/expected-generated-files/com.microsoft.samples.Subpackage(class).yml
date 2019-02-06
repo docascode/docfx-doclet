@@ -1,0 +1,36 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.Subpackage"
+  id: "Subpackage"
+  parent: "com.microsoft.samples"
+  children:
+  - "com.microsoft.samples.Subpackage.Subpackage()"
+  langs:
+  - "java"
+  name: "Subpackage"
+  nameWithType: "Subpackage"
+  fullName: "com.microsoft.samples.Subpackage"
+  type: "Class"
+  package: "com.microsoft.samples"
+  syntax:
+    content: "public class Subpackage"
+  inheritance:
+  - "java.lang.Object"
+- uid: "com.microsoft.samples.Subpackage.Subpackage()"
+  id: "Subpackage()"
+  parent: "com.microsoft.samples.Subpackage"
+  langs:
+  - "java"
+  name: "Subpackage()"
+  nameWithType: "Subpackage.Subpackage()"
+  fullName: "com.microsoft.samples.Subpackage.Subpackage()"
+  overload: "com.microsoft.samples.Subpackage.Subpackage*"
+  type: "Constructor"
+  package: "com.microsoft.samples"
+  syntax:
+    content: "public Subpackage()"
+references:
+- uid: "com.microsoft.samples.Subpackage.Subpackage*"
+  name: "Subpackage"
+  nameWithType: "Subpackage.Subpackage"
+  fullName: "com.microsoft.samples.Subpackage.Subpackage"

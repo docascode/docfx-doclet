@@ -70,11 +70,23 @@ public class YmlFilesBuilder {
             buildFilesForInnerClasses(packageElement, packageTocItem.getItems(), classMetadataFiles);
             tocFile.addTocItem(packageTocItem);
         }
-        FileUtil.dumpToFile(tocFile);
+
+        for (MetadataFile packageFile : packageMetadataFiles) {
+            String packageFileName = packageFile.getFileName();
+            for (MetadataFile classFile : classMetadataFiles) {
+                String classFileName = classFile.getFileName();
+                if (packageFileName.equalsIgnoreCase(classFileName)) {
+                    packageFile.setFileName(packageFileName.replaceAll("\\.yml$", "(package).yml"));
+                    classFile.setFileName(classFileName.replaceAll("\\.yml$", "(class).yml"));
+                }
+            }
+        }
 
         populateUidValues(packageMetadataFiles, classMetadataFiles);
+
         packageMetadataFiles.forEach(FileUtil::dumpToFile);
         classMetadataFiles.forEach(FileUtil::dumpToFile);
+        FileUtil.dumpToFile(tocFile);
 
         return true;
     }

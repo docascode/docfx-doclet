@@ -2,6 +2,8 @@
 - uid: "com.microsoft.samples"
   name: "com.microsoft.samples"
   items:
+  - uid: "com.microsoft.samples.Subpackage"
+    name: "Subpackage"
   - uid: "com.microsoft.samples.SuperHero"
     name: "SuperHero"
 - uid: "com.microsoft.samples.subpackage"
