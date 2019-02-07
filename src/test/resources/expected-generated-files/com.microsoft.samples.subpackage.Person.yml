@@ -190,6 +190,11 @@ references:
   name: "setLastName"
   nameWithType: "Person<T>.setLastName"
   fullName: "com.microsoft.samples.subpackage.Person<T>.setLastName"
+- uid: "java.util.Set<java.lang.String>"
+  isExternal: true
+  name: "Set<String>"
+  nameWithType: "Set<String>"
+  fullName: "java.util.Set<java.lang.String>"
 - uid: "com.microsoft.samples.subpackage.Person<T>.getSomeSet*"
   name: "getSomeSet"
   nameWithType: "Person<T>.getSomeSet"

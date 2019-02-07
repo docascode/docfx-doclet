@@ -328,8 +328,6 @@ public class YmlFilesBuilder {
             MetadataFileItem item = iterator.next();
             String uid = item.getUid();
             if (!uid.endsWith("*") && uid.contains("<")) {
-                iterator.remove();
-
                 List<String> classNames = splitUidWithGenericsIntoClassNames(uid);
                 additionalItems.addAll(classNames.stream()
                     .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), true))

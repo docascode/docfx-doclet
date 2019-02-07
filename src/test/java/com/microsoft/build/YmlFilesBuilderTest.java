@@ -154,17 +154,17 @@ public class YmlFilesBuilderTest {
     }
 
     @Test
-    public void applyPostProcessing() {
+    public void expandComplexGenericsInReferences() {
         MetadataFile classMetadataFile = new MetadataFile("path", "name");
         MetadataFileItem referenceItem = new MetadataFileItem("a.b.c.List<df.mn.ClassOne<tr.T>>");
         Set<MetadataFileItem> references = classMetadataFile.getReferences();
         references.add(referenceItem);
 
-        ymlFilesBuilder.applyPostProcessing(classMetadataFile);
+        ymlFilesBuilder.expandComplexGenericsInReferences(classMetadataFile);
 
-        assertThat("Wrong references amount", references.size(), is(3));
+        assertThat("Wrong references amount", references.size(), is(4));
         assertThat("Wrong references content",
             references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList()),
-            hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T"));
+            hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T", "a.b.c.List<df.mn.ClassOne<tr.T>>"));
     }
 }

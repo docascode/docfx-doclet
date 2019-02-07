@@ -112,6 +112,11 @@ references:
   name: "valueOf"
   nameWithType: "Person.IdentificationInfo.Gender.valueOf"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf"
+- uid: "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"
+  isExternal: true
+  name: "Enum<Person.IdentificationInfo.Gender>"
+  nameWithType: "Enum<Person.IdentificationInfo.Gender>"
+  fullName: "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"
 - uid: "java.lang.Enum"
   isExternal: true
   name: "Enum"
