@@ -37,7 +37,6 @@ public class DocFxDoclet implements Doclet {
         return "DocFxDoclet";
     }
 
-
     private String outputPath;
     private String[] excludePackages = {};
     private String[] excludeClasses = {};

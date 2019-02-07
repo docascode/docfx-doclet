@@ -42,7 +42,6 @@ public class ClassLookupTest {
 
         assertThat("Wrong type params size", result.size(), is(1));
         assertThat("Wrong type parameter id", result.get(0).getId(), is("T"));
-        assertThat("Wrong type parameter type", result.get(0).getType(), is(nullValue()));
     }
 
     @Test

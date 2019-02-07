@@ -78,6 +78,7 @@ public class YmlFilesBuilder {
                 if (packageFileName.equalsIgnoreCase(classFileName)) {
                     packageFile.setFileName(packageFileName.replaceAll("\\.yml$", "(package).yml"));
                     classFile.setFileName(classFileName.replaceAll("\\.yml$", "(class).yml"));
+                    break;
                 }
             }
         }
