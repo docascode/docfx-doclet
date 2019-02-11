@@ -261,4 +261,13 @@ public class ClassItemsLookupTest {
             "com.microsoft.samples.SuperHero.SuperHero()"), is(
             "com.microsoft.samples.SuperHero.SuperHero*"));
     }
+
+    @Test
+    public void determineTypeForEnumConstant() {
+        TypeElement element = elements
+            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+
+        assertThat(classItemsLookup.determineType(element.getEnclosedElements().get(0)), is("Field"));
+        assertThat(classItemsLookup.determineType(element.getEnclosedElements().get(1)), is("Field"));
+    }
 }

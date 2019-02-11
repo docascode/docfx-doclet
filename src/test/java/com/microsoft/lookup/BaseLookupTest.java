@@ -1,6 +1,7 @@
 package com.microsoft.lookup;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -8,6 +9,11 @@ import static org.mockito.Mockito.when;
 
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
+import com.microsoft.model.ExceptionItem;
+import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.MethodParameter;
+import com.microsoft.model.Return;
+import com.microsoft.model.TypeParameter;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.LinkTree;
@@ -17,6 +23,7 @@ import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTrees;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
@@ -42,6 +49,7 @@ public class BaseLookupTest {
     private ReferenceTree referenceTree;
     private LiteralTree literalTree;
     private BaseLookup<Element> baseLookup;
+    private ExtendedMetadataFileItem lastBuiltItem;
 
     @Before
     public void setup() {
@@ -56,8 +64,9 @@ public class BaseLookupTest {
 
         baseLookup = new BaseLookup<>(environment) {
             @Override
-            protected ExtendedMetadataFileItem buildMetadataFileItem(Element key) {
-                return null;
+            protected ExtendedMetadataFileItem buildMetadataFileItem(Element element) {
+                lastBuiltItem = buildExtendedMetadataFileItem(element);
+                return lastBuiltItem;
             }
         };
     }
@@ -156,5 +165,80 @@ public class BaseLookupTest {
 
         assertThat("Wrong result", result, is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">"
             + "Some#signature</xref><code>Some text content</code>" + textTreeContent));
+    }
+
+    @Test
+    public void resolve() {
+        TypeElement element1 = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
+        TypeElement element2 = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
+
+        ExtendedMetadataFileItem resultForKey1 = baseLookup.resolve(element1);
+        ExtendedMetadataFileItem resultForKey2 = baseLookup.resolve(element2);
+        ExtendedMetadataFileItem consequenceCallResultForKey1 = baseLookup.resolve(element1);
+
+        assertThat("Consequence call should return same instance", resultForKey1, is(consequenceCallResultForKey1));
+        assertThat("Resolve for another key should return another instance", resultForKey2, not((resultForKey1)));
+    }
+
+    @Test
+    public void testExtractMethods() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
+
+        assertThat("Wrong packageName", baseLookup.extractPackageName(element), is(lastBuiltItem.getPackageName()));
+        assertThat("Wrong fullName", baseLookup.extractFullName(element), is(lastBuiltItem.getFullName()));
+        assertThat("Wrong name", baseLookup.extractName(element), is(lastBuiltItem.getName()));
+        assertThat("Wrong href", baseLookup.extractHref(element), is(lastBuiltItem.getHref()));
+        assertThat("Wrong parent", baseLookup.extractParent(element), is(lastBuiltItem.getParent()));
+        assertThat("Wrong id", baseLookup.extractId(element), is(lastBuiltItem.getId()));
+        assertThat("Wrong uid", baseLookup.extractUid(element), is(lastBuiltItem.getUid()));
+        assertThat("Wrong nameWithType", baseLookup.extractNameWithType(element), is(lastBuiltItem.getNameWithType()));
+        assertThat("Wrong methodContent", baseLookup.extractMethodContent(element),
+            is(lastBuiltItem.getMethodContent()));
+        assertThat("Wrong fieldContent", baseLookup.extractFieldContent(element), is(lastBuiltItem.getFieldContent()));
+        assertThat("Wrong constructorContent", baseLookup.extractConstructorContent(element),
+            is(lastBuiltItem.getConstructorContent()));
+        assertThat("Wrong overload", baseLookup.extractOverload(element), is(lastBuiltItem.getOverload()));
+        assertThat("Wrong parameters", baseLookup.extractParameters(element), is(lastBuiltItem.getParameters()));
+        assertThat("Wrong exceptions", baseLookup.extractExceptions(element), is(lastBuiltItem.getExceptions()));
+
+        assertThat("Wrong return", baseLookup.extractReturn(element).getReturnType(),
+            is(lastBuiltItem.getReturn().getReturnType()));
+        assertThat("Wrong return", baseLookup.extractReturn(element).getReturnDescription(),
+            is(lastBuiltItem.getReturn().getReturnDescription()));
+
+        assertThat("Wrong summary", baseLookup.extractSummary(element), is(lastBuiltItem.getSummary()));
+        assertThat("Wrong type", baseLookup.extractType(element), is(lastBuiltItem.getType()));
+        assertThat("Wrong content", baseLookup.extractContent(element), is(lastBuiltItem.getContent()));
+        assertThat("Wrong typeParameters", baseLookup.extractTypeParameters(element),
+            is(lastBuiltItem.getTypeParameters()));
+        assertThat("Wrong superclass", baseLookup.extractSuperclass(element), is(lastBuiltItem.getSuperclassValue()));
+        assertThat("Wrong tocName", baseLookup.extractTocName(element), is(lastBuiltItem.getTocName()));
+        assertThat("Wrong references", baseLookup.extractReferences(element), is(lastBuiltItem.getReferences()));
+    }
+
+    private ExtendedMetadataFileItem buildExtendedMetadataFileItem(Element element) {
+        ExtendedMetadataFileItem result = new ExtendedMetadataFileItem(String.valueOf(element));
+        result.setPackageName("Some package name");
+        result.setFullName("Some full name");
+        result.setName("Some name");
+        result.setHref("Some href");
+        result.setParent("Some parent");
+        result.setId("Some id");
+        result.setNameWithType("Some name with type");
+        result.setMethodContent("Some method content");
+        result.setFieldContent("Some field content");
+        result.setConstructorContent("Some constructor content");
+        result.setOverload("Some overload");
+        result.setParameters(Arrays.asList(new MethodParameter("method id", "method type", "method desc")));
+        result.setExceptions(Arrays.asList(new ExceptionItem("ex type", "ex desc")));
+        result.setReturn(new Return("return type", "return desc"));
+        result.setSummary("Some summary");
+        result.setType("Some type");
+        result.setContent("Some content");
+        result.setTypeParameters(Arrays.asList(new TypeParameter("type param id")));
+        result.setSuperclass("Some ");
+        result.setTocName("Some toc name");
+        result.addReferences(Set.of(new MetadataFileItem("ref uid")));
+        return result;
     }
 }
