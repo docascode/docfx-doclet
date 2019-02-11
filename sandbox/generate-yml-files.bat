@@ -14,6 +14,7 @@ pushd %SOURCES_FOLDER%
 jar xf ../libs/junit-4.12-sources.jar
 popd
 
+echo "Before this action make sure that doclet jar presents in target folder. So build it preliminary when needed"
 echo "Generate yml files"
 javadoc ^
 -encoding UTF-8 ^

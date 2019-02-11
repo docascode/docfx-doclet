@@ -68,6 +68,7 @@
           </docletArtifact>
           <useStandardDocletOptions>false</useStandardDocletOptions>
           <additionalOptions>-outputpath ./generated-files</additionalOptions>
+          <!-- Add additional options here when needed -->
         </configuration>
       </plugin>
 
