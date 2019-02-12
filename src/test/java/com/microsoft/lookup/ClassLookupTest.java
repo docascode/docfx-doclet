@@ -1,7 +1,7 @@
 package com.microsoft.lookup;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import com.google.testing.compile.CompilationRule;
@@ -80,8 +80,10 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "SuperHero", container);
 
-        assertThat("Wrong result", container.getContent(),
+        assertThat("Wrong content", container.getContent(),
             is("public class SuperHero extends Person implements Serializable, Cloneable"));
+        assertThat("Wrong set of interfaces", container.getInterfaces(),
+            hasItems("java.io.Serializable", "java.lang.Cloneable"));
     }
 
     @Test
@@ -91,8 +93,10 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "Display<T,R>", container);
 
-        assertThat("Wrong result", container.getContent(),
+        assertThat("Wrong content", container.getContent(),
             is("public interface Display<T,R> extends Serializable, List<Person<T>>"));
+        assertThat("Wrong set of interfaces", container.getInterfaces(),
+            hasItems("java.io.Serializable", "java.util.List<com.microsoft.samples.subpackage.Person<T>>"));
     }
 
     @Test
@@ -103,7 +107,7 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "Person.IdentificationInfo.Gender", container);
 
-        assertThat("Wrong result", container.getContent(),
+        assertThat("Wrong content", container.getContent(),
             is("public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>"));
     }
 
@@ -114,7 +118,7 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "Person.IdentificationInfo", container);
 
-        assertThat("Wrong result", container.getContent(), is("public static class Person.IdentificationInfo"));
+        assertThat("Wrong content", container.getContent(), is("public static class Person.IdentificationInfo"));
     }
 
     @Test

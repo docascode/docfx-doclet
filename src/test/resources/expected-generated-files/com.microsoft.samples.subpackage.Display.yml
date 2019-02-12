@@ -19,6 +19,9 @@ items:
     typeParameters:
     - id: "T"
     - id: "R"
+  implements:
+  - "java.io.Serializable"
+  - "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
 - uid: "com.microsoft.samples.subpackage.Display.show()"
   id: "show()"
   parent: "com.microsoft.samples.subpackage.Display"

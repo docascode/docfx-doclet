@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
-    "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "exceptions", "spec.java"})
+    "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
+    "spec.java"})
 public class MetadataFileItem {
 
     private final String uid;
@@ -26,6 +27,8 @@ public class MetadataFileItem {
     private String summary;
     private Syntax syntax;
     private List<String> inheritance;
+    @JsonProperty("implements")
+    private List<String> interfaces;
     private List<ExceptionItem> exceptions;
     private boolean isExternal;
 
@@ -152,6 +155,14 @@ public class MetadataFileItem {
 
     public void setInheritance(String superclass) {
         this.inheritance = (superclass == null) ? null : Arrays.asList(superclass);
+    }
+
+    public List<String> getInterfaces() {
+        return interfaces;
+    }
+
+    public void setInterfaces(List<String> interfaces) {
+        this.interfaces = interfaces;
     }
 
     public List<ExceptionItem> getExceptions() {

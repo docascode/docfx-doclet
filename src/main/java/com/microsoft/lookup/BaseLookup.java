@@ -135,6 +135,10 @@ public abstract class BaseLookup<T extends Element> {
         return resolve(key).getSuperclassValue();
     }
 
+    public List<String> extractInterfaces(T key) {
+        return resolve(key).getInterfaces();
+    }
+
     public String extractTocName(T key) {
         return resolve(key).getTocName();
     }

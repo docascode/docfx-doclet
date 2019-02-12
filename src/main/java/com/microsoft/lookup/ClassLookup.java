@@ -71,6 +71,10 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             result += prefix + interfaces.stream().map(String::valueOf).map(this::makeTypeShort)
                 .collect(Collectors.joining(", "));
 
+            container.setInterfaces(interfaces.stream()
+                .map(String::valueOf)
+                .collect(Collectors.toList()));
+
             addInterfacesToReferencesMap(interfaces, container);
         }
 
