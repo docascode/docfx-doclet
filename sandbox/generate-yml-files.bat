@@ -1,6 +1,6 @@
 
-set SOURCES_FOLDER="./unpacked-sources"
-set GENERATED_FOLDER="./generated-yml-files"
+set SOURCES_FOLDER="../target/sandbox/unpacked-sources"
+set GENERATED_FOLDER="../target/sandbox/generated-yml-files"
 
 echo "Remove folders"
 rmdir /S /Q %SOURCES_FOLDER%
@@ -11,7 +11,7 @@ mkdir %SOURCES_FOLDER%
 
 echo "Extract sources from jar file"
 pushd %SOURCES_FOLDER%
-jar xf ../libs/junit-4.12-sources.jar
+jar xf ../../../sandbox/libs/junit-4.12-sources.jar
 popd
 
 echo "Before this action make sure that doclet jar presents in target folder. So build it preliminary when needed"
