@@ -8,6 +8,8 @@ import static org.mockito.Mockito.when;
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.MethodParameter;
+import com.microsoft.model.Syntax;
 import com.sun.source.util.DocTrees;
 import java.io.File;
 import java.util.Arrays;
@@ -95,6 +97,7 @@ public class YmlFilesBuilderTest {
         MetadataFileItem ownerClassItem = buildMetadataFileItem("a.b.OwnerClass", "Not important summary value");
         ownerClassItem.setNameWithType("OwnerClass");
         MetadataFileItem item1 = buildMetadataFileItem("UID unknown class", "UnknownClass");
+        populateSyntax(item1, "SomeClass#someMethod(String param)");
         MetadataFileItem item2 = buildMetadataFileItem("UID known class", "SomeClass#someMethod(String param)");
         MetadataFileItem item3 = buildMetadataFileItem("UID method only", "#someMethod2(String p1, String p2)");
         classMetadataFile.getItems().addAll(Arrays.asList(ownerClassItem, item1, item2, item3));
@@ -109,10 +112,13 @@ public class YmlFilesBuilderTest {
 
         assertThat("Wrong summary for unknown class", item1.getSummary(),
             is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla"));
+        assertThat("Wrong syntax description", item1.getSyntax().getParameters().get(0).getDescription(),
+            is("One two <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> three"));
         assertThat("Wrong summary for known class", item2.getSummary(),
             is("Bla bla <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla"));
         assertThat("Wrong summary for method", item3.getSummary(),
             is("Bla bla <xref uid=\"a.b.OwnerClass.someMethod2(String p1, String p2)\" data-throw-if-not-resolved=\"false\">#someMethod2(String p1, String p2)</xref> bla"));
+
     }
 
     private MetadataFileItem buildMetadataFileItem(String uid, String value) {
@@ -120,6 +126,15 @@ public class YmlFilesBuilderTest {
         item.setSummary(
             String.format("Bla bla <xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref> bla", value, value));
         return item;
+    }
+
+    private void populateSyntax(MetadataFileItem item, String value) {
+        Syntax syntax = new Syntax();
+        String methodParamDescription = String
+            .format("One two <xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref> three", value, value);
+        syntax.setParameters(
+            Arrays.asList(new MethodParameter("method param id", "method param type", methodParamDescription)));
+        item.setSyntax(syntax);
     }
 
     @Test

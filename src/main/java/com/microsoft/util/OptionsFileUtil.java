@@ -21,7 +21,7 @@ public class OptionsFileUtil {
         return jargs.toArray(new String[0]);
     }
 
-    public static String readOptionsFromFile(String filename) {
+    private static String readOptionsFromFile(String filename) {
         StringBuffer buffer = new StringBuffer();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             String line;

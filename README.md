@@ -40,7 +40,7 @@ Run javadoc tool with command-line params set:
     -outputpath ./target/test-out \                       # Set location of output files
     -excludepackages com\.msdn\..*:com\.ms\.news\..*  \   # List excluded packages separated by ':' (not mandatory parameter)
     -excludeclasses .*SomeClass:com\.ms\..*AnyClass \     # List excluded classes separated by ':' (not mandatory parameter)
-    -subpackages com.microsoft.samples                    # Subpackages to recursively load
+    -subpackages com.microsoft.samples                    # Subpackages to recursively load separated by ':'
 
 So to use doclet for sources packed into jar we need to unpack jar content and download its compile dependencies 
 and put them to classpath for javadoc run.   
@@ -56,7 +56,7 @@ and run next command:
     -cp ./hamcrest-core-1.3.jar \                         # Put dependencies into classpath
     -sourcepath ./junit-4.12-sources \                    # Set localtion of jar with sources 
     -outputpath ./test-out \                              # Set location of output files
-    -subpackages org:junit                                # Subpackages to recursively load
+    -subpackages org:junit                                # Subpackages to recursively load separated by ':'
 
 See this script `sandbox/generate-yml-files.bat` for details
 

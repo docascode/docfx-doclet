@@ -1,7 +1,9 @@
 package com.microsoft.model;
 
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -125,5 +127,32 @@ public class MetadataFileItemTest {
 
         assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
         assertThat("Wrong content value", object.getSyntax().getContent(), is(content));
+    }
+
+    @Test
+    public void setInheritance() {
+        MetadataFileItem object = new MetadataFileItem("123");
+
+        object.setInheritance("Some value");
+
+        assertThat("Wrong inheritance size", object.getInheritance().size(), is(1));
+        assertThat("Wrong inheritance content", object.getInheritance(), hasItem("Some value"));
+    }
+
+    @Test
+    public void setInheritanceForNull() {
+        MetadataFileItem object = new MetadataFileItem("123");
+
+        object.setInheritance(null);
+
+        assertThat("Wrong inheritance", object.getInheritance(), is(nullValue()));
+    }
+
+    @Test
+    public void getIsExternal() {
+        assertThat("Wrong isExternal when null", (new MetadataFileItem("123")).getIsExternal(), is(nullValue()));
+        assertThat("Wrong isExternal when true", (new MetadataFileItem("123", "name", true)).getIsExternal(), is(true));
+        assertThat("Wrong isExternal when false", (new MetadataFileItem("123", "name", false)).getIsExternal(),
+            is(nullValue()));
     }
 }

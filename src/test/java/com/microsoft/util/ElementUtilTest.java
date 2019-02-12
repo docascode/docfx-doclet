@@ -31,7 +31,9 @@ public class ElementUtilTest {
     @Before
     public void setup() {
         elements = rule.getElements();
-        elementUtil = new ElementUtil(new String[]{}, new String[]{});
+        elementUtil = new ElementUtil(
+            new String[]{"samples\\.someexcludedpackage"},
+            new String[]{"com\\.microsoft\\..*SomeExcludedClass"});
     }
 
     @Test
@@ -48,6 +50,19 @@ public class ElementUtilTest {
         assertThat("Wrong result list size", result.size(), is(2));
         assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples"));
         assertThat("Unexpected second item", result.get(1), is("com.microsoft.samples.subpackage"));
+    }
+
+    @Test
+    public void extractSortedElements() {
+        Element element = elements.getPackageElement("com.microsoft.samples.subpackage");
+
+        List<String> result = elementUtil.extractSortedElements(element)
+            .stream().map(String::valueOf).collect(Collectors.toList());
+
+        assertThat("Wrong result list size", result.size(), is(3));
+        assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples.subpackage.CustomException"));
+        assertThat("Unexpected second item", result.get(1), is("com.microsoft.samples.subpackage.Display"));
+        assertThat("Unexpected third item", result.get(2), is("com.microsoft.samples.subpackage.Person"));
     }
 
     @Test
