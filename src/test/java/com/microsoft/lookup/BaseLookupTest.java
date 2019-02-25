@@ -150,6 +150,17 @@ public class BaseLookupTest {
     }
 
     @Test
+    public void expandLiteralBody() {
+        String tagContent = "Some text";
+        when(literalTree.getBody()).thenReturn(textTree);
+        when(textTree.toString()).thenReturn(tagContent);
+
+        String result = baseLookup.expandLiteralBody(literalTree);
+
+        assertThat("Wrong result", result, is(tagContent));
+    }
+
+    @Test
     public void replaceLinksAndCodes() {
         when(linkTree.getReference()).thenReturn(referenceTree);
         when(referenceTree.getSignature()).thenReturn("Some#signature");

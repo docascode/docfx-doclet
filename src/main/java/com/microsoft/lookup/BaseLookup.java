@@ -177,6 +177,8 @@ public abstract class BaseLookup<T extends Element> {
                         return buildXrefTag((LinkTree) bodyItem);
                     case CODE:
                         return buildCodeTag((LiteralTree) bodyItem);
+                    case LITERAL:
+                        return expandLiteralBody((LiteralTree) bodyItem);
                     default:
                         return String.valueOf(bodyItem);
                 }
@@ -198,6 +200,10 @@ public abstract class BaseLookup<T extends Element> {
 
     String buildCodeTag(LiteralTree literalTree) {
         return String.format("<code>%s</code>", literalTree.getBody());
+    }
+
+    String expandLiteralBody(LiteralTree bodyItem) {
+        return String.valueOf(bodyItem.getBody());
     }
 
     protected Optional<DocCommentTree> getDocCommentTree(T element) {
