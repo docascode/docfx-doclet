@@ -22,6 +22,7 @@ import java.util.Set;
  * <li>Link with label {@link Set WordOne}</li>
  * </ul>
  *
+ * This is an "at" symbol: {@literal @}
  * @see Display
  */
 public class Person<T> {
