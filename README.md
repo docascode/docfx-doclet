@@ -100,24 +100,25 @@ javadoc \
 -subpackages org:junit                                # Subpackages to recursively load separated by ':'
 ```
 
-See this script `sandbox/generate-yml-files.bat` for details
+You can take a look at an [example documentation generation script](https://github.com/dendeli-msft/docfx-doclet/blob/master/sandbox/generate-yml-files.bat) outlining the process above.
 
 
-### Doclet development
+## Development
 
-For development it could be useful to use `DocletRunner` class.  
-It makes javadoc call and takes params from external text file. To use it:  
-- Create Run/Debug IDE configuration with main class `com.microsoft.doclet.DocletRunner`
+When making changes, it is important to ensure that you are using `DocletRunner` class - it is responsible for makeing the `javadoc` call and takes params from an external configuration file.
+
+To use it:  
+
+- Create Run/Debug IDE configuration with the main class set as `com.microsoft.doclet.DocletRunner`
 - Add `src\test\resources\test-doclet-params.txt` as program arguments of configuration
 
-Now we could run/debug doclet versus source code classes located at `com.microsoft.samples` package 
-as mentioned in `test-doclet-params.txt` config file
+Now we could run/debug doclet against source code classes located in the `com.microsoft.samples` package, as specified in the `test-doclet-params.txt` config file.
 
 
-### Serve DocFx documentation
+### Serving DocFx documentation
 
-- Install `Chocolately` using [its instructions](https://chocolatey.org/docs/installation)  
-- Install docfx through `Chocolatey`: `choco install docfx -y`
-- Generate set of yml files by java sources using one of aforementioned ways  
-- Start DocFx web-server using this script: `sandbox/serve-docs.bat`  
-- Connect to http://localhost:8080 to see how it looks like
+1. Get DocFX. You can read about it on the [official site](https://dotnet.github.io/docfx/).
+2. Initialize an empty docset, by calling: `docfx init -q`
+3. Place the generated YAML files in the `api` folder in the generated docset.
+4. Build the content in the folder by calling: `docfx`
+5. Serve the content on a local web server: `docfx serve _site`
