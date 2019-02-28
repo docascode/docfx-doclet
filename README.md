@@ -5,6 +5,20 @@
 
 This doclet is designed to produce a YAML representation of the Javadoc-generated documentation, that can be integrated into [DocFX](https://dotnet.github.io/docfx/).
 
+## Getting started
+
+You can clone the repository and build it with the help of Maven. You can do so by calling: 
+
+```bash
+mvn compile
+```
+
+Once the compilation is complete, you will need to generate a JAR file, that can be used alongside `javadoc`. You can do so by calling:
+
+```bash
+mvn package
+```
+
 ### Usage of doclet with help of `maven-javadoc-plugin`
 
 When we have existing java project where maven used as a build tool, we could add `maven-javadoc-plugin` to root pom.xml:
