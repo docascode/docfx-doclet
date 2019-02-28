@@ -3,6 +3,8 @@
 
 [![Build status](https://apidrop.visualstudio.com/Toolshed/_apis/build/status/Toolshed-Maven-CI)](https://apidrop.visualstudio.com/Toolshed/_build/latest?definitionId=1633)
 
+This doclet is designed to produce a YAML representation of the Javadoc-generated documentation, that can be integrated into [DocFX](https://dotnet.github.io/docfx/).
+
 ### Usage of doclet with help of `maven-javadoc-plugin`
 
 When we have existing java project where maven used as a build tool, we could add `maven-javadoc-plugin` to root pom.xml:
