@@ -30,22 +30,22 @@ This will produce two JAR files that you can use - one with dependencies, and an
 When there is an existing java project where Maven is used as a build tool, one could add `maven-javadoc-plugin` to the root `pom.xml`:
 
 ```java
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.1</version>
-        <configuration>
-          <doclet>com.microsoft.doclet.DocFxDoclet</doclet>
-          <docletArtifact>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>${project.artifactId}</artifactId>
-            <version>${project.version}</version>
-          </docletArtifact>
-          <useStandardDocletOptions>false</useStandardDocletOptions>
-          <additionalOptions>-outputpath ./generated-files</additionalOptions>
-          <!-- Add additional options here when needed -->
-        </configuration>
-      </plugin>
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-javadoc-plugin</artifactId>
+  <version>3.0.1</version>
+  <configuration>
+    <doclet>com.microsoft.doclet.DocFxDoclet</doclet>
+    <docletArtifact>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>${project.artifactId}</artifactId>
+      <version>${project.version}</version>
+    </docletArtifact>
+    <useStandardDocletOptions>false</useStandardDocletOptions>
+    <additionalOptions>-outputpath ./generated-files</additionalOptions>
+    <!-- Add additional options here when needed -->
+  </configuration>
+</plugin>
 ```
 
 The doclet can then be ran with the following command: 
@@ -54,12 +54,12 @@ The doclet can then be ran with the following command:
 mvn javadoc:javadoc
 ```
 
-In result generated files will be placed into `./target/site/apidocs/generated-files` folder  
+The generated files will be placed in the `./target/site/apidocs/generated-files` folder  
 
 
-### To use doclet standalone
+### Standalone
 
-Run javadoc tool with command-line params set:
+One can execute the `javadoc` command with the command line parameters:
 
     javadoc \
     -encoding UTF-8 \                                     # Source files encoding (not mandatory parameter)
