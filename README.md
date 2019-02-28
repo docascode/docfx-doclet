@@ -61,32 +61,44 @@ The generated files will be placed in the `./target/site/apidocs/generated-files
 
 One can execute the `javadoc` command with the command line parameters:
 
-    javadoc \
-    -encoding UTF-8 \                                     # Source files encoding (not mandatory parameter)
-    -docletpath ./target/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \      # Set path to jar with doclet
-    -doclet com.microsoft.doclet.DocFxDoclet \            # Set name of doclet class
-    -classpath <list of jar with dependencies> \          # Put dependencies into classpath
-    -sourcepath ./src/test/java \                         # Set localtion of jar with sources
-    -outputpath ./target/test-out \                       # Set location of output files
-    -excludepackages com\.msdn\..*:com\.ms\.news\..*  \   # List excluded packages separated by ':' (not mandatory parameter)
-    -excludeclasses .*SomeClass:com\.ms\..*AnyClass \     # List excluded classes separated by ':' (not mandatory parameter)
-    -subpackages com.microsoft.samples                    # Subpackages to recursively load separated by ':'
+```bash
+javadoc \
+-encoding UTF-8 \
+-docletpath ./target/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \
+-doclet com.microsoft.doclet.DocFxDoclet \
+-classpath <list of jar with dependencies> \
+-sourcepath ./src/test/java \
+-outputpath ./target/test-out \
+-excludepackages com\.msdn\..*:com\.ms\.news\..*  \
+-excludeclasses .*SomeClass:com\.ms\..*AnyClass \
+-subpackages com.microsoft.samples
+```
 
-So to use doclet for sources packed into jar we need to unpack jar content and download its compile dependencies 
-and put them to classpath for javadoc run.   
+| Parameter | Description |
+|-----------|-------------|
+| `encoding` | Encoding for source files (_optional_). |
+| `docletpath` | Path to the doclet JAR file. |
+| `doclet` | Doclet class name. |
+| `classpath` | List of dependencies to be included in the classpath (_optional_). |
+| `sourcepath` | Location of the source code that needs to be documented. |
+| `outputpath` | The location for the generated YAML files. |
+| `excludepackages` | List of excluded packages, separated by a colon (`:`) (_optional_). |
+| `excludeclasses` | List of excluded classes, separated by a colon (`:`) (_optional_). |
+| `subpackages` | Subpackages to recursively load, separated by a colon (`:`). |
 
-For example for [JUnit-4.12 sources](https://mvnrepository.com/artifact/junit/junit/4.12) we discovered from 
-Maven central that this library depends on `hamcrest-core-1.3` library, so download this library, unpack sources jar 
-and run next command:
 
-    javadoc \
-    -encoding UTF-8 \                                     # Source files encoding
-    -docletpath ./docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \     # Set path to jar with doclet
-    -doclet com.microsoft.doclet.DocFxDoclet \            # Set name of doclet class
-    -cp ./hamcrest-core-1.3.jar \                         # Put dependencies into classpath
-    -sourcepath ./junit-4.12-sources \                    # Set localtion of jar with sources 
-    -outputpath ./test-out \                              # Set location of output files
-    -subpackages org:junit                                # Subpackages to recursively load separated by ':'
+For example, if we would want to generate documentation for [JUnit-4.12 source code](https://mvnrepository.com/artifact/junit/junit/4.12), we would need to account for the fact that the library depends on `hamcrest-core-1.3`, therefore we would download this library, unpack the sources JAR and run the following command:
+
+```bash
+javadoc \
+-encoding UTF-8 \                                     # Source files encoding
+-docletpath ./docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \     # Set path to jar with doclet
+-doclet com.microsoft.doclet.DocFxDoclet \            # Set name of doclet class
+-cp ./hamcrest-core-1.3.jar \                         # Put dependencies into classpath
+-sourcepath ./junit-4.12-sources \                    # Set localtion of jar with sources 
+-outputpath ./test-out \                              # Set location of output files
+-subpackages org:junit                                # Subpackages to recursively load separated by ':'
+```
 
 See this script `sandbox/generate-yml-files.bat` for details
 
