@@ -1,6 +1,7 @@
 
-## Doclet for generation of DocFx-ready files for Java source code
+## JavaDoc Doclet for DocFX
 
+[![Build status](https://apidrop.visualstudio.com/Toolshed/_apis/build/status/Toolshed-Maven-CI)](https://apidrop.visualstudio.com/Toolshed/_build/latest?definitionId=1633)
 
 ### Usage of doclet with help of `maven-javadoc-plugin`
 
