@@ -7,7 +7,9 @@ This doclet is designed to produce a YAML representation of the Javadoc-generate
 
 ## Getting started
 
-You can clone the repository and build it with the help of Maven. You can do so by calling: 
+The easiest way is to just get the JAR files directly from our [releases](https://github.com/dendeli-msft/docfx-doclet/releases).
+
+Alternatively, you can clone the repository and build it with the help of Maven. You can do so by calling: 
 
 ```bash
 mvn compile
@@ -19,10 +21,15 @@ Once the compilation is complete, you will need to generate a JAR file, that can
 mvn package
 ```
 
-### Usage of doclet with help of `maven-javadoc-plugin`
+This will produce two JAR files that you can use - one with dependencies, and another one without.
 
-When we have existing java project where maven used as a build tool, we could add `maven-javadoc-plugin` to root pom.xml:
+## Usage 
 
+### With `maven-javadoc-plugin`
+
+When there is an existing java project where Maven is used as a build tool, one could add `maven-javadoc-plugin` to the root `pom.xml`:
+
+```java
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -39,8 +46,14 @@ When we have existing java project where maven used as a build tool, we could ad
           <!-- Add additional options here when needed -->
         </configuration>
       </plugin>
+```
 
-And run doclet using next command: `mvn javadoc:javadoc`  
+The doclet can then be ran with the following command: 
+
+```bash
+mvn javadoc:javadoc
+```
+
 In result generated files will be placed into `./target/site/apidocs/generated-files` folder  
 
 
