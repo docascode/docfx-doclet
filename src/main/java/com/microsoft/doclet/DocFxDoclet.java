@@ -2,6 +2,7 @@ package com.microsoft.doclet;
 
 import com.microsoft.build.YmlFilesBuilder;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -66,7 +67,13 @@ public class DocFxDoclet implements Doclet {
                     excludeClasses = StringUtils.split(arguments.get(0), ":");
                     return true;
                 }
-            }
+            },
+            // Support next properties for compatibility with Gradle javadoc task.
+            // According to javadoc spec - these properties used by StandardDoclet and used only when
+            // 'doclet' parameter not populated. But Gradle javadoc not align with this rule and
+            // passes them in spite of 'doclet' parameter existence
+            new FakeOptionForCompatibilityWithStandardDoclet("Fake support of doctitle property", "-doctitle"),
+            new FakeOptionForCompatibilityWithStandardDoclet("Fake support of windowtitle property", "-windowtitle")
         };
         return new HashSet<>(Arrays.asList(options));
     }
@@ -111,6 +118,18 @@ public class DocFxDoclet implements Doclet {
         @Override
         public String getParameters() {
             return parameters;
+        }
+    }
+
+    static class FakeOptionForCompatibilityWithStandardDoclet extends CustomOption {
+
+        public FakeOptionForCompatibilityWithStandardDoclet(String description, String name) {
+            super(description, Collections.singletonList(name), "none");
+        }
+
+        @Override
+        public boolean process(String option, List<String> arguments) {
+            return true;
         }
     }
 }
