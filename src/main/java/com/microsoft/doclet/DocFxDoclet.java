@@ -44,7 +44,7 @@ public class DocFxDoclet implements Doclet {
     @Override
     public Set<? extends Option> getSupportedOptions() {
         Option[] options = {
-            new CustomOption("Output path", Arrays.asList("-outputpath", "--output-path", "-o"), "path") {
+            new CustomOption("Output path", Arrays.asList("-outputpath", "--output-path", "-d"), "path") {
                 @Override
                 public boolean process(String option, List<String> arguments) {
                     outputPath = arguments.get(0);
