@@ -56,6 +56,22 @@ mvn javadoc:javadoc
 
 The generated files will be placed in the `./target/site/apidocs/generated-files` folder  
 
+### Usage of doclet with Gradle javadoc task
+
+For Gradle project put jar with doclet to `libs` folder and add next task to `build.gradle`:
+
+    task generateApiDocs(type: Javadoc) {
+      source sourceSets.main.allJava
+      classpath = configurations.compile
+      options.encoding 'UTF-8'
+      destinationDir = file("build/generated-files")
+      options.addStringOption("doclet", "com.microsoft.doclet.DocFxDoclet")
+      options.docletpath = [file("libs/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar")]
+      dependsOn build
+    }
+
+And run doclet using next command: `gradle generateApiDocs`  
+In result generated files will be placed into `./build/generated-files` folder  
 
 ### Standalone
 
