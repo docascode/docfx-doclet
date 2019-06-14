@@ -306,6 +306,7 @@ public class YmlFilesBuilder {
             setName(RegExUtils.removeAll(item.getName(), "\\(.*\\)$"));
             setNameWithType(RegExUtils.removeAll(item.getNameWithType(), "\\(.*\\)$"));
             setFullName(RegExUtils.removeAll(item.getFullName(), "\\(.*\\)$"));
+            setPackageName(item.getPackageName());
         }};
         classMetadataFile.getReferences().add(overloadRefItem);
     }
