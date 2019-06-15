@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.RegExUtils;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
     "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
@@ -114,7 +115,7 @@ public class MetadataFileItem {
     }
 
     public void setOverload(String overload) {
-        this.overload = overload;
+        this.overload = handleGenericForOverLoad(overload);
     }
 
     public String getType() {
@@ -222,5 +223,10 @@ public class MetadataFileItem {
 
     public Boolean getIsExternal() {
         return isExternal ? true : null;
+    }
+
+    public String handleGenericForOverLoad(String value)
+    {
+        return RegExUtils.removeAll(value,"<\\D+>");
     }
 }

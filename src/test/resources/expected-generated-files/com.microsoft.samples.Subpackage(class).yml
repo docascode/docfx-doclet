@@ -34,3 +34,4 @@ references:
   name: "Subpackage"
   nameWithType: "Subpackage.Subpackage"
   fullName: "com.microsoft.samples.Subpackage.Subpackage"
+  package: "com.microsoft.samples"

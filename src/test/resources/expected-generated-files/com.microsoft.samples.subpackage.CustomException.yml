@@ -60,10 +60,12 @@ references:
   name: "CustomException"
   nameWithType: "CustomException.CustomException"
   fullName: "com.microsoft.samples.subpackage.CustomException.CustomException"
+  package: "com.microsoft.samples.subpackage"
 - uid: "com.microsoft.samples.subpackage.CustomException.makeSomething*"
   name: "makeSomething"
   nameWithType: "CustomException.makeSomething"
   fullName: "com.microsoft.samples.subpackage.CustomException.makeSomething"
+  package: "com.microsoft.samples.subpackage"
 - uid: "java.lang.Exception"
   isExternal: true
   name: "Exception"
