@@ -19,3 +19,5 @@
     name: "Person.IdentificationInfo"
   - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
     name: "Person.IdentificationInfo.Gender"
+  - uid: "com.microsoft.samples.subpackage.Tuple"
+    name: "Tuple"

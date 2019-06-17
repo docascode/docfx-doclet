@@ -227,6 +227,6 @@ public class MetadataFileItem {
 
     public String handleGenericForOverLoad(String value)
     {
-        return RegExUtils.removeAll(value,"<\\D+>");
+        return RegExUtils.removeAll(value,"<\\w+(,\\s*\\w+)*>");
     }
 }
