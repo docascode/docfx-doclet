@@ -59,7 +59,7 @@ public class ElementUtilTest {
         List<String> result = elementUtil.extractSortedElements(element)
             .stream().map(String::valueOf).collect(Collectors.toList());
 
-        assertThat("Wrong result list size", result.size(), is(3));
+        assertThat("Wrong result list size", result.size(), is(4));
         assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples.subpackage.CustomException"));
         assertThat("Unexpected second item", result.get(1), is("com.microsoft.samples.subpackage.Display"));
         assertThat("Unexpected third item", result.get(2), is("com.microsoft.samples.subpackage.Person"));
