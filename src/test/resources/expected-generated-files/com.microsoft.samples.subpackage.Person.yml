@@ -171,7 +171,6 @@ references:
   fullName: "com.microsoft.samples.subpackage.Person<T>.Person"
   package: "com.microsoft.samples.subpackage"
 - uid: "java.lang.String"
-  isExternal: true
   name: "String"
   nameWithType: "String"
   fullName: "java.lang.String"
@@ -196,7 +195,6 @@ references:
   fullName: "com.microsoft.samples.subpackage.Person<T>.setLastName"
   package: "com.microsoft.samples.subpackage"
 - uid: "java.util.Set<java.lang.String>"
-  isExternal: true
   name: "Set<String>"
   nameWithType: "Set<String>"
   fullName: "java.util.Set<java.lang.String>"
@@ -211,7 +209,6 @@ references:
   fullName: "com.microsoft.samples.subpackage.Person<T>.buildPerson"
   package: "com.microsoft.samples.subpackage"
 - uid: "int"
-  isExternal: true
   name: "int"
   nameWithType: "int"
   fullName: "int"
@@ -224,7 +221,6 @@ references:
   nameWithType: "Person.IdentificationInfo"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
 - uid: "java.util.Set"
-  isExternal: true
   name: "Set"
   nameWithType: "Set"
   fullName: "java.util.Set"

@@ -52,7 +52,6 @@ items:
     description: "with reason message"
 references:
 - uid: "java.lang.String"
-  isExternal: true
   name: "String"
   nameWithType: "String"
   fullName: "java.lang.String"
@@ -67,7 +66,6 @@ references:
   fullName: "com.microsoft.samples.subpackage.CustomException.makeSomething"
   package: "com.microsoft.samples.subpackage"
 - uid: "java.lang.Exception"
-  isExternal: true
   name: "Exception"
   nameWithType: "Exception"
   fullName: "java.lang.Exception"

@@ -82,13 +82,13 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     void addSuperclassToReferencesMap(String superclass, ExtendedMetadataFileItem container) {
-        container.addReferences(Set.of(new MetadataFileItem(superclass, makeTypeShort(superclass), true)));
+        container.addReferences(Set.of(new MetadataFileItem(superclass, makeTypeShort(superclass), false)));
     }
 
     void addInterfacesToReferencesMap(List<? extends TypeMirror> interfaces, ExtendedMetadataFileItem container) {
         container.addReferences(interfaces.stream()
             .map(String::valueOf)
-            .map(o -> new MetadataFileItem(o, makeTypeShort(o), true))
+            .map(o -> new MetadataFileItem(o, makeTypeShort(o), false))
             .collect(Collectors.toSet())
         );
     }
