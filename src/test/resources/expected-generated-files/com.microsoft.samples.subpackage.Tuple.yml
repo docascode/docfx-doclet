@@ -105,12 +105,10 @@ items:
       type: "T2"
 references:
 - uid: "T1"
-  isExternal: true
   name: "T1"
   nameWithType: "T1"
   fullName: "T1"
 - uid: "T2"
-  isExternal: true
   name: "T2"
   nameWithType: "T2"
   fullName: "T2"

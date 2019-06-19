@@ -333,7 +333,7 @@ public class YmlFilesBuilder {
             if (!uid.endsWith("*") && uid.contains("<")) {
                 List<String> classNames = splitUidWithGenericsIntoClassNames(uid);
                 additionalItems.addAll(classNames.stream()
-                    .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), true))
+                    .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), false))
                     .collect(Collectors.toSet()));
             }
         }
@@ -414,6 +414,6 @@ public class YmlFilesBuilder {
 
     MetadataFileItem buildRefItem(String value) {
         value = RegExUtils.removeAll(value, "\\[\\]$");
-        return new MetadataFileItem(value, classLookup.makeTypeShort(value), true);
+        return new MetadataFileItem(value, classLookup.makeTypeShort(value), false);
     }
 }

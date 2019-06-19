@@ -256,17 +256,14 @@ references:
   fullName: "com.microsoft.samples.SuperHero.SuperHero"
   package: "com.microsoft.samples"
 - uid: "java.lang.String"
-  isExternal: true
   name: "String"
   nameWithType: "String"
   fullName: "java.lang.String"
 - uid: "int"
-  isExternal: true
   name: "int"
   nameWithType: "int"
   fullName: "int"
 - uid: "java.lang.IllegalArgumentException"
-  isExternal: true
   name: "IllegalArgumentException"
   nameWithType: "IllegalArgumentException"
   fullName: "java.lang.IllegalArgumentException"
@@ -321,17 +318,14 @@ references:
   fullName: "com.microsoft.samples.SuperHero.setDefense"
   package: "com.microsoft.samples"
 - uid: "com.microsoft.samples.subpackage.Person"
-  isExternal: true
   name: "Person"
   nameWithType: "Person"
   fullName: "com.microsoft.samples.subpackage.Person"
 - uid: "java.lang.Cloneable"
-  isExternal: true
   name: "Cloneable"
   nameWithType: "Cloneable"
   fullName: "java.lang.Cloneable"
 - uid: "java.io.Serializable"
-  isExternal: true
   name: "Serializable"
   nameWithType: "Serializable"
   fullName: "java.io.Serializable"

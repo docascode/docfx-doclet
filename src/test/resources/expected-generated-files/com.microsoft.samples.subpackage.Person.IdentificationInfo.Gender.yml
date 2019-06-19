@@ -106,7 +106,6 @@ references:
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values"
   package: "com.microsoft.samples.subpackage"
 - uid: "java.lang.String"
-  isExternal: true
   name: "String"
   nameWithType: "String"
   fullName: "java.lang.String"
@@ -116,12 +115,10 @@ references:
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf"
   package: "com.microsoft.samples.subpackage"
 - uid: "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"
-  isExternal: true
   name: "Enum<Person.IdentificationInfo.Gender>"
   nameWithType: "Enum<Person.IdentificationInfo.Gender>"
   fullName: "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"
 - uid: "java.lang.Enum"
-  isExternal: true
   name: "Enum"
   nameWithType: "Enum"
   fullName: "java.lang.Enum"
