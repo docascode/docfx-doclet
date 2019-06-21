@@ -6,11 +6,13 @@ import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.SpecViewModel;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import com.microsoft.util.YamlUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -30,9 +32,12 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
+
 import jdk.javadoc.doclet.DocletEnvironment;
+
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
+
 
 public class YmlFilesBuilder {
 
@@ -48,7 +53,7 @@ public class YmlFilesBuilder {
     private ClassLookup classLookup;
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
-        String[] excludePackages, String[] excludeClasses) {
+                           String[] excludePackages, String[] excludeClasses) {
         this.environment = environment;
         this.outputPath = outputPath;
         this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
@@ -116,7 +121,7 @@ public class YmlFilesBuilder {
     }
 
     void addChildrenReferences(Element element, List<String> packageChildren,
-        Set<MetadataFileItem> referencesCollector) {
+                               Set<MetadataFileItem> referencesCollector) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             referencesCollector.add(buildClassReference(classElement));
 
@@ -176,16 +181,16 @@ public class YmlFilesBuilder {
 
     List<? extends Element> filterPrivateElements(List<? extends Element> elements) {
         return elements.stream()
-            .filter(element -> !element.getModifiers().contains(Modifier.PRIVATE)).collect(Collectors.toList());
+                .filter(element -> !element.getModifiers().contains(Modifier.PRIVATE)).collect(Collectors.toList());
     }
 
     void collect(TypeElement classElement, List<String> children,
-        Function<Iterable<? extends Element>, List<? extends Element>> selectFunc,
-        Function<? super Element, String> mapFunc) {
+                 Function<Iterable<? extends Element>, List<? extends Element>> selectFunc,
+                 Function<? super Element, String> mapFunc) {
 
         List<? extends Element> elements = selectFunc.apply(classElement.getEnclosedElements());
         children.addAll(filterPrivateElements(elements).stream()
-            .map(mapFunc).collect(Collectors.toList()));
+                .map(mapFunc).collect(Collectors.toList()));
     }
 
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
@@ -203,33 +208,33 @@ public class YmlFilesBuilder {
 
     void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
-            .filter(methodElement -> !methodElement.getModifiers().contains(Modifier.PRIVATE))
-            .forEach(methodElement -> {
-                MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
-                methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
-                methodItem.setContent(classItemsLookup.extractMethodContent(methodElement));
-                methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
-                methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
-                methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
+                .filter(methodElement -> !methodElement.getModifiers().contains(Modifier.PRIVATE))
+                .forEach(methodElement -> {
+                    MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
+                    methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
+                    methodItem.setContent(classItemsLookup.extractMethodContent(methodElement));
+                    methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
+                    methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
+                    methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
 
-                classMetadataFile.getItems().add(methodItem);
-                addExceptionReferences(methodItem, classMetadataFile);
-                addParameterReferences(methodItem, classMetadataFile);
-                addReturnReferences(methodItem, classMetadataFile);
-                addOverloadReferences(methodItem, classMetadataFile);
-            });
+                    classMetadataFile.getItems().add(methodItem);
+                    addExceptionReferences(methodItem, classMetadataFile);
+                    addParameterReferences(methodItem, classMetadataFile);
+                    addReturnReferences(methodItem, classMetadataFile);
+                    addOverloadReferences(methodItem, classMetadataFile);
+                });
     }
 
     void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.fieldsIn(classElement.getEnclosedElements()).stream()
-            .filter(fieldElement -> !fieldElement.getModifiers().contains(Modifier.PRIVATE))
-            .forEach(fieldElement -> {
-                MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
-                fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
-                fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
-                classMetadataFile.getItems().add(fieldItem);
-                addReturnReferences(fieldItem, classMetadataFile);
-            });
+                .filter(fieldElement -> !fieldElement.getModifiers().contains(Modifier.PRIVATE))
+                .forEach(fieldElement -> {
+                    MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
+                    fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
+                    fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
+                    classMetadataFile.getItems().add(fieldItem);
+                    addReturnReferences(fieldItem, classMetadataFile);
+                });
     }
 
     void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {
@@ -258,36 +263,36 @@ public class YmlFilesBuilder {
 
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
-            methodItem.getSyntax().getParameters().stream()
-                .map(parameter -> buildRefItem(parameter.getType()))
-                .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList()));
+                methodItem.getSyntax().getParameters().stream()
+                        .map(parameter -> buildRefItem(parameter.getType()))
+                        .filter(o -> !classMetadataFile.getItems().contains(o))
+                        .collect(Collectors.toList()));
     }
 
     void addReturnReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
-            Stream.of(methodItem.getSyntax().getReturnValue())
-                .filter(Objects::nonNull)
-                .map(returnValue -> buildRefItem(returnValue.getReturnType()))
-                .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList()));
+                Stream.of(methodItem.getSyntax().getReturnValue())
+                        .filter(Objects::nonNull)
+                        .map(returnValue -> buildRefItem(returnValue.getReturnType()))
+                        .filter(o -> !classMetadataFile.getItems().contains(o))
+                        .collect(Collectors.toList()));
     }
 
     void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
-            methodItem.getExceptions().stream()
-                .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
-                .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList()));
+                methodItem.getExceptions().stream()
+                        .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
+                        .filter(o -> !classMetadataFile.getItems().contains(o))
+                        .collect(Collectors.toList()));
     }
 
     void addTypeParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
-            methodItem.getSyntax().getTypeParameters().stream()
-                .map(typeParameter -> {
-                    String id = typeParameter.getId();
-                    return new MetadataFileItem(id, id, false);
-                }).collect(Collectors.toList()));
+                methodItem.getSyntax().getTypeParameters().stream()
+                        .map(typeParameter -> {
+                            String id = typeParameter.getId();
+                            return new MetadataFileItem(id, id, false);
+                        }).collect(Collectors.toList()));
     }
 
     void addSuperclassAndInterfacesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
@@ -296,9 +301,9 @@ public class YmlFilesBuilder {
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
-            ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
-                .map(this::buildClassReference)
-                .collect(Collectors.toList()));
+                ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
+                        .map(this::buildClassReference)
+                        .collect(Collectors.toList()));
     }
 
     void addOverloadReferences(MetadataFileItem item, MetadataFile classMetadataFile) {
@@ -333,8 +338,8 @@ public class YmlFilesBuilder {
             if (!uid.endsWith("*") && uid.contains("<")) {
                 List<String> classNames = splitUidWithGenericsIntoClassNames(uid);
                 additionalItems.addAll(classNames.stream()
-                    .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), false))
-                    .collect(Collectors.toSet()));
+                        .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), false))
+                        .collect(Collectors.toSet()));
             }
         }
         // Remove items which already exist in 'items' section (compared by 'uid' field)
@@ -351,22 +356,22 @@ public class YmlFilesBuilder {
 
             for (MetadataFileItem item : classMetadataFile.getItems()) {
                 item.setSummary(YamlUtil.convertHtmlToMarkdown(
-                    populateUidValues(item.getSummary(), lookupContext)
+                        populateUidValues(item.getSummary(), lookupContext)
                 ));
 
                 Optional.ofNullable(item.getSyntax()).ifPresent(syntax -> {
-                        Optional.ofNullable(syntax.getParameters()).ifPresent(
-                            methodParams -> methodParams.forEach(
-                                param -> {
-                                    param.setDescription(populateUidValues(param.getDescription(), lookupContext));
-                                })
-                        );
-                        Optional.ofNullable(syntax.getReturnValue()).ifPresent(returnValue ->
-                            returnValue.setReturnDescription(
-                                populateUidValues(syntax.getReturnValue().getReturnDescription(), lookupContext)
-                            )
-                        );
-                    }
+                            Optional.ofNullable(syntax.getParameters()).ifPresent(
+                                    methodParams -> methodParams.forEach(
+                                            param -> {
+                                                param.setDescription(populateUidValues(param.getDescription(), lookupContext));
+                                            })
+                            );
+                            Optional.ofNullable(syntax.getReturnValue()).ifPresent(returnValue ->
+                                    returnValue.setReturnDescription(
+                                            populateUidValues(syntax.getReturnValue().getReturnDescription(), lookupContext)
+                                    )
+                            );
+                        }
                 );
             }
         });
@@ -414,6 +419,33 @@ public class YmlFilesBuilder {
 
     MetadataFileItem buildRefItem(String value) {
         value = RegExUtils.removeAll(value, "\\[\\]$");
-        return new MetadataFileItem(value, classLookup.makeTypeShort(value), false);
+        if (!value.endsWith("*") && value.contains("<")) {
+            return new MetadataFileItem(value, getJavaSpec(replaceUidAndSplit(value)));
+        } else
+            return new MetadataFileItem(value, classLookup.makeTypeShort(value), false);
     }
+
+    List<String> replaceUidAndSplit(String value) {
+        String retValue = RegExUtils.replaceAll(value, "\\<", ",<,");
+        retValue = RegExUtils.replaceAll(retValue, "\\>", ",>,");
+        return Arrays.asList(StringUtils.split(retValue, ","));
+    }
+
+    List<SpecViewModel> getJavaSpec(List<String> value) {
+        List<SpecViewModel> returnList = new ArrayList<>();
+
+        Optional.ofNullable(value).ifPresent(
+                Params -> Params.forEach(
+                        param -> {
+                            if (param.equalsIgnoreCase("<") || param.equalsIgnoreCase(">"))
+                                returnList.add(new SpecViewModel(param, param));
+                            else if (param != "")
+                                returnList.add(new SpecViewModel(param, param, param));
+                        })
+        );
+
+        return returnList;
+    }
+
+
 }
