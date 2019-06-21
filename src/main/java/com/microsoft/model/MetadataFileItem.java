@@ -2,15 +2,18 @@ package com.microsoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
 import org.apache.commons.lang3.RegExUtils;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
-    "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
-    "spec.java"})
-public class MetadataFileItem {
+        "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
+        "spec.java"})
+public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     private final String uid;
     private String id;
@@ -32,6 +35,11 @@ public class MetadataFileItem {
     private List<String> interfaces;
     private List<ExceptionItem> exceptions;
     private boolean isExternal;
+
+    @Override
+    public int compareTo(MetadataFileItem item) {
+        return this.getUid().compareTo(item.getUid());
+    }
 
     public MetadataFileItem(String[] langs, String uid) {
         this(uid);
@@ -71,6 +79,7 @@ public class MetadataFileItem {
     }
 
     public List<String> getChildren() {
+        Collections.sort(children);
         return children;
     }
 
@@ -225,8 +234,7 @@ public class MetadataFileItem {
         return isExternal ? true : null;
     }
 
-    public String handleGenericForOverLoad(String value)
-    {
-        return RegExUtils.removeAll(value,"<\\w+(,\\s*\\w+)*>");
+    public String handleGenericForOverLoad(String value) {
+        return RegExUtils.removeAll(value, "<\\w+(,\\s*\\w+)*>");
     }
 }
