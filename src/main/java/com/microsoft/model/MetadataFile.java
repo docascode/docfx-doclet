@@ -2,11 +2,9 @@ package com.microsoft.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.microsoft.util.YamlUtil;
+
 import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class MetadataFile implements YmlFile {
 
@@ -32,6 +30,8 @@ public class MetadataFile implements YmlFile {
     @JsonIgnore
     @Override
     public String getFileContent() {
+        Set<MetadataFileItem> sortedSet = new TreeSet<>(this.items);
+        this.items = sortedSet;
         return METADATA_FILE_HEADER + YamlUtil.objectToYamlString(this);
     }
 
@@ -41,12 +41,12 @@ public class MetadataFile implements YmlFile {
         return outputPath + File.separator + fileName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     @JsonIgnore
     public String getFileName() {
         return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

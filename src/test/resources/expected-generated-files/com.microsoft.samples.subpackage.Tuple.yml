@@ -6,8 +6,8 @@ items:
   children:
   - "com.microsoft.samples.subpackage.Tuple.Tuple(T1,T2)"
   - "com.microsoft.samples.subpackage.Tuple.getItem1()"
-  - "com.microsoft.samples.subpackage.Tuple.setItem1(T1)"
   - "com.microsoft.samples.subpackage.Tuple.getItem2()"
+  - "com.microsoft.samples.subpackage.Tuple.setItem1(T1)"
   - "com.microsoft.samples.subpackage.Tuple.setItem2(T2)"
   langs:
   - "java"
@@ -56,6 +56,21 @@ items:
     content: "public T1 getItem1()"
     return:
       type: "T1"
+- uid: "com.microsoft.samples.subpackage.Tuple.getItem2()"
+  id: "getItem2()"
+  parent: "com.microsoft.samples.subpackage.Tuple"
+  langs:
+  - "java"
+  name: "getItem2()"
+  nameWithType: "Tuple<T1,T2>.getItem2()"
+  fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.getItem2()"
+  overload: "com.microsoft.samples.subpackage.Tuple.getItem2*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
+  syntax:
+    content: "public T2 getItem2()"
+    return:
+      type: "T2"
 - uid: "com.microsoft.samples.subpackage.Tuple.setItem1(T1)"
   id: "setItem1(T1)"
   parent: "com.microsoft.samples.subpackage.Tuple"
@@ -72,21 +87,6 @@ items:
     parameters:
     - id: "item1"
       type: "T1"
-- uid: "com.microsoft.samples.subpackage.Tuple.getItem2()"
-  id: "getItem2()"
-  parent: "com.microsoft.samples.subpackage.Tuple"
-  langs:
-  - "java"
-  name: "getItem2()"
-  nameWithType: "Tuple<T1,T2>.getItem2()"
-  fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.getItem2()"
-  overload: "com.microsoft.samples.subpackage.Tuple.getItem2*"
-  type: "Method"
-  package: "com.microsoft.samples.subpackage"
-  syntax:
-    content: "public T2 getItem2()"
-    return:
-      type: "T2"
 - uid: "com.microsoft.samples.subpackage.Tuple.setItem2(T2)"
   id: "setItem2(T2)"
   parent: "com.microsoft.samples.subpackage.Tuple"

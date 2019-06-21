@@ -4,8 +4,8 @@ items:
   id: "IdentificationInfo"
   parent: "com.microsoft.samples.subpackage"
   children:
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   langs:
   - "java"
   name: "Person.IdentificationInfo"

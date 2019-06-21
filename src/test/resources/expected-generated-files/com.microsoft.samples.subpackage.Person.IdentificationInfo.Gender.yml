@@ -4,10 +4,10 @@ items:
   id: "Gender"
   parent: "com.microsoft.samples.subpackage"
   children:
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
   langs:
   - "java"
   name: "Person.IdentificationInfo.Gender"
@@ -20,6 +20,20 @@ items:
     content: "public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>"
   inheritance:
   - "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  id: "FEMALE"
+  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  langs:
+  - "java"
+  name: "FEMALE"
+  nameWithType: "Person.IdentificationInfo.Gender.FEMALE"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  type: "Field"
+  package: "com.microsoft.samples.subpackage"
+  syntax:
+    content: "public static final Person.IdentificationInfo.Gender FEMALE"
+    return:
+      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
   id: "Gender()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -33,21 +47,20 @@ items:
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "private Gender()"
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
-  id: "values()"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  id: "MALE"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
   langs:
   - "java"
-  name: "values()"
-  nameWithType: "Person.IdentificationInfo.Gender.values()"
-  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
-  overload: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*"
-  type: "Method"
+  name: "MALE"
+  nameWithType: "Person.IdentificationInfo.Gender.MALE"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  type: "Field"
   package: "com.microsoft.samples.subpackage"
   syntax:
-    content: "public static Person.IdentificationInfo.Gender[] values()"
+    content: "public static final Person.IdentificationInfo.Gender MALE"
     return:
-      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]"
+      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
   id: "valueOf(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -66,34 +79,21 @@ items:
       type: "java.lang.String"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
-  id: "MALE"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  id: "values()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
   langs:
   - "java"
-  name: "MALE"
-  nameWithType: "Person.IdentificationInfo.Gender.MALE"
-  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
-  type: "Field"
+  name: "values()"
+  nameWithType: "Person.IdentificationInfo.Gender.values()"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  overload: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*"
+  type: "Method"
   package: "com.microsoft.samples.subpackage"
   syntax:
-    content: "public static final Person.IdentificationInfo.Gender MALE"
+    content: "public static Person.IdentificationInfo.Gender[] values()"
     return:
-      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
-  id: "FEMALE"
-  parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  langs:
-  - "java"
-  name: "FEMALE"
-  nameWithType: "Person.IdentificationInfo.Gender.FEMALE"
-  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
-  type: "Field"
-  package: "com.microsoft.samples.subpackage"
-  syntax:
-    content: "public static final Person.IdentificationInfo.Gender FEMALE"
-    return:
-      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+      type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]"
 references:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*"
   name: "Gender"

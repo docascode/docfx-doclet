@@ -4,8 +4,8 @@ items:
   id: "Display"
   parent: "com.microsoft.samples.subpackage"
   children:
-  - "com.microsoft.samples.subpackage.Display.show()"
   - "com.microsoft.samples.subpackage.Display.hide()"
+  - "com.microsoft.samples.subpackage.Display.show()"
   langs:
   - "java"
   name: "Display<T,R>"
@@ -22,19 +22,6 @@ items:
   implements:
   - "java.io.Serializable"
   - "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
-- uid: "com.microsoft.samples.subpackage.Display.show()"
-  id: "show()"
-  parent: "com.microsoft.samples.subpackage.Display"
-  langs:
-  - "java"
-  name: "show()"
-  nameWithType: "Display<T,R>.show()"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show()"
-  overload: "com.microsoft.samples.subpackage.Display.show*"
-  type: "Method"
-  package: "com.microsoft.samples.subpackage"
-  syntax:
-    content: "public abstract void show()"
 - uid: "com.microsoft.samples.subpackage.Display.hide()"
   id: "hide()"
   parent: "com.microsoft.samples.subpackage.Display"
@@ -48,6 +35,19 @@ items:
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "public abstract void hide()"
+- uid: "com.microsoft.samples.subpackage.Display.show()"
+  id: "show()"
+  parent: "com.microsoft.samples.subpackage.Display"
+  langs:
+  - "java"
+  name: "show()"
+  nameWithType: "Display<T,R>.show()"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show()"
+  overload: "com.microsoft.samples.subpackage.Display.show*"
+  type: "Method"
+  package: "com.microsoft.samples.subpackage"
+  syntax:
+    content: "public abstract void show()"
 references:
 - uid: "com.microsoft.samples.subpackage.Display.show*"
   name: "show"
