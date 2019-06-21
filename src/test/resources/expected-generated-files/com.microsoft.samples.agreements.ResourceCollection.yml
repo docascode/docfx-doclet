@@ -1,0 +1,44 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.agreements.ResourceCollection"
+  id: "ResourceCollection"
+  parent: "com.microsoft.samples.agreements"
+  children:
+  - "com.microsoft.samples.agreements.ResourceCollection.ResourceCollection()"
+  langs:
+  - "java"
+  name: "ResourceCollection<TResource>"
+  nameWithType: "ResourceCollection<TResource>"
+  fullName: "com.microsoft.samples.agreements.ResourceCollection<TResource>"
+  type: "Class"
+  package: "com.microsoft.samples.agreements"
+  summary: "Contains a collection of resources with JSON properties to represent the output Type of objects in collection"
+  syntax:
+    content: "public class ResourceCollection<TResource>"
+    typeParameters:
+    - id: "TResource"
+  inheritance:
+  - "java.lang.Object"
+- uid: "com.microsoft.samples.agreements.ResourceCollection.ResourceCollection()"
+  id: "ResourceCollection()"
+  parent: "com.microsoft.samples.agreements.ResourceCollection"
+  langs:
+  - "java"
+  name: "ResourceCollection()"
+  nameWithType: "ResourceCollection<TResource>.ResourceCollection()"
+  fullName: "com.microsoft.samples.agreements.ResourceCollection<TResource>.ResourceCollection()"
+  overload: "com.microsoft.samples.agreements.ResourceCollection.ResourceCollection*"
+  type: "Constructor"
+  package: "com.microsoft.samples.agreements"
+  syntax:
+    content: "public ResourceCollection()"
+references:
+- uid: "com.microsoft.samples.agreements.ResourceCollection.ResourceCollection*"
+  name: "ResourceCollection"
+  nameWithType: "ResourceCollection<TResource>.ResourceCollection"
+  fullName: "com.microsoft.samples.agreements.ResourceCollection<TResource>.ResourceCollection"
+  package: "com.microsoft.samples.agreements"
+- uid: "TResource"
+  name: "TResource"
+  nameWithType: "TResource"
+  fullName: "TResource"
