@@ -68,9 +68,10 @@ references:
   fullName: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString"
   package: "com.microsoft.samples"
 - uid: "java.lang.String"
-  name: "String"
-  nameWithType: "String"
-  fullName: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
 - uid: "com.microsoft.samples.BasePartnerComponent<java.lang.String>"
   name: "BasePartnerComponent<String>"
   nameWithType: "BasePartnerComponent<String>"

@@ -106,9 +106,10 @@ references:
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values"
   package: "com.microsoft.samples.subpackage"
 - uid: "java.lang.String"
-  name: "String"
-  nameWithType: "String"
-  fullName: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*"
   name: "valueOf"
   nameWithType: "Person.IdentificationInfo.Gender.valueOf"

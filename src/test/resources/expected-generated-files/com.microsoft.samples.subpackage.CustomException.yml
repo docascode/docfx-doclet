@@ -52,9 +52,10 @@ items:
     description: "with reason message"
 references:
 - uid: "java.lang.String"
-  name: "String"
-  nameWithType: "String"
-  fullName: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
 - uid: "com.microsoft.samples.subpackage.CustomException.CustomException*"
   name: "CustomException"
   nameWithType: "CustomException.CustomException"
