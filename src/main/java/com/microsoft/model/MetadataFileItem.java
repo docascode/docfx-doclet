@@ -36,7 +36,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     private List<ExceptionItem> exceptions;
     private boolean isExternal;
     @JsonProperty("spec.java")
-    private List<SpecViewModel> specs = new ArrayList<>();
+    private List<SpecViewModel> specForJava = new ArrayList<>();
 
     @Override
     public int compareTo(MetadataFileItem item) {
@@ -58,6 +58,11 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         this.nameWithType = name;
         this.fullName = uid;
         this.isExternal = isExternal;
+    }
+
+    public MetadataFileItem(String uid, List<SpecViewModel> specs) {
+        this(uid);
+        this.specForJava = specs;
     }
 
     public String getUid() {
@@ -83,11 +88,6 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     public List<String> getChildren() {
         Collections.sort(children);
         return children;
-    }
-
-    public MetadataFileItem(String uid, List<SpecViewModel> specForJava) {
-        this(uid);
-        this.specs = specForJava;
     }
 
     public String getHref() {
@@ -176,6 +176,10 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     public List<String> getInterfaces() {
         return interfaces;
+    }
+
+    public List<SpecViewModel> getSpecForJava() {
+        return specForJava;
     }
 
     public void setInterfaces(List<String> interfaces) {

@@ -417,35 +417,45 @@ public class YmlFilesBuilder {
         return Arrays.asList(StringUtils.split(uid, "<"));
     }
 
-    MetadataFileItem buildRefItem(String value) {
-        value = RegExUtils.removeAll(value, "\\[\\]$");
-        if (!value.endsWith("*") && value.contains("<")) {
-            return new MetadataFileItem(value, getJavaSpec(replaceUidAndSplit(value)));
-        } else
-            return new MetadataFileItem(value, classLookup.makeTypeShort(value), false);
+    MetadataFileItem buildRefItem(String uid) {
+        uid = RegExUtils.removeAll(uid, "\\[\\]$");
+        if (!uid.endsWith("*") && uid.contains("<")) {
+            return new MetadataFileItem(uid, getJavaSpec(replaceUidAndSplit(uid)));
+        } else {
+            List<String> fullNameList = new ArrayList<>();
+
+            this.environment.getIncludedElements().forEach(
+                    element -> elementUtil.extractSortedElements(element).forEach(
+                            typeElement -> fullNameList.add(classLookup.extractFullName(typeElement)))
+            );
+
+            if (fullNameList.contains(uid)) {
+                return new MetadataFileItem(uid, classLookup.makeTypeShort(uid), false);
+            } else {
+                return new MetadataFileItem(uid, getJavaSpec(replaceUidAndSplit(uid)));
+            }
+        }
     }
 
-    List<String> replaceUidAndSplit(String value) {
-        String retValue = RegExUtils.replaceAll(value, "\\<", ",<,");
+    List<String> replaceUidAndSplit(String uid) {
+        String retValue = RegExUtils.replaceAll(uid, "\\<", ",<,");
         retValue = RegExUtils.replaceAll(retValue, "\\>", ",>,");
         return Arrays.asList(StringUtils.split(retValue, ","));
     }
 
-    List<SpecViewModel> getJavaSpec(List<String> value) {
-        List<SpecViewModel> returnList = new ArrayList<>();
+    List<SpecViewModel> getJavaSpec(List<String> references) {
+        List<SpecViewModel> specList = new ArrayList<>();
 
-        Optional.ofNullable(value).ifPresent(
-                Params -> Params.forEach(
-                        param -> {
-                            if (param.equalsIgnoreCase("<") || param.equalsIgnoreCase(">"))
-                                returnList.add(new SpecViewModel(param, param));
-                            else if (param != "")
-                                returnList.add(new SpecViewModel(param, param, param));
+        Optional.ofNullable(references).ifPresent(
+                ref -> references.forEach(
+                        uid -> {
+                            if (uid.equalsIgnoreCase("<") || uid.equalsIgnoreCase(">"))
+                                specList.add(new SpecViewModel(null, uid));
+                            else if (uid != "")
+                                specList.add(new SpecViewModel(uid, uid));
                         })
         );
 
-        return returnList;
+        return specList;
     }
-
-
 }

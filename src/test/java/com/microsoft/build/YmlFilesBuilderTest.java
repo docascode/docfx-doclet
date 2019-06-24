@@ -75,19 +75,20 @@ public class YmlFilesBuilderTest {
         assertThat("Container should contain 2 constructor items", constructorItems.size(), is(2));
     }
 
+    //todo add test case to cover reference item with in package
     @Test
     public void buildRefItem() {
-        buildRefItemAndCheckAssertions("java.lang.Some.String", "java.lang.Some.String", "Some.String");
-        buildRefItemAndCheckAssertions("java.lang.Some.String[]", "java.lang.Some.String", "Some.String");
+        buildRefItemAndCheckAssertions("java.lang.Some.String", "java.lang.Some.String", "String");
+        buildRefItemAndCheckAssertions("java.lang.Some.String[]", "java.lang.Some.String", "String");
     }
 
     private void buildRefItemAndCheckAssertions(String initialValue, String expectedUid, String expectedName) {
         MetadataFileItem result = ymlFilesBuilder.buildRefItem(initialValue);
 
         assertThat("Wrong uid", result.getUid(), is(expectedUid));
-        assertThat("Wrong name", result.getName(), is(expectedName));
-        assertThat("Wrong fullName", result.getFullName(), is(expectedUid));
-        assertThat("Wrong nameWithType", result.getNameWithType(), is(expectedName));
+        assertThat("Wrong name", result.getSpecForJava().iterator().next().getUid(), is(expectedUid));
+        assertThat("Wrong name", result.getSpecForJava().iterator().next().getName(), is(expectedName));
+        assertThat("Wrong fullName", result.getSpecForJava().iterator().next().getFullName(), is(expectedUid));
     }
 
     @Test

@@ -46,9 +46,10 @@ references:
   nameWithType: "IPartner"
   fullName: "com.microsoft.samples.IPartner"
 - uid: "TContext"
-  name: "TContext"
-  nameWithType: "TContext"
-  fullName: "TContext"
+  spec.java:
+  - uid: "TContext"
+    name: "TContext"
+    fullName: "TContext"
 - uid: "com.microsoft.samples.BasePartnerComponent.BasePartnerComponent*"
   name: "BasePartnerComponent"
   nameWithType: "BasePartnerComponent<TContext>.BasePartnerComponent"

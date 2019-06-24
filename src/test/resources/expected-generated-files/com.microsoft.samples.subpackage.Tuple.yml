@@ -105,13 +105,15 @@ items:
       type: "T2"
 references:
 - uid: "T1"
-  name: "T1"
-  nameWithType: "T1"
-  fullName: "T1"
+  spec.java:
+  - uid: "T1"
+    name: "T1"
+    fullName: "T1"
 - uid: "T2"
-  name: "T2"
-  nameWithType: "T2"
-  fullName: "T2"
+  spec.java:
+  - uid: "T2"
+    name: "T2"
+    fullName: "T2"
 - uid: "com.microsoft.samples.subpackage.Tuple.Tuple*"
   name: "Tuple"
   nameWithType: "Tuple<T1,T2>.Tuple"
