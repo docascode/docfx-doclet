@@ -17,6 +17,8 @@ items:
   syntax:
     content: "public class AgreementDetailsCollectionOperations extends BasePartnerComponentString implements IAgreementDetailsCollection"
   inheritance:
+  - "java.lang.Object"
+  - "com.microsoft.samples.BasePartnerComponent"
   - "com.microsoft.samples.BasePartnerComponentString"
   implements:
   - "com.microsoft.samples.agreements.IAgreementDetailsCollection"

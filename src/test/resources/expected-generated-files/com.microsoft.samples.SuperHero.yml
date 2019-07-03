@@ -28,6 +28,7 @@ items:
   syntax:
     content: "public class SuperHero extends Person implements Serializable, Cloneable"
   inheritance:
+  - "java.lang.Object"
   - "com.microsoft.samples.subpackage.Person"
   implements:
   - "java.io.Serializable"
