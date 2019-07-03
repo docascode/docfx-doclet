@@ -170,8 +170,8 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         return inheritance;
     }
 
-    public void setInheritance(String superclass) {
-        this.inheritance = (superclass == null) ? null : Arrays.asList(superclass);
+    public void setInheritance(List<String> superclass) {
+        this.inheritance = (superclass == null) ? null : superclass;
     }
 
     public List<String> getInterfaces() {

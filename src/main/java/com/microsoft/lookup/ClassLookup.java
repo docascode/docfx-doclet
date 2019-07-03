@@ -3,6 +3,8 @@ package com.microsoft.lookup;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,7 +43,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         result.setPackageName(packageName);
         result.setSummary(determineComment(classElement));
         populateContent(classElement, classSNameWithGenericsSupport, result);
-        result.setSuperclass(determineSuperclass(classElement));
+        result.setSuperclass(determineNestedSuperclass(classElement, result));
         result.setTypeParameters(determineTypeParameters(classElement));
         result.setTocName(classQName.replace(packageName.concat("."), ""));
 
@@ -99,6 +101,23 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             return null;
         }
         return String.valueOf(superclass);
+    }
+
+    List<String> determineNestedSuperclass(TypeElement classElement, ExtendedMetadataFileItem result) {
+        List<String> nestedList = new ArrayList<>();
+
+        if (result.getSuperclass() != null) {
+            nestedList = result.getSuperclass();
+        }
+
+        TypeMirror supperclass = classElement.getSuperclass();
+        if (supperclass.getKind() != TypeKind.NONE) {
+            TypeElement supperClassElement = (TypeElement) environment.getTypeUtils().asElement(supperclass);
+            nestedList.add(supperClassElement.getQualifiedName().toString());
+            result.setSuperclass(nestedList);
+            determineNestedSuperclass(supperClassElement, result);
+        }
+        return nestedList;
     }
 
     List<TypeParameter> determineTypeParameters(TypeElement element) {

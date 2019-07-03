@@ -17,7 +17,8 @@ items:
   syntax:
     content: "public abstract class BasePartnerComponentString extends BasePartnerComponent<String>"
   inheritance:
-  - "com.microsoft.samples.BasePartnerComponent<java.lang.String>"
+  - "java.lang.Object"
+  - "com.microsoft.samples.BasePartnerComponent"
 - uid: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString(com.microsoft.samples.IPartner)"
   id: "BasePartnerComponentString(com.microsoft.samples.IPartner)"
   parent: "com.microsoft.samples.BasePartnerComponentString"

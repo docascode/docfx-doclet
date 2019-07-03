@@ -222,7 +222,7 @@ public class BaseLookupTest {
         assertThat("Wrong content", baseLookup.extractContent(element), is(lastBuiltItem.getContent()));
         assertThat("Wrong typeParameters", baseLookup.extractTypeParameters(element),
             is(lastBuiltItem.getTypeParameters()));
-        assertThat("Wrong superclass", baseLookup.extractSuperclass(element), is(lastBuiltItem.getSuperclassValue()));
+        assertThat("Wrong superclass", baseLookup.extractSuperclass(element), is(lastBuiltItem.getSuperclass()));
         assertThat("Wrong interfaces", baseLookup.extractInterfaces(element), is(lastBuiltItem.getInterfaces()));
         assertThat("Wrong tocName", baseLookup.extractTocName(element), is(lastBuiltItem.getTocName()));
         assertThat("Wrong references", baseLookup.extractReferences(element), is(lastBuiltItem.getReferences()));
@@ -248,7 +248,7 @@ public class BaseLookupTest {
         result.setType("Some type");
         result.setContent("Some content");
         result.setTypeParameters(Arrays.asList(new TypeParameter("type param id")));
-        result.setSuperclass("Some ");
+        result.setSuperclass(Arrays.asList("Some "));
         result.setInterfaces(Arrays.asList("Some interface"));
         result.setTocName("Some toc name");
         result.addReferences(Set.of(new MetadataFileItem("ref uid")));

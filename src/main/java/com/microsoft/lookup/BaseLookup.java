@@ -10,11 +10,8 @@ import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.lang.model.element.Element;
@@ -38,7 +35,7 @@ public abstract class BaseLookup<T extends Element> {
     }};
 
     protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
-    private final DocletEnvironment environment;
+    public final DocletEnvironment environment;
 
     protected BaseLookup(DocletEnvironment environment) {
         this.environment = environment;
@@ -131,8 +128,10 @@ public abstract class BaseLookup<T extends Element> {
         return resolve(key).getTypeParameters();
     }
 
-    public String extractSuperclass(T key) {
-        return resolve(key).getSuperclassValue();
+    public List<String> extractSuperclass(T key) {
+        List<String> sortedList = resolve(key).getSuperclass();
+        Collections.reverse(sortedList);
+        return sortedList;
     }
 
     public List<String> extractInterfaces(T key) {

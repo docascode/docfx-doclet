@@ -16,6 +16,8 @@ items:
   syntax:
     content: "public class CustomException extends Exception"
   inheritance:
+  - "java.lang.Object"
+  - "java.lang.Throwable"
   - "java.lang.Exception"
 - uid: "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
   id: "CustomException(java.lang.String)"
