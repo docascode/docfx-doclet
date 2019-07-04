@@ -439,9 +439,10 @@ public class YmlFilesBuilder {
     }
 
     List<String> replaceUidAndSplit(String uid) {
-        String retValue = RegExUtils.replaceAll(uid, "\\<", ",<,");
-        retValue = RegExUtils.replaceAll(retValue, "\\>", ",>,");
-        return Arrays.asList(StringUtils.split(retValue, ","));
+        String retValue= RegExUtils.replaceAll(uid,"\\<","//<//");
+        retValue = RegExUtils.replaceAll(retValue,"\\>","//>//");
+        retValue = RegExUtils.replaceAll(retValue,",","//,//");
+        return  Arrays.asList(StringUtils.split(retValue, "//"));
     }
 
     List<SpecViewModel> getJavaSpec(List<String> references) {
@@ -450,7 +451,7 @@ public class YmlFilesBuilder {
         Optional.ofNullable(references).ifPresent(
                 ref -> references.forEach(
                         uid -> {
-                            if (uid.equalsIgnoreCase("<") || uid.equalsIgnoreCase(">"))
+                            if(uid.equalsIgnoreCase("<") || uid.equalsIgnoreCase(">") || uid.equalsIgnoreCase(",") )
                                 specList.add(new SpecViewModel(null, uid));
                             else if (uid != "")
                                 specList.add(new SpecViewModel(uid, uid));
