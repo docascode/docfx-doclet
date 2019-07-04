@@ -35,7 +35,7 @@ public abstract class BaseLookup<T extends Element> {
     }};
 
     protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
-    public final DocletEnvironment environment;
+    protected final DocletEnvironment environment;
 
     protected BaseLookup(DocletEnvironment environment) {
         this.environment = environment;
@@ -129,9 +129,15 @@ public abstract class BaseLookup<T extends Element> {
     }
 
     public List<String> extractSuperclass(T key) {
-        List<String> sortedList = resolve(key).getSuperclass();
-        Collections.reverse(sortedList);
-        return sortedList;
+        List<String> reversed = resolve(key).getSuperclass();
+        Collections.reverse(reversed);
+        return reversed;
+    }
+
+    public List<String> extractInheritedMethods(T key) {
+        List<String> sorted = resolve(key).getInheritedMethods();
+        Collections.sort(sorted);
+        return sorted;
     }
 
     public List<String> extractInterfaces(T key) {

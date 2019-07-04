@@ -12,7 +12,7 @@ import org.apache.commons.lang3.RegExUtils;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
         "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
-        "spec.java"})
+        "spec.java", "inheritedMembers"})
 public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     private final String uid;
@@ -37,6 +37,8 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     private boolean isExternal;
     @JsonProperty("spec.java")
     private List<SpecViewModel> specForJava = new ArrayList<>();
+    @JsonProperty("inheritedMembers")
+    private List<String> inheritedMethods = new ArrayList<>();
 
     @Override
     public int compareTo(MetadataFileItem item) {
@@ -176,6 +178,14 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     public List<String> getInterfaces() {
         return interfaces;
+    }
+
+    public void setInheritedMethods(List<String> inheritedMethods) {
+        this.inheritedMethods = (inheritedMethods == null) ? null : inheritedMethods;
+    }
+
+    public List<String> getInheritedMethods() {
+        return inheritedMethods;
     }
 
     public List<SpecViewModel> getSpecForJava() {
