@@ -169,6 +169,7 @@ public class YmlFilesBuilder {
         classItem.setTypeParameters(classLookup.extractTypeParameters(classElement));
         classItem.setInheritance(classLookup.extractSuperclass(classElement));
         classItem.setInterfaces(classLookup.extractInterfaces(classElement));
+        classItem.setInheritedMethods(classLookup.extractInheritedMethods(classElement));
         classMetadataFile.getItems().add(classItem);
     }
 

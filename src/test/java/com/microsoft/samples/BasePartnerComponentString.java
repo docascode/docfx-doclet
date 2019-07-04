@@ -32,4 +32,8 @@ public abstract class BasePartnerComponentString
     {
         super( rootPartnerOperations, componentContext );
     }
+
+    @Override
+    protected void testInherited ()
+    {}
 }

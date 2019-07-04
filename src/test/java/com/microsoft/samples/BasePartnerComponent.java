@@ -54,4 +54,10 @@ public abstract class BasePartnerComponent<TContext>
     {
         context = value;
     }
+
+    protected void testBase()
+    {}
+
+    protected void testInherited()
+    {}
 }
