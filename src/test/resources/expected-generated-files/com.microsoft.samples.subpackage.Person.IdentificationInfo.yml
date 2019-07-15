@@ -4,8 +4,8 @@ items:
   id: "IdentificationInfo"
   parent: "com.microsoft.samples.subpackage"
   children:
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   langs:
   - "java"
   name: "Person.IdentificationInfo"
@@ -18,6 +18,18 @@ items:
     content: "public static class Person.IdentificationInfo"
   inheritance:
   - "java.lang.Object"
+  inheritedMembers:
+  - "java.lang.Object.clone()"
+  - "java.lang.Object.equals(java.lang.Object)"
+  - "java.lang.Object.finalize()"
+  - "java.lang.Object.getClass()"
+  - "java.lang.Object.hashCode()"
+  - "java.lang.Object.notify()"
+  - "java.lang.Object.notifyAll()"
+  - "java.lang.Object.toString()"
+  - "java.lang.Object.wait()"
+  - "java.lang.Object.wait(long)"
+  - "java.lang.Object.wait(long,int)"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   id: "IdentificationInfo()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
@@ -36,6 +48,7 @@ references:
   name: "IdentificationInfo"
   nameWithType: "Person.IdentificationInfo.IdentificationInfo"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo"
+  package: "com.microsoft.samples.subpackage"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
   name: "Person.IdentificationInfo.Gender"
   nameWithType: "Person.IdentificationInfo.Gender"

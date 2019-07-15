@@ -2,14 +2,18 @@ package com.microsoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.RegExUtils;
+
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
-    "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
-    "spec.java"})
-public class MetadataFileItem {
+        "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
+        "spec.java", "inheritedMembers"})
+public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     private final String uid;
     private String id;
@@ -31,6 +35,15 @@ public class MetadataFileItem {
     private List<String> interfaces;
     private List<ExceptionItem> exceptions;
     private boolean isExternal;
+    @JsonProperty("spec.java")
+    private List<SpecViewModel> specForJava = new ArrayList<>();
+    @JsonProperty("inheritedMembers")
+    private List<String> inheritedMethods = new ArrayList<>();
+
+    @Override
+    public int compareTo(MetadataFileItem item) {
+        return this.getUid().compareTo(item.getUid());
+    }
 
     public MetadataFileItem(String[] langs, String uid) {
         this(uid);
@@ -47,6 +60,11 @@ public class MetadataFileItem {
         this.nameWithType = name;
         this.fullName = uid;
         this.isExternal = isExternal;
+    }
+
+    public MetadataFileItem(String uid, List<SpecViewModel> specs) {
+        this(uid);
+        this.specForJava = specs;
     }
 
     public String getUid() {
@@ -70,6 +88,7 @@ public class MetadataFileItem {
     }
 
     public List<String> getChildren() {
+        Collections.sort(children);
         return children;
     }
 
@@ -114,7 +133,7 @@ public class MetadataFileItem {
     }
 
     public void setOverload(String overload) {
-        this.overload = overload;
+        this.overload = handleGenericForOverLoad(overload);
     }
 
     public String getType() {
@@ -153,12 +172,24 @@ public class MetadataFileItem {
         return inheritance;
     }
 
-    public void setInheritance(String superclass) {
-        this.inheritance = (superclass == null) ? null : Arrays.asList(superclass);
+    public void setInheritance(List<String> superclass) {
+        this.inheritance = (superclass == null) ? null : superclass;
     }
 
     public List<String> getInterfaces() {
         return interfaces;
+    }
+
+    public void setInheritedMethods(List<String> inheritedMethods) {
+        this.inheritedMethods = (inheritedMethods == null) ? null : inheritedMethods;
+    }
+
+    public List<String> getInheritedMethods() {
+        return inheritedMethods;
+    }
+
+    public List<SpecViewModel> getSpecForJava() {
+        return specForJava;
     }
 
     public void setInterfaces(List<String> interfaces) {
@@ -222,5 +253,9 @@ public class MetadataFileItem {
 
     public Boolean getIsExternal() {
         return isExternal ? true : null;
+    }
+
+    public String handleGenericForOverLoad(String value) {
+        return RegExUtils.removeAll(value, "<\\w+(,\\s*\\w+)*>");
     }
 }

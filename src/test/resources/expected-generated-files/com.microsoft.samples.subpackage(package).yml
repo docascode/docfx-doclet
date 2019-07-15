@@ -8,6 +8,7 @@ items:
   - "com.microsoft.samples.subpackage.Person"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo"
   - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  - "com.microsoft.samples.subpackage.Tuple"
   langs:
   - "java"
   name: "com.microsoft.samples.subpackage"
@@ -38,3 +39,7 @@ references:
   name: "Person.IdentificationInfo.Gender"
   nameWithType: "Person.IdentificationInfo.Gender"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+- uid: "com.microsoft.samples.subpackage.Tuple"
+  name: "Tuple<T1,T2>"
+  nameWithType: "Tuple<T1,T2>"
+  fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>"

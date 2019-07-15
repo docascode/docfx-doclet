@@ -1,0 +1,45 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.IPartner"
+  id: "IPartner"
+  parent: "com.microsoft.samples"
+  children:
+  - "com.microsoft.samples.IPartner.getCredentials()"
+  langs:
+  - "java"
+  name: "IPartner"
+  nameWithType: "IPartner"
+  fullName: "com.microsoft.samples.IPartner"
+  type: "Interface"
+  package: "com.microsoft.samples"
+  summary: "The main entry point into using the partner SDK functionality. Represents a partner and encapsulates all the behavior attached to partners. Use this interface to get to the partner's customers, profiles, and customer orders, profiles and subscriptions and more."
+  syntax:
+    content: "public interface IPartner"
+- uid: "com.microsoft.samples.IPartner.getCredentials()"
+  id: "getCredentials()"
+  parent: "com.microsoft.samples.IPartner"
+  langs:
+  - "java"
+  name: "getCredentials()"
+  nameWithType: "IPartner.getCredentials()"
+  fullName: "com.microsoft.samples.IPartner.getCredentials()"
+  overload: "com.microsoft.samples.IPartner.getCredentials*"
+  type: "Method"
+  package: "com.microsoft.samples"
+  summary: "Gets the partner credentials."
+  syntax:
+    content: "public abstract String getCredentials()"
+    return:
+      type: "java.lang.String"
+      description: "The partner credentials."
+references:
+- uid: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+- uid: "com.microsoft.samples.IPartner.getCredentials*"
+  name: "getCredentials"
+  nameWithType: "IPartner.getCredentials"
+  fullName: "com.microsoft.samples.IPartner.getCredentials"
+  package: "com.microsoft.samples"

@@ -20,9 +20,10 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     private Return returnValue;
     private String content;
     private List<TypeParameter> typeParameters;
-    private String superclass;
+    private List<String> superclass;
     private String tocName;
     private Set<MetadataFileItem> references = new LinkedHashSet<>();
+    private Integer nestedLevel;
 
     public ExtendedMetadataFileItem(String uid) {
         super(uid);
@@ -56,6 +57,10 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
         return parameters;
     }
 
+    public Integer getNestedLevel() {return nestedLevel;}
+
+    public void setNestedLevel(Integer level) {this.nestedLevel = level;}
+
     @Override
     public void setParameters(List<MethodParameter> parameters) {
         this.parameters = parameters;
@@ -88,11 +93,11 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
         this.typeParameters = typeParameters;
     }
 
-    public String getSuperclassValue() {
+    public List<String> getSuperclass() {
         return superclass;
     }
 
-    public void setSuperclass(String superclass) {
+    public void setSuperclass(List<String>  superclass) {
         this.superclass = superclass;
     }
 
