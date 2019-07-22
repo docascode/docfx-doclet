@@ -118,6 +118,13 @@ references:
   nameWithType: "Person.IdentificationInfo.Gender.Gender"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender"
   package: "com.microsoft.samples.subpackage"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]"
+  spec.java:
+  - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+    name: "Gender"
+    fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  - name: "[]"
+    fullName: "[]"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*"
   name: "values"
   nameWithType: "Person.IdentificationInfo.Gender.values"

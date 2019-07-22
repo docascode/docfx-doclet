@@ -10,6 +10,11 @@
     name: "IAgreementDetailsCollection"
   - uid: "com.microsoft.samples.agreements.ResourceCollection"
     name: "ResourceCollection"
+- uid: "com.microsoft.samples.offers"
+  name: "com.microsoft.samples.offers"
+  items:
+  - uid: "com.microsoft.samples.offers.Offer"
+    name: "Offer"
 - uid: "com.microsoft.samples"
   name: "com.microsoft.samples"
   items:

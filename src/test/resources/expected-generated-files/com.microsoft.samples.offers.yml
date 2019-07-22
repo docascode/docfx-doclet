@@ -1,0 +1,19 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.offers"
+  id: "offers"
+  children:
+  - "com.microsoft.samples.offers.Offer"
+  langs:
+  - "java"
+  name: "com.microsoft.samples.offers"
+  nameWithType: "com.microsoft.samples.offers"
+  fullName: "com.microsoft.samples.offers"
+  type: "Namespace"
+  syntax:
+    content: "package com.microsoft.samples.offers"
+references:
+- uid: "com.microsoft.samples.offers.Offer"
+  name: "Offer"
+  nameWithType: "Offer"
+  fullName: "com.microsoft.samples.offers.Offer"
