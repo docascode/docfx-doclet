@@ -82,9 +82,9 @@ public class ClassLookup extends BaseLookup<TypeElement> {
                     .collect(Collectors.toList()));
 
             addInterfacesToReferencesMap(interfaces, container);
-            addInheritedMethodsToReferencesMap(container);
-        }
 
+        }
+        addInheritedMethodsToReferencesMap(container);
         container.setContent(result);
     }
 
@@ -122,15 +122,15 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             nestedList = result.getSuperclass();
         }
 
-        TypeMirror supperclass = classElement.getSuperclass();
-        if (supperclass.getKind() != TypeKind.NONE) {
-            TypeElement supperClassElement = (TypeElement) environment.getTypeUtils().asElement(supperclass);
+        TypeMirror superclass = classElement.getSuperclass();
+        if (superclass.getKind() != TypeKind.NONE) {
+            TypeElement superClassElement = (TypeElement) environment.getTypeUtils().asElement(superclass);
 
-            nestedList.add(supperClassElement.getQualifiedName().toString());
+            nestedList.add(superClassElement.getQualifiedName().toString());
             result.setSuperclass(nestedList);
-            appendInheritedMethods(supperClassElement, inheritedMethods);
+            appendInheritedMethods(superClassElement, inheritedMethods);
 
-            determineNestedSuperclass(supperClassElement, result, inheritedMethods);
+            determineNestedSuperclass(superClassElement, result, inheritedMethods);
         }
         return nestedList;
     }
@@ -180,7 +180,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
                 String key = item.getName();
 
                 if (map.containsKey(key) && map.get(key).getNestedLevel() > item.getNestedLevel()) {
-                    // childclass will have smaller than supperclass, we only need the nearest methods inherited with same signature
+                    // child class will have smaller than superclass, we only need the nearest methods inherited with same signature
                     map.put(key, item);
                 } else if (!map.containsKey(key)) {
                     map.put(key, item);
