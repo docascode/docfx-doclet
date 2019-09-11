@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.RegExUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -79,16 +80,16 @@ public class YmlFilesBuilderTest {
     @Test
     public void buildRefItem() {
         buildRefItemAndCheckAssertions("java.lang.Some.String", "java.lang.Some.String", "String");
-        buildRefItemAndCheckAssertions("java.lang.Some.String[]", "java.lang.Some.String", "String");
+        buildRefItemAndCheckAssertions("java.lang.Some.String[]", "java.lang.Some.String[]", "String");
     }
 
     private void buildRefItemAndCheckAssertions(String initialValue, String expectedUid, String expectedName) {
         MetadataFileItem result = ymlFilesBuilder.buildRefItem(initialValue);
 
         assertThat("Wrong uid", result.getUid(), is(expectedUid));
-        assertThat("Wrong name", result.getSpecForJava().iterator().next().getUid(), is(expectedUid));
+        assertThat("Wrong name", result.getSpecForJava().iterator().next().getUid(), is(RegExUtils.removeAll(expectedUid, "\\[\\]$")));
         assertThat("Wrong name", result.getSpecForJava().iterator().next().getName(), is(expectedName));
-        assertThat("Wrong fullName", result.getSpecForJava().iterator().next().getFullName(), is(expectedUid));
+        assertThat("Wrong fullName", result.getSpecForJava().iterator().next().getFullName(), is(RegExUtils.removeAll(expectedUid, "\\[\\]$")));
     }
 
     @Test
