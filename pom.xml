@@ -153,7 +153,7 @@
     <repository>
       <id>sprin-libs-repo</id>
       <name>Spring Lib Release repository</name>
-      <url>http://repo.spring.io/libs-release</url>
+      <url>https://repo.spring.io/libs-release</url>
     </repository>
   </repositories>
 </project>
