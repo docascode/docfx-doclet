@@ -1,16 +1,18 @@
 package com.microsoft.util;
 
+import org.apache.commons.lang3.StringUtils;
+
+import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.ElementFilter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.ElementFilter;
-import org.apache.commons.lang3.StringUtils;
 
 public class ElementUtil {
 
@@ -48,5 +50,25 @@ public class ElementUtil {
             }
         }
         return false;
+    }
+
+    public static boolean isPackagePrivate(Element e) {
+        return !(isPublic(e) || isPrivate(e) || isProtected(e));
+    }
+
+    public static boolean isPrivate(Element e) {
+        return e.getModifiers().contains(Modifier.PRIVATE);
+    }
+
+    public static boolean isProtected(Element e) {
+        return e.getModifiers().contains(Modifier.PROTECTED);
+    }
+
+    public static boolean isPublic(Element e) {
+        return e.getModifiers().contains(Modifier.PUBLIC);
+    }
+
+    public static boolean isPrivateOrPackagePrivate(Element e) {
+        return isPrivate(e) || isPackagePrivate(e);
     }
 }

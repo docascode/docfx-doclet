@@ -1,8 +1,9 @@
 package com.microsoft.samples;
 
 import com.microsoft.samples.subpackage.Person;
-import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
 
 /**
  * Hero is the main entity we will be using to something
@@ -18,6 +19,7 @@ public class SuperHero extends Person implements Serializable, Cloneable {
     private String uniquePower;
     private int health;
     private int defense;
+    String hobby;
 
     public final String SOME_PUBLIC_STRING = "So important string value";
 
@@ -98,6 +100,7 @@ public class SuperHero extends Person implements Serializable, Cloneable {
         this.defense = defense;
     }
 
-    private void somePrivateMethod() {
-    }
+    private void somePrivateMethod() {}
+
+    void somePackagePrivateMethod() {}
 }

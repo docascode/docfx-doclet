@@ -1,24 +1,23 @@
 package com.microsoft.util;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import com.google.testing.compile.CompilationRule;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import javax.lang.model.element.Element;
+import javax.lang.model.util.Elements;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import javax.lang.model.element.Element;
-import javax.lang.model.util.Elements;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ElementUtilTest {
@@ -73,5 +72,29 @@ public class ElementUtilTest {
         assertTrue(elementUtil.matchAnyPattern(patterns, "UsualClass"));
         assertFalse(elementUtil.matchAnyPattern(patterns, "EngineFive"));
         assertFalse(elementUtil.matchAnyPattern(patterns, "com.ms.Awesome"));
+    }
+
+    @Test
+    public void isPackagePrivate() {
+        Element element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        List<Element> result = element.getEnclosedElements()
+                .stream().filter(e -> ElementUtil.isPackagePrivate(e)).collect(Collectors.toList());
+
+        assertThat("Wrong result list size", result.size(), is(2));
+        assertThat("Unexpected package private field", String.valueOf(result.get(0)), is("hobby"));
+        assertThat("Unexpected package private method", String.valueOf(result.get(1)), is("somePackagePrivateMethod()"));
+    }
+
+    @Test
+    public void isPrivateOrPackagePrivate() {
+        Element element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        List<Element> result = element.getEnclosedElements()
+                .stream().filter(e -> ElementUtil.isPrivateOrPackagePrivate(e)).collect(Collectors.toList());
+
+        assertThat("Wrong result list size", result.size(), is(7));
+        assertThat("Unexpected private method", String.valueOf(result.get(5)), is("somePrivateMethod()"));
+        assertThat("Unexpected package private method", String.valueOf(result.get(6)), is("somePackagePrivateMethod()"));
     }
 }
