@@ -3,19 +3,18 @@ package com.microsoft.lookup;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeKind;
-import javax.lang.model.type.TypeMirror;
-
+import com.microsoft.util.ElementUtil;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClassLookup extends BaseLookup<TypeElement> {
 
@@ -147,7 +146,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
                 .orElse(0);
 
         for (Element m : members) {
-            if (m.getKind() == ElementKind.METHOD && !m.getModifiers().contains(Modifier.PRIVATE)) {
+            if (m.getKind() == ElementKind.METHOD && !ElementUtil.isPrivateOrPackagePrivate(m)) {
                 String uid = element.getQualifiedName().toString().concat(".") + String.valueOf(m);
 
                 ExtendedMetadataFileItem item = new ExtendedMetadataFileItem(uid);
