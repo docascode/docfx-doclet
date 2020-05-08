@@ -27,6 +27,7 @@ public class YmlFilesBuilder {
     private final static String[] LANGS = {"java"};
     private final Pattern XREF_LINK_PATTERN = Pattern.compile("<xref uid=\".*?\" .*?>.*?</xref>");
     private final Pattern XREF_LINK_CONTENT_PATTERN = Pattern.compile("(?<=<xref uid=\").*?(?=\" .*?>.*?</xref>)");
+    private final Pattern XREF_LINK_RESOLVE_PATTERN = Pattern.compile("(?<class>\\w+)\\#(?<member>\\w+)(\\((?<param>.*)\\))?");
 
     private DocletEnvironment environment;
     private String outputPath;
@@ -375,25 +376,40 @@ public class YmlFilesBuilder {
             }
 
             String linkContent = linkContentMatcher.group();
-            String uid = resolveUidByLookup(linkContent, lookupContext);
+            String uid = resolveUidFromLinkContent(linkContent, lookupContext);
             String updatedLink = linkContentMatcher.replaceAll(uid);
             text = StringUtils.replace(text, link, updatedLink);
         }
         return text;
     }
 
-    String resolveUidByLookup(String linkContent, LookupContext lookupContext) {
+    /**
+     * The linkContent could be in following format
+     * #memeber
+     * Class#member
+     * Class#method()
+     * Class#method(params)
+     */
+    String resolveUidFromLinkContent(String linkContent, LookupContext lookupContext) {
         if (StringUtils.isBlank(linkContent)) {
             return "";
         }
 
         linkContent = linkContent.trim();
+
+        // complete class name for class internal link
         if (linkContent.startsWith("#")) {
             String firstKey = lookupContext.getOwnerUid();
             linkContent = firstKey + linkContent;
         }
+
+        // fuzzy resolve, target for items from project external references
+        String fuzzyResolvedUid = resolveUidFromReference(linkContent, lookupContext);
+
+        // exact resolve in lookupContext
         linkContent = linkContent.replace("#", ".");
-        return lookupContext.containsKey(linkContent) ? lookupContext.resolve(linkContent) : "";
+        String exactResolveUid = resolveUidByLookup(linkContent, lookupContext);
+        return exactResolveUid.isEmpty() ? fuzzyResolvedUid : exactResolveUid;
     }
 
     List<String> splitUidWithGenericsIntoClassNames(String uid) {
@@ -446,5 +462,36 @@ public class YmlFilesBuilder {
         );
 
         return specList;
+    }
+
+    /**
+     * this method is used to do fuzzy resolve
+     * "*" will be added at the end of uid for method for xerf service resolve purpose
+     */
+    String resolveUidFromReference(String linkContent, LookupContext lookupContext) {
+        String uid = "";
+        Matcher matcher = XREF_LINK_RESOLVE_PATTERN.matcher(linkContent);
+
+        if (matcher.find()) {
+            String className = matcher.group("class");
+            String memberName = matcher.group("member");
+            uid = resolveUidByLookup(className, lookupContext);
+            if (!uid.isEmpty()) {
+                uid = uid.concat(".").concat(memberName);
+
+                // linkContent targets a method
+                if (!StringUtils.isBlank(matcher.group(3))) {
+                    uid = uid.concat("*");
+                }
+            }
+        }
+        return uid;
+    }
+
+    String resolveUidByLookup(String signature, LookupContext lookupContext){
+        if (StringUtils.isBlank(signature) || lookupContext == null) {
+            return "";
+        }
+        return lookupContext.containsKey(signature) ? lookupContext.resolve(signature) : "";
     }
 }

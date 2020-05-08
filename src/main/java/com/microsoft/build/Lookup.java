@@ -4,6 +4,7 @@ import static org.apache.commons.lang3.RegExUtils.removeAll;
 import static org.apache.commons.lang3.RegExUtils.replaceAll;
 
 import com.microsoft.model.MetadataFile;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,6 +55,8 @@ public class Lookup {
              * Logic of {@link YmlFilesBuilder#resolveUidByLookup} based on this for case when @link starts from '#'
              */
             Map<String, String> map = new LinkedHashMap<>();
+            Map<String, String> specForJavaMap = new LinkedHashMap<>();
+
             file.getItems().forEach(item -> {
                 String uid = item.getUid();
                 String nameWithType = item.getNameWithType();
@@ -71,13 +74,26 @@ public class Lookup {
                 map.put(replaceAll(removeAll(uid, UID_PACKAGE_NAME_REGEXP), ",", ", "), uid);
                 map.put(replaceAll(removeAll(nameWithTypeWithoutGenerics, METHOD_PARAMS_REGEXP), ", ", ","), uid);
             });
+
             file.getReferences().forEach(item -> {
-                map.put(item.getNameWithType(), item.getUid());
                 map.put(item.getUid(), item.getUid());
+
+                // complex types are recorded in "specForJava" as arrayList of items, thus it has no "NameWithType"
+                // thus we need to get every reference item from specForJava, and add to localLookup
+                if (item.getNameWithType() == null || item.getNameWithType().isEmpty()) {
+                    item.getSpecForJava().forEach(spec -> {
+                        specForJavaMap.put(spec.getName(), spec.getUid());
+                        specForJavaMap.put(spec.getFullName(), spec.getUid());
+                    });
+                } else {
+                    map.put(item.getNameWithType(), item.getUid());
+                }
             });
 
-            localLookupByFileName.put(file.getFileNameWithPath(), map);
+            // to avoid conflict, the items from specForJava should only add to localLookup
             globalLookup.putAll(map);
+            map.putAll(specForJavaMap);
+            localLookupByFileName.put(file.getFileNameWithPath(), map);
         });
     }
 }

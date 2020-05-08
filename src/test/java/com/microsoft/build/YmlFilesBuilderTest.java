@@ -11,6 +11,7 @@ import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Syntax;
 import com.sun.source.util.DocTrees;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,6 +23,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.junit.Before;
@@ -113,29 +115,29 @@ public class YmlFilesBuilderTest {
         ymlFilesBuilder.populateUidValues(Collections.emptyList(), Arrays.asList(classMetadataFile));
 
         assertThat("Wrong summary for unknown class", item1.getSummary(),
-            is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla"));
+                is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla"));
         assertThat("Wrong syntax description", item1.getSyntax().getParameters().get(0).getDescription(),
-            is("One two <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> three"));
+                is("One two <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> three"));
         assertThat("Wrong summary for known class", item2.getSummary(),
-            is("Bla bla <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla"));
+                is("Bla bla <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla"));
         assertThat("Wrong summary for method", item3.getSummary(),
-            is("Bla bla <xref uid=\"a.b.OwnerClass.someMethod2(String p1, String p2)\" data-throw-if-not-resolved=\"false\">#someMethod2(String p1, String p2)</xref> bla"));
+                is("Bla bla <xref uid=\"a.b.OwnerClass.someMethod2(String p1, String p2)\" data-throw-if-not-resolved=\"false\">#someMethod2(String p1, String p2)</xref> bla"));
 
     }
 
     private MetadataFileItem buildMetadataFileItem(String uid, String value) {
         MetadataFileItem item = new MetadataFileItem(uid);
         item.setSummary(
-            String.format("Bla bla <xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref> bla", value, value));
+                String.format("Bla bla <xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref> bla", value, value));
         return item;
     }
 
     private void populateSyntax(MetadataFileItem item, String value) {
         Syntax syntax = new Syntax();
         String methodParamDescription = String
-            .format("One two <xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref> three", value, value);
+                .format("One two <xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref> three", value, value);
         syntax.setParameters(
-            Arrays.asList(new MethodParameter("method param id", "method param type", methodParamDescription)));
+                Arrays.asList(new MethodParameter("method param id", "method param type", methodParamDescription)));
         item.setSyntax(syntax);
     }
 
@@ -149,15 +151,15 @@ public class YmlFilesBuilderTest {
 
         LookupContext lookupContext = new LookupContext(lookup, lookup);
         assertThat("Wrong result for class", ymlFilesBuilder.
-            resolveUidByLookup("SomeClass", lookupContext), is("a.b.c.SomeClass"));
+                resolveUidByLookup("SomeClass", lookupContext), is("a.b.c.SomeClass"));
         assertThat("Wrong result for method", ymlFilesBuilder.
-            resolveUidByLookup("SomeClass#someMethod()", lookupContext), is("a.b.c.SomeClass.someMethod()"));
+                resolveUidFromLinkContent("SomeClass#someMethod()", lookupContext), is("a.b.c.SomeClass.someMethod()"));
         assertThat("Wrong result for method with param", ymlFilesBuilder.
-                resolveUidByLookup("SomeClass#someMethod(String param)", lookupContext),
-            is("a.b.c.SomeClass.someMethod(String param)"));
+                        resolveUidFromLinkContent("SomeClass#someMethod(String param)", lookupContext),
+                is("a.b.c.SomeClass.someMethod(String param)"));
 
         assertThat("Wrong result for unknown class", ymlFilesBuilder.
-            resolveUidByLookup("UnknownClass", lookupContext), is(""));
+                resolveUidByLookup("UnknownClass", lookupContext), is(""));
         assertThat("Wrong result for null", ymlFilesBuilder.resolveUidByLookup(null, lookupContext), is(""));
         assertThat("Wrong result for whitespace", ymlFilesBuilder.resolveUidByLookup(" ", lookupContext), is(""));
     }
@@ -181,7 +183,7 @@ public class YmlFilesBuilderTest {
 
         assertThat("Wrong references amount", references.size(), is(4));
         assertThat("Wrong references content",
-            references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList()),
-            hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T", "a.b.c.List<df.mn.ClassOne<tr.T>>"));
+                references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList()),
+                hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T", "a.b.c.List<df.mn.ClassOne<tr.T>>"));
     }
 }
