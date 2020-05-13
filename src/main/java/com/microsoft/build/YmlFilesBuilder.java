@@ -4,39 +4,22 @@ import com.microsoft.lookup.BaseLookup;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
-import com.microsoft.model.MetadataFile;
-import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.SpecViewModel;
-import com.microsoft.model.TocFile;
-import com.microsoft.model.TocItem;
+import com.microsoft.model.*;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import com.microsoft.util.YamlUtil;
+import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import javax.lang.model.element.*;
+import javax.lang.model.util.ElementFilter;
+import java.util.*;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.ElementFilter;
-
-import jdk.javadoc.doclet.DocletEnvironment;
-
-import org.apache.commons.lang3.RegExUtils;
-import org.apache.commons.lang3.StringUtils;
 
 
 public class YmlFilesBuilder {
@@ -44,6 +27,7 @@ public class YmlFilesBuilder {
     private final static String[] LANGS = {"java"};
     private final Pattern XREF_LINK_PATTERN = Pattern.compile("<xref uid=\".*?\" .*?>.*?</xref>");
     private final Pattern XREF_LINK_CONTENT_PATTERN = Pattern.compile("(?<=<xref uid=\").*?(?=\" .*?>.*?</xref>)");
+    private final Pattern XREF_LINK_RESOLVE_PATTERN = Pattern.compile("(?<class>\\w+)\\#(?<member>\\w+)(\\((?<param>.*)\\))?");
 
     private DocletEnvironment environment;
     private String outputPath;
@@ -182,7 +166,7 @@ public class YmlFilesBuilder {
 
     List<? extends Element> filterPrivateElements(List<? extends Element> elements) {
         return elements.stream()
-                .filter(element -> !element.getModifiers().contains(Modifier.PRIVATE)).collect(Collectors.toList());
+                .filter(element -> !ElementUtil.isPrivateOrPackagePrivate(element)).collect(Collectors.toList());
     }
 
     void collect(TypeElement classElement, List<String> children,
@@ -209,7 +193,7 @@ public class YmlFilesBuilder {
 
     void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
-                .filter(methodElement -> !methodElement.getModifiers().contains(Modifier.PRIVATE))
+                .filter(methodElement -> !ElementUtil.isPrivateOrPackagePrivate(methodElement))
                 .forEach(methodElement -> {
                     MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
                     methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
@@ -228,7 +212,7 @@ public class YmlFilesBuilder {
 
     void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.fieldsIn(classElement.getEnclosedElements()).stream()
-                .filter(fieldElement -> !fieldElement.getModifiers().contains(Modifier.PRIVATE))
+                .filter(fieldElement -> !ElementUtil.isPrivateOrPackagePrivate(fieldElement))
                 .forEach(fieldElement -> {
                     MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
                     fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
@@ -392,25 +376,40 @@ public class YmlFilesBuilder {
             }
 
             String linkContent = linkContentMatcher.group();
-            String uid = resolveUidByLookup(linkContent, lookupContext);
+            String uid = resolveUidFromLinkContent(linkContent, lookupContext);
             String updatedLink = linkContentMatcher.replaceAll(uid);
             text = StringUtils.replace(text, link, updatedLink);
         }
         return text;
     }
 
-    String resolveUidByLookup(String linkContent, LookupContext lookupContext) {
+    /**
+     * The linkContent could be in following format
+     * #memeber
+     * Class#member
+     * Class#method()
+     * Class#method(params)
+     */
+    String resolveUidFromLinkContent(String linkContent, LookupContext lookupContext) {
         if (StringUtils.isBlank(linkContent)) {
             return "";
         }
 
         linkContent = linkContent.trim();
+
+        // complete class name for class internal link
         if (linkContent.startsWith("#")) {
             String firstKey = lookupContext.getOwnerUid();
             linkContent = firstKey + linkContent;
         }
+
+        // fuzzy resolve, target for items from project external references
+        String fuzzyResolvedUid = resolveUidFromReference(linkContent, lookupContext);
+
+        // exact resolve in lookupContext
         linkContent = linkContent.replace("#", ".");
-        return lookupContext.containsKey(linkContent) ? lookupContext.resolve(linkContent) : "";
+        String exactResolveUid = resolveUidByLookup(linkContent, lookupContext);
+        return exactResolveUid.isEmpty() ? fuzzyResolvedUid : exactResolveUid;
     }
 
     List<String> splitUidWithGenericsIntoClassNames(String uid) {
@@ -463,5 +462,36 @@ public class YmlFilesBuilder {
         );
 
         return specList;
+    }
+
+    /**
+     * this method is used to do fuzzy resolve
+     * "*" will be added at the end of uid for method for xerf service resolve purpose
+     */
+    String resolveUidFromReference(String linkContent, LookupContext lookupContext) {
+        String uid = "";
+        Matcher matcher = XREF_LINK_RESOLVE_PATTERN.matcher(linkContent);
+
+        if (matcher.find()) {
+            String className = matcher.group("class");
+            String memberName = matcher.group("member");
+            uid = resolveUidByLookup(className, lookupContext);
+            if (!uid.isEmpty()) {
+                uid = uid.concat(".").concat(memberName);
+
+                // linkContent targets a method
+                if (!StringUtils.isBlank(matcher.group(3))) {
+                    uid = uid.concat("*");
+                }
+            }
+        }
+        return uid;
+    }
+
+    String resolveUidByLookup(String signature, LookupContext lookupContext){
+        if (StringUtils.isBlank(signature) || lookupContext == null) {
+            return "";
+        }
+        return lookupContext.containsKey(signature) ? lookupContext.resolve(signature) : "";
     }
 }
