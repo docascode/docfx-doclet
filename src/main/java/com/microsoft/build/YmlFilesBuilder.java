@@ -5,9 +5,8 @@ import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.*;
-import com.microsoft.util.ElementUtil;
-import com.microsoft.util.FileUtil;
-import com.microsoft.util.YamlUtil;
+import com.microsoft.util.*;
+
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -166,7 +165,7 @@ public class YmlFilesBuilder {
 
     List<? extends Element> filterPrivateElements(List<? extends Element> elements) {
         return elements.stream()
-                .filter(element -> !ElementUtil.isPrivateOrPackagePrivate(element)).collect(Collectors.toList());
+                .filter(element -> !Utils.isPrivateOrPackagePrivate(element)).collect(Collectors.toList());
     }
 
     void collect(TypeElement classElement, List<String> children,
@@ -193,7 +192,7 @@ public class YmlFilesBuilder {
 
     void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
-                .filter(methodElement -> !ElementUtil.isPrivateOrPackagePrivate(methodElement))
+                .filter(methodElement -> !Utils.isPrivateOrPackagePrivate(methodElement))
                 .forEach(methodElement -> {
                     MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
                     methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
@@ -212,7 +211,7 @@ public class YmlFilesBuilder {
 
     void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.fieldsIn(classElement.getEnclosedElements()).stream()
-                .filter(fieldElement -> !ElementUtil.isPrivateOrPackagePrivate(fieldElement))
+                .filter(fieldElement -> !Utils.isPrivateOrPackagePrivate(fieldElement))
                 .forEach(fieldElement -> {
                     MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
                     fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));

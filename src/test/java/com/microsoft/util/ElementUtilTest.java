@@ -31,8 +31,8 @@ public class ElementUtilTest {
     public void setup() {
         elements = rule.getElements();
         elementUtil = new ElementUtil(
-            new String[]{"samples\\.someexcludedpackage"},
-            new String[]{"com\\.microsoft\\..*SomeExcludedClass"});
+                new String[]{"samples\\.someexcludedpackage"},
+                new String[]{"com\\.microsoft\\..*SomeExcludedClass"});
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ElementUtilTest {
         }};
 
         List<String> result = elementUtil.extractPackageElements(elementsSet)
-            .stream().map(String::valueOf).collect(Collectors.toList());
+                .stream().map(String::valueOf).collect(Collectors.toList());
 
         assertThat("Wrong result list size", result.size(), is(2));
         assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples"));
@@ -55,46 +55,42 @@ public class ElementUtilTest {
     public void extractSortedElements() {
         Element element = elements.getPackageElement("com.microsoft.samples.subpackage");
 
-        List<String> result = elementUtil.extractSortedElements(element)
-            .stream().map(String::valueOf).collect(Collectors.toList());
+        List<String> allElements = element.getEnclosedElements()
+                .stream().map(String::valueOf).collect(Collectors.toList());
 
-        assertThat("Wrong result list size", result.size(), is(4));
-        assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples.subpackage.CustomException"));
-        assertThat("Unexpected second item", result.get(1), is("com.microsoft.samples.subpackage.Display"));
-        assertThat("Unexpected third item", result.get(2), is("com.microsoft.samples.subpackage.Person"));
+        String packagePrivateClass = searchString(allElements, "com.microsoft.samples.subpackage.InternalException");
+        String toExcludeClass = searchString(allElements, "com.microsoft.samples.subpackage.SomeExcludedClass");
+
+        // Ensure items to exclude exist.
+        assertThat("Wrong enclosed elements number", allElements.size(), is(6));
+        assertThat("Unexpected package private class", packagePrivateClass, is("com.microsoft.samples.subpackage.InternalException"));
+        assertThat("Unexpected to-exclude class", toExcludeClass, is("com.microsoft.samples.subpackage.SomeExcludedClass"));
+
+
+        List<String> extractedElements = elementUtil.extractSortedElements(element)
+                .stream().map(String::valueOf).collect(Collectors.toList());
+
+        // Actual test of filtered and sorted result
+        assertThat("Wrong extracted result list size", extractedElements.size(), is(4));
+        assertThat("Unexpected extracted first item", extractedElements.get(0), is("com.microsoft.samples.subpackage.CustomException"));
+        assertThat("Unexpected extracted second item", extractedElements.get(1), is("com.microsoft.samples.subpackage.Display"));
+        assertThat("Unexpected extracted third item", extractedElements.get(2), is("com.microsoft.samples.subpackage.Person"));
     }
 
     @Test
     public void matchAnyPattern() {
         HashSet<Pattern> patterns = new HashSet<>(
-            Arrays.asList(Pattern.compile("com\\.ms\\.Some.*"), Pattern.compile(".*UsualClass")));
+                Arrays.asList(Pattern.compile("com\\.ms\\.Some.*"), Pattern.compile(".*UsualClass")));
         assertTrue(elementUtil.matchAnyPattern(patterns, "com.ms.SomeStrangeClass"));
         assertTrue(elementUtil.matchAnyPattern(patterns, "UsualClass"));
         assertFalse(elementUtil.matchAnyPattern(patterns, "EngineFive"));
         assertFalse(elementUtil.matchAnyPattern(patterns, "com.ms.Awesome"));
     }
 
-    @Test
-    public void isPackagePrivate() {
-        Element element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
-        List<Element> result = element.getEnclosedElements()
-                .stream().filter(e -> ElementUtil.isPackagePrivate(e)).collect(Collectors.toList());
-
-        assertThat("Wrong result list size", result.size(), is(2));
-        assertThat("Unexpected package private field", String.valueOf(result.get(0)), is("hobby"));
-        assertThat("Unexpected package private method", String.valueOf(result.get(1)), is("somePackagePrivateMethod()"));
-    }
-
-    @Test
-    public void isPrivateOrPackagePrivate() {
-        Element element = elements.getTypeElement("com.microsoft.samples.SuperHero");
-
-        List<Element> result = element.getEnclosedElements()
-                .stream().filter(e -> ElementUtil.isPrivateOrPackagePrivate(e)).collect(Collectors.toList());
-
-        assertThat("Wrong result list size", result.size(), is(7));
-        assertThat("Unexpected private method", String.valueOf(result.get(5)), is("somePrivateMethod()"));
-        assertThat("Unexpected package private method", String.valueOf(result.get(6)), is("somePackagePrivateMethod()"));
+    private String searchString(List<String> list, String string) {
+        return list.stream()
+                .filter(item -> item.trim().equals(string))
+                .findFirst().orElse("");
     }
 }
