@@ -28,7 +28,10 @@ public class ElementUtil {
 
     public List<TypeElement> extractSortedElements(Element element) {
         // Need to apply sorting, because order of result items for Element.getEnclosedElements() depend on JDK implementation
+        // By default, exclude private and package-private items
+        // todo allow pass parameter for filter items by access modifiers
         return ElementFilter.typesIn(element.getEnclosedElements()).stream()
+            .filter(o -> !isPrivateOrPackagePrivate(o))
             .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
             .sorted((o1, o2) ->
                 StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))

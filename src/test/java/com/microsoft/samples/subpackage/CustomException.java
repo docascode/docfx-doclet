@@ -14,4 +14,8 @@ public class CustomException extends Exception {
     public void makeSomething() throws CustomException {
         throw new CustomException("It happened!");
     }
+
+    private class PrivateException {
+        private String message;
+    }
 }
