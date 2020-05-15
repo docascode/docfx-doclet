@@ -55,13 +55,23 @@ public class ElementUtilTest {
     public void extractSortedElements() {
         Element element = elements.getPackageElement("com.microsoft.samples.subpackage");
 
-        List<String> result = elementUtil.extractSortedElements(element)
+        List<String> allElements = element.getEnclosedElements()
+                .stream().map(String::valueOf).collect(Collectors.toList());
+
+        // Ensure items to exclude exist.
+        assertThat("Wrong enclosed elements number", allElements.size(), is(6));
+        assertTrue("Unexpected package private class", allElements.contains("com.microsoft.samples.subpackage.InternalException"));
+        assertTrue("Unexpected to-exclude class", allElements.contains("com.microsoft.samples.subpackage.SomeExcludedClass"));
+
+
+        List<String> extractedElements = elementUtil.extractSortedElements(element)
             .stream().map(String::valueOf).collect(Collectors.toList());
 
-        assertThat("Wrong result list size", result.size(), is(4));
-        assertThat("Unexpected first item", result.get(0), is("com.microsoft.samples.subpackage.CustomException"));
-        assertThat("Unexpected second item", result.get(1), is("com.microsoft.samples.subpackage.Display"));
-        assertThat("Unexpected third item", result.get(2), is("com.microsoft.samples.subpackage.Person"));
+        // Verify filtered and sorted result
+        assertThat("Wrong result list size", extractedElements.size(), is(4));
+        assertThat("Unexpected first item in the result list after invoke method extractSortedElements()", extractedElements.get(0), is("com.microsoft.samples.subpackage.CustomException"));
+        assertThat("Unexpected second item in the result list after invoke method extractSortedElements()", extractedElements.get(1), is("com.microsoft.samples.subpackage.Display"));
+        assertThat("Unexpected third item in the result list after invoke method extractSortedElements()", extractedElements.get(2), is("com.microsoft.samples.subpackage.Person"));
     }
 
     @Test
