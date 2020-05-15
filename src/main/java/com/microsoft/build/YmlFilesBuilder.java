@@ -286,7 +286,7 @@ public class YmlFilesBuilder {
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
-                ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
+                ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
                         .map(this::buildClassReference)
                         .collect(Collectors.toList()));
     }
