@@ -3,7 +3,6 @@ package com.microsoft.util;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
@@ -31,7 +30,7 @@ public class ElementUtil {
         // By default, exclude private and package-private items
         // todo allow pass parameter for filter items by access modifiers
         return ElementFilter.typesIn(element.getEnclosedElements()).stream()
-            .filter(o -> !isPrivateOrPackagePrivate(o))
+            .filter(o -> !Utils.isPrivateOrPackagePrivate(o))
             .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
             .sorted((o1, o2) ->
                 StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
@@ -53,25 +52,5 @@ public class ElementUtil {
             }
         }
         return false;
-    }
-
-    public static boolean isPackagePrivate(Element e) {
-        return !(isPublic(e) || isPrivate(e) || isProtected(e));
-    }
-
-    public static boolean isPrivate(Element e) {
-        return e.getModifiers().contains(Modifier.PRIVATE);
-    }
-
-    public static boolean isProtected(Element e) {
-        return e.getModifiers().contains(Modifier.PROTECTED);
-    }
-
-    public static boolean isPublic(Element e) {
-        return e.getModifiers().contains(Modifier.PUBLIC);
-    }
-
-    public static boolean isPrivateOrPackagePrivate(Element e) {
-        return isPrivate(e) || isPackagePrivate(e);
     }
 }
