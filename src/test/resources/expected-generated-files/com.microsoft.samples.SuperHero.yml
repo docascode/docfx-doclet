@@ -128,7 +128,7 @@ items:
   type: "Method"
   package: "com.microsoft.samples"
   syntax:
-    content: "public int getHealth()"
+    content: "protected int getHealth()"
     return:
       type: "int"
 - uid: "com.microsoft.samples.SuperHero.getHeroName()"
@@ -206,7 +206,7 @@ items:
   type: "Method"
   package: "com.microsoft.samples"
   syntax:
-    content: "public void setHealth(int health)"
+    content: "protected void setHealth(int health)"
     parameters:
     - id: "health"
       type: "int"
