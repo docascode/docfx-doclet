@@ -39,7 +39,7 @@ public class SuperHero extends Person implements Serializable, Cloneable {
      * </p>
      *
      * @param incomingDamage the amount of incoming damage for {@link SuperHero}
-     * @param damageType type of damage with similar word damageTypeLong, sure
+     * @param damageType     type of damage with similar word damageTypeLong, sure
      * @return the amount of health hero has after attack
      * @throws IllegalArgumentException when incomingDamage is negative and thanks for {@link Exception}
      * @version 1.2
@@ -84,11 +84,11 @@ public class SuperHero extends Person implements Serializable, Cloneable {
         this.uniquePower = uniquePower;
     }
 
-    public int getHealth() {
+    protected int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    protected void setHealth(int health) {
         this.health = health;
     }
 
@@ -100,7 +100,11 @@ public class SuperHero extends Person implements Serializable, Cloneable {
         this.defense = defense;
     }
 
-    private void somePrivateMethod() {}
+    private void setHobby(String hobby) {
+        this.hobby = hobby;
+    }
 
-    void somePackagePrivateMethod() {}
+    String getHobby() {
+        return hobby;
+    }
 }
