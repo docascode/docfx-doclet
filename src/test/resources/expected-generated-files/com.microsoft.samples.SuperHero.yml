@@ -155,6 +155,7 @@ items:
   nameWithType: "SuperHero.getLastName()"
   fullName: "com.microsoft.samples.SuperHero.getLastName()"
   overload: "com.microsoft.samples.SuperHero.getLastName*"
+  overridden: "com.microsoft.samples.subpackage.Person.getLastName()"
   type: "Method"
   package: "com.microsoft.samples"
   summary: "Get capitalized last name. But it's not the end, because of multiline comment"
