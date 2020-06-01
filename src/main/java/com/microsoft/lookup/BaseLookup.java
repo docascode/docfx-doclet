@@ -6,6 +6,7 @@ import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.model.TypeParameter;
+
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
@@ -14,9 +15,12 @@ import com.sun.source.doctree.LiteralTree;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+
 import jdk.javadoc.doclet.DocletEnvironment;
+
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -152,6 +156,10 @@ public abstract class BaseLookup<T extends Element> {
         return resolve(key).getReferences();
     }
 
+    public String extractOverridden(T key) {
+        return resolve(key).getOverridden();
+    }
+
     protected String determineType(T element) {
         return elementKindLookup.get(element.getKind());
     }
@@ -162,9 +170,9 @@ public abstract class BaseLookup<T extends Element> {
 
     protected String determineComment(T element) {
         return getDocCommentTree(element)
-            .map(DocCommentTree::getFullBody)
-            .map(this::replaceLinksAndCodes)
-            .orElse(null);
+                .map(DocCommentTree::getFullBody)
+                .map(this::replaceLinksAndCodes)
+                .orElse(null);
     }
 
     /**
@@ -175,19 +183,19 @@ public abstract class BaseLookup<T extends Element> {
      */
     String replaceLinksAndCodes(List<? extends DocTree> items) {
         return items.stream().map(
-            bodyItem -> {
-                switch (bodyItem.getKind()) {
-                    case LINK:
-                    case LINK_PLAIN:
-                        return buildXrefTag((LinkTree) bodyItem);
-                    case CODE:
-                        return buildCodeTag((LiteralTree) bodyItem);
-                    case LITERAL:
-                        return expandLiteralBody((LiteralTree) bodyItem);
-                    default:
-                        return String.valueOf(bodyItem);
+                bodyItem -> {
+                    switch (bodyItem.getKind()) {
+                        case LINK:
+                        case LINK_PLAIN:
+                            return buildXrefTag((LinkTree) bodyItem);
+                        case CODE:
+                            return buildCodeTag((LiteralTree) bodyItem);
+                        case LITERAL:
+                            return expandLiteralBody((LiteralTree) bodyItem);
+                        default:
+                            return String.valueOf(bodyItem);
+                    }
                 }
-            }
         ).collect(Collectors.joining());
     }
 
@@ -223,7 +231,7 @@ public abstract class BaseLookup<T extends Element> {
             return value;
         }
         return Stream.of(StringUtils.split(value, "<"))
-            .map(s -> RegExUtils.removeAll(s, "\\b[a-z0-9_.]+\\."))
-            .collect(Collectors.joining("<"));
+                .map(s -> RegExUtils.removeAll(s, "\\b[a-z0-9_.]+\\."))
+                .collect(Collectors.joining("<"));
     }
 }

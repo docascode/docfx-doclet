@@ -11,7 +11,7 @@ import java.util.List;
 import org.apache.commons.lang3.RegExUtils;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
-        "fullName", "overload", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
+        "fullName", "overload", "overridden", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
         "spec.java", "inheritedMembers"})
 public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
@@ -25,6 +25,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     private String nameWithType;
     private String fullName;
     private String overload;
+    private String overridden;
     private String type;
     @JsonProperty("package")
     private String packageName;
@@ -230,6 +231,14 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
             syntax = new Syntax();
         }
         syntax.setReturnValue(returnValue);
+    }
+
+    public void setOverridden(String overridden) {
+        this.overridden = overridden;
+    }
+
+    public String getOverridden() {
+        return overridden;
     }
 
     @Override

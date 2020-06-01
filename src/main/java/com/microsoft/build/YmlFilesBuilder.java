@@ -202,6 +202,7 @@ public class YmlFilesBuilder {
                     methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
                     methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
                     methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
+                    methodItem.setOverridden(classItemsLookup.extractOverridden(methodElement));
 
                     classMetadataFile.getItems().add(methodItem);
                     addExceptionReferences(methodItem, classMetadataFile);
@@ -489,7 +490,7 @@ public class YmlFilesBuilder {
         return uid;
     }
 
-    String resolveUidByLookup(String signature, LookupContext lookupContext){
+    String resolveUidByLookup(String signature, LookupContext lookupContext) {
         if (StringUtils.isBlank(signature) || lookupContext == null) {
             return "";
         }
