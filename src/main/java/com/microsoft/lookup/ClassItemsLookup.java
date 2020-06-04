@@ -1,17 +1,24 @@
 package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
+
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
+
+import com.microsoft.util.CommentHelper;
 import com.microsoft.util.Utils;
+
+import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.ParamTree;
 import com.sun.source.doctree.ReturnTree;
 import com.sun.source.doctree.ThrowsTree;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
 
@@ -64,6 +71,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             result.setReturn(extractReturn(exeElement));
             if (exeElement.getKind() == ElementKind.METHOD) {
                 result.setOverridden(extractOverriddenUid(utils.overriddenMethod(exeElement)));
+                result.setSummary(getInheritedInlineCommentString(exeElement));
             }
         }
         result.setNameWithType(String.format("%s.%s", classSNameWithGenericsSupport, result.getName()));
@@ -144,5 +152,47 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         }
 
         return "";
+    }
+
+    /**
+     * If the item being inherited from is declared from external compiled package,
+     * or is declared in the packages like java.lang.Object,
+     * comments may be not available as doclet resolves from byte code.
+     */
+    String getInheritedInlineCommentString(ExecutableElement exeElement) {
+        CommentHelper ch = getInheritedInlineTags(new CommentHelper(exeElement, utils));
+        // Remove unresolved "@inheritDoc" tag.
+        List<? extends DocTree> dctree = utils.removeBlockTag(ch.inlineTags, DocTree.Kind.INHERIT_DOC);
+        return replaceLinksAndCodes(dctree);
+    }
+
+    CommentHelper getInheritedInlineTags(CommentHelper input) {
+        CommentHelper output = input.copy();
+        if (!output.hasInheritDocTag()&& !output.isSimpleOverride()) {
+            return output;
+        }
+
+        CommentHelper inheritedSearchInput = input.copy();
+        ExecutableElement overriddenMethod = utils.overriddenMethod((ExecutableElement) input.element);
+
+        if (overriddenMethod != null) {
+            inheritedSearchInput.element = overriddenMethod;
+            CommentHelper ch = getInheritedInlineTags(inheritedSearchInput);
+            if (!ch.isSimpleOverride()) {
+                output = output.inherit(ch);
+            }
+        }
+
+        TypeElement encl = utils.getEnclosingTypeElement(input.element);
+        List<Element> implementedMethods = utils.getImplementedMethods(input.element.toString(), encl, new ArrayList<Element>());
+        for (Element implementedMethod : implementedMethods) {
+            inheritedSearchInput.element = implementedMethod;
+            CommentHelper ch = getInheritedInlineTags(inheritedSearchInput);
+            if (!ch.isSimpleOverride()) {
+                output = output.inherit(ch);
+            }
+        }
+
+        return output;
     }
 }

@@ -1,0 +1,72 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.commentinheritance.Carnivorous"
+  id: "Carnivorous"
+  parent: "com.microsoft.samples.commentinheritance"
+  children:
+  - "com.microsoft.samples.commentinheritance.Carnivorous.eat(com.microsoft.samples.commentinheritance.Animal)"
+  - "com.microsoft.samples.commentinheritance.Carnivorous.getKind()"
+  langs:
+  - "java"
+  name: "Carnivorous"
+  nameWithType: "Carnivorous"
+  fullName: "com.microsoft.samples.commentinheritance.Carnivorous"
+  type: "Interface"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Marks an Animal that eats other animals."
+  syntax:
+    content: "public interface Carnivorous"
+- uid: "com.microsoft.samples.commentinheritance.Carnivorous.eat(com.microsoft.samples.commentinheritance.Animal)"
+  id: "eat(com.microsoft.samples.commentinheritance.Animal)"
+  parent: "com.microsoft.samples.commentinheritance.Carnivorous"
+  langs:
+  - "java"
+  name: "eat(Animal animalBeingEaten)"
+  nameWithType: "Carnivorous.eat(Animal animalBeingEaten)"
+  fullName: "com.microsoft.samples.commentinheritance.Carnivorous.eat(Animal animalBeingEaten)"
+  overload: "com.microsoft.samples.commentinheritance.Carnivorous.eat*"
+  type: "Method"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Eat the provided animal."
+  syntax:
+    content: "public abstract void eat(Animal animalBeingEaten)"
+    parameters:
+    - id: "animalBeingEaten"
+      type: "com.microsoft.samples.commentinheritance.Animal"
+      description: "Animal that will be eaten."
+- uid: "com.microsoft.samples.commentinheritance.Carnivorous.getKind()"
+  id: "getKind()"
+  parent: "com.microsoft.samples.commentinheritance.Carnivorous"
+  langs:
+  - "java"
+  name: "getKind()"
+  nameWithType: "Carnivorous.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Carnivorous.getKind()"
+  overload: "com.microsoft.samples.commentinheritance.Carnivorous.getKind*"
+  type: "Method"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Get kind from Carnivorous."
+  syntax:
+    content: "public abstract String getKind()"
+    return:
+      type: "java.lang.String"
+references:
+- uid: "com.microsoft.samples.commentinheritance.Animal"
+  name: "Animal"
+  nameWithType: "Animal"
+  fullName: "com.microsoft.samples.commentinheritance.Animal"
+- uid: "com.microsoft.samples.commentinheritance.Carnivorous.eat*"
+  name: "eat"
+  nameWithType: "Carnivorous.eat"
+  fullName: "com.microsoft.samples.commentinheritance.Carnivorous.eat"
+  package: "com.microsoft.samples.commentinheritance"
+- uid: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+- uid: "com.microsoft.samples.commentinheritance.Carnivorous.getKind*"
+  name: "getKind"
+  nameWithType: "Carnivorous.getKind"
+  fullName: "com.microsoft.samples.commentinheritance.Carnivorous.getKind"
+  package: "com.microsoft.samples.commentinheritance"

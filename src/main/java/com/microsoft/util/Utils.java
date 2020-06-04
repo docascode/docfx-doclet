@@ -10,10 +10,7 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleElementVisitor9;
 import javax.lang.model.util.Types;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -75,6 +72,21 @@ public class Utils {
         List<? extends DocTree> fullBody = getFullBody(m);
         return fullBody.isEmpty() ||
                 (fullBody.size() == 1 && fullBody.get(0).getKind().equals(DocTree.Kind.INHERIT_DOC));
+    }
+
+    public boolean hasInlineTag(List<? extends DocTree> inlineTags, DocTree.Kind kind) {
+        for (DocTree dt : inlineTags) {
+            if (dt.getKind() == kind) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Element getMemberBySignature(TypeElement te, ElementKind kind, String signature) {
+        return getMembers(te, kind).stream()
+                .filter(e -> e.toString().equals(signature))
+                .findFirst().orElse(null);
     }
 
     public TypeElement getObjectType() {
@@ -193,6 +205,12 @@ public class Utils {
         return getBlockTags0(element, (DocTree.Kind[]) null);
     }
 
+    public List<? extends DocTree> removeBlockTag(List<? extends DocTree> dctree, DocTree.Kind kind) {
+        return dctree.stream()
+                .filter(dc -> !dc.getKind().equals(kind))
+                .collect(Collectors.toList());
+    }
+
     /**
      * Returns a list of visible enclosed members of given kind,
      * declared in this type element, and does not include
@@ -203,6 +221,41 @@ public class Utils {
     public List<? extends Element> getMembers(TypeElement te, ElementKind kind) {
         return te.getEnclosedElements().stream()
                 .filter(e -> e.getKind() == kind && !isPrivateOrPackagePrivate(e))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns a list of methods being implemented by given method.
+     * When a method in an interface overrides a method its superinterface,
+     * it will be considered as "implemented", instead of "overridden".
+     *
+     * @return a list of implemented methods
+     */
+    public List<Element> getImplementedMethods(String signature, TypeElement encl, List<Element> implementedMethods) {
+        if (encl == null) {
+            return implementedMethods;
+        }
+
+        for (TypeElement interfaceType : getImplementedInterfaces(encl)) {
+            Element implementedMethod = getMemberBySignature(interfaceType, ElementKind.METHOD, signature);
+            if (implementedMethod != null) {
+                implementedMethods.add(implementedMethod);
+            }
+            // We need to search every implemented interface of the Inheritance chain.
+            getImplementedMethods(signature, interfaceType, implementedMethods);
+        }
+        return implementedMethods;
+    }
+
+    /**
+     * Returns a list of implemented interface type elements of given type element.
+     * Follow Standard doclet, search in the order of appearance following the word implements in declaration.
+     *
+     * @return a list of implemented interfaces
+     */
+    public List<TypeElement> getImplementedInterfaces(TypeElement element) {
+        return element.getInterfaces().stream()
+                .map(e -> asTypeElement(e))
                 .collect(Collectors.toList());
     }
 }

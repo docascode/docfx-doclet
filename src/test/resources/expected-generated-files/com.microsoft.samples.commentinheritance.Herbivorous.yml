@@ -1,0 +1,73 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.commentinheritance.Herbivorous"
+  id: "Herbivorous"
+  parent: "com.microsoft.samples.commentinheritance"
+  children:
+  - "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+  - "com.microsoft.samples.commentinheritance.Herbivorous.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
+  - "com.microsoft.samples.commentinheritance.Herbivorous.getKind()"
+  langs:
+  - "java"
+  name: "Herbivorous"
+  nameWithType: "Herbivorous"
+  fullName: "com.microsoft.samples.commentinheritance.Herbivorous"
+  type: "Interface"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Marks animals that eat plants."
+  syntax:
+    content: "public interface Herbivorous"
+- uid: "com.microsoft.samples.commentinheritance.Herbivorous.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
+  id: "eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
+  parent: "com.microsoft.samples.commentinheritance.Herbivorous"
+  langs:
+  - "java"
+  name: "eat(Herbivorous.Plant plantToBeEaten)"
+  nameWithType: "Herbivorous.eat(Herbivorous.Plant plantToBeEaten)"
+  fullName: "com.microsoft.samples.commentinheritance.Herbivorous.eat(Herbivorous.Plant plantToBeEaten)"
+  overload: "com.microsoft.samples.commentinheritance.Herbivorous.eat*"
+  type: "Method"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Eat the provided plant."
+  syntax:
+    content: "public abstract void eat(Herbivorous.Plant plantToBeEaten)"
+    parameters:
+    - id: "plantToBeEaten"
+      type: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+      description: "Plant that will be eaten."
+- uid: "com.microsoft.samples.commentinheritance.Herbivorous.getKind()"
+  id: "getKind()"
+  parent: "com.microsoft.samples.commentinheritance.Herbivorous"
+  langs:
+  - "java"
+  name: "getKind()"
+  nameWithType: "Herbivorous.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Herbivorous.getKind()"
+  overload: "com.microsoft.samples.commentinheritance.Herbivorous.getKind*"
+  type: "Method"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Get kind from Herbivorous."
+  syntax:
+    content: "public abstract String getKind()"
+    return:
+      type: "java.lang.String"
+references:
+- uid: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+  name: "Herbivorous.Plant"
+  nameWithType: "Herbivorous.Plant"
+  fullName: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+- uid: "com.microsoft.samples.commentinheritance.Herbivorous.eat*"
+  name: "eat"
+  nameWithType: "Herbivorous.eat"
+  fullName: "com.microsoft.samples.commentinheritance.Herbivorous.eat"
+  package: "com.microsoft.samples.commentinheritance"
+- uid: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+- uid: "com.microsoft.samples.commentinheritance.Herbivorous.getKind*"
+  name: "getKind"
+  nameWithType: "Herbivorous.getKind"
+  fullName: "com.microsoft.samples.commentinheritance.Herbivorous.getKind"
+  package: "com.microsoft.samples.commentinheritance"
