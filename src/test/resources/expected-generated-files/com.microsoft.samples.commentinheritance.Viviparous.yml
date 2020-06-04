@@ -1,0 +1,71 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.commentinheritance.Viviparous"
+  id: "Viviparous"
+  parent: "com.microsoft.samples.commentinheritance"
+  children:
+  - "com.microsoft.samples.commentinheritance.Viviparous.getKind()"
+  - "com.microsoft.samples.commentinheritance.Viviparous.giveBirth(int)"
+  langs:
+  - "java"
+  name: "Viviparous"
+  nameWithType: "Viviparous"
+  fullName: "com.microsoft.samples.commentinheritance.Viviparous"
+  type: "Interface"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Mammals that give birth to young that develop within the mother's body."
+  syntax:
+    content: "public interface Viviparous"
+- uid: "com.microsoft.samples.commentinheritance.Viviparous.getKind()"
+  id: "getKind()"
+  parent: "com.microsoft.samples.commentinheritance.Viviparous"
+  langs:
+  - "java"
+  name: "getKind()"
+  nameWithType: "Viviparous.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Viviparous.getKind()"
+  overload: "com.microsoft.samples.commentinheritance.Viviparous.getKind*"
+  type: "Method"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Get kind from Viviparous."
+  syntax:
+    content: "public abstract String getKind()"
+    return:
+      type: "java.lang.String"
+- uid: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth(int)"
+  id: "giveBirth(int)"
+  parent: "com.microsoft.samples.commentinheritance.Viviparous"
+  langs:
+  - "java"
+  name: "giveBirth(int numberOfOffspring)"
+  nameWithType: "Viviparous.giveBirth(int numberOfOffspring)"
+  fullName: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth(int numberOfOffspring)"
+  overload: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth*"
+  type: "Method"
+  package: "com.microsoft.samples.commentinheritance"
+  syntax:
+    content: "public abstract void giveBirth(int numberOfOffspring)"
+    parameters:
+    - id: "numberOfOffspring"
+      type: "int"
+references:
+- uid: "int"
+  spec.java:
+  - uid: "int"
+    name: "int"
+    fullName: "int"
+- uid: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth*"
+  name: "giveBirth"
+  nameWithType: "Viviparous.giveBirth"
+  fullName: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth"
+  package: "com.microsoft.samples.commentinheritance"
+- uid: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+- uid: "com.microsoft.samples.commentinheritance.Viviparous.getKind*"
+  name: "getKind"
+  nameWithType: "Viviparous.getKind"
+  fullName: "com.microsoft.samples.commentinheritance.Viviparous.getKind"
+  package: "com.microsoft.samples.commentinheritance"
