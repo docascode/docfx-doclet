@@ -4,6 +4,7 @@ import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
 import com.microsoft.util.Utils;
+
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -148,7 +149,6 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         for (Element m : members) {
             if (m.getKind() == ElementKind.METHOD && !Utils.isPrivateOrPackagePrivate(m)) {
                 String uid = element.getQualifiedName().toString().concat(".") + String.valueOf(m);
-
                 ExtendedMetadataFileItem item = new ExtendedMetadataFileItem(uid);
                 item.setName(String.valueOf(m));
                 item.setNestedLevel(level + 1);

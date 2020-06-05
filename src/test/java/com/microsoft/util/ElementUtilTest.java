@@ -83,4 +83,28 @@ public class ElementUtilTest {
         assertFalse(elementUtil.matchAnyPattern(patterns, "EngineFive"));
         assertFalse(elementUtil.matchAnyPattern(patterns, "com.ms.Awesome"));
     }
+
+    @Test
+    public void isPackagePrivate() {
+        Element element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        List<Element> result = element.getEnclosedElements()
+                .stream().filter(e -> ElementUtil.isPackagePrivate(e)).collect(Collectors.toList());
+
+        assertThat("Wrong result list size", result.size(), is(2));
+        assertThat("Unexpected package private field", String.valueOf(result.get(0)), is("hobby"));
+        assertThat("Unexpected package private method", String.valueOf(result.get(1)), is("somePackagePrivateMethod()"));
+    }
+
+    @Test
+    public void isPrivateOrPackagePrivate() {
+        Element element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+
+        List<Element> result = element.getEnclosedElements()
+                .stream().filter(e -> ElementUtil.isPrivateOrPackagePrivate(e)).collect(Collectors.toList());
+
+        assertThat("Wrong result list size", result.size(), is(7));
+        assertThat("Unexpected private method", String.valueOf(result.get(5)), is("somePrivateMethod()"));
+        assertThat("Unexpected package private method", String.valueOf(result.get(6)), is("somePackagePrivateMethod()"));
+    }
 }
