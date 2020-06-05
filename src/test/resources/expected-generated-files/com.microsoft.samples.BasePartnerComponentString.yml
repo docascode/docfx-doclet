@@ -82,6 +82,7 @@ items:
   nameWithType: "BasePartnerComponentString.testInherited()"
   fullName: "com.microsoft.samples.BasePartnerComponentString.testInherited()"
   overload: "com.microsoft.samples.BasePartnerComponentString.testInherited*"
+  overridden: "com.microsoft.samples.BasePartnerComponent.testInherited()"
   type: "Method"
   package: "com.microsoft.samples"
   syntax:

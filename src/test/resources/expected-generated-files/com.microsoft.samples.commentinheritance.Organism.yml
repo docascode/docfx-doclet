@@ -1,0 +1,43 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.commentinheritance.Organism"
+  id: "Organism"
+  parent: "com.microsoft.samples.commentinheritance"
+  children:
+  - "com.microsoft.samples.commentinheritance.Organism.getKind()"
+  langs:
+  - "java"
+  name: "Organism"
+  nameWithType: "Organism"
+  fullName: "com.microsoft.samples.commentinheritance.Organism"
+  type: "Interface"
+  package: "com.microsoft.samples.commentinheritance"
+  syntax:
+    content: "public interface Organism"
+- uid: "com.microsoft.samples.commentinheritance.Organism.getKind()"
+  id: "getKind()"
+  parent: "com.microsoft.samples.commentinheritance.Organism"
+  langs:
+  - "java"
+  name: "getKind()"
+  nameWithType: "Organism.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Organism.getKind()"
+  overload: "com.microsoft.samples.commentinheritance.Organism.getKind*"
+  type: "Method"
+  package: "com.microsoft.samples.commentinheritance"
+  summary: "Get kind from Organism."
+  syntax:
+    content: "public abstract String getKind()"
+    return:
+      type: "java.lang.String"
+references:
+- uid: "java.lang.String"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+- uid: "com.microsoft.samples.commentinheritance.Organism.getKind*"
+  name: "getKind"
+  nameWithType: "Organism.getKind"
+  fullName: "com.microsoft.samples.commentinheritance.Organism.getKind"
+  package: "com.microsoft.samples.commentinheritance"

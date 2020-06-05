@@ -7,6 +7,7 @@ import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.*;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
+import com.microsoft.util.Utils;
 import com.microsoft.util.YamlUtil;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
@@ -166,7 +167,7 @@ public class YmlFilesBuilder {
 
     List<? extends Element> filterPrivateElements(List<? extends Element> elements) {
         return elements.stream()
-                .filter(element -> !ElementUtil.isPrivateOrPackagePrivate(element)).collect(Collectors.toList());
+                .filter(element -> !Utils.isPrivateOrPackagePrivate(element)).collect(Collectors.toList());
     }
 
     void collect(TypeElement classElement, List<String> children,
@@ -193,7 +194,7 @@ public class YmlFilesBuilder {
 
     void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
-                .filter(methodElement -> !ElementUtil.isPrivateOrPackagePrivate(methodElement))
+                .filter(methodElement -> !Utils.isPrivateOrPackagePrivate(methodElement))
                 .forEach(methodElement -> {
                     MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
                     methodItem.setOverload(classItemsLookup.extractOverload(methodElement));
@@ -201,6 +202,7 @@ public class YmlFilesBuilder {
                     methodItem.setExceptions(classItemsLookup.extractExceptions(methodElement));
                     methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
                     methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
+                    methodItem.setOverridden(classItemsLookup.extractOverridden(methodElement));
 
                     classMetadataFile.getItems().add(methodItem);
                     addExceptionReferences(methodItem, classMetadataFile);
@@ -212,7 +214,7 @@ public class YmlFilesBuilder {
 
     void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         ElementFilter.fieldsIn(classElement.getEnclosedElements()).stream()
-                .filter(fieldElement -> !ElementUtil.isPrivateOrPackagePrivate(fieldElement))
+                .filter(fieldElement -> !Utils.isPrivateOrPackagePrivate(fieldElement))
                 .forEach(fieldElement -> {
                     MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
                     fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
@@ -286,7 +288,7 @@ public class YmlFilesBuilder {
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
-                ElementFilter.typesIn(classElement.getEnclosedElements()).stream()
+                ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
                         .map(this::buildClassReference)
                         .collect(Collectors.toList()));
     }
@@ -488,7 +490,7 @@ public class YmlFilesBuilder {
         return uid;
     }
 
-    String resolveUidByLookup(String signature, LookupContext lookupContext){
+    String resolveUidByLookup(String signature, LookupContext lookupContext) {
         if (StringUtils.isBlank(signature) || lookupContext == null) {
             return "";
         }
