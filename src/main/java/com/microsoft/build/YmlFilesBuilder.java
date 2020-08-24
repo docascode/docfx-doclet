@@ -105,12 +105,12 @@ public class YmlFilesBuilder {
         return packageMetadataFile;
     }
 
-    void addChildrenReferences(Element element, List<String> packageChildren,
+    void addChildrenReferences(Element element, List<MetadataFileItem> packageChildren,
                                Set<MetadataFileItem> referencesCollector) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             referencesCollector.add(buildClassReference(classElement));
 
-            packageChildren.add(classLookup.extractUid(classElement));
+            packageChildren.add(classLookup.extractItem(classElement));
             addChildrenReferences(classElement, packageChildren, referencesCollector);
         }
     }
@@ -158,11 +158,11 @@ public class YmlFilesBuilder {
         classMetadataFile.getItems().add(classItem);
     }
 
-    void addChildren(TypeElement classElement, List<String> children) {
-        collect(classElement, children, ElementFilter::constructorsIn, classItemsLookup::extractUid);
-        collect(classElement, children, ElementFilter::methodsIn, classItemsLookup::extractUid);
-        collect(classElement, children, ElementFilter::fieldsIn, classItemsLookup::extractUid);
-        collect(classElement, children, ElementFilter::typesIn, String::valueOf);
+    void addChildren(TypeElement classElement, List<MetadataFileItem> children) {
+        collect(classElement, children, ElementFilter::constructorsIn, classItemsLookup::extractItem);
+        collect(classElement, children, ElementFilter::methodsIn, classItemsLookup::extractItem);
+        collect(classElement, children, ElementFilter::fieldsIn, classItemsLookup::extractItem);
+        collect(classElement, children, ElementFilter::typesIn, classItemsLookup::extractItem);
     }
 
     List<? extends Element> filterPrivateElements(List<? extends Element> elements) {
@@ -170,9 +170,9 @@ public class YmlFilesBuilder {
                 .filter(element -> !Utils.isPrivateOrPackagePrivate(element)).collect(Collectors.toList());
     }
 
-    void collect(TypeElement classElement, List<String> children,
+    void collect(TypeElement classElement, List<MetadataFileItem> children,
                  Function<Iterable<? extends Element>, List<? extends Element>> selectFunc,
-                 Function<? super Element, String> mapFunc) {
+                 Function<? super Element, MetadataFileItem> mapFunc) {
 
         List<? extends Element> elements = selectFunc.apply(classElement.getEnclosedElements());
         children.addAll(filterPrivateElements(elements).stream()

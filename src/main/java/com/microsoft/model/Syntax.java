@@ -10,7 +10,7 @@ public class Syntax {
     private List<MethodParameter> parameters;
     @JsonProperty("return")
     private Return returnValue;
-    private List<TypeParameter> typeParameters;
+    private List<TypeParameter> typeParameters  = new ArrayList<>();
 
     public String getContent() {
         return content;

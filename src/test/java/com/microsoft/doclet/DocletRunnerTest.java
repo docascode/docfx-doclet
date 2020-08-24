@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.apache.commons.io.output.TeeOutputStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +32,11 @@ public class DocletRunnerTest {
     public void cleanup() throws IOException {
         FileUtilTest.deleteDirectory(OUTPUT_DIR);
 
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
+        TeeOutputStream err =new TeeOutputStream(System.out, errContent);
+        TeeOutputStream info =new TeeOutputStream(System.out, outContent);
+
+        System.setOut(new PrintStream(info));
+        System.setErr(new PrintStream(err));
     }
 
     @After
