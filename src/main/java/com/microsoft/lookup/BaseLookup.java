@@ -45,6 +45,10 @@ public abstract class BaseLookup<T extends Element> {
         this.environment = environment;
     }
 
+    public ExtendedMetadataFileItem extractItem(T key) {
+        return resolve(key);
+    }
+
     protected ExtendedMetadataFileItem resolve(T key) {
         ExtendedMetadataFileItem value = map.get(key);
         if (value == null) {

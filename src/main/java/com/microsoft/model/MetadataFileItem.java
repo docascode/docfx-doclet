@@ -18,12 +18,13 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     private final String uid;
     private String id;
     private String parent;
-    private List<String> children = new ArrayList<>();
+    private List<MetadataFileItem> children = new ArrayList<>();
     private String href;
     private String[] langs;
     private String name;
     private String nameWithType;
     private String fullName;
+    private Field field;
     private String overload;
     private String overridden;
     private String type;
@@ -31,10 +32,10 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     private String packageName;
     private String summary;
     private Syntax syntax;
-    private List<String> inheritance;
+    private List<String> inheritance  = new ArrayList<>();
     @JsonProperty("implements")
-    private List<String> interfaces;
-    private List<ExceptionItem> exceptions;
+    private List<String> interfaces  = new ArrayList<>();
+    private List<ExceptionItem> exceptions  = new ArrayList<>();
     private boolean isExternal;
     @JsonProperty("spec.java")
     private List<SpecViewModel> specForJava = new ArrayList<>();
@@ -88,7 +89,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         this.parent = parent;
     }
 
-    public List<String> getChildren() {
+    public List<MetadataFileItem> getChildren() {
         Collections.sort(children);
         return children;
     }
@@ -138,7 +139,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     }
 
     public String getType() {
-        return type;
+        return type.toLowerCase();
     }
 
     public void setType(String type) {
@@ -237,8 +238,20 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         this.overridden = overridden;
     }
 
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
     public String getOverridden() {
         return overridden;
+    }
+
+    public String getShortName(){
+        return name.replaceAll("\\(.*\\)", "");
     }
 
     @Override
