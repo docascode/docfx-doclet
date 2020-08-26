@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.*;
-import com.microsoft.model.Field;
 
 public class ExecutableModel extends BaseModel implements Comparable<ExecutableModel> {
 
@@ -26,7 +25,7 @@ public class ExecutableModel extends BaseModel implements Comparable<ExecutableM
     //<editor-fold desc="Constructor">
     public ExecutableModel(MetadataFileItem item) {
         super(item.getUid(), item.getName(), item.getFullName(), item.getNameWithType());
-        this.overridden = item.getOverridden() == null ? null : item.getOverridden();
+        this.overridden = item.getOverridden();
         this.syntax = ((ExtendedMetadataFileItem) item).getSyntaxContent();
         if (item.getType().toLowerCase().equals("field")) {
             this.field = item.getField();

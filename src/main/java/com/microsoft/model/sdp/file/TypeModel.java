@@ -52,9 +52,12 @@ public class TypeModel extends TypeBaseModel implements YmlFile {
                 type -> this.getInheritances().add(XrefHelper.generateXrefString(type, XrefHelper.XrefOption.DEFAULT)));
 
         this.getInheritedMembers().addAll(item.getInheritedMethods());
-        this.setSyntax(item.getSyntax().getContent());
-        this.getTypeParameters().addAll(item.getSyntax().getTypeParameters());
         this.setType(item.getType());
+
+        if (item.getSyntax() != null) {
+            this.setSyntax(item.getSyntax().getContent());
+            this.getTypeParameters().addAll(item.getSyntax().getTypeParameters());
+        }
 
         for (var child : item.getChildren()) {
             String type = child.getType();

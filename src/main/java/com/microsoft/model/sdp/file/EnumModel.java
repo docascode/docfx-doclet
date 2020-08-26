@@ -42,7 +42,10 @@ public class EnumModel extends TypeBaseModel implements YmlFile {
                 type -> this.getInheritances().add(XrefHelper.generateXrefString(type, XrefHelper.XrefOption.DEFAULT)));
 
         this.getInheritedMembers().addAll(item.getInheritedMethods());
-        this.setSyntax(item.getSyntax().getContent());
+
+        if (item.getSyntax() != null) {
+            this.setSyntax(item.getSyntax().getContent());
+        }
 
         for (var child : item.getChildren()) {
             String type = child.getType();
