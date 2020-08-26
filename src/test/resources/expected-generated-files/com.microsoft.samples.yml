@@ -1,50 +1,16 @@
-### YamlMime:ManagedReference
-items:
-- uid: "com.microsoft.samples"
-  id: "samples"
-  children:
-  - "com.microsoft.samples.BasePartnerComponent"
-  - "com.microsoft.samples.BasePartnerComponentString"
-  - "com.microsoft.samples.IPartner"
-  - "com.microsoft.samples.KeyValuePair"
-  - "com.microsoft.samples.Link"
-  - "com.microsoft.samples.Subpackage"
-  - "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "com.microsoft.samples"
-  nameWithType: "com.microsoft.samples"
-  fullName: "com.microsoft.samples"
-  type: "Namespace"
-  summary: "This package contains the sample set of classes for testing DocFx doclet."
-  syntax:
-    content: "package com.microsoft.samples"
-references:
-- uid: "com.microsoft.samples.BasePartnerComponent"
-  name: "BasePartnerComponent<TContext>"
-  nameWithType: "BasePartnerComponent<TContext>"
-  fullName: "com.microsoft.samples.BasePartnerComponent<TContext>"
-- uid: "com.microsoft.samples.BasePartnerComponentString"
-  name: "BasePartnerComponentString"
-  nameWithType: "BasePartnerComponentString"
-  fullName: "com.microsoft.samples.BasePartnerComponentString"
-- uid: "com.microsoft.samples.IPartner"
-  name: "IPartner"
-  nameWithType: "IPartner"
-  fullName: "com.microsoft.samples.IPartner"
-- uid: "com.microsoft.samples.KeyValuePair"
-  name: "KeyValuePair<K,V>"
-  nameWithType: "KeyValuePair<K,V>"
-  fullName: "com.microsoft.samples.KeyValuePair<K,V>"
-- uid: "com.microsoft.samples.Link"
-  name: "Link"
-  nameWithType: "Link"
-  fullName: "com.microsoft.samples.Link"
-- uid: "com.microsoft.samples.Subpackage"
-  name: "Subpackage"
-  nameWithType: "Subpackage"
-  fullName: "com.microsoft.samples.Subpackage"
-- uid: "com.microsoft.samples.SuperHero"
-  name: "SuperHero"
-  nameWithType: "SuperHero"
-  fullName: "com.microsoft.samples.SuperHero"
+### YamlMime:JavaPackage
+uid: com.microsoft.samples
+fullName: com.microsoft.samples
+name: com.microsoft.samples
+summary: This package contains the sample set of classes for testing DocFx doclet.
+classes:
+- com.microsoft.samples.BasePartnerComponent
+- com.microsoft.samples.BasePartnerComponentString
+- com.microsoft.samples.KeyValuePair
+- com.microsoft.samples.Link
+- com.microsoft.samples.Subpackage
+- com.microsoft.samples.SuperHero
+interfaces:
+- com.microsoft.samples.IPartner
+metadata: {}
+package: com.microsoft.samples

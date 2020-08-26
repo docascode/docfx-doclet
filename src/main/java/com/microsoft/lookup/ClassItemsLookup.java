@@ -4,6 +4,7 @@ import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
+import com.microsoft.model.Field;
 import com.microsoft.model.Return;
 
 import com.microsoft.util.CommentHelper;
@@ -81,7 +82,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         if (element instanceof VariableElement) {
             String type = makeTypeShort(String.valueOf(element.asType()));
             result.setFieldContent(String.format("%s %s %s", modifiers, type, elementQName));
-            result.setReturn(extractReturn((VariableElement) element));
+            result.setField(extractField((VariableElement) element));
         }
         return result;
     }
@@ -152,6 +153,11 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         }
 
         return "";
+    }
+
+    public Field extractField(VariableElement fieldElement) {
+        var constantValue = fieldElement.getConstantValue()==null?null:fieldElement.getConstantValue().toString();
+        return new Field(String.valueOf(fieldElement.asType()), constantValue);
     }
 
     /**
