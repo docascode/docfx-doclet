@@ -1,5 +1,6 @@
 package com.microsoft.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -250,6 +251,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         return overridden;
     }
 
+    @JsonIgnore
     public String getShortName(){
         return name.replaceAll("\\(.*\\)", "");
     }

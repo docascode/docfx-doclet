@@ -5,6 +5,7 @@ import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.*;
+import com.microsoft.model.sdp.file.*;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import com.microsoft.util.Utils;
@@ -75,21 +76,27 @@ public class YmlFilesBuilder {
 
         populateUidValues(packageMetadataFiles, classMetadataFiles);
 
-        packageMetadataFiles.forEach(FileUtil::dumpToFile);
-        classMetadataFiles.forEach(FileUtil::dumpToFile);
+        // write content files
+        packageMetadataFiles.forEach(YmlFilesBuilder::writePackageContentToYml);
+        for (MetadataFile type : classMetadataFiles)
+        {
+            writeTypeContentToYml(type);
+        }
+
+        // write toc.yml
         FileUtil.dumpToFile(tocFile);
 
         return true;
     }
 
-    void buildFilesForInnerClasses(Element element, List<TocItem> listToAddItems, List<MetadataFile> container) {
+    void buildFilesForInnerClasses(Element element, Set<TocItem> listToAddItems, List<MetadataFile> container) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             String uid = classLookup.extractUid(classElement);
             String name = classLookup.extractTocName(classElement);
+            TocItem tocNode = new TocItem(uid, name);
 
-            listToAddItems.add(new TocItem(uid, name));
-
-            container.add(buildClassYmlFile(classElement));
+            container.add(buildClassYmlFile(classElement, tocNode));
+            listToAddItems.add(tocNode);
             buildFilesForInnerClasses(classElement, listToAddItems, container);
         }
     }
@@ -132,13 +139,13 @@ public class YmlFilesBuilder {
         item.setContent(lookup.extractContent(element));
     }
 
-    MetadataFile buildClassYmlFile(TypeElement classElement) {
+    MetadataFile buildClassYmlFile(TypeElement classElement, TocItem tocItem) {
         String fileName = classLookup.extractHref(classElement);
         MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
         addClassInfo(classElement, classMetadataFile);
-        addConstructorsInfo(classElement, classMetadataFile);
-        addMethodsInfo(classElement, classMetadataFile);
-        addFieldsInfo(classElement, classMetadataFile);
+        addConstructorsInfo(classElement, classMetadataFile, tocItem);
+        addMethodsInfo(classElement, classMetadataFile, tocItem);
+        addFieldsInfo(classElement, classMetadataFile, tocItem);
         addReferencesInfo(classElement, classMetadataFile);
         applyPostProcessing(classMetadataFile);
         return classMetadataFile;
@@ -179,7 +186,7 @@ public class YmlFilesBuilder {
                 .map(mapFunc).collect(Collectors.toList()));
     }
 
-    void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
+    void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile, TocItem tocItem) {
         for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
             MetadataFileItem constructorItem = buildMetadataFileItem(constructorElement);
             constructorItem.setOverload(classItemsLookup.extractOverload(constructorElement));
@@ -189,10 +196,15 @@ public class YmlFilesBuilder {
 
             addParameterReferences(constructorItem, classMetadataFile);
             addOverloadReferences(constructorItem, classMetadataFile);
+
+            if(!classElement.getKind().equals(ElementKind.ENUM)){
+                tocItem.getItems().add(
+                        new TocItem(constructorItem.getOverload(), constructorItem.getShortName(), constructorItem.getType().toLowerCase()));
+            }
         }
     }
 
-    void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
+    void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile, TocItem tocItem) {
         ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
                 .filter(methodElement -> !Utils.isPrivateOrPackagePrivate(methodElement))
                 .forEach(methodElement -> {
@@ -209,10 +221,15 @@ public class YmlFilesBuilder {
                     addParameterReferences(methodItem, classMetadataFile);
                     addReturnReferences(methodItem, classMetadataFile);
                     addOverloadReferences(methodItem, classMetadataFile);
+
+                    if(!classElement.getKind().equals(ElementKind.ENUM)){
+                        tocItem.getItems().add(
+                                new TocItem(methodItem.getOverload(), methodItem.getShortName(), methodItem.getType().toLowerCase()));
+                    }
                 });
     }
 
-    void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
+    void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile,TocItem tocItem) {
         ElementFilter.fieldsIn(classElement.getEnclosedElements()).stream()
                 .filter(fieldElement -> !Utils.isPrivateOrPackagePrivate(fieldElement))
                 .forEach(fieldElement -> {
@@ -221,6 +238,11 @@ public class YmlFilesBuilder {
                     fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
                     classMetadataFile.getItems().add(fieldItem);
                     addReturnReferences(fieldItem, classMetadataFile);
+
+                    if(classElement.getKind() != ElementKind.ENUM) {
+                        tocItem.getItems().add(
+                                new TocItem(fieldItem.getUid(), fieldItem.getName(), fieldItem.getType().toLowerCase()));
+                    }
                 });
     }
 
@@ -305,6 +327,33 @@ public class YmlFilesBuilder {
 
     void applyPostProcessing(MetadataFile classMetadataFile) {
         expandComplexGenericsInReferences(classMetadataFile);
+    }
+
+    private static void writePackageContentToYml(MetadataFile pack) {
+        for (MetadataFileItem item : pack.getItems()) {
+            PackageModel model = new PackageModel(item, pack.getFileNameWithPath());;
+            FileUtil.dumpToFile(model);
+        }
+    }
+
+    private void writeTypeContentToYml(MetadataFile typeItem) {
+        MetadataFileItem item = typeItem.getItems().iterator().next();
+        String type = item.getType();
+        switch (type.toLowerCase()) {
+            case "class":
+            case "interface":
+                TypeModel typeModel = new TypeModel(item, typeItem.getFileNameWithPath(), getOutputPath());
+                FileUtil.dumpToFile(typeModel);
+                break;
+            case "enum":
+                EnumModel enumModel = new EnumModel(item, typeItem.getFileNameWithPath());
+                FileUtil.dumpToFile(enumModel);
+                break;
+        }
+    }
+
+    public String getOutputPath() {
+        return outputPath;
     }
 
     /**

@@ -116,4 +116,20 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     public Set<MetadataFileItem> getReferences() {
         return references;
     }
+
+    public String getSyntaxContent() {
+        String content = "";
+        switch (this.getType().toLowerCase()) {
+            case "constructor":
+                content = getConstructorContent();
+                break;
+            case "field":
+                content = getFieldContent();
+                break;
+            case "method":
+                content = getMethodContent();
+                break;
+        }
+        return content;
+    }
 }

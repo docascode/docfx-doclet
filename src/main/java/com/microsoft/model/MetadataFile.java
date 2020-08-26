@@ -32,7 +32,7 @@ public class MetadataFile implements YmlFile {
     public String getFileContent() {
         Set<MetadataFileItem> sortedSet = new TreeSet<>(this.items);
         this.items = sortedSet;
-        return METADATA_FILE_HEADER + YamlUtil.objectToYamlString(this);
+        return METADATA_FILE_HEADER + YamlUtil.objectToYamlString(this, this.fileName);
     }
 
     @JsonIgnore

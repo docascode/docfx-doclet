@@ -3,7 +3,9 @@ package com.microsoft.util;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator.Feature;
 import com.overzealous.remark.IgnoredHtmlElement;
 import com.overzealous.remark.Options;
@@ -30,15 +32,18 @@ public class YamlUtil {
     private static final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()
         .disable(Feature.WRITE_DOC_START_MARKER)
         .disable(Feature.SPLIT_LINES)
+        .enable(YAMLGenerator.Feature.MINIMIZE_QUOTES)
     )
+        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
         .setSerializationInclusion(Include.NON_NULL)
         .setSerializationInclusion(Include.NON_EMPTY);
 
-    public static String objectToYamlString(Object object) {
+    public static String objectToYamlString(Object object, String fileName) {
         try {
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException jpe) {
-            throw new RuntimeException("Could not serialize object to yaml string", jpe);
+            String exception = "Could not serialize object to yaml string for " + fileName;
+            throw new RuntimeException(exception, jpe);
         }
     }
 
