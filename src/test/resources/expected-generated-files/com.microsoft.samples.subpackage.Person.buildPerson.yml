@@ -1,0 +1,20 @@
+### YamlMime:JavaMember
+uid: com.microsoft.samples.subpackage.Person.buildPerson*
+fullName: com.microsoft.samples.subpackage.Person<T>.buildPerson
+name: buildPerson
+nameWithType: Person<T>.buildPerson
+members:
+- uid: com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)
+  fullName: com.microsoft.samples.subpackage.Person<T>.buildPerson(Person seed)
+  name: buildPerson(Person seed)
+  nameWithType: Person<T>.buildPerson(Person seed)
+  summary: We need to have this method that takes parameter and return types declared in the current class
+  parameters:
+  - name: seed
+    type: <xref href="com.microsoft.samples.subpackage.Person?alt=com.microsoft.samples.subpackage.Person&text=Person" data-throw-if-not-resolved="False" />
+  syntax: public static Person buildPerson(Person seed)
+  returns:
+    type: <xref href="com.microsoft.samples.subpackage.Person?alt=com.microsoft.samples.subpackage.Person&text=Person" data-throw-if-not-resolved="False" />
+type: method
+metadata: {}
+package: com.microsoft.samples.subpackage

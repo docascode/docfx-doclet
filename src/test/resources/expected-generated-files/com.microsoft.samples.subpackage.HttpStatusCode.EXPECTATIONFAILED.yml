@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED
+fullName: com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED
+name: EXPECTATIONFAILED
+nameWithType: HttpStatusCode.EXPECTATIONFAILED
+members:
+- uid: com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED
+  fullName: com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED
+  name: EXPECTATIONFAILED
+  nameWithType: HttpStatusCode.EXPECTATIONFAILED
+  syntax: public static final int EXPECTATIONFAILED
+type: field
+metadata: {}
+package: com.microsoft.samples.subpackage

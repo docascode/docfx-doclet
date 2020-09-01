@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE
+fullName: com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE
+name: SERVICEUNAVAILABLE
+nameWithType: HttpStatusCode.SERVICEUNAVAILABLE
+members:
+- uid: com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE
+  fullName: com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE
+  name: SERVICEUNAVAILABLE
+  nameWithType: HttpStatusCode.SERVICEUNAVAILABLE
+  syntax: public static final int SERVICEUNAVAILABLE
+type: field
+metadata: {}
+package: com.microsoft.samples.subpackage

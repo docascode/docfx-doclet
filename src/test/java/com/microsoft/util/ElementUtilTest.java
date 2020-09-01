@@ -59,7 +59,7 @@ public class ElementUtilTest {
                 .stream().map(String::valueOf).collect(Collectors.toList());
 
         // Ensure items to exclude exist.
-        assertThat("Wrong enclosed elements number", allElements.size(), is(6));
+        assertThat("Wrong enclosed elements number", allElements.size(), is(7));
         assertThat("Unexpected package private class", allElements.contains("com.microsoft.samples.subpackage.InternalException"), is(true));
         assertThat("Unexpected to-exclude class", allElements.contains("com.microsoft.samples.subpackage.SomeExcludedClass"), is(true));
 
@@ -68,10 +68,10 @@ public class ElementUtilTest {
             .stream().map(String::valueOf).collect(Collectors.toList());
 
         // Verify filtered and sorted result
-        assertThat("Wrong result list size", extractedElements.size(), is(4));
+        assertThat("Wrong result list size", extractedElements.size(), is(5));
         assertThat("Unexpected first item in the result list after invoke method extractSortedElements()", extractedElements.get(0), is("com.microsoft.samples.subpackage.CustomException"));
         assertThat("Unexpected second item in the result list after invoke method extractSortedElements()", extractedElements.get(1), is("com.microsoft.samples.subpackage.Display"));
-        assertThat("Unexpected third item in the result list after invoke method extractSortedElements()", extractedElements.get(2), is("com.microsoft.samples.subpackage.Person"));
+        assertThat("Unexpected third item in the result list after invoke method extractSortedElements()", extractedElements.get(2), is("com.microsoft.samples.subpackage.HttpStatusCode"));
     }
 
     @Test
