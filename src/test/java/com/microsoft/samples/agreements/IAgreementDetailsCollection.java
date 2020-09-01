@@ -13,4 +13,6 @@ public interface IAgreementDetailsCollection
      * @return The current agreement metadata.
      */
     ResourceCollection<AgreementMetaData> get();
+
+    ResourceCollection<AgreementMetaData> get(String id);
 }

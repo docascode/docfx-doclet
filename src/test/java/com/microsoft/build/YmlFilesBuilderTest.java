@@ -6,10 +6,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 import com.google.testing.compile.CompilationRule;
-import com.microsoft.model.MetadataFile;
-import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.MethodParameter;
-import com.microsoft.model.Syntax;
+import com.microsoft.model.*;
 import com.sun.source.util.DocTrees;
 
 import java.io.File;
@@ -57,8 +54,9 @@ public class YmlFilesBuilderTest {
         MetadataFile container = new MetadataFile("output", "name");
         when(environment.getElementUtils()).thenReturn(elements);
         when(environment.getDocTrees()).thenReturn(docTrees);
+        TocItem toc = new TocItem("com.microsoft.samples.subpackage.Person", "com.microsoft.samples.subpackage.Person");
 
-        ymlFilesBuilder.addConstructorsInfo(element, container);
+        ymlFilesBuilder.addConstructorsInfo(element, container, toc);
 
         assertThat("Wrong file name", container.getFileNameWithPath(), is("output" + File.separator + "name"));
         assertThat("Container should contain constructor item", container.getItems().size(), is(1));
@@ -70,8 +68,8 @@ public class YmlFilesBuilderTest {
         MetadataFile container = new MetadataFile("output", "name");
         when(environment.getElementUtils()).thenReturn(elements);
         when(environment.getDocTrees()).thenReturn(docTrees);
-
-        ymlFilesBuilder.addConstructorsInfo(element, container);
+        TocItem toc = new TocItem("com.microsoft.samples.SuperHero", "com.microsoft.samples.SuperHero");
+        ymlFilesBuilder.addConstructorsInfo(element, container, toc);
 
         assertThat("Wrong file name", container.getFileNameWithPath(), is("output" + File.separator + "name"));
         Collection<MetadataFileItem> constructorItems = container.getItems();

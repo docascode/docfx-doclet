@@ -1,85 +1,22 @@
-### YamlMime:ManagedReference
-items:
-- uid: "com.microsoft.samples.subpackage.Display"
-  id: "Display"
-  parent: "com.microsoft.samples.subpackage"
-  children:
-  - "com.microsoft.samples.subpackage.Display.hide()"
-  - "com.microsoft.samples.subpackage.Display.show()"
-  langs:
-  - "java"
-  name: "Display<T,R>"
-  nameWithType: "Display<T,R>"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>"
-  type: "Interface"
-  package: "com.microsoft.samples.subpackage"
-  summary: "Do you see some `First` code block?\n\nOr this `Second` code block?"
-  syntax:
-    content: "public interface Display<T,R> extends Serializable, List<Person<T>>"
-    typeParameters:
-    - id: "T"
-    - id: "R"
-  implements:
-  - "java.io.Serializable"
-  - "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
-- uid: "com.microsoft.samples.subpackage.Display.hide()"
-  id: "hide()"
-  parent: "com.microsoft.samples.subpackage.Display"
-  langs:
-  - "java"
-  name: "hide()"
-  nameWithType: "Display<T,R>.hide()"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>.hide()"
-  overload: "com.microsoft.samples.subpackage.Display.hide*"
-  type: "Method"
-  package: "com.microsoft.samples.subpackage"
-  syntax:
-    content: "public abstract void hide()"
-- uid: "com.microsoft.samples.subpackage.Display.show()"
-  id: "show()"
-  parent: "com.microsoft.samples.subpackage.Display"
-  langs:
-  - "java"
-  name: "show()"
-  nameWithType: "Display<T,R>.show()"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show()"
-  overload: "com.microsoft.samples.subpackage.Display.show*"
-  type: "Method"
-  package: "com.microsoft.samples.subpackage"
-  syntax:
-    content: "public abstract void show()"
-references:
-- uid: "com.microsoft.samples.subpackage.Display.show*"
-  name: "show"
-  nameWithType: "Display<T,R>.show"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show"
-  package: "com.microsoft.samples.subpackage"
-- uid: "com.microsoft.samples.subpackage.Display.hide*"
-  name: "hide"
-  nameWithType: "Display<T,R>.hide"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>.hide"
-  package: "com.microsoft.samples.subpackage"
-- uid: "T"
-  name: "T"
-  nameWithType: "T"
-  fullName: "T"
-- uid: "R"
-  name: "R"
-  nameWithType: "R"
-  fullName: "R"
-- uid: "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
-  name: "List<Person<T>>"
-  nameWithType: "List<Person<T>>"
-  fullName: "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
-- uid: "java.io.Serializable"
-  name: "Serializable"
-  nameWithType: "Serializable"
-  fullName: "java.io.Serializable"
-- uid: "java.util.List"
-  name: "List"
-  nameWithType: "List"
-  fullName: "java.util.List"
-- uid: "com.microsoft.samples.subpackage.Person"
-  name: "Person"
-  nameWithType: "Person"
-  fullName: "com.microsoft.samples.subpackage.Person"
+### YamlMime:JavaType
+uid: com.microsoft.samples.subpackage.Display
+fullName: com.microsoft.samples.subpackage.Display<T,R>
+name: Display<T,R>
+nameWithType: Display<T,R>
+summary: |-
+  Do you see some `First` code block?
+
+  Or this `Second` code block?
+syntax: public interface Display<T,R> extends Serializable, List<Person<T>>
+methods:
+- com.microsoft.samples.subpackage.Display.hide()
+- com.microsoft.samples.subpackage.Display.show()
+type: interface
+typeParameters:
+- name: T
+- name: R
+implements:
+- <xref href="java.io.Serializable?alt=java.io.Serializable&text=Serializable" data-throw-if-not-resolved="False" />
+- <xref href="java.util.List?alt=java.util.List&text=List" data-throw-if-not-resolved="False" />&lt;<xref href="com.microsoft.samples.subpackage.Person?alt=com.microsoft.samples.subpackage.Person&text=Person" data-throw-if-not-resolved="False" />&lt;<xref href="T?alt=T&text=T" data-throw-if-not-resolved="False" />&gt;&gt;
+metadata: {}
+package: com.microsoft.samples.subpackage

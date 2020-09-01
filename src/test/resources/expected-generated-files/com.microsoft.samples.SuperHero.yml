@@ -1,427 +1,51 @@
-### YamlMime:ManagedReference
-items:
-- uid: "com.microsoft.samples.SuperHero"
-  id: "SuperHero"
-  parent: "com.microsoft.samples"
-  children:
-  - "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
-  - "com.microsoft.samples.SuperHero.SuperHero()"
-  - "com.microsoft.samples.SuperHero.SuperHero(java.lang.String,java.lang.String,int,int)"
-  - "com.microsoft.samples.SuperHero.getDefense()"
-  - "com.microsoft.samples.SuperHero.getHealth()"
-  - "com.microsoft.samples.SuperHero.getHeroName()"
-  - "com.microsoft.samples.SuperHero.getLastName()"
-  - "com.microsoft.samples.SuperHero.getUniquePower()"
-  - "com.microsoft.samples.SuperHero.setDefense(int)"
-  - "com.microsoft.samples.SuperHero.setHealth(int)"
-  - "com.microsoft.samples.SuperHero.setHeroName(java.lang.String)"
-  - "com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)"
-  - "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"
-  langs:
-  - "java"
-  name: "SuperHero"
-  nameWithType: "SuperHero"
-  fullName: "com.microsoft.samples.SuperHero"
-  type: "Class"
-  package: "com.microsoft.samples"
-  summary: "Hero is the main entity we will be using to something"
-  syntax:
-    content: "public class SuperHero extends Person implements Serializable, Cloneable"
-  inheritance:
-  - "java.lang.Object"
-  - "com.microsoft.samples.subpackage.Person"
-  implements:
-  - "java.io.Serializable"
-  - "java.lang.Cloneable"
-  inheritedMembers:
-  - "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
-  - "com.microsoft.samples.subpackage.Person.getFirstName()"
-  - "com.microsoft.samples.subpackage.Person.getLastName()"
-  - "com.microsoft.samples.subpackage.Person.getSomeSet()"
-  - "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
-  - "com.microsoft.samples.subpackage.Person.setLastName()"
-  - "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
-  - "java.lang.Object.clone()"
-  - "java.lang.Object.equals(java.lang.Object)"
-  - "java.lang.Object.finalize()"
-  - "java.lang.Object.getClass()"
-  - "java.lang.Object.hashCode()"
-  - "java.lang.Object.notify()"
-  - "java.lang.Object.notifyAll()"
-  - "java.lang.Object.toString()"
-  - "java.lang.Object.wait()"
-  - "java.lang.Object.wait(long)"
-  - "java.lang.Object.wait(long,int)"
-- uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
-  id: "SOME_PUBLIC_STRING"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "SOME_PUBLIC_STRING"
-  nameWithType: "SuperHero.SOME_PUBLIC_STRING"
-  fullName: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
-  type: "Field"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public final String SOME_PUBLIC_STRING"
-    return:
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.SuperHero.SuperHero()"
-  id: "SuperHero()"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "SuperHero()"
-  nameWithType: "SuperHero.SuperHero()"
-  fullName: "com.microsoft.samples.SuperHero.SuperHero()"
-  overload: "com.microsoft.samples.SuperHero.SuperHero*"
-  type: "Constructor"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public SuperHero()"
-- uid: "com.microsoft.samples.SuperHero.SuperHero(java.lang.String,java.lang.String,int,int)"
-  id: "SuperHero(java.lang.String,java.lang.String,int,int)"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "SuperHero(String heroName, String uniquePower, int health, int defense)"
-  nameWithType: "SuperHero.SuperHero(String heroName, String uniquePower, int health, int defense)"
-  fullName: "com.microsoft.samples.SuperHero.SuperHero(String heroName, String uniquePower, int health, int defense)"
-  overload: "com.microsoft.samples.SuperHero.SuperHero*"
-  type: "Constructor"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public SuperHero(String heroName, String uniquePower, int health, int defense)"
-    parameters:
-    - id: "heroName"
-      type: "java.lang.String"
-    - id: "uniquePower"
-      type: "java.lang.String"
-    - id: "health"
-      type: "int"
-    - id: "defense"
-      type: "int"
-- uid: "com.microsoft.samples.SuperHero.getDefense()"
-  id: "getDefense()"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "getDefense()"
-  nameWithType: "SuperHero.getDefense()"
-  fullName: "com.microsoft.samples.SuperHero.getDefense()"
-  overload: "com.microsoft.samples.SuperHero.getDefense*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public int getDefense()"
-    return:
-      type: "int"
-- uid: "com.microsoft.samples.SuperHero.getHealth()"
-  id: "getHealth()"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "getHealth()"
-  nameWithType: "SuperHero.getHealth()"
-  fullName: "com.microsoft.samples.SuperHero.getHealth()"
-  overload: "com.microsoft.samples.SuperHero.getHealth*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "protected int getHealth()"
-    return:
-      type: "int"
-- uid: "com.microsoft.samples.SuperHero.getHeroName()"
-  id: "getHeroName()"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "getHeroName()"
-  nameWithType: "SuperHero.getHeroName()"
-  fullName: "com.microsoft.samples.SuperHero.getHeroName()"
-  overload: "com.microsoft.samples.SuperHero.getHeroName*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public String getHeroName()"
-    return:
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.SuperHero.getLastName()"
-  id: "getLastName()"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "getLastName()"
-  nameWithType: "SuperHero.getLastName()"
-  fullName: "com.microsoft.samples.SuperHero.getLastName()"
-  overload: "com.microsoft.samples.SuperHero.getLastName*"
-  overridden: "com.microsoft.samples.subpackage.Person.getLastName()"
-  type: "Method"
-  package: "com.microsoft.samples"
-  summary: "Get capitalized last name. But it's not the end, because of multiline comment"
-  syntax:
-    content: "public String getLastName()"
-    return:
-      type: "java.lang.String"
-      description: "lastName in uppercase. But it's not the end,\n because of multiline comment"
-- uid: "com.microsoft.samples.SuperHero.getUniquePower()"
-  id: "getUniquePower()"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "getUniquePower()"
-  nameWithType: "SuperHero.getUniquePower()"
-  fullName: "com.microsoft.samples.SuperHero.getUniquePower()"
-  overload: "com.microsoft.samples.SuperHero.getUniquePower*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public String getUniquePower()"
-    return:
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.SuperHero.setDefense(int)"
-  id: "setDefense(int)"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "setDefense(int defense)"
-  nameWithType: "SuperHero.setDefense(int defense)"
-  fullName: "com.microsoft.samples.SuperHero.setDefense(int defense)"
-  overload: "com.microsoft.samples.SuperHero.setDefense*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public void setDefense(int defense)"
-    parameters:
-    - id: "defense"
-      type: "int"
-- uid: "com.microsoft.samples.SuperHero.setHealth(int)"
-  id: "setHealth(int)"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "setHealth(int health)"
-  nameWithType: "SuperHero.setHealth(int health)"
-  fullName: "com.microsoft.samples.SuperHero.setHealth(int health)"
-  overload: "com.microsoft.samples.SuperHero.setHealth*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "protected void setHealth(int health)"
-    parameters:
-    - id: "health"
-      type: "int"
-- uid: "com.microsoft.samples.SuperHero.setHeroName(java.lang.String)"
-  id: "setHeroName(java.lang.String)"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "setHeroName(String heroName)"
-  nameWithType: "SuperHero.setHeroName(String heroName)"
-  fullName: "com.microsoft.samples.SuperHero.setHeroName(String heroName)"
-  overload: "com.microsoft.samples.SuperHero.setHeroName*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public void setHeroName(String heroName)"
-    parameters:
-    - id: "heroName"
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)"
-  id: "setUniquePower(java.lang.String)"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "setUniquePower(String uniquePower)"
-  nameWithType: "SuperHero.setUniquePower(String uniquePower)"
-  fullName: "com.microsoft.samples.SuperHero.setUniquePower(String uniquePower)"
-  overload: "com.microsoft.samples.SuperHero.setUniquePower*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  syntax:
-    content: "public void setUniquePower(String uniquePower)"
-    parameters:
-    - id: "uniquePower"
-      type: "java.lang.String"
-- uid: "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"
-  id: "successfullyAttacked(int,java.lang.String)"
-  parent: "com.microsoft.samples.SuperHero"
-  langs:
-  - "java"
-  name: "successfullyAttacked(int incomingDamage, String damageType)"
-  nameWithType: "SuperHero.successfullyAttacked(int incomingDamage, String damageType)"
-  fullName: "com.microsoft.samples.SuperHero.successfullyAttacked(int incomingDamage, String damageType)"
-  overload: "com.microsoft.samples.SuperHero.successfullyAttacked*"
-  type: "Method"
-  package: "com.microsoft.samples"
-  summary: "This is a simple description of the method. . . [Superman!][Superman]\n\n\n[Superman]: http://www.supermanisthegreatest.com"
-  syntax:
-    content: "public int successfullyAttacked(int incomingDamage, String damageType)"
-    parameters:
-    - id: "incomingDamage"
-      type: "int"
-      description: "the amount of incoming damage for <xref uid=\"com.microsoft.samples.SuperHero\" data-throw-if-not-resolved=\"false\">SuperHero</xref>"
-    - id: "damageType"
-      type: "java.lang.String"
-      description: "type of damage with similar word damageTypeLong, sure"
-    return:
-      type: "int"
-      description: "the amount of health hero has after attack"
-  exceptions:
-  - type: "java.lang.IllegalArgumentException"
-    description: "when incomingDamage is negative and thanks for <xref uid=\"Exception\" data-throw-if-not-resolved=\"false\">Exception</xref>"
-references:
-- uid: "com.microsoft.samples.SuperHero.SuperHero*"
-  name: "SuperHero"
-  nameWithType: "SuperHero.SuperHero"
-  fullName: "com.microsoft.samples.SuperHero.SuperHero"
-  package: "com.microsoft.samples"
-- uid: "java.lang.String"
-  spec.java:
-  - uid: "java.lang.String"
-    name: "String"
-    fullName: "java.lang.String"
-- uid: "int"
-  spec.java:
-  - uid: "int"
-    name: "int"
-    fullName: "int"
-- uid: "java.lang.IllegalArgumentException"
-  spec.java:
-  - uid: "java.lang.IllegalArgumentException"
-    name: "IllegalArgumentException"
-    fullName: "java.lang.IllegalArgumentException"
-- uid: "com.microsoft.samples.SuperHero.successfullyAttacked*"
-  name: "successfullyAttacked"
-  nameWithType: "SuperHero.successfullyAttacked"
-  fullName: "com.microsoft.samples.SuperHero.successfullyAttacked"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.getHeroName*"
-  name: "getHeroName"
-  nameWithType: "SuperHero.getHeroName"
-  fullName: "com.microsoft.samples.SuperHero.getHeroName"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.setHeroName*"
-  name: "setHeroName"
-  nameWithType: "SuperHero.setHeroName"
-  fullName: "com.microsoft.samples.SuperHero.setHeroName"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.getLastName*"
-  name: "getLastName"
-  nameWithType: "SuperHero.getLastName"
-  fullName: "com.microsoft.samples.SuperHero.getLastName"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.getUniquePower*"
-  name: "getUniquePower"
-  nameWithType: "SuperHero.getUniquePower"
-  fullName: "com.microsoft.samples.SuperHero.getUniquePower"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.setUniquePower*"
-  name: "setUniquePower"
-  nameWithType: "SuperHero.setUniquePower"
-  fullName: "com.microsoft.samples.SuperHero.setUniquePower"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.getHealth*"
-  name: "getHealth"
-  nameWithType: "SuperHero.getHealth"
-  fullName: "com.microsoft.samples.SuperHero.getHealth"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.setHealth*"
-  name: "setHealth"
-  nameWithType: "SuperHero.setHealth"
-  fullName: "com.microsoft.samples.SuperHero.setHealth"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.getDefense*"
-  name: "getDefense"
-  nameWithType: "SuperHero.getDefense"
-  fullName: "com.microsoft.samples.SuperHero.getDefense"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.SuperHero.setDefense*"
-  name: "setDefense"
-  nameWithType: "SuperHero.setDefense"
-  fullName: "com.microsoft.samples.SuperHero.setDefense"
-  package: "com.microsoft.samples"
-- uid: "com.microsoft.samples.subpackage.Person"
-  name: "Person"
-  nameWithType: "Person"
-  fullName: "com.microsoft.samples.subpackage.Person"
-- uid: "java.lang.Cloneable"
-  name: "Cloneable"
-  nameWithType: "Cloneable"
-  fullName: "java.lang.Cloneable"
-- uid: "java.io.Serializable"
-  name: "Serializable"
-  nameWithType: "Serializable"
-  fullName: "java.io.Serializable"
-- uid: "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
-  name: "Person.setFirstName(String)"
-  nameWithType: "Person.setFirstName(String)"
-  fullName: "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)"
-- uid: "com.microsoft.samples.subpackage.Person.getLastName()"
-  name: "Person.getLastName()"
-  nameWithType: "Person.getLastName()"
-  fullName: "com.microsoft.samples.subpackage.Person.getLastName()"
-- uid: "java.lang.Object.notify()"
-  name: "Object.notify()"
-  nameWithType: "Object.notify()"
-  fullName: "java.lang.Object.notify()"
-- uid: "java.lang.Object.wait()"
-  name: "Object.wait()"
-  nameWithType: "Object.wait()"
-  fullName: "java.lang.Object.wait()"
-- uid: "java.lang.Object.finalize()"
-  name: "Object.finalize()"
-  nameWithType: "Object.finalize()"
-  fullName: "java.lang.Object.finalize()"
-- uid: "java.lang.Object.notifyAll()"
-  name: "Object.notifyAll()"
-  nameWithType: "Object.notifyAll()"
-  fullName: "java.lang.Object.notifyAll()"
-- uid: "java.lang.Object.clone()"
-  name: "Object.clone()"
-  nameWithType: "Object.clone()"
-  fullName: "java.lang.Object.clone()"
-- uid: "java.lang.Object.equals(java.lang.Object)"
-  name: "Object.equals(Object)"
-  nameWithType: "Object.equals(Object)"
-  fullName: "java.lang.Object.equals(java.lang.Object)"
-- uid: "java.lang.Object.toString()"
-  name: "Object.toString()"
-  nameWithType: "Object.toString()"
-  fullName: "java.lang.Object.toString()"
-- uid: "com.microsoft.samples.subpackage.Person.getFirstName()"
-  name: "Person.getFirstName()"
-  nameWithType: "Person.getFirstName()"
-  fullName: "com.microsoft.samples.subpackage.Person.getFirstName()"
-- uid: "com.microsoft.samples.subpackage.Person.getSomeSet()"
-  name: "Person.getSomeSet()"
-  nameWithType: "Person.getSomeSet()"
-  fullName: "com.microsoft.samples.subpackage.Person.getSomeSet()"
-- uid: "java.lang.Object.getClass()"
-  name: "Object.getClass()"
-  nameWithType: "Object.getClass()"
-  fullName: "java.lang.Object.getClass()"
-- uid: "java.lang.Object.wait(long)"
-  name: "Object.wait(long)"
-  nameWithType: "Object.wait(long)"
-  fullName: "java.lang.Object.wait(long)"
-- uid: "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
-  name: "Person.setLastName(String)"
-  nameWithType: "Person.setLastName(String)"
-  fullName: "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
-- uid: "java.lang.Object.hashCode()"
-  name: "Object.hashCode()"
-  nameWithType: "Object.hashCode()"
-  fullName: "java.lang.Object.hashCode()"
-- uid: "com.microsoft.samples.subpackage.Person.setLastName()"
-  name: "Person.setLastName()"
-  nameWithType: "Person.setLastName()"
-  fullName: "com.microsoft.samples.subpackage.Person.setLastName()"
-- uid: "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
-  name: "Person.buildPerson(Person)"
-  nameWithType: "Person.buildPerson(Person)"
-  fullName: "com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)"
-- uid: "java.lang.Object.wait(long,int)"
-  name: "Object.wait(long,int)"
-  nameWithType: "Object.wait(long,int)"
-  fullName: "java.lang.Object.wait(long,int)"
+### YamlMime:JavaType
+uid: com.microsoft.samples.SuperHero
+fullName: com.microsoft.samples.SuperHero
+name: SuperHero
+nameWithType: SuperHero
+summary: Hero is the main entity we will be using to something
+inheritances:
+- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- <xref href="com.microsoft.samples.subpackage.Person" data-throw-if-not-resolved="False" />
+inheritedMembers:
+- com.microsoft.samples.subpackage.Person.buildPerson(com.microsoft.samples.subpackage.Person)
+- com.microsoft.samples.subpackage.Person.getFirstName()
+- com.microsoft.samples.subpackage.Person.getLastName()
+- com.microsoft.samples.subpackage.Person.getSomeSet()
+- com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String)
+- com.microsoft.samples.subpackage.Person.setLastName()
+- com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)
+- java.lang.Object.clone()
+- java.lang.Object.equals(java.lang.Object)
+- java.lang.Object.finalize()
+- java.lang.Object.getClass()
+- java.lang.Object.hashCode()
+- java.lang.Object.notify()
+- java.lang.Object.notifyAll()
+- java.lang.Object.toString()
+- java.lang.Object.wait()
+- java.lang.Object.wait(long)
+- java.lang.Object.wait(long,int)
+syntax: public class SuperHero extends Person implements Serializable, Cloneable
+constructors:
+- com.microsoft.samples.SuperHero.SuperHero()
+- com.microsoft.samples.SuperHero.SuperHero(java.lang.String,java.lang.String,int,int)
+fields:
+- com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING
+methods:
+- com.microsoft.samples.SuperHero.getDefense()
+- com.microsoft.samples.SuperHero.getHealth()
+- com.microsoft.samples.SuperHero.getHeroName()
+- com.microsoft.samples.SuperHero.getLastName()
+- com.microsoft.samples.SuperHero.getUniquePower()
+- com.microsoft.samples.SuperHero.setDefense(int)
+- com.microsoft.samples.SuperHero.setHealth(int)
+- com.microsoft.samples.SuperHero.setHeroName(java.lang.String)
+- com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)
+- com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)
+type: class
+implements:
+- <xref href="java.io.Serializable?alt=java.io.Serializable&text=Serializable" data-throw-if-not-resolved="False" />
+- <xref href="java.lang.Cloneable?alt=java.lang.Cloneable&text=Cloneable" data-throw-if-not-resolved="False" />
+metadata: {}
+package: com.microsoft.samples
