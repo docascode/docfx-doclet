@@ -1,12 +1,12 @@
 ### YamlMime:JavaPackage
-uid: com.microsoft.samples.agreements
-fullName: com.microsoft.samples.agreements
-name: com.microsoft.samples.agreements
+uid: "com.microsoft.samples.agreements"
+fullName: "com.microsoft.samples.agreements"
+name: "com.microsoft.samples.agreements"
 classes:
-- com.microsoft.samples.agreements.AgreementDetailsCollectionOperations
-- com.microsoft.samples.agreements.AgreementMetaData
-- com.microsoft.samples.agreements.ResourceCollection
+- "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
+- "com.microsoft.samples.agreements.AgreementMetaData"
+- "com.microsoft.samples.agreements.ResourceCollection"
 interfaces:
-- com.microsoft.samples.agreements.IAgreementDetailsCollection
+- "com.microsoft.samples.agreements.IAgreementDetailsCollection"
 metadata: {}
-package: com.microsoft.samples.agreements
+package: "com.microsoft.samples.agreements"

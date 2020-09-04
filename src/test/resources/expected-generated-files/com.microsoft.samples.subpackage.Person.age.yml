@@ -1,14 +1,14 @@
 ### YamlMime:JavaMember
-uid: com.microsoft.samples.subpackage.Person.age
-fullName: com.microsoft.samples.subpackage.Person<T>.age
-name: age
-nameWithType: Person<T>.age
+uid: "com.microsoft.samples.subpackage.Person.age"
+fullName: "com.microsoft.samples.subpackage.Person<T>.age"
+name: "age"
+nameWithType: "Person<T>.age"
 members:
-- uid: com.microsoft.samples.subpackage.Person.age
-  fullName: com.microsoft.samples.subpackage.Person<T>.age
-  name: age
-  nameWithType: Person<T>.age
-  syntax: public int age
-type: field
+- uid: "com.microsoft.samples.subpackage.Person.age"
+  fullName: "com.microsoft.samples.subpackage.Person<T>.age"
+  name: "age"
+  nameWithType: "Person<T>.age"
+  syntax: "public int age"
+type: "field"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

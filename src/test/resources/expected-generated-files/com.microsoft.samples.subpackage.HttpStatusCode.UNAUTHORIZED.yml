@@ -1,14 +1,14 @@
 ### YamlMime:JavaMember
-uid: com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED
-fullName: com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED
-name: UNAUTHORIZED
-nameWithType: HttpStatusCode.UNAUTHORIZED
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED"
+fullName: "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED"
+name: "UNAUTHORIZED"
+nameWithType: "HttpStatusCode.UNAUTHORIZED"
 members:
-- uid: com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED
-  fullName: com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED
-  name: UNAUTHORIZED
-  nameWithType: HttpStatusCode.UNAUTHORIZED
-  syntax: public static final int UNAUTHORIZED
-type: field
+- uid: "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED"
+  fullName: "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED"
+  name: "UNAUTHORIZED"
+  nameWithType: "HttpStatusCode.UNAUTHORIZED"
+  syntax: "public static final int UNAUTHORIZED"
+type: "field"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

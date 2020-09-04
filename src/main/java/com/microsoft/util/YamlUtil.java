@@ -32,7 +32,6 @@ public class YamlUtil {
     private static final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()
         .disable(Feature.WRITE_DOC_START_MARKER)
         .disable(Feature.SPLIT_LINES)
-        .enable(YAMLGenerator.Feature.MINIMIZE_QUOTES)
     )
         .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
         .setSerializationInclusion(Include.NON_NULL)

@@ -1,33 +1,33 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.commentinheritance.Animal
-fullName: com.microsoft.samples.commentinheritance.Animal
-name: Animal
-nameWithType: Animal
-summary: Animal.
+uid: "com.microsoft.samples.commentinheritance.Animal"
+fullName: "com.microsoft.samples.commentinheritance.Animal"
+name: "Animal"
+nameWithType: "Animal"
+summary: "Animal."
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public abstract class Animal implements Organism
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public abstract class Animal implements Organism"
 constructors:
-- com.microsoft.samples.commentinheritance.Animal.Animal()
+- "com.microsoft.samples.commentinheritance.Animal.Animal()"
 methods:
-- com.microsoft.samples.commentinheritance.Animal.breathe()
-- com.microsoft.samples.commentinheritance.Animal.feed()
-- com.microsoft.samples.commentinheritance.Animal.getKind()
-- com.microsoft.samples.commentinheritance.Animal.verballyCommunicate()
-type: class
+- "com.microsoft.samples.commentinheritance.Animal.breathe()"
+- "com.microsoft.samples.commentinheritance.Animal.feed()"
+- "com.microsoft.samples.commentinheritance.Animal.getKind()"
+- "com.microsoft.samples.commentinheritance.Animal.verballyCommunicate()"
+type: "class"
 implements:
-- <xref href="com.microsoft.samples.commentinheritance.Organism?alt=com.microsoft.samples.commentinheritance.Organism&text=Organism" data-throw-if-not-resolved="False" />
+- "<xref href=\"com.microsoft.samples.commentinheritance.Organism?alt=com.microsoft.samples.commentinheritance.Organism&text=Organism\" data-throw-if-not-resolved=\"False\" />"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

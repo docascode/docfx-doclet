@@ -1,33 +1,33 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.agreements.AgreementMetaData
-fullName: com.microsoft.samples.agreements.AgreementMetaData
-name: AgreementMetaData
-nameWithType: AgreementMetaData
-summary: The AgreementMetaData provides metadata about the agreement type that partner can provide confirmation of customer acceptance.
+uid: "com.microsoft.samples.agreements.AgreementMetaData"
+fullName: "com.microsoft.samples.agreements.AgreementMetaData"
+name: "AgreementMetaData"
+nameWithType: "AgreementMetaData"
+summary: "The AgreementMetaData provides metadata about the agreement type that partner can provide confirmation of customer acceptance."
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public class AgreementMetaData
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class AgreementMetaData"
 constructors:
-- com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData()
+- "com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData()"
 methods:
-- com.microsoft.samples.agreements.AgreementMetaData.getAgreementLink()
-- com.microsoft.samples.agreements.AgreementMetaData.getTemplateId()
-- com.microsoft.samples.agreements.AgreementMetaData.getVersionRank()
-- com.microsoft.samples.agreements.AgreementMetaData.setAgreementLink(java.lang.String)
-- com.microsoft.samples.agreements.AgreementMetaData.setTemplateId(java.lang.String)
-- com.microsoft.samples.agreements.AgreementMetaData.setVersionRank(int)
-type: class
+- "com.microsoft.samples.agreements.AgreementMetaData.getAgreementLink()"
+- "com.microsoft.samples.agreements.AgreementMetaData.getTemplateId()"
+- "com.microsoft.samples.agreements.AgreementMetaData.getVersionRank()"
+- "com.microsoft.samples.agreements.AgreementMetaData.setAgreementLink(java.lang.String)"
+- "com.microsoft.samples.agreements.AgreementMetaData.setTemplateId(java.lang.String)"
+- "com.microsoft.samples.agreements.AgreementMetaData.setVersionRank(int)"
+type: "class"
 metadata: {}
-package: com.microsoft.samples.agreements
+package: "com.microsoft.samples.agreements"

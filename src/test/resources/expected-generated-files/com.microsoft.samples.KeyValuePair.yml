@@ -1,32 +1,32 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.KeyValuePair
-fullName: com.microsoft.samples.KeyValuePair<K,V>
-name: KeyValuePair<K,V>
-nameWithType: KeyValuePair<K,V>
+uid: "com.microsoft.samples.KeyValuePair"
+fullName: "com.microsoft.samples.KeyValuePair<K,V>"
+name: "KeyValuePair<K,V>"
+nameWithType: "KeyValuePair<K,V>"
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public class KeyValuePair<K,V>
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class KeyValuePair<K,V>"
 constructors:
-- com.microsoft.samples.KeyValuePair.KeyValuePair()
-- com.microsoft.samples.KeyValuePair.KeyValuePair(K,V)
+- "com.microsoft.samples.KeyValuePair.KeyValuePair()"
+- "com.microsoft.samples.KeyValuePair.KeyValuePair(K,V)"
 methods:
-- com.microsoft.samples.KeyValuePair.getKey()
-- com.microsoft.samples.KeyValuePair.getValue()
-type: class
+- "com.microsoft.samples.KeyValuePair.getKey()"
+- "com.microsoft.samples.KeyValuePair.getValue()"
+type: "class"
 typeParameters:
-- name: K
-- name: V
+- name: "K"
+- name: "V"
 metadata: {}
-package: com.microsoft.samples
+package: "com.microsoft.samples"

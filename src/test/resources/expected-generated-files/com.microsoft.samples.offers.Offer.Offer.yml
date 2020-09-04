@@ -1,15 +1,15 @@
 ### YamlMime:JavaMember
-uid: com.microsoft.samples.offers.Offer.Offer*
-fullName: com.microsoft.samples.offers.Offer.Offer
-name: Offer
-nameWithType: Offer.Offer
+uid: "com.microsoft.samples.offers.Offer.Offer*"
+fullName: "com.microsoft.samples.offers.Offer.Offer"
+name: "Offer"
+nameWithType: "Offer.Offer"
 members:
-- uid: com.microsoft.samples.offers.Offer.Offer()
-  fullName: com.microsoft.samples.offers.Offer.Offer()
-  name: Offer()
-  nameWithType: Offer.Offer()
-  summary: Initializes a new instance of the Offer class.
-  syntax: public Offer()
-type: constructor
+- uid: "com.microsoft.samples.offers.Offer.Offer()"
+  fullName: "com.microsoft.samples.offers.Offer.Offer()"
+  name: "Offer()"
+  nameWithType: "Offer.Offer()"
+  summary: "Initializes a new instance of the Offer class."
+  syntax: "public Offer()"
+type: "constructor"
 metadata: {}
-package: com.microsoft.samples.offers
+package: "com.microsoft.samples.offers"

@@ -1,17 +1,17 @@
 ### YamlMime:JavaPackage
-uid: com.microsoft.samples.subpackage
-fullName: com.microsoft.samples.subpackage
-name: com.microsoft.samples.subpackage
-summary: This subpackage contains the sample set of classes for testing DocFx doclet.
+uid: "com.microsoft.samples.subpackage"
+fullName: "com.microsoft.samples.subpackage"
+name: "com.microsoft.samples.subpackage"
+summary: "This subpackage contains the sample set of classes for testing DocFx doclet."
 classes:
-- com.microsoft.samples.subpackage.CustomException
-- com.microsoft.samples.subpackage.HttpStatusCode
-- com.microsoft.samples.subpackage.Person
-- com.microsoft.samples.subpackage.Person.IdentificationInfo
-- com.microsoft.samples.subpackage.Tuple
+- "com.microsoft.samples.subpackage.CustomException"
+- "com.microsoft.samples.subpackage.HttpStatusCode"
+- "com.microsoft.samples.subpackage.Person"
+- "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+- "com.microsoft.samples.subpackage.Tuple"
 enums:
-- com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
+- "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
 interfaces:
-- com.microsoft.samples.subpackage.Display
+- "com.microsoft.samples.subpackage.Display"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

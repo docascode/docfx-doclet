@@ -1,13 +1,13 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.commentinheritance.Viviparous
-fullName: com.microsoft.samples.commentinheritance.Viviparous
-name: Viviparous
-nameWithType: Viviparous
-summary: Mammals that give birth to young that develop within the mother's body.
-syntax: public interface Viviparous
+uid: "com.microsoft.samples.commentinheritance.Viviparous"
+fullName: "com.microsoft.samples.commentinheritance.Viviparous"
+name: "Viviparous"
+nameWithType: "Viviparous"
+summary: "Mammals that give birth to young that develop within the mother's body."
+syntax: "public interface Viviparous"
 methods:
-- com.microsoft.samples.commentinheritance.Viviparous.getKind()
-- com.microsoft.samples.commentinheritance.Viviparous.giveBirth(int)
-type: interface
+- "com.microsoft.samples.commentinheritance.Viviparous.getKind()"
+- "com.microsoft.samples.commentinheritance.Viviparous.giveBirth(int)"
+type: "interface"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

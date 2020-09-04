@@ -1,14 +1,14 @@
 ### YamlMime:JavaMember
-uid: com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND
-fullName: com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND
-name: NOTFOUND
-nameWithType: HttpStatusCode.NOTFOUND
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND"
+fullName: "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND"
+name: "NOTFOUND"
+nameWithType: "HttpStatusCode.NOTFOUND"
 members:
-- uid: com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND
-  fullName: com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND
-  name: NOTFOUND
-  nameWithType: HttpStatusCode.NOTFOUND
-  syntax: public static final int NOTFOUND
-type: field
+- uid: "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND"
+  fullName: "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND"
+  name: "NOTFOUND"
+  nameWithType: "HttpStatusCode.NOTFOUND"
+  syntax: "public static final int NOTFOUND"
+type: "field"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

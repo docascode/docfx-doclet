@@ -1,17 +1,17 @@
 ### YamlMime:JavaPackage
-uid: com.microsoft.samples.commentinheritance
-fullName: com.microsoft.samples.commentinheritance
-name: com.microsoft.samples.commentinheritance
+uid: "com.microsoft.samples.commentinheritance"
+fullName: "com.microsoft.samples.commentinheritance"
+name: "com.microsoft.samples.commentinheritance"
 classes:
-- com.microsoft.samples.commentinheritance.Animal
-- com.microsoft.samples.commentinheritance.Dog
-- com.microsoft.samples.commentinheritance.Herbivorous.Plant
-- com.microsoft.samples.commentinheritance.Mammal
+- "com.microsoft.samples.commentinheritance.Animal"
+- "com.microsoft.samples.commentinheritance.Dog"
+- "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+- "com.microsoft.samples.commentinheritance.Mammal"
 interfaces:
-- com.microsoft.samples.commentinheritance.Carnivorous
-- com.microsoft.samples.commentinheritance.Herbivorous
-- com.microsoft.samples.commentinheritance.Omnivorous
-- com.microsoft.samples.commentinheritance.Organism
-- com.microsoft.samples.commentinheritance.Viviparous
+- "com.microsoft.samples.commentinheritance.Carnivorous"
+- "com.microsoft.samples.commentinheritance.Herbivorous"
+- "com.microsoft.samples.commentinheritance.Omnivorous"
+- "com.microsoft.samples.commentinheritance.Organism"
+- "com.microsoft.samples.commentinheritance.Viviparous"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

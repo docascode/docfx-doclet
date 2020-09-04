@@ -1,26 +1,26 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.subpackage.Person.IdentificationInfo
-fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo
-name: Person.IdentificationInfo
-nameWithType: Person.IdentificationInfo
-summary: Class that describes person's identification
+uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+name: "Person.IdentificationInfo"
+nameWithType: "Person.IdentificationInfo"
+summary: "Class that describes person's identification"
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public static class Person.IdentificationInfo
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public static class Person.IdentificationInfo"
 constructors:
-- com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()
-type: class
+- "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
+type: "class"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

@@ -1,17 +1,17 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.commentinheritance.Omnivorous
-fullName: com.microsoft.samples.commentinheritance.Omnivorous
-name: Omnivorous
-nameWithType: Omnivorous
-summary: Eats plants and animals.
-syntax: public interface Omnivorous extends Carnivorous, Herbivorous
+uid: "com.microsoft.samples.commentinheritance.Omnivorous"
+fullName: "com.microsoft.samples.commentinheritance.Omnivorous"
+name: "Omnivorous"
+nameWithType: "Omnivorous"
+summary: "Eats plants and animals."
+syntax: "public interface Omnivorous extends Carnivorous, Herbivorous"
 methods:
-- com.microsoft.samples.commentinheritance.Omnivorous.eat(com.microsoft.samples.commentinheritance.Animal)
-- com.microsoft.samples.commentinheritance.Omnivorous.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)
-- com.microsoft.samples.commentinheritance.Omnivorous.getKind()
-type: interface
+- "com.microsoft.samples.commentinheritance.Omnivorous.eat(com.microsoft.samples.commentinheritance.Animal)"
+- "com.microsoft.samples.commentinheritance.Omnivorous.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
+- "com.microsoft.samples.commentinheritance.Omnivorous.getKind()"
+type: "interface"
 implements:
-- <xref href="com.microsoft.samples.commentinheritance.Carnivorous?alt=com.microsoft.samples.commentinheritance.Carnivorous&text=Carnivorous" data-throw-if-not-resolved="False" />
-- <xref href="com.microsoft.samples.commentinheritance.Herbivorous?alt=com.microsoft.samples.commentinheritance.Herbivorous&text=Herbivorous" data-throw-if-not-resolved="False" />
+- "<xref href=\"com.microsoft.samples.commentinheritance.Carnivorous?alt=com.microsoft.samples.commentinheritance.Carnivorous&text=Carnivorous\" data-throw-if-not-resolved=\"False\" />"
+- "<xref href=\"com.microsoft.samples.commentinheritance.Herbivorous?alt=com.microsoft.samples.commentinheritance.Herbivorous&text=Herbivorous\" data-throw-if-not-resolved=\"False\" />"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

@@ -1,31 +1,31 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.BasePartnerComponent
-fullName: com.microsoft.samples.BasePartnerComponent<TContext>
-name: BasePartnerComponent<TContext>
-nameWithType: BasePartnerComponent<TContext>
-summary: Holds common partner component properties and behavior. All components should inherit from this class. The context object type.
+uid: "com.microsoft.samples.BasePartnerComponent"
+fullName: "com.microsoft.samples.BasePartnerComponent<TContext>"
+name: "BasePartnerComponent<TContext>"
+nameWithType: "BasePartnerComponent<TContext>"
+summary: "Holds common partner component properties and behavior. All components should inherit from this class. The context object type."
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public abstract class BasePartnerComponent<TContext>
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public abstract class BasePartnerComponent<TContext>"
 constructors:
-- com.microsoft.samples.BasePartnerComponent.BasePartnerComponent(com.microsoft.samples.IPartner,TContext)
+- "com.microsoft.samples.BasePartnerComponent.BasePartnerComponent(com.microsoft.samples.IPartner,TContext)"
 methods:
-- com.microsoft.samples.BasePartnerComponent.testBase()
-- com.microsoft.samples.BasePartnerComponent.testInherited()
-type: class
+- "com.microsoft.samples.BasePartnerComponent.testBase()"
+- "com.microsoft.samples.BasePartnerComponent.testInherited()"
+type: "class"
 typeParameters:
-- name: TContext
+- name: "TContext"
 metadata: {}
-package: com.microsoft.samples
+package: "com.microsoft.samples"

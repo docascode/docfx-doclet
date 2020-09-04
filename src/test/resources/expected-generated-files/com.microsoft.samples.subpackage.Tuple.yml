@@ -1,33 +1,33 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.subpackage.Tuple
-fullName: com.microsoft.samples.subpackage.Tuple<T1,T2>
-name: Tuple<T1,T2>
-nameWithType: Tuple<T1,T2>
+uid: "com.microsoft.samples.subpackage.Tuple"
+fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>"
+name: "Tuple<T1,T2>"
+nameWithType: "Tuple<T1,T2>"
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public class Tuple<T1,T2>
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class Tuple<T1,T2>"
 constructors:
-- com.microsoft.samples.subpackage.Tuple.Tuple(T1,T2)
+- "com.microsoft.samples.subpackage.Tuple.Tuple(T1,T2)"
 methods:
-- com.microsoft.samples.subpackage.Tuple.getItem1()
-- com.microsoft.samples.subpackage.Tuple.getItem2()
-- com.microsoft.samples.subpackage.Tuple.setItem1(T1)
-- com.microsoft.samples.subpackage.Tuple.setItem2(T2)
-type: class
+- "com.microsoft.samples.subpackage.Tuple.getItem1()"
+- "com.microsoft.samples.subpackage.Tuple.getItem2()"
+- "com.microsoft.samples.subpackage.Tuple.setItem1(T1)"
+- "com.microsoft.samples.subpackage.Tuple.setItem2(T2)"
+type: "class"
 typeParameters:
-- name: T1
-- name: T2
+- name: "T1"
+- name: "T2"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

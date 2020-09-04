@@ -1,12 +1,12 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.IPartner
-fullName: com.microsoft.samples.IPartner
-name: IPartner
-nameWithType: IPartner
-summary: The main entry point into using the partner SDK functionality. Represents a partner and encapsulates all the behavior attached to partners. Use this interface to get to the partner's customers, profiles, and customer orders, profiles and subscriptions and more.
-syntax: public interface IPartner
+uid: "com.microsoft.samples.IPartner"
+fullName: "com.microsoft.samples.IPartner"
+name: "IPartner"
+nameWithType: "IPartner"
+summary: "The main entry point into using the partner SDK functionality. Represents a partner and encapsulates all the behavior attached to partners. Use this interface to get to the partner's customers, profiles, and customer orders, profiles and subscriptions and more."
+syntax: "public interface IPartner"
 methods:
-- com.microsoft.samples.IPartner.getCredentials()
-type: interface
+- "com.microsoft.samples.IPartner.getCredentials()"
+type: "interface"
 metadata: {}
-package: com.microsoft.samples
+package: "com.microsoft.samples"

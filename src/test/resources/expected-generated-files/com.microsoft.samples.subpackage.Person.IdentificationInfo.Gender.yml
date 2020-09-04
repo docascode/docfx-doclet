@@ -1,56 +1,56 @@
 ### YamlMime:JavaEnum
-uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender
-name: Person.IdentificationInfo.Gender
-nameWithType: Person.IdentificationInfo.Gender
-summary: Enum describes person's gender
+uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+name: "Person.IdentificationInfo.Gender"
+nameWithType: "Person.IdentificationInfo.Gender"
+summary: "Enum describes person's gender"
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
-- <xref href="java.lang.Enum" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
+- "<xref href=\"java.lang.Enum\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Enum.<T>valueOf(java.lang.Class<T>,java.lang.String)
-- java.lang.Enum.clone()
-- java.lang.Enum.compareTo(E)
-- java.lang.Enum.equals(java.lang.Object)
-- java.lang.Enum.finalize()
-- java.lang.Enum.getDeclaringClass()
-- java.lang.Enum.hashCode()
-- java.lang.Enum.name()
-- java.lang.Enum.ordinal()
-- java.lang.Enum.toString()
-- java.lang.Object.getClass()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>
+- "java.lang.Enum.<T>valueOf(java.lang.Class<T>,java.lang.String)"
+- "java.lang.Enum.clone()"
+- "java.lang.Enum.compareTo(E)"
+- "java.lang.Enum.equals(java.lang.Object)"
+- "java.lang.Enum.finalize()"
+- "java.lang.Enum.getDeclaringClass()"
+- "java.lang.Enum.hashCode()"
+- "java.lang.Enum.name()"
+- "java.lang.Enum.ordinal()"
+- "java.lang.Enum.toString()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>"
 fields:
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE
-  name: FEMALE
-  nameWithType: Person.IdentificationInfo.Gender.FEMALE
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE
-  name: MALE
-  nameWithType: Person.IdentificationInfo.Gender.MALE
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
+  name: "FEMALE"
+  nameWithType: "Person.IdentificationInfo.Gender.FEMALE"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
+  name: "MALE"
+  nameWithType: "Person.IdentificationInfo.Gender.MALE"
 methods:
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)
-  name: valueOf(String name)
-  nameWithType: Person.IdentificationInfo.Gender.valueOf(String name)
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(String name)"
+  name: "valueOf(String name)"
+  nameWithType: "Person.IdentificationInfo.Gender.valueOf(String name)"
   parameters:
-  - name: name
-    type: <xref href="java.lang.String?alt=java.lang.String&text=String" data-throw-if-not-resolved="False" />
-  syntax: public static Person.IdentificationInfo.Gender valueOf(String name)
+  - name: "name"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public static Person.IdentificationInfo.Gender valueOf(String name)"
   returns:
-    type: <xref href="com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender?alt=com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender&text=Gender" data-throw-if-not-resolved="False" />
-- uid: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  fullName: com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()
-  name: values()
-  nameWithType: Person.IdentificationInfo.Gender.values()
-  syntax: public static Person.IdentificationInfo.Gender[] values()
+    type: "<xref href=\"com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender?alt=com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender&text=Gender\" data-throw-if-not-resolved=\"False\" />"
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
+  name: "values()"
+  nameWithType: "Person.IdentificationInfo.Gender.values()"
+  syntax: "public static Person.IdentificationInfo.Gender[] values()"
   returns:
-    type: <xref href="com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender?alt=com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender&text=Gender" data-throw-if-not-resolved="False" />[]
+    type: "<xref href=\"com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender?alt=com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender&text=Gender\" data-throw-if-not-resolved=\"False\" />[]"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

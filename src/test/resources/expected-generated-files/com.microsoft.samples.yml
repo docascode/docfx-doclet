@@ -1,16 +1,16 @@
 ### YamlMime:JavaPackage
-uid: com.microsoft.samples
-fullName: com.microsoft.samples
-name: com.microsoft.samples
-summary: This package contains the sample set of classes for testing DocFx doclet.
+uid: "com.microsoft.samples"
+fullName: "com.microsoft.samples"
+name: "com.microsoft.samples"
+summary: "This package contains the sample set of classes for testing DocFx doclet."
 classes:
-- com.microsoft.samples.BasePartnerComponent
-- com.microsoft.samples.BasePartnerComponentString
-- com.microsoft.samples.KeyValuePair
-- com.microsoft.samples.Link
-- com.microsoft.samples.Subpackage
-- com.microsoft.samples.SuperHero
+- "com.microsoft.samples.BasePartnerComponent"
+- "com.microsoft.samples.BasePartnerComponentString"
+- "com.microsoft.samples.KeyValuePair"
+- "com.microsoft.samples.Link"
+- "com.microsoft.samples.Subpackage"
+- "com.microsoft.samples.SuperHero"
 interfaces:
-- com.microsoft.samples.IPartner
+- "com.microsoft.samples.IPartner"
 metadata: {}
-package: com.microsoft.samples
+package: "com.microsoft.samples"
