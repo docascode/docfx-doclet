@@ -107,4 +107,16 @@ public class SuperHero extends Person implements Serializable, Cloneable {
     String getHobby() {
         return hobby;
     }
+
+    /**
+     * Returns a FileStoreAttributeView of the given type.
+     * <p>
+     * This method always returns null as no {@link FileStoreAttributeView} is currently supported.
+     *
+     * @param aClass a class
+     * @return null
+     */
+    public <V extends Class> V ReturnNull(Class<V> aClass) {
+        return null;
+    }
 }

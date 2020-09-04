@@ -1,35 +1,35 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.agreements.AgreementDetailsCollectionOperations
-fullName: com.microsoft.samples.agreements.AgreementDetailsCollectionOperations
-name: AgreementDetailsCollectionOperations
-nameWithType: AgreementDetailsCollectionOperations
-summary: Agreement details collection operations implementation class.
+uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
+fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
+name: "AgreementDetailsCollectionOperations"
+nameWithType: "AgreementDetailsCollectionOperations"
+summary: "Agreement details collection operations implementation class."
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
-- <xref href="com.microsoft.samples.BasePartnerComponent" data-throw-if-not-resolved="False" />
-- <xref href="com.microsoft.samples.BasePartnerComponentString" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
+- "<xref href=\"com.microsoft.samples.BasePartnerComponent\" data-throw-if-not-resolved=\"False\" />"
+- "<xref href=\"com.microsoft.samples.BasePartnerComponentString\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- com.microsoft.samples.BasePartnerComponent.testBase()
-- com.microsoft.samples.BasePartnerComponentString.testInherited()
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public class AgreementDetailsCollectionOperations extends BasePartnerComponentString implements IAgreementDetailsCollection
+- "com.microsoft.samples.BasePartnerComponent.testBase()"
+- "com.microsoft.samples.BasePartnerComponentString.testInherited()"
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class AgreementDetailsCollectionOperations extends BasePartnerComponentString implements IAgreementDetailsCollection"
 constructors:
-- com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)
+- "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
 methods:
-- com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get()
-- com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get(java.lang.String)
-type: class
+- "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get()"
+- "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get(java.lang.String)"
+type: "class"
 implements:
-- <xref href="com.microsoft.samples.agreements.IAgreementDetailsCollection?alt=com.microsoft.samples.agreements.IAgreementDetailsCollection&text=IAgreementDetailsCollection" data-throw-if-not-resolved="False" />
+- "<xref href=\"com.microsoft.samples.agreements.IAgreementDetailsCollection?alt=com.microsoft.samples.agreements.IAgreementDetailsCollection&text=IAgreementDetailsCollection\" data-throw-if-not-resolved=\"False\" />"
 metadata: {}
-package: com.microsoft.samples.agreements
+package: "com.microsoft.samples.agreements"

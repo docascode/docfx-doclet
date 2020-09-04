@@ -1,13 +1,13 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.commentinheritance.Carnivorous
-fullName: com.microsoft.samples.commentinheritance.Carnivorous
-name: Carnivorous
-nameWithType: Carnivorous
-summary: Marks an Animal that eats other animals.
-syntax: public interface Carnivorous
+uid: "com.microsoft.samples.commentinheritance.Carnivorous"
+fullName: "com.microsoft.samples.commentinheritance.Carnivorous"
+name: "Carnivorous"
+nameWithType: "Carnivorous"
+summary: "Marks an Animal that eats other animals."
+syntax: "public interface Carnivorous"
 methods:
-- com.microsoft.samples.commentinheritance.Carnivorous.eat(com.microsoft.samples.commentinheritance.Animal)
-- com.microsoft.samples.commentinheritance.Carnivorous.getKind()
-type: interface
+- "com.microsoft.samples.commentinheritance.Carnivorous.eat(com.microsoft.samples.commentinheritance.Animal)"
+- "com.microsoft.samples.commentinheritance.Carnivorous.getKind()"
+type: "interface"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

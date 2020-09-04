@@ -1,13 +1,13 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.agreements.IAgreementDetailsCollection
-fullName: com.microsoft.samples.agreements.IAgreementDetailsCollection
-name: IAgreementDetailsCollection
-nameWithType: IAgreementDetailsCollection
-summary: Encapsulates the operations on the agreement metadata collection.
-syntax: public interface IAgreementDetailsCollection
+uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection"
+fullName: "com.microsoft.samples.agreements.IAgreementDetailsCollection"
+name: "IAgreementDetailsCollection"
+nameWithType: "IAgreementDetailsCollection"
+summary: "Encapsulates the operations on the agreement metadata collection."
+syntax: "public interface IAgreementDetailsCollection"
 methods:
-- com.microsoft.samples.agreements.IAgreementDetailsCollection.get()
-- com.microsoft.samples.agreements.IAgreementDetailsCollection.get(java.lang.String)
-type: interface
+- "com.microsoft.samples.agreements.IAgreementDetailsCollection.get()"
+- "com.microsoft.samples.agreements.IAgreementDetailsCollection.get(java.lang.String)"
+type: "interface"
 metadata: {}
-package: com.microsoft.samples.agreements
+package: "com.microsoft.samples.agreements"

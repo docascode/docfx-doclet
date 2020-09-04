@@ -26,24 +26,24 @@ public class YamlUtilTest {
 
         assertThat("Wrong result", result, is(""
             + "items:\n"
-            + "- uid: Some uid 3\n"
-            + "  id: Some id3\n"
-            + "  href: Some href3\n"
-            + "  type: method\n"
+            + "- uid: \"Some uid 3\"\n"
+            + "  id: \"Some id3\"\n"
+            + "  href: \"Some href3\"\n"
+            + "  type: \"method\"\n"
             + "  syntax:\n"
             + "    parameters:\n"
-            + "    - description: Some desc 3\n"
-            + "      name: Some name 3\n"
-            + "      type: <xref href=\"Some type 3?alt=Some type 3&text=Some type 3\" data-throw-if-not-resolved=\"False\" />\n"
+            + "    - description: \"Some desc 3\"\n"
+            + "      name: \"Some name 3\"\n"
+            + "      type: \"<xref href=\\\"Some type 3?alt=Some type 3&text=Some type 3\\\" data-throw-if-not-resolved=\\\"False\\\" />\"\n"
             + "references:\n"
-            + "- uid: Some uid 5\n"
-            + "  id: Some id5\n"
-            + "  href: Some href5\n"
+            + "- uid: \"Some uid 5\"\n"
+            + "  id: \"Some id5\"\n"
+            + "  href: \"Some href5\"\n"
             + "  syntax:\n"
             + "    parameters:\n"
-            + "    - description: Some desc 5\n"
-            + "      name: Some name 5\n"
-            + "      type: <xref href=\"Some type 5?alt=Some type 5&text=Some type 5\" data-throw-if-not-resolved=\"False\" />\n"));
+            + "    - description: \"Some desc 5\"\n"
+            + "      name: \"Some name 5\"\n"
+            + "      type: \"<xref href=\\\"Some type 5?alt=Some type 5&text=Some type 5\\\" data-throw-if-not-resolved=\\\"False\\\" />\"\n"));
     }
 
     @Test

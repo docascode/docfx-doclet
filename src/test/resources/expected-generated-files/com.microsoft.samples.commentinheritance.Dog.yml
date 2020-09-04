@@ -1,43 +1,43 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.commentinheritance.Dog
-fullName: com.microsoft.samples.commentinheritance.Dog
-name: Dog
-nameWithType: Dog
-summary: Canine and man's best friend.
+uid: "com.microsoft.samples.commentinheritance.Dog"
+fullName: "com.microsoft.samples.commentinheritance.Dog"
+name: "Dog"
+nameWithType: "Dog"
+summary: "Canine and man's best friend."
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
-- <xref href="com.microsoft.samples.commentinheritance.Animal" data-throw-if-not-resolved="False" />
-- <xref href="com.microsoft.samples.commentinheritance.Mammal" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
+- "<xref href=\"com.microsoft.samples.commentinheritance.Animal\" data-throw-if-not-resolved=\"False\" />"
+- "<xref href=\"com.microsoft.samples.commentinheritance.Mammal\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- com.microsoft.samples.commentinheritance.Animal.breathe()
-- com.microsoft.samples.commentinheritance.Animal.feed()
-- com.microsoft.samples.commentinheritance.Animal.verballyCommunicate()
-- com.microsoft.samples.commentinheritance.Mammal.getKind()
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public class Dog extends Mammal implements Omnivorous, Viviparous
+- "com.microsoft.samples.commentinheritance.Animal.breathe()"
+- "com.microsoft.samples.commentinheritance.Animal.feed()"
+- "com.microsoft.samples.commentinheritance.Animal.verballyCommunicate()"
+- "com.microsoft.samples.commentinheritance.Mammal.getKind()"
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class Dog extends Mammal implements Omnivorous, Viviparous"
 constructors:
-- com.microsoft.samples.commentinheritance.Dog.Dog()
+- "com.microsoft.samples.commentinheritance.Dog.Dog()"
 methods:
-- com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Animal)
-- com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)
-- com.microsoft.samples.commentinheritance.Dog.feed()
-- com.microsoft.samples.commentinheritance.Dog.getHairColor()
-- com.microsoft.samples.commentinheritance.Dog.getKind()
-- com.microsoft.samples.commentinheritance.Dog.giveBirth(int)
-- com.microsoft.samples.commentinheritance.Dog.verballyCommunicate()
-type: class
+- "com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Animal)"
+- "com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
+- "com.microsoft.samples.commentinheritance.Dog.feed()"
+- "com.microsoft.samples.commentinheritance.Dog.getHairColor()"
+- "com.microsoft.samples.commentinheritance.Dog.getKind()"
+- "com.microsoft.samples.commentinheritance.Dog.giveBirth(int)"
+- "com.microsoft.samples.commentinheritance.Dog.verballyCommunicate()"
+type: "class"
 implements:
-- <xref href="com.microsoft.samples.commentinheritance.Omnivorous?alt=com.microsoft.samples.commentinheritance.Omnivorous&text=Omnivorous" data-throw-if-not-resolved="False" />
-- <xref href="com.microsoft.samples.commentinheritance.Viviparous?alt=com.microsoft.samples.commentinheritance.Viviparous&text=Viviparous" data-throw-if-not-resolved="False" />
+- "<xref href=\"com.microsoft.samples.commentinheritance.Omnivorous?alt=com.microsoft.samples.commentinheritance.Omnivorous&text=Omnivorous\" data-throw-if-not-resolved=\"False\" />"
+- "<xref href=\"com.microsoft.samples.commentinheritance.Viviparous?alt=com.microsoft.samples.commentinheritance.Viviparous&text=Viviparous\" data-throw-if-not-resolved=\"False\" />"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

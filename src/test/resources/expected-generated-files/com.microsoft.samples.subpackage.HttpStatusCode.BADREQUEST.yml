@@ -1,14 +1,14 @@
 ### YamlMime:JavaMember
-uid: com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST
-fullName: com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST
-name: BADREQUEST
-nameWithType: HttpStatusCode.BADREQUEST
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST"
+fullName: "com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST"
+name: "BADREQUEST"
+nameWithType: "HttpStatusCode.BADREQUEST"
 members:
-- uid: com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST
-  fullName: com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST
-  name: BADREQUEST
-  nameWithType: HttpStatusCode.BADREQUEST
-  syntax: public static final int BADREQUEST
-type: field
+- uid: "com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST"
+  fullName: "com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST"
+  name: "BADREQUEST"
+  nameWithType: "HttpStatusCode.BADREQUEST"
+  syntax: "public static final int BADREQUEST"
+type: "field"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"

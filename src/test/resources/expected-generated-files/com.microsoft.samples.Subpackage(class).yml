@@ -1,25 +1,25 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.Subpackage
-fullName: com.microsoft.samples.Subpackage
-name: Subpackage
-nameWithType: Subpackage
+uid: "com.microsoft.samples.Subpackage"
+fullName: "com.microsoft.samples.Subpackage"
+name: "Subpackage"
+nameWithType: "Subpackage"
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public class Subpackage
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class Subpackage"
 constructors:
-- com.microsoft.samples.Subpackage.Subpackage()
-type: class
+- "com.microsoft.samples.Subpackage.Subpackage()"
+type: "class"
 metadata: {}
-package: com.microsoft.samples
+package: "com.microsoft.samples"

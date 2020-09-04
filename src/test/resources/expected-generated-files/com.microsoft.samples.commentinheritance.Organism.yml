@@ -1,11 +1,11 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.commentinheritance.Organism
-fullName: com.microsoft.samples.commentinheritance.Organism
-name: Organism
-nameWithType: Organism
-syntax: public interface Organism
+uid: "com.microsoft.samples.commentinheritance.Organism"
+fullName: "com.microsoft.samples.commentinheritance.Organism"
+name: "Organism"
+nameWithType: "Organism"
+syntax: "public interface Organism"
 methods:
-- com.microsoft.samples.commentinheritance.Organism.getKind()
-type: interface
+- "com.microsoft.samples.commentinheritance.Organism.getKind()"
+type: "interface"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

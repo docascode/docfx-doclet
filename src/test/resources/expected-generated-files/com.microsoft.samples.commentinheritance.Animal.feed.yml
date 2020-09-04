@@ -1,15 +1,15 @@
 ### YamlMime:JavaMember
-uid: com.microsoft.samples.commentinheritance.Animal.feed*
-fullName: com.microsoft.samples.commentinheritance.Animal.feed
-name: feed
-nameWithType: Animal.feed
+uid: "com.microsoft.samples.commentinheritance.Animal.feed*"
+fullName: "com.microsoft.samples.commentinheritance.Animal.feed"
+name: "feed"
+nameWithType: "Animal.feed"
 members:
-- uid: com.microsoft.samples.commentinheritance.Animal.feed()
-  fullName: com.microsoft.samples.commentinheritance.Animal.feed()
-  name: feed()
-  nameWithType: Animal.feed()
-  summary: Feed offspring.
-  syntax: public abstract void feed()
-type: method
+- uid: "com.microsoft.samples.commentinheritance.Animal.feed()"
+  fullName: "com.microsoft.samples.commentinheritance.Animal.feed()"
+  name: "feed()"
+  nameWithType: "Animal.feed()"
+  summary: "Feed offspring."
+  syntax: "public abstract void feed()"
+type: "method"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

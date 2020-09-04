@@ -1,25 +1,25 @@
 ### YamlMime:JavaType
-uid: com.microsoft.samples.commentinheritance.Herbivorous.Plant
-fullName: com.microsoft.samples.commentinheritance.Herbivorous.Plant
-name: Herbivorous.Plant
-nameWithType: Herbivorous.Plant
+uid: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+fullName: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+name: "Herbivorous.Plant"
+nameWithType: "Herbivorous.Plant"
 inheritances:
-- <xref href="java.lang.Object" data-throw-if-not-resolved="False" />
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
 inheritedMembers:
-- java.lang.Object.clone()
-- java.lang.Object.equals(java.lang.Object)
-- java.lang.Object.finalize()
-- java.lang.Object.getClass()
-- java.lang.Object.hashCode()
-- java.lang.Object.notify()
-- java.lang.Object.notifyAll()
-- java.lang.Object.toString()
-- java.lang.Object.wait()
-- java.lang.Object.wait(long)
-- java.lang.Object.wait(long,int)
-syntax: public static class Herbivorous.Plant
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public static class Herbivorous.Plant"
 constructors:
-- com.microsoft.samples.commentinheritance.Herbivorous.Plant.Plant()
-type: class
+- "com.microsoft.samples.commentinheritance.Herbivorous.Plant.Plant()"
+type: "class"
 metadata: {}
-package: com.microsoft.samples.commentinheritance
+package: "com.microsoft.samples.commentinheritance"

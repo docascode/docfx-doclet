@@ -1,14 +1,14 @@
 ### YamlMime:JavaMember
-uid: com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT
-fullName: com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT
-name: CONFLICT
-nameWithType: HttpStatusCode.CONFLICT
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT"
+fullName: "com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT"
+name: "CONFLICT"
+nameWithType: "HttpStatusCode.CONFLICT"
 members:
-- uid: com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT
-  fullName: com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT
-  name: CONFLICT
-  nameWithType: HttpStatusCode.CONFLICT
-  syntax: public static final int CONFLICT
-type: field
+- uid: "com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT"
+  fullName: "com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT"
+  name: "CONFLICT"
+  nameWithType: "HttpStatusCode.CONFLICT"
+  syntax: "public static final int CONFLICT"
+type: "field"
 metadata: {}
-package: com.microsoft.samples.subpackage
+package: "com.microsoft.samples.subpackage"
