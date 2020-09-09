@@ -2,7 +2,7 @@ package com.microsoft.model;
 
 import com.microsoft.util.YamlUtil;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 
 public class TocFile extends ArrayList<TocItem> implements YmlFile {
 
@@ -20,6 +20,7 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
     }
 
     public ArrayList<TocItem> getItems() {
+        Collections.sort(items, Comparator.comparing(TocItem::getUid));
         return items;
     }
 

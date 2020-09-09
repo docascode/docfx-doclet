@@ -32,6 +32,8 @@ public class TocItem implements Comparable<TocItem>{
     }
 
     public Set<TocItem> getItems() {
+        Set<TocItem> sortedSet = new TreeSet<>(this.items);
+        this.items = sortedSet;
         return items;
     }
 
