@@ -395,6 +395,12 @@ public class YmlFilesBuilder {
                         populateUidValues(item.getSummary(), lookupContext)
                 ));
 
+                for(MetadataFileItem child :item.getChildren()) {
+                    child.setSummary(YamlUtil.convertHtmlToMarkdown(
+                            populateUidValues(child.getSummary(), lookupContext)
+                    ));
+                }
+
                 Optional.ofNullable(item.getSyntax()).ifPresent(syntax -> {
                             Optional.ofNullable(syntax.getParameters()).ifPresent(
                                     methodParams -> methodParams.forEach(

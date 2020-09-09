@@ -8,7 +8,7 @@ members:
   fullName: "com.microsoft.samples.SuperHero.getLastName()"
   name: "getLastName()"
   nameWithType: "SuperHero.getLastName()"
-  summary: "Get capitalized last name. But it's not the end,\n because of multiline comment"
+  summary: "Get capitalized last name. But it's not the end, because of multiline comment"
   overridden: "com.microsoft.samples.subpackage.Person.getLastName()"
   syntax: "public String getLastName()"
   returns:
