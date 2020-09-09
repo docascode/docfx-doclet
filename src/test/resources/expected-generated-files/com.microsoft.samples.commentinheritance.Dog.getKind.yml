@@ -8,7 +8,7 @@ members:
   fullName: "com.microsoft.samples.commentinheritance.Dog.getKind()"
   name: "getKind()"
   nameWithType: "Dog.getKind()"
-  summary: "Get kind from Organism.\n Get kind from Animal.\n Get kind from Mammal.\n Get kind from Dog."
+  summary: "Get kind from Organism. Get kind from Animal. Get kind from Mammal. Get kind from Dog."
   overridden: "com.microsoft.samples.commentinheritance.Mammal.getKind()"
   syntax: "public String getKind()"
   returns:
