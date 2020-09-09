@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TocItem {
+public class TocItem implements Comparable<TocItem>{
 
     private final String uid;
     private final String name;
@@ -53,4 +53,9 @@ public class TocItem {
 
         return uid.equals(that.uid);
     }
+
+    @Override
+    public int compareTo(TocItem item) {
+        return this.getUid().compareTo(item.getUid());
+        }
 }
