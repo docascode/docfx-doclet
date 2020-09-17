@@ -1,0 +1,19 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Carnivorous.eat*"
+fullName: "com.microsoft.samples.commentinheritance.Carnivorous.eat"
+name: "eat"
+nameWithType: "Carnivorous.eat"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Carnivorous.eat(com.microsoft.samples.commentinheritance.Animal)"
+  fullName: "com.microsoft.samples.commentinheritance.Carnivorous.eat(Animal animalBeingEaten)"
+  name: "eat(Animal animalBeingEaten)"
+  nameWithType: "Carnivorous.eat(Animal animalBeingEaten)"
+  summary: "Eat the provided animal."
+  parameters:
+  - description: "Animal that will be eaten."
+    name: "animalBeingEaten"
+    type: "<xref href=\"com.microsoft.samples.commentinheritance.Animal?alt=com.microsoft.samples.commentinheritance.Animal&text=Animal\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public abstract void eat(Animal animalBeingEaten)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

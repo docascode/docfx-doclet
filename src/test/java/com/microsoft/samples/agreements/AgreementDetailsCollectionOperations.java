@@ -31,4 +31,9 @@ public class AgreementDetailsCollectionOperations
     {
         return null;
     }
+
+    public ResourceCollection<AgreementMetaData> get(String id)
+    {
+        return null;
+    }
 }

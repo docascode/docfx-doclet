@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.Link.getMethod*"
+fullName: "com.microsoft.samples.Link.getMethod"
+name: "getMethod"
+nameWithType: "Link.getMethod"
+members:
+- uid: "com.microsoft.samples.Link.getMethod()"
+  fullName: "com.microsoft.samples.Link.getMethod()"
+  name: "getMethod()"
+  nameWithType: "Link.getMethod()"
+  syntax: "public String getMethod()"
+  returns:
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

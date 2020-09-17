@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.Link.setHeaders*"
+fullName: "com.microsoft.samples.Link.setHeaders"
+name: "setHeaders"
+nameWithType: "Link.setHeaders"
+members:
+- uid: "com.microsoft.samples.Link.setHeaders(java.util.Collection<com.microsoft.samples.KeyValuePair<java.lang.String,java.lang.String>>)"
+  fullName: "com.microsoft.samples.Link.setHeaders(Collection<KeyValuePair<String,String>> value)"
+  name: "setHeaders(Collection<KeyValuePair<String,String>> value)"
+  nameWithType: "Link.setHeaders(Collection<KeyValuePair<String,String>> value)"
+  parameters:
+  - name: "value"
+    type: "<xref href=\"java.util.Collection?alt=java.util.Collection&text=Collection\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"com.microsoft.samples.KeyValuePair?alt=com.microsoft.samples.KeyValuePair&text=KeyValuePair\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />,<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />&gt;&gt;"
+  syntax: "public void setHeaders(Collection<KeyValuePair<String,String>> value)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

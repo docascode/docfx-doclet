@@ -1,0 +1,15 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Animal.breathe*"
+fullName: "com.microsoft.samples.commentinheritance.Animal.breathe"
+name: "breathe"
+nameWithType: "Animal.breathe"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Animal.breathe()"
+  fullName: "com.microsoft.samples.commentinheritance.Animal.breathe()"
+  name: "breathe()"
+  nameWithType: "Animal.breathe()"
+  summary: "Breathe."
+  syntax: "public void breathe()"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

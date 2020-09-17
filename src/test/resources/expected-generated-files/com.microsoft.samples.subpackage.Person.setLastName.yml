@@ -1,0 +1,22 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Person.setLastName*"
+fullName: "com.microsoft.samples.subpackage.Person<T>.setLastName"
+name: "setLastName"
+nameWithType: "Person<T>.setLastName"
+members:
+- uid: "com.microsoft.samples.subpackage.Person.setLastName()"
+  fullName: "com.microsoft.samples.subpackage.Person<T>.setLastName()"
+  name: "setLastName()"
+  nameWithType: "Person<T>.setLastName()"
+  syntax: "public void setLastName()"
+- uid: "com.microsoft.samples.subpackage.Person.setLastName(java.lang.String)"
+  fullName: "com.microsoft.samples.subpackage.Person<T>.setLastName(String lastName)"
+  name: "setLastName(String lastName)"
+  nameWithType: "Person<T>.setLastName(String lastName)"
+  parameters:
+  - name: "lastName"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setLastName(String lastName)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

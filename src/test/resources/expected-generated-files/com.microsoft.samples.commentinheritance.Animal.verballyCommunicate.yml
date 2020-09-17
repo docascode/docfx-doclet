@@ -1,0 +1,15 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Animal.verballyCommunicate*"
+fullName: "com.microsoft.samples.commentinheritance.Animal.verballyCommunicate"
+name: "verballyCommunicate"
+nameWithType: "Animal.verballyCommunicate"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Animal.verballyCommunicate()"
+  fullName: "com.microsoft.samples.commentinheritance.Animal.verballyCommunicate()"
+  name: "verballyCommunicate()"
+  nameWithType: "Animal.verballyCommunicate()"
+  summary: "Communicate verbally."
+  syntax: "public abstract void verballyCommunicate()"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

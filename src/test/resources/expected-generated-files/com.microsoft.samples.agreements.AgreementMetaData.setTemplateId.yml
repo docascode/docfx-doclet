@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementMetaData.setTemplateId*"
+fullName: "com.microsoft.samples.agreements.AgreementMetaData.setTemplateId"
+name: "setTemplateId"
+nameWithType: "AgreementMetaData.setTemplateId"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementMetaData.setTemplateId(java.lang.String)"
+  fullName: "com.microsoft.samples.agreements.AgreementMetaData.setTemplateId(String value)"
+  name: "setTemplateId(String value)"
+  nameWithType: "AgreementMetaData.setTemplateId(String value)"
+  parameters:
+  - name: "value"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setTemplateId(String value)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.agreements"

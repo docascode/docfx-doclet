@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.setDefense*"
+fullName: "com.microsoft.samples.SuperHero.setDefense"
+name: "setDefense"
+nameWithType: "SuperHero.setDefense"
+members:
+- uid: "com.microsoft.samples.SuperHero.setDefense(int)"
+  fullName: "com.microsoft.samples.SuperHero.setDefense(int defense)"
+  name: "setDefense(int defense)"
+  nameWithType: "SuperHero.setDefense(int defense)"
+  parameters:
+  - name: "defense"
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setDefense(int defense)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

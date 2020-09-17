@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Viviparous.getKind*"
+fullName: "com.microsoft.samples.commentinheritance.Viviparous.getKind"
+name: "getKind"
+nameWithType: "Viviparous.getKind"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Viviparous.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Viviparous.getKind()"
+  name: "getKind()"
+  nameWithType: "Viviparous.getKind()"
+  summary: "Get kind from Viviparous."
+  syntax: "public abstract String getKind()"
+  returns:
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

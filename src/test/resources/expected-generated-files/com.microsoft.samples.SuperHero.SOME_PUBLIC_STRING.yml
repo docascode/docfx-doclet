@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
+fullName: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
+name: "SOME_PUBLIC_STRING"
+nameWithType: "SuperHero.SOME_PUBLIC_STRING"
+members:
+- uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
+  fullName: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
+  name: "SOME_PUBLIC_STRING"
+  nameWithType: "SuperHero.SOME_PUBLIC_STRING"
+  syntax: "public final String SOME_PUBLIC_STRING"
+type: "field"
+metadata: {}
+package: "com.microsoft.samples"

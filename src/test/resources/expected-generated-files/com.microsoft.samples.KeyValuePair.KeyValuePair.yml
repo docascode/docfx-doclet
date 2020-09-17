@@ -1,0 +1,24 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.KeyValuePair.KeyValuePair*"
+fullName: "com.microsoft.samples.KeyValuePair<K,V>.KeyValuePair"
+name: "KeyValuePair"
+nameWithType: "KeyValuePair<K,V>.KeyValuePair"
+members:
+- uid: "com.microsoft.samples.KeyValuePair.KeyValuePair()"
+  fullName: "com.microsoft.samples.KeyValuePair<K,V>.KeyValuePair()"
+  name: "KeyValuePair()"
+  nameWithType: "KeyValuePair<K,V>.KeyValuePair()"
+  syntax: "public KeyValuePair()"
+- uid: "com.microsoft.samples.KeyValuePair.KeyValuePair(K,V)"
+  fullName: "com.microsoft.samples.KeyValuePair<K,V>.KeyValuePair(K key, V value)"
+  name: "KeyValuePair(K key, V value)"
+  nameWithType: "KeyValuePair<K,V>.KeyValuePair(K key, V value)"
+  parameters:
+  - name: "key"
+    type: "<xref href=\"K?alt=K&text=K\" data-throw-if-not-resolved=\"False\" />"
+  - name: "value"
+    type: "<xref href=\"V?alt=V&text=V\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public KeyValuePair(K key, V value)"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples"

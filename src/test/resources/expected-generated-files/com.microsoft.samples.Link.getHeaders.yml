@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.Link.getHeaders*"
+fullName: "com.microsoft.samples.Link.getHeaders"
+name: "getHeaders"
+nameWithType: "Link.getHeaders"
+members:
+- uid: "com.microsoft.samples.Link.getHeaders()"
+  fullName: "com.microsoft.samples.Link.getHeaders()"
+  name: "getHeaders()"
+  nameWithType: "Link.getHeaders()"
+  syntax: "public Collection<KeyValuePair<String,String>> getHeaders()"
+  returns:
+    type: "<xref href=\"java.util.Collection?alt=java.util.Collection&text=Collection\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"com.microsoft.samples.KeyValuePair?alt=com.microsoft.samples.KeyValuePair&text=KeyValuePair\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />,<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />&gt;&gt;"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

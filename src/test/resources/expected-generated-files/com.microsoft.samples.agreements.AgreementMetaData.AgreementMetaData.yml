@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData*"
+fullName: "com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData"
+name: "AgreementMetaData"
+nameWithType: "AgreementMetaData.AgreementMetaData"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData()"
+  fullName: "com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData()"
+  name: "AgreementMetaData()"
+  nameWithType: "AgreementMetaData.AgreementMetaData()"
+  syntax: "public AgreementMetaData()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.agreements"

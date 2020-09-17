@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.getHeroName*"
+fullName: "com.microsoft.samples.SuperHero.getHeroName"
+name: "getHeroName"
+nameWithType: "SuperHero.getHeroName"
+members:
+- uid: "com.microsoft.samples.SuperHero.getHeroName()"
+  fullName: "com.microsoft.samples.SuperHero.getHeroName()"
+  name: "getHeroName()"
+  nameWithType: "SuperHero.getHeroName()"
+  syntax: "public String getHeroName()"
+  returns:
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

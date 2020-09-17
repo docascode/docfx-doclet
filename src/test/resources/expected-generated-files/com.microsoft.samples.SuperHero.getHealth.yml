@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.getHealth*"
+fullName: "com.microsoft.samples.SuperHero.getHealth"
+name: "getHealth"
+nameWithType: "SuperHero.getHealth"
+members:
+- uid: "com.microsoft.samples.SuperHero.getHealth()"
+  fullName: "com.microsoft.samples.SuperHero.getHealth()"
+  name: "getHealth()"
+  nameWithType: "SuperHero.getHealth()"
+  syntax: "protected int getHealth()"
+  returns:
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

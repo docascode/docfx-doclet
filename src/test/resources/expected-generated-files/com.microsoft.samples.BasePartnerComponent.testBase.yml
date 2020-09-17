@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.BasePartnerComponent.testBase*"
+fullName: "com.microsoft.samples.BasePartnerComponent<TContext>.testBase"
+name: "testBase"
+nameWithType: "BasePartnerComponent<TContext>.testBase"
+members:
+- uid: "com.microsoft.samples.BasePartnerComponent.testBase()"
+  fullName: "com.microsoft.samples.BasePartnerComponent<TContext>.testBase()"
+  name: "testBase()"
+  nameWithType: "BasePartnerComponent<TContext>.testBase()"
+  syntax: "protected void testBase()"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

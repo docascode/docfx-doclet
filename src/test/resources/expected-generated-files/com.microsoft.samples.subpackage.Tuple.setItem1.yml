@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Tuple.setItem1*"
+fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.setItem1"
+name: "setItem1"
+nameWithType: "Tuple<T1,T2>.setItem1"
+members:
+- uid: "com.microsoft.samples.subpackage.Tuple.setItem1(T1)"
+  fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.setItem1(T1 item1)"
+  name: "setItem1(T1 item1)"
+  nameWithType: "Tuple<T1,T2>.setItem1(T1 item1)"
+  parameters:
+  - name: "item1"
+    type: "<xref href=\"T1?alt=T1&text=T1\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setItem1(T1 item1)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

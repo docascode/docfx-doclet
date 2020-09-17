@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Tuple.getItem2*"
+fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.getItem2"
+name: "getItem2"
+nameWithType: "Tuple<T1,T2>.getItem2"
+members:
+- uid: "com.microsoft.samples.subpackage.Tuple.getItem2()"
+  fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.getItem2()"
+  name: "getItem2()"
+  nameWithType: "Tuple<T1,T2>.getItem2()"
+  syntax: "public T2 getItem2()"
+  returns:
+    type: "<xref href=\"T2?alt=T2&text=T2\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

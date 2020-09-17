@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Display.show*"
+fullName: "com.microsoft.samples.subpackage.Display<T,R>.show"
+name: "show"
+nameWithType: "Display<T,R>.show"
+members:
+- uid: "com.microsoft.samples.subpackage.Display.show()"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>.show()"
+  name: "show()"
+  nameWithType: "Display<T,R>.show()"
+  syntax: "public abstract void show()"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

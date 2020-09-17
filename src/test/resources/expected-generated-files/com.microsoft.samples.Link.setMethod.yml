@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.Link.setMethod*"
+fullName: "com.microsoft.samples.Link.setMethod"
+name: "setMethod"
+nameWithType: "Link.setMethod"
+members:
+- uid: "com.microsoft.samples.Link.setMethod(java.lang.String)"
+  fullName: "com.microsoft.samples.Link.setMethod(String value)"
+  name: "setMethod(String value)"
+  nameWithType: "Link.setMethod(String value)"
+  parameters:
+  - name: "value"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setMethod(String value)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

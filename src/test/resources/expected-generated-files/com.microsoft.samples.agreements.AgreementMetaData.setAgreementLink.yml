@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementMetaData.setAgreementLink*"
+fullName: "com.microsoft.samples.agreements.AgreementMetaData.setAgreementLink"
+name: "setAgreementLink"
+nameWithType: "AgreementMetaData.setAgreementLink"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementMetaData.setAgreementLink(java.lang.String)"
+  fullName: "com.microsoft.samples.agreements.AgreementMetaData.setAgreementLink(String value)"
+  name: "setAgreementLink(String value)"
+  nameWithType: "AgreementMetaData.setAgreementLink(String value)"
+  parameters:
+  - name: "value"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setAgreementLink(String value)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.agreements"

@@ -1,0 +1,18 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Dog.giveBirth*"
+fullName: "com.microsoft.samples.commentinheritance.Dog.giveBirth"
+name: "giveBirth"
+nameWithType: "Dog.giveBirth"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Dog.giveBirth(int)"
+  fullName: "com.microsoft.samples.commentinheritance.Dog.giveBirth(int numberPuppies)"
+  name: "giveBirth(int numberPuppies)"
+  nameWithType: "Dog.giveBirth(int numberPuppies)"
+  parameters:
+  - description: "Number of puppies being born."
+    name: "numberPuppies"
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void giveBirth(int numberPuppies)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN"
+fullName: "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN"
+name: "FORBIDDEN"
+nameWithType: "HttpStatusCode.FORBIDDEN"
+members:
+- uid: "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN"
+  fullName: "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN"
+  name: "FORBIDDEN"
+  nameWithType: "HttpStatusCode.FORBIDDEN"
+  syntax: "public static final int FORBIDDEN"
+type: "field"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

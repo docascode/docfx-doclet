@@ -1,0 +1,28 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.SuperHero*"
+fullName: "com.microsoft.samples.SuperHero.SuperHero"
+name: "SuperHero"
+nameWithType: "SuperHero.SuperHero"
+members:
+- uid: "com.microsoft.samples.SuperHero.SuperHero()"
+  fullName: "com.microsoft.samples.SuperHero.SuperHero()"
+  name: "SuperHero()"
+  nameWithType: "SuperHero.SuperHero()"
+  syntax: "public SuperHero()"
+- uid: "com.microsoft.samples.SuperHero.SuperHero(java.lang.String,java.lang.String,int,int)"
+  fullName: "com.microsoft.samples.SuperHero.SuperHero(String heroName, String uniquePower, int health, int defense)"
+  name: "SuperHero(String heroName, String uniquePower, int health, int defense)"
+  nameWithType: "SuperHero.SuperHero(String heroName, String uniquePower, int health, int defense)"
+  parameters:
+  - name: "heroName"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  - name: "uniquePower"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  - name: "health"
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+  - name: "defense"
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public SuperHero(String heroName, String uniquePower, int health, int defense)"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples"

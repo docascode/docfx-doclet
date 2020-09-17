@@ -19,30 +19,31 @@ public class YamlUtilTest {
     @Test
     public void objectToYamlString() {
         MetadataFile metadataFile = new MetadataFile("", "SomeFileName");
-        metadataFile.getItems().add(buildMetadataFileItem(3));
-        metadataFile.getReferences().add(buildMetadataFileItem(5));
+        metadataFile.getItems().add(buildMetadataFileItem(3, "method"));
+        metadataFile.getReferences().add(buildMetadataFileItem(5, ""));
 
-        String result = YamlUtil.objectToYamlString(metadataFile);
+        String result = YamlUtil.objectToYamlString(metadataFile, "SomeFileName");
 
         assertThat("Wrong result", result, is(""
             + "items:\n"
             + "- uid: \"Some uid 3\"\n"
             + "  id: \"Some id3\"\n"
             + "  href: \"Some href3\"\n"
+            + "  type: \"method\"\n"
             + "  syntax:\n"
             + "    parameters:\n"
-            + "    - id: \"Some id 3\"\n"
-            + "      type: \"Some type 3\"\n"
-            + "      description: \"Some desc 3\"\n"
+            + "    - description: \"Some desc 3\"\n"
+            + "      name: \"Some name 3\"\n"
+            + "      type: \"<xref href=\\\"Some type 3?alt=Some type 3&text=Some type 3\\\" data-throw-if-not-resolved=\\\"False\\\" />\"\n"
             + "references:\n"
             + "- uid: \"Some uid 5\"\n"
             + "  id: \"Some id5\"\n"
             + "  href: \"Some href5\"\n"
             + "  syntax:\n"
             + "    parameters:\n"
-            + "    - id: \"Some id 5\"\n"
-            + "      type: \"Some type 5\"\n"
-            + "      description: \"Some desc 5\"\n"));
+            + "    - description: \"Some desc 5\"\n"
+            + "      name: \"Some name 5\"\n"
+            + "      type: \"<xref href=\\\"Some type 5?alt=Some type 5&text=Some type 5\\\" data-throw-if-not-resolved=\\\"False\\\" />\"\n"));
     }
 
     @Test
@@ -61,12 +62,13 @@ public class YamlUtilTest {
         assertThat("Wrong result for empty string", YamlUtil.convertHtmlToMarkdown(""), is(""));
     }
 
-    private MetadataFileItem buildMetadataFileItem(int seed) {
+    private MetadataFileItem buildMetadataFileItem(int seed, String type) {
         MetadataFileItem metadataFileItem = new MetadataFileItem("Some uid " + seed);
         metadataFileItem.setId("Some id" + seed);
         metadataFileItem.setHref("Some href" + seed);
+        metadataFileItem.setType(type);
         metadataFileItem.setParameters(Collections.singletonList(
-            new MethodParameter("Some id " + seed, "Some type " + seed, "Some desc " + seed)));
+            new MethodParameter("Some name " + seed, "Some type " + seed, "Some desc " + seed)));
 
         return metadataFileItem;
     }

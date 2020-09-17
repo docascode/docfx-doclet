@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Display.hide*"
+fullName: "com.microsoft.samples.subpackage.Display<T,R>.hide"
+name: "hide"
+nameWithType: "Display<T,R>.hide"
+members:
+- uid: "com.microsoft.samples.subpackage.Display.hide()"
+  fullName: "com.microsoft.samples.subpackage.Display<T,R>.hide()"
+  name: "hide()"
+  nameWithType: "Display<T,R>.hide()"
+  syntax: "public abstract void hide()"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

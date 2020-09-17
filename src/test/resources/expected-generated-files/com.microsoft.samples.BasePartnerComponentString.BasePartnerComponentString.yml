@@ -1,0 +1,32 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString*"
+fullName: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString"
+name: "BasePartnerComponentString"
+nameWithType: "BasePartnerComponentString.BasePartnerComponentString"
+members:
+- uid: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString(com.microsoft.samples.IPartner)"
+  fullName: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString(IPartner rootPartnerOperations)"
+  name: "BasePartnerComponentString(IPartner rootPartnerOperations)"
+  nameWithType: "BasePartnerComponentString.BasePartnerComponentString(IPartner rootPartnerOperations)"
+  summary: "Initializes a new instance of the BasePartnerComponent class."
+  parameters:
+  - description: "The root partner operations that created this component."
+    name: "rootPartnerOperations"
+    type: "<xref href=\"com.microsoft.samples.IPartner?alt=com.microsoft.samples.IPartner&text=IPartner\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "protected BasePartnerComponentString(IPartner rootPartnerOperations)"
+- uid: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString(com.microsoft.samples.IPartner,java.lang.String)"
+  fullName: "com.microsoft.samples.BasePartnerComponentString.BasePartnerComponentString(IPartner rootPartnerOperations, String componentContext)"
+  name: "BasePartnerComponentString(IPartner rootPartnerOperations, String componentContext)"
+  nameWithType: "BasePartnerComponentString.BasePartnerComponentString(IPartner rootPartnerOperations, String componentContext)"
+  summary: "Initializes a new instance of the BasePartnerComponent class."
+  parameters:
+  - description: "The root partner operations that created this component."
+    name: "rootPartnerOperations"
+    type: "<xref href=\"com.microsoft.samples.IPartner?alt=com.microsoft.samples.IPartner&text=IPartner\" data-throw-if-not-resolved=\"False\" />"
+  - description: "A component context object to work with."
+    name: "componentContext"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "protected BasePartnerComponentString(IPartner rootPartnerOperations, String componentContext)"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples"

@@ -1,0 +1,19 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.getLastName*"
+fullName: "com.microsoft.samples.SuperHero.getLastName"
+name: "getLastName"
+nameWithType: "SuperHero.getLastName"
+members:
+- uid: "com.microsoft.samples.SuperHero.getLastName()"
+  fullName: "com.microsoft.samples.SuperHero.getLastName()"
+  name: "getLastName()"
+  nameWithType: "SuperHero.getLastName()"
+  summary: "Get capitalized last name. But it's not the end, because of multiline comment"
+  overridden: "com.microsoft.samples.subpackage.Person.getLastName()"
+  syntax: "public String getLastName()"
+  returns:
+    description: "lastName in uppercase. But it's not the end,\n because of multiline comment"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

@@ -1,0 +1,22 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.ReturnNull*"
+fullName: "com.microsoft.samples.SuperHero.<V>ReturnNull"
+name: "<V>ReturnNull"
+nameWithType: "SuperHero.<V>ReturnNull"
+members:
+- uid: "com.microsoft.samples.SuperHero.<V>ReturnNull(java.lang.Class<V>)"
+  fullName: "com.microsoft.samples.SuperHero.<V>ReturnNull(Class<V> aClass)"
+  name: "<V>ReturnNull(Class<V> aClass)"
+  nameWithType: "SuperHero.<V>ReturnNull(Class<V> aClass)"
+  summary: "Returns a FileStoreAttributeView of the given type.\n\nThis method always returns null as no <xref uid=\"\" data-throw-if-not-resolved=\"false\">FileStoreAttributeView</xref> is currently supported."
+  parameters:
+  - description: "a class"
+    name: "aClass"
+    type: "<xref href=\"java.lang.Class?alt=java.lang.Class&text=Class\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"V?alt=V&text=V\" data-throw-if-not-resolved=\"False\" />&gt;"
+  syntax: "public V <V>ReturnNull(Class<V> aClass)"
+  returns:
+    description: "null"
+    type: "<xref href=\"V?alt=V&text=V\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

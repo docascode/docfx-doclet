@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.CustomException.CustomException*"
+fullName: "com.microsoft.samples.subpackage.CustomException.CustomException"
+name: "CustomException"
+nameWithType: "CustomException.CustomException"
+members:
+- uid: "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
+  fullName: "com.microsoft.samples.subpackage.CustomException.CustomException(String message)"
+  name: "CustomException(String message)"
+  nameWithType: "CustomException.CustomException(String message)"
+  parameters:
+  - name: "message"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public CustomException(String message)"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

@@ -18,7 +18,8 @@ public class FileUtil {
             Files.createDirectories(path.getParent());
             Files.write(path, content.getBytes());
         } catch (IOException ioe) {
-            throw new RuntimeException("Error during dump to file", ioe);
+            String exception = "Error during dump to file: " + fileName;
+            throw new RuntimeException(exception, ioe);
         }
     }
 

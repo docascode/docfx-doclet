@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Omnivorous.getKind*"
+fullName: "com.microsoft.samples.commentinheritance.Omnivorous.getKind"
+name: "getKind"
+nameWithType: "Omnivorous.getKind"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Omnivorous.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Omnivorous.getKind()"
+  name: "getKind()"
+  nameWithType: "Omnivorous.getKind()"
+  summary: "Get kind from Carnivorous. Get kind from Omnivorous."
+  syntax: "public abstract String getKind()"
+  returns:
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.setHeroName*"
+fullName: "com.microsoft.samples.SuperHero.setHeroName"
+name: "setHeroName"
+nameWithType: "SuperHero.setHeroName"
+members:
+- uid: "com.microsoft.samples.SuperHero.setHeroName(java.lang.String)"
+  fullName: "com.microsoft.samples.SuperHero.setHeroName(String heroName)"
+  name: "setHeroName(String heroName)"
+  nameWithType: "SuperHero.setHeroName(String heroName)"
+  parameters:
+  - name: "heroName"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setHeroName(String heroName)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

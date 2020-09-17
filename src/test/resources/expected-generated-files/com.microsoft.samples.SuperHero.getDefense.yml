@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.getDefense*"
+fullName: "com.microsoft.samples.SuperHero.getDefense"
+name: "getDefense"
+nameWithType: "SuperHero.getDefense"
+members:
+- uid: "com.microsoft.samples.SuperHero.getDefense()"
+  fullName: "com.microsoft.samples.SuperHero.getDefense()"
+  name: "getDefense()"
+  nameWithType: "SuperHero.getDefense()"
+  syntax: "public int getDefense()"
+  returns:
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

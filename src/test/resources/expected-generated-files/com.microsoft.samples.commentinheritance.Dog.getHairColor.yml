@@ -1,0 +1,18 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Dog.getHairColor*"
+fullName: "com.microsoft.samples.commentinheritance.Dog.getHairColor"
+name: "getHairColor"
+nameWithType: "Dog.getHairColor"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Dog.getHairColor()"
+  fullName: "com.microsoft.samples.commentinheritance.Dog.getHairColor()"
+  name: "getHairColor()"
+  nameWithType: "Dog.getHairColor()"
+  summary: "Provide the color of the dog's hair."
+  syntax: "public Color getHairColor()"
+  returns:
+    description: "Color of the dog's fur."
+    type: "<xref href=\"java.awt.Color?alt=java.awt.Color&text=Color\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

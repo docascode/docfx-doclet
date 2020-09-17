@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.offers.Offer.setResellerQualifications*"
+fullName: "com.microsoft.samples.offers.Offer.setResellerQualifications"
+name: "setResellerQualifications"
+nameWithType: "Offer.setResellerQualifications"
+members:
+- uid: "com.microsoft.samples.offers.Offer.setResellerQualifications(java.lang.String[])"
+  fullName: "com.microsoft.samples.offers.Offer.setResellerQualifications(String[] value)"
+  name: "setResellerQualifications(String[] value)"
+  nameWithType: "Offer.setResellerQualifications(String[] value)"
+  parameters:
+  - name: "value"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />[]"
+  syntax: "public void setResellerQualifications(String[] value)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.offers"

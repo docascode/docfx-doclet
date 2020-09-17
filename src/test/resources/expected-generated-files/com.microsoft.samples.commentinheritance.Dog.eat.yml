@@ -1,0 +1,29 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Dog.eat*"
+fullName: "com.microsoft.samples.commentinheritance.Dog.eat"
+name: "eat"
+nameWithType: "Dog.eat"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Animal)"
+  fullName: "com.microsoft.samples.commentinheritance.Dog.eat(Animal otherAnimal)"
+  name: "eat(Animal otherAnimal)"
+  nameWithType: "Dog.eat(Animal otherAnimal)"
+  summary: "Eat the provided animal."
+  parameters:
+  - description: "Tasty treat."
+    name: "otherAnimal"
+    type: "<xref href=\"com.microsoft.samples.commentinheritance.Animal?alt=com.microsoft.samples.commentinheritance.Animal&text=Animal\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void eat(Animal otherAnimal)"
+- uid: "com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
+  fullName: "com.microsoft.samples.commentinheritance.Dog.eat(Herbivorous.Plant plantToBeEaten)"
+  name: "eat(Herbivorous.Plant plantToBeEaten)"
+  nameWithType: "Dog.eat(Herbivorous.Plant plantToBeEaten)"
+  summary: "Eat the provided plant."
+  parameters:
+  - description: "Plant that this dog will eat."
+    name: "plantToBeEaten"
+    type: "<xref href=\"com.microsoft.samples.commentinheritance.Herbivorous.Plant?alt=com.microsoft.samples.commentinheritance.Herbivorous.Plant&text=Plant\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void eat(Herbivorous.Plant plantToBeEaten)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

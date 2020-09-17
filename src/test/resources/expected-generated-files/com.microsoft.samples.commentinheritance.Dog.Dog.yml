@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Dog.Dog*"
+fullName: "com.microsoft.samples.commentinheritance.Dog.Dog"
+name: "Dog"
+nameWithType: "Dog.Dog"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Dog.Dog()"
+  fullName: "com.microsoft.samples.commentinheritance.Dog.Dog()"
+  name: "Dog()"
+  nameWithType: "Dog.Dog()"
+  syntax: "public Dog()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

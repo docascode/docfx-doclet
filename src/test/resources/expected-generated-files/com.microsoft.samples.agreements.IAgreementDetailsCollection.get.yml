@@ -1,0 +1,28 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get*"
+fullName: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get"
+name: "get"
+nameWithType: "IAgreementDetailsCollection.get"
+members:
+- uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get()"
+  fullName: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get()"
+  name: "get()"
+  nameWithType: "IAgreementDetailsCollection.get()"
+  summary: "Retrieves all current agreement metadata."
+  syntax: "public abstract ResourceCollection<AgreementMetaData> get()"
+  returns:
+    description: "The current agreement metadata."
+    type: "<xref href=\"com.microsoft.samples.agreements.ResourceCollection?alt=com.microsoft.samples.agreements.ResourceCollection&text=ResourceCollection\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"com.microsoft.samples.agreements.AgreementMetaData?alt=com.microsoft.samples.agreements.AgreementMetaData&text=AgreementMetaData\" data-throw-if-not-resolved=\"False\" />&gt;"
+- uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get(java.lang.String)"
+  fullName: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get(String id)"
+  name: "get(String id)"
+  nameWithType: "IAgreementDetailsCollection.get(String id)"
+  parameters:
+  - name: "id"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public abstract ResourceCollection<AgreementMetaData> get(String id)"
+  returns:
+    type: "<xref href=\"com.microsoft.samples.agreements.ResourceCollection?alt=com.microsoft.samples.agreements.ResourceCollection&text=ResourceCollection\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"com.microsoft.samples.agreements.AgreementMetaData?alt=com.microsoft.samples.agreements.AgreementMetaData&text=AgreementMetaData\" data-throw-if-not-resolved=\"False\" />&gt;"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.agreements"

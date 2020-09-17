@@ -1,5 +1,7 @@
 package com.microsoft.samples.subpackage;
 
+import com.microsoft.samples.SuperHero;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -57,6 +59,8 @@ public class Person<T> {
 
     /**
      * We need to have this method that takes parameter and return types declared in the current class
+     * Test link {@link String}
+     * A person maybe a {@link SuperHero}
      */
     public static Person buildPerson(Person seed) {
         return seed;

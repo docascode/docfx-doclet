@@ -1,0 +1,19 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Tuple.Tuple*"
+fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.Tuple"
+name: "Tuple"
+nameWithType: "Tuple<T1,T2>.Tuple"
+members:
+- uid: "com.microsoft.samples.subpackage.Tuple.Tuple(T1,T2)"
+  fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>.Tuple(T1 item1, T2 item2)"
+  name: "Tuple(T1 item1, T2 item2)"
+  nameWithType: "Tuple<T1,T2>.Tuple(T1 item1, T2 item2)"
+  parameters:
+  - name: "item1"
+    type: "<xref href=\"T1?alt=T1&text=T1\" data-throw-if-not-resolved=\"False\" />"
+  - name: "item2"
+    type: "<xref href=\"T2?alt=T2&text=T2\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public Tuple(T1 item1, T2 item2)"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

@@ -1,0 +1,18 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Dog.getKind*"
+fullName: "com.microsoft.samples.commentinheritance.Dog.getKind"
+name: "getKind"
+nameWithType: "Dog.getKind"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Dog.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Dog.getKind()"
+  name: "getKind()"
+  nameWithType: "Dog.getKind()"
+  summary: "Get kind from Organism. Get kind from Animal. Get kind from Mammal. Get kind from Dog."
+  overridden: "com.microsoft.samples.commentinheritance.Mammal.getKind()"
+  syntax: "public String getKind()"
+  returns:
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

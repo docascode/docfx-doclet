@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Mammal.Mammal*"
+fullName: "com.microsoft.samples.commentinheritance.Mammal.Mammal"
+name: "Mammal"
+nameWithType: "Mammal.Mammal"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Mammal.Mammal()"
+  fullName: "com.microsoft.samples.commentinheritance.Mammal.Mammal()"
+  name: "Mammal()"
+  nameWithType: "Mammal.Mammal()"
+  syntax: "public Mammal()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

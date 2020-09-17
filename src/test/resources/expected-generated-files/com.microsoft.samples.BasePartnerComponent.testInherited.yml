@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.BasePartnerComponent.testInherited*"
+fullName: "com.microsoft.samples.BasePartnerComponent<TContext>.testInherited"
+name: "testInherited"
+nameWithType: "BasePartnerComponent<TContext>.testInherited"
+members:
+- uid: "com.microsoft.samples.BasePartnerComponent.testInherited()"
+  fullName: "com.microsoft.samples.BasePartnerComponent<TContext>.testInherited()"
+  name: "testInherited()"
+  nameWithType: "BasePartnerComponent<TContext>.testInherited()"
+  syntax: "protected void testInherited()"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

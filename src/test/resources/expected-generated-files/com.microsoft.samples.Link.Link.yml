@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.Link.Link*"
+fullName: "com.microsoft.samples.Link.Link"
+name: "Link"
+nameWithType: "Link.Link"
+members:
+- uid: "com.microsoft.samples.Link.Link()"
+  fullName: "com.microsoft.samples.Link.Link()"
+  name: "Link()"
+  nameWithType: "Link.Link()"
+  syntax: "public Link()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples"

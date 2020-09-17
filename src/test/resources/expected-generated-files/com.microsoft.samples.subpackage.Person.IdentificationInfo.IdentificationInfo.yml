@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo*"
+fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo"
+name: "IdentificationInfo"
+nameWithType: "Person.IdentificationInfo.IdentificationInfo"
+members:
+- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
+  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
+  name: "IdentificationInfo()"
+  nameWithType: "Person.IdentificationInfo.IdentificationInfo()"
+  syntax: "public IdentificationInfo()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

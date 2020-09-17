@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.Subpackage.Subpackage*"
+fullName: "com.microsoft.samples.Subpackage.Subpackage"
+name: "Subpackage"
+nameWithType: "Subpackage.Subpackage"
+members:
+- uid: "com.microsoft.samples.Subpackage.Subpackage()"
+  fullName: "com.microsoft.samples.Subpackage.Subpackage()"
+  name: "Subpackage()"
+  nameWithType: "Subpackage.Subpackage()"
+  syntax: "public Subpackage()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples"

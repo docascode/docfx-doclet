@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.KeyValuePair.getValue*"
+fullName: "com.microsoft.samples.KeyValuePair<K,V>.getValue"
+name: "getValue"
+nameWithType: "KeyValuePair<K,V>.getValue"
+members:
+- uid: "com.microsoft.samples.KeyValuePair.getValue()"
+  fullName: "com.microsoft.samples.KeyValuePair<K,V>.getValue()"
+  name: "getValue()"
+  nameWithType: "KeyValuePair<K,V>.getValue()"
+  syntax: "public V getValue()"
+  returns:
+    type: "<xref href=\"V?alt=V&text=V\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

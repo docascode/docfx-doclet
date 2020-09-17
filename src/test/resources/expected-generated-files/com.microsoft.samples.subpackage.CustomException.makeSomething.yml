@@ -1,0 +1,18 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.CustomException.makeSomething*"
+fullName: "com.microsoft.samples.subpackage.CustomException.makeSomething"
+name: "makeSomething"
+nameWithType: "CustomException.makeSomething"
+members:
+- uid: "com.microsoft.samples.subpackage.CustomException.makeSomething()"
+  fullName: "com.microsoft.samples.subpackage.CustomException.makeSomething()"
+  name: "makeSomething()"
+  nameWithType: "CustomException.makeSomething()"
+  summary: "We need to have such method that throw exception declared in the same class"
+  syntax: "public void makeSomething()"
+  exceptions:
+  - description: "with reason message"
+    type: "<xref href=\"com.microsoft.samples.subpackage.CustomException?alt=com.microsoft.samples.subpackage.CustomException&text=CustomException\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

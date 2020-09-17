@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Organism.getKind*"
+fullName: "com.microsoft.samples.commentinheritance.Organism.getKind"
+name: "getKind"
+nameWithType: "Organism.getKind"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Organism.getKind()"
+  fullName: "com.microsoft.samples.commentinheritance.Organism.getKind()"
+  name: "getKind()"
+  nameWithType: "Organism.getKind()"
+  summary: "Get kind from Organism."
+  syntax: "public abstract String getKind()"
+  returns:
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

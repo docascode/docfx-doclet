@@ -1,0 +1,19 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations*"
+fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations"
+name: "AgreementDetailsCollectionOperations"
+nameWithType: "AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
+  fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(IPartner rootPartnerOperations)"
+  name: "AgreementDetailsCollectionOperations(IPartner rootPartnerOperations)"
+  nameWithType: "AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(IPartner rootPartnerOperations)"
+  summary: "Initializes a new instance of the AgreementDetailsCollectionOperations class."
+  parameters:
+  - description: "The root partner operations instance."
+    name: "rootPartnerOperations"
+    type: "<xref href=\"com.microsoft.samples.IPartner?alt=com.microsoft.samples.IPartner&text=IPartner\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public AgreementDetailsCollectionOperations(IPartner rootPartnerOperations)"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.agreements"

@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementMetaData.getVersionRank*"
+fullName: "com.microsoft.samples.agreements.AgreementMetaData.getVersionRank"
+name: "getVersionRank"
+nameWithType: "AgreementMetaData.getVersionRank"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementMetaData.getVersionRank()"
+  fullName: "com.microsoft.samples.agreements.AgreementMetaData.getVersionRank()"
+  name: "getVersionRank()"
+  nameWithType: "AgreementMetaData.getVersionRank()"
+  syntax: "public int getVersionRank()"
+  returns:
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.agreements"

@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementMetaData.setVersionRank*"
+fullName: "com.microsoft.samples.agreements.AgreementMetaData.setVersionRank"
+name: "setVersionRank"
+nameWithType: "AgreementMetaData.setVersionRank"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementMetaData.setVersionRank(int)"
+  fullName: "com.microsoft.samples.agreements.AgreementMetaData.setVersionRank(int value)"
+  name: "setVersionRank(int value)"
+  nameWithType: "AgreementMetaData.setVersionRank(int value)"
+  parameters:
+  - name: "value"
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setVersionRank(int value)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.agreements"

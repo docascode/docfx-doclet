@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth*"
+fullName: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth"
+name: "giveBirth"
+nameWithType: "Viviparous.giveBirth"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth(int)"
+  fullName: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth(int numberOfOffspring)"
+  name: "giveBirth(int numberOfOffspring)"
+  nameWithType: "Viviparous.giveBirth(int numberOfOffspring)"
+  parameters:
+  - name: "numberOfOffspring"
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public abstract void giveBirth(int numberOfOffspring)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

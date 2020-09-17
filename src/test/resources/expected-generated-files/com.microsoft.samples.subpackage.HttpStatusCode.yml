@@ -1,0 +1,33 @@
+### YamlMime:JavaType
+uid: "com.microsoft.samples.subpackage.HttpStatusCode"
+fullName: "com.microsoft.samples.subpackage.HttpStatusCode"
+name: "HttpStatusCode"
+nameWithType: "HttpStatusCode"
+inheritances:
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
+inheritedMembers:
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class HttpStatusCode"
+constructors:
+- "com.microsoft.samples.subpackage.HttpStatusCode.HttpStatusCode()"
+fields:
+- "com.microsoft.samples.subpackage.HttpStatusCode.BADREQUEST"
+- "com.microsoft.samples.subpackage.HttpStatusCode.CONFLICT"
+- "com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED"
+- "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN"
+- "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND"
+- "com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE"
+- "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED"
+type: "class"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

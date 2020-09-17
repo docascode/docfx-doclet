@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.setUniquePower*"
+fullName: "com.microsoft.samples.SuperHero.setUniquePower"
+name: "setUniquePower"
+nameWithType: "SuperHero.setUniquePower"
+members:
+- uid: "com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)"
+  fullName: "com.microsoft.samples.SuperHero.setUniquePower(String uniquePower)"
+  name: "setUniquePower(String uniquePower)"
+  nameWithType: "SuperHero.setUniquePower(String uniquePower)"
+  parameters:
+  - name: "uniquePower"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public void setUniquePower(String uniquePower)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

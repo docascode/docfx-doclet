@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.Person.Person*"
+fullName: "com.microsoft.samples.subpackage.Person<T>.Person"
+name: "Person"
+nameWithType: "Person<T>.Person"
+members:
+- uid: "com.microsoft.samples.subpackage.Person.Person()"
+  fullName: "com.microsoft.samples.subpackage.Person<T>.Person()"
+  name: "Person()"
+  nameWithType: "Person<T>.Person()"
+  syntax: "public Person()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

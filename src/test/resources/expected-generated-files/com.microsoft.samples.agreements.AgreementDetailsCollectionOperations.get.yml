@@ -1,0 +1,28 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get*"
+fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get"
+name: "get"
+nameWithType: "AgreementDetailsCollectionOperations.get"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get()"
+  fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get()"
+  name: "get()"
+  nameWithType: "AgreementDetailsCollectionOperations.get()"
+  summary: "Retrieves the agreement details."
+  syntax: "public ResourceCollection<AgreementMetaData> get()"
+  returns:
+    description: "A list of agreement details."
+    type: "<xref href=\"com.microsoft.samples.agreements.ResourceCollection?alt=com.microsoft.samples.agreements.ResourceCollection&text=ResourceCollection\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"com.microsoft.samples.agreements.AgreementMetaData?alt=com.microsoft.samples.agreements.AgreementMetaData&text=AgreementMetaData\" data-throw-if-not-resolved=\"False\" />&gt;"
+- uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get(java.lang.String)"
+  fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get(String id)"
+  name: "get(String id)"
+  nameWithType: "AgreementDetailsCollectionOperations.get(String id)"
+  parameters:
+  - name: "id"
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "public ResourceCollection<AgreementMetaData> get(String id)"
+  returns:
+    type: "<xref href=\"com.microsoft.samples.agreements.ResourceCollection?alt=com.microsoft.samples.agreements.ResourceCollection&text=ResourceCollection\" data-throw-if-not-resolved=\"False\" />&lt;<xref href=\"com.microsoft.samples.agreements.AgreementMetaData?alt=com.microsoft.samples.agreements.AgreementMetaData&text=AgreementMetaData\" data-throw-if-not-resolved=\"False\" />&gt;"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.agreements"

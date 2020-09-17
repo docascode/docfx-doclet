@@ -1,45 +1,17 @@
-### YamlMime:ManagedReference
-items:
-- uid: "com.microsoft.samples.subpackage"
-  id: "subpackage"
-  children:
-  - "com.microsoft.samples.subpackage.CustomException"
-  - "com.microsoft.samples.subpackage.Display"
-  - "com.microsoft.samples.subpackage.Person"
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  - "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  - "com.microsoft.samples.subpackage.Tuple"
-  langs:
-  - "java"
-  name: "com.microsoft.samples.subpackage"
-  nameWithType: "com.microsoft.samples.subpackage"
-  fullName: "com.microsoft.samples.subpackage"
-  type: "Namespace"
-  summary: "This subpackage contains the sample set of classes for testing DocFx doclet."
-  syntax:
-    content: "package com.microsoft.samples.subpackage"
-references:
-- uid: "com.microsoft.samples.subpackage.CustomException"
-  name: "CustomException"
-  nameWithType: "CustomException"
-  fullName: "com.microsoft.samples.subpackage.CustomException"
-- uid: "com.microsoft.samples.subpackage.Display"
-  name: "Display<T,R>"
-  nameWithType: "Display<T,R>"
-  fullName: "com.microsoft.samples.subpackage.Display<T,R>"
-- uid: "com.microsoft.samples.subpackage.Person"
-  name: "Person<T>"
-  nameWithType: "Person<T>"
-  fullName: "com.microsoft.samples.subpackage.Person<T>"
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-  name: "Person.IdentificationInfo"
-  nameWithType: "Person.IdentificationInfo"
-  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
-- uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-  name: "Person.IdentificationInfo.Gender"
-  nameWithType: "Person.IdentificationInfo.Gender"
-  fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
-- uid: "com.microsoft.samples.subpackage.Tuple"
-  name: "Tuple<T1,T2>"
-  nameWithType: "Tuple<T1,T2>"
-  fullName: "com.microsoft.samples.subpackage.Tuple<T1,T2>"
+### YamlMime:JavaPackage
+uid: "com.microsoft.samples.subpackage"
+fullName: "com.microsoft.samples.subpackage"
+name: "com.microsoft.samples.subpackage"
+summary: "This subpackage contains the sample set of classes for testing DocFx doclet."
+classes:
+- "com.microsoft.samples.subpackage.CustomException"
+- "com.microsoft.samples.subpackage.HttpStatusCode"
+- "com.microsoft.samples.subpackage.Person"
+- "com.microsoft.samples.subpackage.Person.IdentificationInfo"
+- "com.microsoft.samples.subpackage.Tuple"
+enums:
+- "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+interfaces:
+- "com.microsoft.samples.subpackage.Display"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

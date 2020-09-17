@@ -1,0 +1,22 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.BasePartnerComponent.BasePartnerComponent*"
+fullName: "com.microsoft.samples.BasePartnerComponent<TContext>.BasePartnerComponent"
+name: "BasePartnerComponent"
+nameWithType: "BasePartnerComponent<TContext>.BasePartnerComponent"
+members:
+- uid: "com.microsoft.samples.BasePartnerComponent.BasePartnerComponent(com.microsoft.samples.IPartner,TContext)"
+  fullName: "com.microsoft.samples.BasePartnerComponent<TContext>.BasePartnerComponent(IPartner rootPartnerOperations, TContext componentContext)"
+  name: "BasePartnerComponent(IPartner rootPartnerOperations, TContext componentContext)"
+  nameWithType: "BasePartnerComponent<TContext>.BasePartnerComponent(IPartner rootPartnerOperations, TContext componentContext)"
+  summary: "Initializes a new instance of the BasePartnerComponent class."
+  parameters:
+  - description: "The root partner operations that created this component."
+    name: "rootPartnerOperations"
+    type: "<xref href=\"com.microsoft.samples.IPartner?alt=com.microsoft.samples.IPartner&text=IPartner\" data-throw-if-not-resolved=\"False\" />"
+  - description: "A component context object to work with."
+    name: "componentContext"
+    type: "<xref href=\"TContext?alt=TContext&text=TContext\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "protected BasePartnerComponent(IPartner rootPartnerOperations, TContext componentContext)"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples"

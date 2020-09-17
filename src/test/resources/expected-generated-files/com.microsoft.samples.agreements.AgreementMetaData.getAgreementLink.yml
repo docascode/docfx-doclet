@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.agreements.AgreementMetaData.getAgreementLink*"
+fullName: "com.microsoft.samples.agreements.AgreementMetaData.getAgreementLink"
+name: "getAgreementLink"
+nameWithType: "AgreementMetaData.getAgreementLink"
+members:
+- uid: "com.microsoft.samples.agreements.AgreementMetaData.getAgreementLink()"
+  fullName: "com.microsoft.samples.agreements.AgreementMetaData.getAgreementLink()"
+  name: "getAgreementLink()"
+  nameWithType: "AgreementMetaData.getAgreementLink()"
+  syntax: "public String getAgreementLink()"
+  returns:
+    type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.agreements"

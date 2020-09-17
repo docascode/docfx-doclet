@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.HttpStatusCode*"
+fullName: "com.microsoft.samples.subpackage.HttpStatusCode.HttpStatusCode"
+name: "HttpStatusCode"
+nameWithType: "HttpStatusCode.HttpStatusCode"
+members:
+- uid: "com.microsoft.samples.subpackage.HttpStatusCode.HttpStatusCode()"
+  fullName: "com.microsoft.samples.subpackage.HttpStatusCode.HttpStatusCode()"
+  name: "HttpStatusCode()"
+  nameWithType: "HttpStatusCode.HttpStatusCode()"
+  syntax: "public HttpStatusCode()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.subpackage"

@@ -1,0 +1,17 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.SuperHero.setHealth*"
+fullName: "com.microsoft.samples.SuperHero.setHealth"
+name: "setHealth"
+nameWithType: "SuperHero.setHealth"
+members:
+- uid: "com.microsoft.samples.SuperHero.setHealth(int)"
+  fullName: "com.microsoft.samples.SuperHero.setHealth(int health)"
+  name: "setHealth(int health)"
+  nameWithType: "SuperHero.setHealth(int health)"
+  parameters:
+  - name: "health"
+    type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
+  syntax: "protected void setHealth(int health)"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples"

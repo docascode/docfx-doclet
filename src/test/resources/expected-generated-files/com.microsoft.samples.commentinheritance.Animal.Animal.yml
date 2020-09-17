@@ -1,0 +1,14 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Animal.Animal*"
+fullName: "com.microsoft.samples.commentinheritance.Animal.Animal"
+name: "Animal"
+nameWithType: "Animal.Animal"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Animal.Animal()"
+  fullName: "com.microsoft.samples.commentinheritance.Animal.Animal()"
+  name: "Animal()"
+  nameWithType: "Animal.Animal()"
+  syntax: "public Animal()"
+type: "constructor"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"

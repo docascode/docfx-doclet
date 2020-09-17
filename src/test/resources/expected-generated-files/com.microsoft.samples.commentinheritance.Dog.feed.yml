@@ -1,0 +1,16 @@
+### YamlMime:JavaMember
+uid: "com.microsoft.samples.commentinheritance.Dog.feed*"
+fullName: "com.microsoft.samples.commentinheritance.Dog.feed"
+name: "feed"
+nameWithType: "Dog.feed"
+members:
+- uid: "com.microsoft.samples.commentinheritance.Dog.feed()"
+  fullName: "com.microsoft.samples.commentinheritance.Dog.feed()"
+  name: "feed()"
+  nameWithType: "Dog.feed()"
+  summary: "Feed offspring."
+  overridden: "com.microsoft.samples.commentinheritance.Animal.feed()"
+  syntax: "public void feed()"
+type: "method"
+metadata: {}
+package: "com.microsoft.samples.commentinheritance"
