@@ -1,5 +1,5 @@
 ### YamlMime:JavaMember
-uid: "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND"
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND*"
 fullName: "com.microsoft.samples.subpackage.HttpStatusCode.NOTFOUND"
 name: "NOTFOUND"
 nameWithType: "HttpStatusCode.NOTFOUND"

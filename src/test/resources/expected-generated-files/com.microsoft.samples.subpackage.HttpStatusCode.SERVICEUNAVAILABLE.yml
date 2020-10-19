@@ -1,5 +1,5 @@
 ### YamlMime:JavaMember
-uid: "com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE"
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE*"
 fullName: "com.microsoft.samples.subpackage.HttpStatusCode.SERVICEUNAVAILABLE"
 name: "SERVICEUNAVAILABLE"
 nameWithType: "HttpStatusCode.SERVICEUNAVAILABLE"

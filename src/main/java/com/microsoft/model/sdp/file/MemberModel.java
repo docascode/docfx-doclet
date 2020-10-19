@@ -45,8 +45,14 @@ public class MemberModel extends BaseModel implements YmlFile {
 
     }
 
+
+    /**
+     * This method is used to build model for "filed".
+     * In order to avoid duplicate uid in docfx and align with method/constructor,
+     * add '*' to the end of uid for root level as well.
+     */
     public MemberModel(MetadataFileItem item, String outputPath) {
-        super(item.getUid(), item.getName());
+        super(String.format("%s%s", item.getUid(), '*'), item.getName());
         this.outputPath = outputPath;
         this.setFullName(item.getFullName());
         this.setNameWithType(item.getNameWithType());
