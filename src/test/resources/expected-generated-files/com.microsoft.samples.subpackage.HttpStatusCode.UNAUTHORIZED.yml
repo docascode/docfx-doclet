@@ -1,5 +1,5 @@
 ### YamlMime:JavaMember
-uid: "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED"
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED*"
 fullName: "com.microsoft.samples.subpackage.HttpStatusCode.UNAUTHORIZED"
 name: "UNAUTHORIZED"
 nameWithType: "HttpStatusCode.UNAUTHORIZED"

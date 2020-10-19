@@ -1,5 +1,5 @@
 ### YamlMime:JavaMember
-uid: "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN"
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN*"
 fullName: "com.microsoft.samples.subpackage.HttpStatusCode.FORBIDDEN"
 name: "FORBIDDEN"
 nameWithType: "HttpStatusCode.FORBIDDEN"

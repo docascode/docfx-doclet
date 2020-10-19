@@ -1,5 +1,5 @@
 ### YamlMime:JavaMember
-uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
+uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING*"
 fullName: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
 name: "SOME_PUBLIC_STRING"
 nameWithType: "SuperHero.SOME_PUBLIC_STRING"

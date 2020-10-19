@@ -1,5 +1,5 @@
 ### YamlMime:JavaMember
-uid: "com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED"
+uid: "com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED*"
 fullName: "com.microsoft.samples.subpackage.HttpStatusCode.EXPECTATIONFAILED"
 name: "EXPECTATIONFAILED"
 nameWithType: "HttpStatusCode.EXPECTATIONFAILED"
