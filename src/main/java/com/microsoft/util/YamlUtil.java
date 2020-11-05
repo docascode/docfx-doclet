@@ -24,7 +24,7 @@ public class YamlUtil {
         protected Remark initialValue() {
             Options options = Options.github();
             options.fencedCodeBlocksWidth = 3;
-            options.ignoredHtmlElements.add(IgnoredHtmlElement.create("xref", "uid", "data-throw-if-not-resolved"));
+            options.ignoredHtmlElements.add(IgnoredHtmlElement.create("xref", "uid", "data-throw-if-not-resolved", "data-raw-source"));
             return new Remark(options);
         }
     };

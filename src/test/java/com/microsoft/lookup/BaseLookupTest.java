@@ -93,7 +93,7 @@ public class BaseLookupTest {
         verify(linkTree).getReference();
         verify(linkTree).getLabel();
         assertThat("Wrong result", result,
-            is("Some text 1<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>"));
+            is("Some text 1<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\" data-raw-source=\"Some#signature\"></xref>"));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class BaseLookupTest {
         String result = baseLookup.buildXrefTag(linkTree);
 
         assertThat("Wrong result", result,
-            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>"));
+            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\" data-raw-source=\"Some#signature\"></xref>"));
     }
 
     @Test
@@ -135,7 +135,7 @@ public class BaseLookupTest {
         String result = baseLookup.buildXrefTag(linkTree);
 
         assertThat("Wrong result", result,
-            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">" + labelValue + "</xref>"));
+            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\" data-raw-source=\"" + labelValue + "\"></xref>"));
     }
 
     @Test
@@ -174,8 +174,8 @@ public class BaseLookupTest {
 
         String result = baseLookup.replaceLinksAndCodes(Arrays.asList(linkTree, literalTree, textTree));
 
-        assertThat("Wrong result", result, is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">"
-            + "Some#signature</xref><code>Some text content</code>" + textTreeContent));
+        assertThat("Wrong result", result, is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\""
+            + " data-raw-source=\"Some#signature\"></xref><code>Some text content</code>" + textTreeContent));
     }
 
     @Test

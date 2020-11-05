@@ -212,7 +212,7 @@ public abstract class BaseLookup<T extends Element> {
         if (StringUtils.isEmpty(label)) {
             label = signature;
         }
-        return String.format("<xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref>", signature, label);
+        return String.format("<xref uid=\"%s\" data-throw-if-not-resolved=\"false\" data-raw-source=\"%s\"></xref>", signature, label);
     }
 
     String buildCodeTag(LiteralTree literalTree) {
