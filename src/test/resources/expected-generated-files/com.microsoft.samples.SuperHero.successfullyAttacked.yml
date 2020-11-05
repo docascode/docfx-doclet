@@ -10,7 +10,7 @@ members:
   nameWithType: "SuperHero.successfullyAttacked(int incomingDamage, String damageType)"
   summary: "This is a simple description of the method. . . [Superman!][Superman]\n\n\n[Superman]: http://www.supermanisthegreatest.com"
   parameters:
-  - description: "the amount of incoming damage for <xref uid=\"com.microsoft.samples.SuperHero\" data-throw-if-not-resolved=\"false\">SuperHero</xref>"
+  - description: "the amount of incoming damage for <xref uid=\"com.microsoft.samples.SuperHero\" data-throw-if-not-resolved=\"false\" data-raw-source=\"SuperHero\"></xref>"
     name: "incomingDamage"
     type: "<xref href=\"int?alt=int&text=int\" data-throw-if-not-resolved=\"False\" />"
   - description: "type of damage with similar word damageTypeLong, sure"
@@ -18,7 +18,7 @@ members:
     type: "<xref href=\"java.lang.String?alt=java.lang.String&text=String\" data-throw-if-not-resolved=\"False\" />"
   syntax: "public int successfullyAttacked(int incomingDamage, String damageType)"
   exceptions:
-  - description: "when incomingDamage is negative and thanks for <xref uid=\"Exception\" data-throw-if-not-resolved=\"false\">Exception</xref>"
+  - description: "when incomingDamage is negative and thanks for <xref uid=\"Exception\" data-throw-if-not-resolved=\"false\" data-raw-source=\"Exception\"></xref>"
     type: "<xref href=\"java.lang.IllegalArgumentException?alt=java.lang.IllegalArgumentException&text=IllegalArgumentException\" data-throw-if-not-resolved=\"False\" />"
   returns:
     description: "the amount of health hero has after attack"
