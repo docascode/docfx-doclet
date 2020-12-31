@@ -38,6 +38,8 @@ public class YmlFilesBuilder {
     private ClassItemsLookup classItemsLookup;
     private ClassLookup classLookup;
 
+    private HashMap <Integer, ? extends Element> includedElements;
+
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
                            String[] excludePackages, String[] excludeClasses) {
         this.environment = environment;
@@ -46,6 +48,7 @@ public class YmlFilesBuilder {
         this.packageLookup = new PackageLookup(environment);
         this.classItemsLookup = new ClassItemsLookup(environment);
         this.classLookup = new ClassLookup(environment);
+        this.includedElements = buildElementHashMap(environment);
     }
 
     public boolean build() {
@@ -53,7 +56,7 @@ public class YmlFilesBuilder {
         List<MetadataFile> classMetadataFiles = new ArrayList<>();
 
         TocFile tocFile = new TocFile(outputPath);
-        for (PackageElement packageElement : elementUtil.extractPackageElements(environment.getIncludedElements())) {
+        for (PackageElement packageElement : elementUtil.extractPackageElements(includedElements.values())) {
             String uid = packageLookup.extractUid(packageElement);
             packageMetadataFiles.add(buildPackageMetadataFile(packageElement));
 
@@ -90,7 +93,7 @@ public class YmlFilesBuilder {
     }
 
     void buildFilesForInnerClasses(Element element, Set<TocItem> listToAddItems, List<MetadataFile> container) {
-        for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
+        for (TypeElement classElement : elementUtil.extractSortedElements(element, this.includedElements)) {
             String uid = classLookup.extractUid(classElement);
             String name = classLookup.extractTocName(classElement);
             TocItem tocNode = new TocItem(uid, name);
@@ -480,7 +483,7 @@ public class YmlFilesBuilder {
         } else {
             List<String> fullNameList = new ArrayList<>();
 
-            this.environment.getIncludedElements().forEach(
+            this.includedElements.values().forEach(
                     element -> elementUtil.extractSortedElements(element).forEach(
                             typeElement -> fullNameList.add(classLookup.extractFullName(typeElement)))
             );
@@ -550,5 +553,14 @@ public class YmlFilesBuilder {
             return "";
         }
         return lookupContext.containsKey(signature) ? lookupContext.resolve(signature) : "";
+    }
+
+    private HashMap<Integer, ? extends Element> buildElementHashMap(DocletEnvironment environment)
+    {
+        var map = new HashMap<Integer, Element>();
+        for (Element element: environment.getIncludedElements()) {
+            map.put(element.asType().hashCode(), element);
+        }
+        return map;
     }
 }

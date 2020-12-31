@@ -6,9 +6,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,7 +35,24 @@ public class ElementUtil {
             ).collect(Collectors.toList());
     }
 
-    public List<PackageElement> extractPackageElements(Set<? extends Element> elements) {
+    /**
+     * This overload method is used for list the types to document
+     * If artifactA adds artifactB as its dependency, and they have types defined under same package com.microsoft.example,
+     * When document artifactA, package com.microsoft.example, Element.getEnclosedElements() will return not only returns the types defined in artifactA,
+     * but also returns types defined in artifactB.
+     * Need to make only document the types listed in DocletEnvironment.getIncludedElements()
+    */
+    public List<TypeElement> extractSortedElements(Element element, HashMap<Integer, ? extends Element> includedElements) {
+        return ElementFilter.typesIn(element.getEnclosedElements()).stream()
+                .filter(o -> !Utils.isPrivateOrPackagePrivate(o))
+                .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
+                .filter(o -> includedElements.containsKey(o.asType().hashCode()))
+                .sorted((o1, o2) ->
+                        StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+                ).collect(Collectors.toList());
+    }
+
+    public List<PackageElement> extractPackageElements(Collection<? extends Element> elements) {
         return ElementFilter.packagesIn(elements).stream()
             .filter(o -> !matchAnyPattern(excludePackages, String.valueOf(o)))
             .sorted((o1, o2) ->
