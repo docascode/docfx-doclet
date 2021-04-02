@@ -23,6 +23,7 @@ import jdk.javadoc.doclet.DocletEnvironment;
 
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class BaseLookup<T extends Element> {
 
@@ -173,10 +174,11 @@ public abstract class BaseLookup<T extends Element> {
     }
 
     protected String determineComment(T element) {
-        return getDocCommentTree(element)
+        var commentContent = getDocCommentTree(element)
                 .map(DocCommentTree::getFullBody)
                 .map(this::replaceLinksAndCodes)
                 .orElse(null);
+        return StringEscapeUtils.unescapeJava(commentContent);
     }
 
     /**
