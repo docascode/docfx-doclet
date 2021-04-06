@@ -1,0 +1,31 @@
+### YamlMime:JavaType
+uid: "com.microsoft.samples.noneascii.Offer"
+fullName: "com.microsoft.samples.noneascii.Offer"
+name: "Offer"
+nameWithType: "Offer"
+summary: "代表客户可用的产品形式"
+inheritances:
+- "<xref href=\"java.lang.Object\" data-throw-if-not-resolved=\"False\" />"
+inheritedMembers:
+- "java.lang.Object.clone()"
+- "java.lang.Object.equals(java.lang.Object)"
+- "java.lang.Object.finalize()"
+- "java.lang.Object.getClass()"
+- "java.lang.Object.hashCode()"
+- "java.lang.Object.notify()"
+- "java.lang.Object.notifyAll()"
+- "java.lang.Object.toString()"
+- "java.lang.Object.wait()"
+- "java.lang.Object.wait(long)"
+- "java.lang.Object.wait(long,int)"
+syntax: "public class Offer"
+constructors:
+- "com.microsoft.samples.noneascii.Offer.Offer()"
+methods:
+- "com.microsoft.samples.noneascii.Offer.getReselleeQualifications()"
+- "com.microsoft.samples.noneascii.Offer.getResellerQualifications()"
+- "com.microsoft.samples.noneascii.Offer.setReselleeQualifications(java.lang.String[])"
+- "com.microsoft.samples.noneascii.Offer.setResellerQualifications(java.lang.String[])"
+type: "class"
+metadata: {}
+package: "com.microsoft.samples.noneascii"

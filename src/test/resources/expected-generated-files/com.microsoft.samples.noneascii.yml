@@ -1,0 +1,8 @@
+### YamlMime:JavaPackage
+uid: "com.microsoft.samples.noneascii"
+fullName: "com.microsoft.samples.noneascii"
+name: "com.microsoft.samples.noneascii"
+classes:
+- "com.microsoft.samples.noneascii.Offer"
+metadata: {}
+package: "com.microsoft.samples.noneascii"
