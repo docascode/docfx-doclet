@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.microsoft.util.XrefHelper;
+import org.apache.commons.text.StringEscapeUtils;
 
 public class Return {
 
@@ -34,7 +35,7 @@ public class Return {
     }
 
     public void setReturnDescription(String returnDescription) {
-        this.returnDescription = returnDescription;
+        this.returnDescription = StringEscapeUtils.unescapeJava(returnDescription);
     }
 
     public String getReturnXrefString() {
