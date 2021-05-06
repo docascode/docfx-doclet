@@ -16,7 +16,7 @@
     <jackson.version>2.9.8</jackson.version>
     <apache.commons-lang.version>3.8.1</apache.commons-lang.version>
     <apache.commons-collections.version>4.2</apache.commons-collections.version>
-    <apache.commons-io.version>2.6</apache.commons-io.version>
+    <apache.commons-io.version>2.7</apache.commons-io.version>
     <remark.version>1.1.0</remark.version>
   </properties>
 
