@@ -5,9 +5,14 @@
 
 This doclet is designed to produce a YAML representation of the Javadoc-generated documentation, that can be integrated into [DocFX](https://dotnet.github.io/docfx/).
 
+`Please Notice:` This default branch supports **DocFX V2** only.
+
+If you are using [DocFX V3](https://github.com/dotnet/docfx/tree/v3), please check further in [main](https://github.com/docascode/docfx-doclet/tree/main) branch.
+
 ## Getting started
 
-The easiest way is to just get the JAR files directly from our [releases](https://github.com/dendeli-msft/docfx-doclet/releases).
+The easiest way is to just get the JAR files directly from our [Release for June, 2020. Supports DocFX V2
+](https://github.com/docascode/docfx-doclet/releases/tag/143274).
 
 Alternatively, you can clone the repository and build it with the help of Maven. You can do so by calling: 
 
@@ -22,6 +27,7 @@ mvn package
 ```
 
 This will produce two JAR files that you can use - one with dependencies, and another one without.
+
 
 ## Usage 
 
