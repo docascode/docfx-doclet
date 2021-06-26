@@ -1,0 +1,19 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.noneascii"
+  id: "noneascii"
+  children:
+  - "com.microsoft.samples.noneascii.Offer"
+  langs:
+  - "java"
+  name: "com.microsoft.samples.noneascii"
+  nameWithType: "com.microsoft.samples.noneascii"
+  fullName: "com.microsoft.samples.noneascii"
+  type: "Namespace"
+  syntax:
+    content: "package com.microsoft.samples.noneascii"
+references:
+- uid: "com.microsoft.samples.noneascii.Offer"
+  name: "Offer"
+  nameWithType: "Offer"
+  fullName: "com.microsoft.samples.noneascii.Offer"

@@ -31,6 +31,11 @@
     name: "Organism"
   - uid: "com.microsoft.samples.commentinheritance.Viviparous"
     name: "Viviparous"
+- uid: "com.microsoft.samples.noneascii"
+  name: "com.microsoft.samples.noneascii"
+  items:
+  - uid: "com.microsoft.samples.noneascii.Offer"
+    name: "Offer"
 - uid: "com.microsoft.samples.offers"
   name: "com.microsoft.samples.offers"
   items:
