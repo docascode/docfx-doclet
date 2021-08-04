@@ -32,6 +32,15 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <skipTests>${skipTests}</skipTests>
+        </configuration>
+      </plugin>
+
       <!-- Pack doclet with dependent libs into fat jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -150,10 +159,10 @@
   </dependencies>
 
   <repositories>
-    <repository>
-      <id>sprin-libs-repo</id>
-      <name>Spring Lib Release repository</name>
-      <url>https://repo.spring.io/libs-release</url>
+     <repository>
+      <id>jcenter</id>
+      <name>jcenter</name>
+      <url>https://jcenter.bintray.com</url>
     </repository>
   </repositories>
 </project>
