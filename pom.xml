@@ -17,7 +17,7 @@
     <apache.commons-lang.version>3.8.1</apache.commons-lang.version>
     <apache.commons-collections.version>4.2</apache.commons-collections.version>
     <apache.commons-io.version>2.7</apache.commons-io.version>
-    <remark.version>1.1.0</remark.version>
+    <remark.version>1.2.0</remark.version>
   </properties>
 
   <build>
@@ -122,7 +122,7 @@
       <version>${jackson.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.overzealous</groupId>
+      <groupId>com.kotcrab.remark</groupId>
       <artifactId>remark</artifactId>
       <version>${remark.version}</version>
     </dependency>
