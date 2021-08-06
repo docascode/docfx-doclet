@@ -17,6 +17,7 @@
     <apache.commons-lang.version>3.8.1</apache.commons-lang.version>
     <apache.commons-collections.version>4.2</apache.commons-collections.version>
     <apache.commons-io.version>2.7</apache.commons-io.version>
+    <apache.commons-text.version>1.9</apache.commons-text.version>
     <remark.version>1.2.0</remark.version>
   </properties>
 
@@ -110,6 +111,11 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>${apache.commons-io.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>${apache.commons-text.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

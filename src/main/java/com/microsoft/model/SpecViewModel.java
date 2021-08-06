@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"uid", "name", "fullName", "isExternal"})
-
 public class SpecViewModel {
 
     private String uid;

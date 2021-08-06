@@ -1,5 +1,7 @@
 package com.microsoft.model;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 public class MethodParameter {
 
     private final String id;
@@ -25,6 +27,6 @@ public class MethodParameter {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = StringEscapeUtils.unescapeJava(description);
     }
 }
