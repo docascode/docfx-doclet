@@ -1,5 +1,7 @@
 package com.microsoft.model;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 public class ExceptionItem {
 
     private final String type;
@@ -7,7 +9,7 @@ public class ExceptionItem {
 
     public ExceptionItem(String type, String description) {
         this.type = type;
-        this.description = description;
+        this.description = StringEscapeUtils.unescapeJava(description);
     }
 
     public String getType() {

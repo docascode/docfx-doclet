@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
         "fullName", "overload", "overridden", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
@@ -158,7 +159,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     }
 
     public void setSummary(String summary) {
-        this.summary = summary;
+        this.summary = StringEscapeUtils.unescapeJava(summary);
     }
 
     public Syntax getSyntax() {

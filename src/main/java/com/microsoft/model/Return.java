@@ -1,6 +1,7 @@
 package com.microsoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.text.StringEscapeUtils;
 
 public class Return {
 
@@ -27,6 +28,6 @@ public class Return {
     }
 
     public void setReturnDescription(String returnDescription) {
-        this.returnDescription = returnDescription;
+        this.returnDescription = StringEscapeUtils.unescapeJava(returnDescription);
     }
 }
